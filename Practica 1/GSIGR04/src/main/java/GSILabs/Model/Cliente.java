@@ -5,15 +5,14 @@
  */
 package GSILabs.Model;
 
-import java.util.HashSet;
-import java.util.Set;
-
 /**
  *
  * @author LENOVO-arribass
  */
-public class Local {
-    private static final Set<String> nombres = new HashSet<String>();
-
-    private String nombre;
+public class Cliente extends Usuario{
+    
+    public Cliente(String nombre, String password) throws Exception {
+        super(nombre, password);
+    }
+    
 }
