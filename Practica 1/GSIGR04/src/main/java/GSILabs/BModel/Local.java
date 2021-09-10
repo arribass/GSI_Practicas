@@ -5,12 +5,21 @@
  */
 package GSILabs.BModel;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  *
  * @author LENOVO-arribass
  */
 public class Local {
+    private static final Set<String> nombres = new HashSet<String>();
+
+    public static Set<String> getNombres() {
+        return nombres;
+    }
     private String nombre;
+    
     private Direccion direccion;
 
     public String getNombre() {
