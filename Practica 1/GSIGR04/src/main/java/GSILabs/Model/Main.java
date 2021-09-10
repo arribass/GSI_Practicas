@@ -3,16 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GSILabs.BModel;
+package GSILabs.Model;
 
 /**
  *
  * @author LENOVO-arribass
  */
-public class Direccion {
-    private String Localidad;
-    private String Provincia;
-    private String Calle;
-    private int Numero;
-    
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("Hola");
+    }
 }
