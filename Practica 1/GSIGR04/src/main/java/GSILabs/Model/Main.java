@@ -5,6 +5,8 @@
  */
 package GSILabs.Model;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -23,23 +25,36 @@ public class Main {
         List<Usuario> Usuarios = new ArrayList<>();
         String nombreUsuario;
         
+        Scanner sc= new Scanner(System.in);
+        
         do {            
-            Scanner sc= new Scanner(System.in);
             System.out.println("Introduce el nombre de usuario: ");  
             nombreUsuario = sc.nextLine();      
             if("exit".equals(nombreUsuario))
                 break;
             System.out.println("Introduce la contraseña: "); 
             String passwordUsuario = sc.nextLine();
+            
+            System.out.println("Introduce la fecha de nacimiento (dd/MM/yyyy): "); 
+            String edadUsuario = sc.nextLine();
+            Date fechaNacimientoUsuario = null;
+            try {
+                fechaNacimientoUsuario = new SimpleDateFormat("dd/MM/yyyy").parse(edadUsuario);
+            } catch (ParseException ex) {
+                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
             Usuario u;
             try {
-                u = new Usuario(nombreUsuario,passwordUsuario,Calendar.getInstance().getTime());
+                u = new Usuario(nombreUsuario,passwordUsuario,fechaNacimientoUsuario);
                 Usuarios.add(u);
+                System.out.println("Usuario registrado correctamente!");
             } catch (Exception e) {
                 System.out.println("Error: "+e.getMessage());
             }
         } while (true);
         
         System.out.println("La lista de los " + Usuarios.size() + " usuarios es: "+ Usuario.getNombres());
+        System.out.println("Lista again: " + Usuarios.toString());
     }
 }

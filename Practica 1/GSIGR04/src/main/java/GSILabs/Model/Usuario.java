@@ -5,9 +5,13 @@
  */
 package GSILabs.Model;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 /**
  *
@@ -21,11 +25,18 @@ public class Usuario {
     private Date fechaNacimiento;
 
     public Usuario(String nombre, String password, Date fechaNacimiento) throws Exception{
-        if (nombre.length() < 3)
-            throw new IllegalArgumentException("Nombre demasiado corto");
+        //Comprobamos la longitud del nombre y que esta disponible
+        if (!nombreValido(nombre))
+            throw new IllegalArgumentException("Nombre demasiado corto");         
         if (!nombres.add(nombre))
             throw new Exception("Ya existe el usuario");
+        this.nombre = nombre;
+        
         this.password = password;
+        
+        //Comprobamos que el usuario tiene la edad suficiente
+        if(!edadValida(fechaNacimiento))
+            throw new Exception("Edad minima 14 años");
         this.fechaNacimiento = fechaNacimiento;
     }
     
@@ -45,7 +56,7 @@ public class Usuario {
     }
 
     public void setNombre(String nombre) {
-        this.setNombre(nombre);
+        this.nombre = nombre;
     }
 
     public String getPassword() {
@@ -58,7 +69,23 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return getNombre() + " " + getPassword();
+        return getNombre() + " " + getPassword() + " " + getFechaNacimiento().toString();
+    }
+
+    private boolean edadValida(Date fechaNacimiento) {
+        long fechaActual = new java.util.Date().getTime();
+        long diffInMillies = Math.abs(fechaNacimiento.getTime() - fechaActual);
+        long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+
+        Period period = Period.between(fechaNacimiento.toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), LocalDate.now());
+        period.getYears();
+        System.out.println("Edad: " + period.getYears());
+        
+        return period.getYears() > 14;
+    }
+
+    private boolean nombreValido(String nombre) {
+        return nombre.length() > 3;
     }
     
     
