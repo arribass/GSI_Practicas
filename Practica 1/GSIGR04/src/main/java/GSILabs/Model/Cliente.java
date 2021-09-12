@@ -5,14 +5,18 @@
  */
 package GSILabs.Model;
 
+import java.util.Date;
+
 /**
  *
  * @author LENOVO-arribass
  */
 public class Cliente extends Usuario{
     
-    public Cliente(String nombre, String password) throws Exception {
-        super(nombre, password);
+    public Cliente(String nombre, String password, Date fechaNacimiento) {
+        super(nombre, password, fechaNacimiento);
     }
+    
+
     
 }
