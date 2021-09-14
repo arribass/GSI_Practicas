@@ -24,29 +24,30 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         
         int choice;
-            do {
-                System.out.println("1.Registrar Usuario \n2.Borrar usuario\n Exit ");
-                System.out.println("Enter your Choice : ");
-                
-                choice = sc.nextInt();
-                switch (choice) {
-                    case 1: 
-                        //Registrar usuario (Tipo sin definir)
-                        registrarUsuario();
-                        break;
-                    case 2:
-                        //Registrar un local (Tipo sin definir)
-                        registrarLocal();
-                    case 3: 
-                        System.out.println("EXIT");
-                        System.exit(0);
-                        break;
-                    default:
-                        System.out.println("Accion no permitida");
-                }
-            } while ( choice > 2 || choice < 1 );
-            System.out.println(Usuarios.size() > 0 ? Usuarios.toString() : "La lista esta vacía");
-        }
+        do {
+            System.out.println("1.Registrar Usuario \n2.Borrar usuario\n Exit ");
+            System.out.println("Enter your Choice : ");
+
+            choice = sc.nextInt();
+            switch (choice) {
+                case 1: 
+                    //Registrar usuario (Tipo sin definir)
+                    registrarUsuario();
+                    break;
+                case 2:
+                    //Registrar un local (Tipo sin definir)
+                    registrarLocal();
+                case 3: 
+                    System.out.println("EXIT");
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Accion no permitida");
+            }
+        } while ( choice > 2 || choice < 1 );
+        System.out.println(Usuarios.size() > 0 ? Usuarios.toString() : "La lista esta vacía");
+    }
+    
     public static boolean registrarUsuario(){
         String nombreUsuario;
         boolean registerOk = false;

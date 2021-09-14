@@ -9,16 +9,25 @@ package GSILabs.BSystem;
 import GSILabs.BModel.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author Arribas
  */
 public class BusinessSystem implements LeisureOffice{
-
+    static List<Usuario> Usuarios = new ArrayList<>();
+    
     @Override
     public boolean nuevoUsuario(Usuario u) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(!existeNick(u.getNick())){
+            //Add usuario a lista
+            Usuarios.add(u);
+            return true;
+        }else{
+            return false;
+        }
     }
 
     @Override
