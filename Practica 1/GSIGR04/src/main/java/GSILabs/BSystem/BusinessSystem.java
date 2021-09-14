@@ -25,10 +25,19 @@ public class BusinessSystem implements LeisureOffice{
      * {@inheritDoc}
      */
     public boolean nuevoUsuario(Usuario u) {
-        Usuarios.add(u);
-        return true;
+        if (validarUsuario(u)) {
+            Usuarios.add(u);    
+            return true;
+        } else {
+            return false;
+        }
     }
-
+    public boolean validarLongitudNick(String nick){
+        return nick.length() > 3;
+    }
+    public boolean validarUsuario(Usuario u){
+        return validarLongitudNick(u.getNick()) && !existeNick(u.getNick());
+    }
     @Override
     public boolean eliminaUsuario(Usuario u) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
