@@ -25,15 +25,20 @@ public class BusinessSystem implements LeisureOffice{
      * {@inheritDoc}
      */
     public boolean nuevoUsuario(Usuario u) {
-        if (validarUsuario(u)) {
-            Usuarios.add(u);    
+        try {
+            validarUsuario(u);
+            Usuarios.add(u);
             return true;
-        } else {
+        } catch (Exception e) {
             return false;
         }
     }
+    
     public boolean validarLongitudNick(String nick){
         return nick.length() > 3;
+    }
+    public boolean validarLongitudNick(String nick,int longitud){
+        return true;
     }
     public boolean validarUsuario(Usuario u){
         return validarLongitudNick(u.getNick()) && !existeNick(u.getNick());
