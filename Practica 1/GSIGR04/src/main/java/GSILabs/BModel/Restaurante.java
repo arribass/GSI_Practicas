@@ -11,4 +11,5 @@ package GSILabs.BModel;
  */
 public class Restaurante extends Local{
     
+    
 }
