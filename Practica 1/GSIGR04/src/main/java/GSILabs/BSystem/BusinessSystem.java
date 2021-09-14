@@ -22,7 +22,7 @@ public class BusinessSystem implements LeisureOffice{
     
     @Override
     /**
-     * {@inheritJavadoc}
+     * {@inheritDoc}
      */
     public boolean nuevoUsuario(Usuario u) {
         Usuarios.add(u);
