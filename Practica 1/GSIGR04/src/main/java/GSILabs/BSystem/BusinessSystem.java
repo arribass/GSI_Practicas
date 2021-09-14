@@ -21,13 +21,8 @@ public class BusinessSystem implements LeisureOffice{
     
     @Override
     public boolean nuevoUsuario(Usuario u) {
-        if(!existeNick(u.getNick())){
-            //Add usuario a lista
-            Usuarios.add(u);
-            return true;
-        }else{
-            return false;
-        }
+        Usuarios.add(u);
+        return true;
     }
 
     @Override

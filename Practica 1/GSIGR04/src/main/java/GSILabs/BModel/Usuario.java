@@ -20,8 +20,20 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class Usuario {
     private static final Set<String> nombres = new HashSet<String>();
-    private AtomicInteger id;
+    private AtomicInteger id = new AtomicInteger();
+    private String nick;
+    private String password;
+    private Date fechaNacimiento;
 
+    public Usuario(String nick, String password, Date fechaNacimiento) {
+        this.id.addAndGet(1);
+        this.nick = nick;
+        this.password = password;
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
+ 
+    
     public AtomicInteger getId() {
         return id;
     }
@@ -29,26 +41,6 @@ public class Usuario {
     public void setId(AtomicInteger id) {
         this.id = id;
     }
-    private String nick;
-    private String password;
-    private Date fechaNacimiento;
-
-    public Usuario(String nombre, String password, Date fechaNacimiento) throws Exception{
-        //Comprobamos la longitud del nombre y que esta disponible
-        if (!nombreValido(nombre))
-            throw new IllegalArgumentException("Nombre demasiado corto");         
-        if (!nombres.add(nombre))
-            throw new Exception("Ya existe el usuario");
-        this.nick = nombre;
-        
-        this.password = password;
-        
-        //Comprobamos que el usuario tiene la edad suficiente
-        if(!edadValida(fechaNacimiento))
-            throw new Exception("Edad minima 14 años");
-        this.fechaNacimiento = fechaNacimiento;
-    }
-    
     public static Set<String> getNombres() {
         return nombres;
     }
