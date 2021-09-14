@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GSILabs.Model;
+package GSILabs.BModel;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -36,6 +36,7 @@ public class Main {
                         break;
                     case 2:
                         //Registrar un local (Tipo sin definir)
+                        registrarLocal();
                     case 3: 
                         System.out.println("EXIT");
                         System.exit(0);
@@ -76,5 +77,9 @@ public class Main {
             System.out.println("Error: " + e.getMessage());
         }
         return registerOk;
+    }
+
+    private static void registrarLocal() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
