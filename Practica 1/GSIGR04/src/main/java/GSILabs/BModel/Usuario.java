@@ -19,7 +19,6 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @author LENOVO-arribass
  */
 public class Usuario {
-    private static final Set<String> nombres = new HashSet<String>();
     private AtomicInteger id = new AtomicInteger();
     private String nick;
     private String password;
@@ -41,9 +40,7 @@ public class Usuario {
     public void setId(AtomicInteger id) {
         this.id = id;
     }
-    public static Set<String> getNombres() {
-        return nombres;
-    }
+    
     public String getNick() {
         return nick;
     }
