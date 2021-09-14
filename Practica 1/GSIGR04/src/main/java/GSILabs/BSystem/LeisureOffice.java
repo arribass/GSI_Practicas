@@ -5,7 +5,7 @@
  * ---
  * Nota: esta documento no contiene tildes ni caracteres castellanos.
  */
-package BSystem;
+package GSILabs.BSystem;
 
 import GSILabs.BModel.*;
 import java.time.LocalDate;

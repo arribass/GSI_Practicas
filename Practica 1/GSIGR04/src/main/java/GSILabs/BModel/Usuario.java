@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  *
@@ -19,7 +20,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class Usuario {
     private static final Set<String> nombres = new HashSet<String>();
-
+    private AtomicInteger id;
     private String nombre;
     private String password;
     private Date fechaNacimiento;
