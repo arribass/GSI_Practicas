@@ -10,6 +10,7 @@ import GSILabs.BModel.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -20,6 +21,9 @@ public class BusinessSystem implements LeisureOffice{
     static List<Usuario> Usuarios = new ArrayList<>();
     
     @Override
+    /**
+     * {@inheritJavadoc}
+     */
     public boolean nuevoUsuario(Usuario u) {
         Usuarios.add(u);
         return true;
@@ -37,7 +41,7 @@ public class BusinessSystem implements LeisureOffice{
 
     @Override
     public boolean existeNick(String nick) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return Usuarios.stream().anyMatch(item -> nick.equals(item.getNick()));
     }
 
     @Override
