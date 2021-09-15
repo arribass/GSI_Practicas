@@ -32,10 +32,11 @@ public class P01Tester {
         Scanner sc = new Scanner(System.in);
         int choice;
         do {
-            System.out.println("1.Registrar Usuario\n"
-                                + "2.Buscar usuario por nick"
+            System.out.println("1. Registrar Usuario\n"
+                                + "2. Buscar usuario por nick\n"
+                                x+ "3. Registrar local"
                                 + "\n Exit ");
-            System.out.println("Enter your Choice : ");
+            System.out.print("Enter your Choice : ");
 
             choice = sc.nextInt();
             sc.nextLine();
@@ -89,7 +90,6 @@ public class P01Tester {
                     break;  
             }
         } while ( choice < 3 && choice > 0 );
-        System.out.println("Ultimo Choice: " + choice);
     }
     private static void registrarLocal() {
         
