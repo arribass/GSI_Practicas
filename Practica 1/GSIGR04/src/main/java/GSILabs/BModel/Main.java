@@ -20,6 +20,7 @@ import java.util.logging.Logger;
  */
 public class Main {
     static List<Usuario> Usuarios = new ArrayList<>();
+    static List<Local> Locales = new ArrayList<>();
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         
@@ -81,6 +82,30 @@ public class Main {
     }
 
     private static void registrarLocal() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        //Pido al usuario el nombre del nuevo local.
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Introduce el nombre del local: ");  
+        String nombreLocal = sc.nextLine(); 
+        
+        //Pido al usuario los componentes de la direccion del local.        
+        System.out.println("Vas a introducir la dirección \n");         
+        System.out.println("Introduce la localidad: "); 
+        String localidad = sc.nextLine();         
+        System.out.println("Introduce la provincia: "); 
+        String provincia = sc.nextLine();       
+        System.out.println("Introduce la calle: "); 
+        String calle = sc.nextLine();       
+        System.out.println("Introduce el numero: "); 
+        String numero = sc.nextLine();
+        //Genero la dirección.
+        Direccion d = new Direccion(localidad,provincia,calle,numero);
+        
+        //Pido la descripcion del local al usuario.
+        System.out.println("Introduce la descripción del local: "); 
+        String descripcionLocal = sc.nextLine();
+        
+        Local l = new Local(nombreLocal,d,descripcionLocal);
+        Locales.add(l); 
     }
 }
