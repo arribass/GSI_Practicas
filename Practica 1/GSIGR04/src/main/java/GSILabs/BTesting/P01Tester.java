@@ -5,11 +5,15 @@
  */
 package GSILabs.BTesting;
 
+import GSILabs.BModel.Direccion;
+import GSILabs.BModel.Local;
 import GSILabs.BModel.Usuario;
 import GSILabs.BSystem.BusinessSystem;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -17,6 +21,8 @@ import java.util.Scanner;
  * @author Arribas
  */
 public class P01Tester {
+               
+    static List<Local> Locales = new ArrayList<>();
     public static void main(String[] args) {
         // Instanciamos una clase BusinessSystem
         BusinessSystem bs = new BusinessSystem();
@@ -73,6 +79,9 @@ public class P01Tester {
                         System.out.println("Usuario NO encontrado");
                     }
                     break;
+                case 3:
+                    registrarLocal();
+                    break;
                 default:
                     //EXIT
                     System.out.println("Accion no permitida");
@@ -81,5 +90,43 @@ public class P01Tester {
             }
         } while ( choice < 3 && choice > 0 );
         System.out.println("Ultimo Choice: " + choice);
+    }
+    private static void registrarLocal() {
+        
+        //Pido al usuario el nombre del nuevo local.
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Introduce el nombre del local: ");  
+        String nombreLocal = sc.nextLine(); 
+        
+        //Pido al usuario los componentes de la direccion del local.        
+        System.out.println("Vas a introducir la dirección \n");         
+        System.out.println("Introduce la localidad: "); 
+        String localidad = sc.nextLine();         
+        System.out.println("Introduce la provincia: "); 
+        String provincia = sc.nextLine();       
+        System.out.println("Introduce la calle: "); 
+        String calle = sc.nextLine();       
+        System.out.println("Introduce el numero: "); 
+        String numero = sc.nextLine();
+        //Genero la dirección.
+        Direccion d = new Direccion(localidad,provincia,calle,numero);
+        
+        //Pido la descripcion del local al usuario.
+        System.out.println("Introduce la descripción del local: "); 
+        String descripcionLocal = sc.nextLine();
+        
+        boolean existeDireccion = false;
+        for (int i=0;i<Locales.size();i++) {      
+            if(Locales.get(i).getDireccion().equals(d)){
+                existeDireccion = true;
+                break;
+            }
+        }
+        if(!existeDireccion){
+            Local l = new Local(nombreLocal,d,descripcionLocal);
+            Locales.add(l); 
+        } else{
+            System.out.println("Ya existe un local en esa direccion.");
+        }        
     }
 }
