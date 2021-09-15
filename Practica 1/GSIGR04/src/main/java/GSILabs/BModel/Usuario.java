@@ -18,10 +18,12 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @author LENOVO-arribass
  */
 public class Usuario {
-    private static AtomicInteger id = new AtomicInteger();
+    private static final AtomicInteger id = new AtomicInteger();
+
     private String nick;
     private String password;
     private Date fechaNacimiento;
+    private final int EDAD_MINIMA  = 14;
 
     public Usuario(String nick, String password, Date fechaNacimiento) {
         Usuario.id.addAndGet(1);
@@ -30,7 +32,7 @@ public class Usuario {
         this.password = password;
         this.fechaNacimiento = fechaNacimiento;
     }
-    
+    /*Getters and Setters*/
     public AtomicInteger getId() {
         return id;
     }
@@ -58,13 +60,25 @@ public class Usuario {
     public void setPassword(String password) {
         this.password = password;
     }  
+    
+    /**/
 
-    @Override
-    public String toString() {
-        return "ID:" + getId() + "\nNick: " + getNick() + "\nFecha nacimiento: " + getFechaNacimiento().toString() +"\n";
+    /**
+     *
+     * @param u
+     * @return 
+     */
+
+     public boolean validarUsuario(Usuario u){
+        return validarLongitudNick(u.getNick());
     }
-
-    private boolean edadValida(Date fechaNacimiento) {
+    public boolean validarLongitudNick(String nick){
+        return nick.length() > 3;
+    }
+    public boolean validarLongitudNick(String nick,int longitud){
+        return true;
+    }
+    private boolean edadValida() {
         long fechaActual = new java.util.Date().getTime();
         long diffInMillies = Math.abs(fechaNacimiento.getTime() - fechaActual);
         long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
@@ -73,12 +87,11 @@ public class Usuario {
         period.getYears();
         System.out.println("Edad: " + period.getYears());
         
-        return period.getYears() > 14;
-    }
-
-    private boolean nombreValido(String nombre) {
-        return nombre.length() > 3;
+        return period.getYears() > EDAD_MINIMA;
     }
     
-    
+    @Override
+    public String toString() {
+        return "ID:" + getId() + "\nNick: " + getNick() + "\nFecha nacimiento: " + getFechaNacimiento().toString() +"\n";
+    }
 }

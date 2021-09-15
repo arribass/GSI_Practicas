@@ -10,7 +10,6 @@ import GSILabs.BModel.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,22 +26,11 @@ public class BusinessSystem implements LeisureOffice{
      */
     public boolean nuevoUsuario(Usuario u) {
         try {
-            validarUsuario(u);
             Usuarios.add(u);
             return true;
         } catch (Exception e) {
             return false;
         }
-    }
-    
-    public boolean validarLongitudNick(String nick){
-        return nick.length() > 3;
-    }
-    public boolean validarLongitudNick(String nick,int longitud){
-        return true;
-    }
-    public boolean validarUsuario(Usuario u){
-        return validarLongitudNick(u.getNick()) && !existeNick(u.getNick());
     }
     
     @Override
@@ -74,11 +62,10 @@ public class BusinessSystem implements LeisureOffice{
      * {@inheritDoc}
      */
     public Usuario obtenerUsuario(String nick) {
-        Usuario userFound = null;
-        List<Usuario> result = Usuarios.stream()
+        Usuario userFound = Usuarios.stream()
                                 .filter(item -> item.getNick().equals(nick))
-                                .collect(Collectors.toList());
-        return !result.isEmpty() ? result.get(0) : null;
+                                .collect(Collectors.toList()).get(0);
+        return userFound;
     }
 
     @Override
