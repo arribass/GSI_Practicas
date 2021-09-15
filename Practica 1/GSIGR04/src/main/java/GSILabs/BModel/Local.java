@@ -29,6 +29,10 @@ public class Local {
         }
         this.descripcion = descripcion;
     }
+    
+    public Direccion getDireccion(){
+        return this.direccion;
+    }
 
     
 }

@@ -105,7 +105,18 @@ public class Main {
         System.out.println("Introduce la descripción del local: "); 
         String descripcionLocal = sc.nextLine();
         
-        Local l = new Local(nombreLocal,d,descripcionLocal);
-        Locales.add(l); 
+        boolean existeDireccion = false;
+        for (int i=0;i<Locales.size();i++) {      
+            if(Locales.get(i).getDireccion().equals(d)){
+                existeDireccion = true;
+                break;
+            }
+        }
+        if(!existeDireccion){
+            Local l = new Local(nombreLocal,d,descripcionLocal);
+            Locales.add(l); 
+        } else{
+            System.out.println("Ya existe un local en esa direccion.");
+        }        
     }
 }
