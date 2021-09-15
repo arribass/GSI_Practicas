@@ -11,4 +11,8 @@ package GSILabs.BModel;
  */
 public class Bar extends Local{
     
+    public Bar(String nombre, Direccion direccion, String descripcion) {
+        super(nombre, direccion, descripcion);
+    }
+    
 }

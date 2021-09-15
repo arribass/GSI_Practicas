@@ -11,4 +11,8 @@ package GSILabs.BModel;
  */
 public class Pub extends Local{
     
+    public Pub(String nombre, Direccion direccion, String descripcion) {
+        super(nombre, direccion, descripcion);
+    }
+    
 }
