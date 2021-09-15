@@ -34,7 +34,7 @@ public class P01Tester {
         do {
             System.out.println("1. Registrar Usuario\n"
                                 + "2. Buscar usuario por nick\n"
-                                x+ "3. Registrar local"
+                                + "3. Registrar local"
                                 + "\n Exit ");
             System.out.print("Enter your Choice : ");
 
