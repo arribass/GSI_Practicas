@@ -25,6 +25,8 @@ public class Direccion {
         this.numero = Numero;
     }
     
+    //Sobre escritura de metodos equals y toString.
+    
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
