@@ -9,8 +9,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -19,26 +18,21 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @author LENOVO-arribass
  */
 public class Usuario {
-    private AtomicInteger id = new AtomicInteger();
+    private static AtomicInteger id = new AtomicInteger();
     private String nick;
     private String password;
     private Date fechaNacimiento;
 
     public Usuario(String nick, String password, Date fechaNacimiento) {
-        this.id.addAndGet(1);
+        Usuario.id.addAndGet(1);
+        
         this.nick = nick;
         this.password = password;
         this.fechaNacimiento = fechaNacimiento;
     }
-
- 
     
     public AtomicInteger getId() {
         return id;
-    }
-
-    public void setId(AtomicInteger id) {
-        this.id = id;
     }
     
     public String getNick() {
@@ -67,7 +61,7 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return getNick() + " " + getPassword() + " " + getFechaNacimiento().toString();
+        return "ID:" + getId() + "\nNick: " + getNick() + "\nFecha nacimiento: " + getFechaNacimiento().toString() +"\n";
     }
 
     private boolean edadValida(Date fechaNacimiento) {

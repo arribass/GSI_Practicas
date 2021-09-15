@@ -12,6 +12,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -43,6 +44,7 @@ public class BusinessSystem implements LeisureOffice{
     public boolean validarUsuario(Usuario u){
         return validarLongitudNick(u.getNick()) && !existeNick(u.getNick());
     }
+    
     @Override
     /**
      * {@inheritDoc}
@@ -72,7 +74,11 @@ public class BusinessSystem implements LeisureOffice{
      * {@inheritDoc}
      */
     public Usuario obtenerUsuario(String nick) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Usuario userFound = null;
+        List<Usuario> result = Usuarios.stream()
+                                .filter(item -> item.getNick().equals(nick))
+                                .collect(Collectors.toList());
+        return !result.isEmpty() ? result.get(0) : null;
     }
 
     @Override
