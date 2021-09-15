@@ -43,6 +43,7 @@ public class BusinessSystem implements LeisureOffice{
     public boolean validarUsuario(Usuario u){
         return validarLongitudNick(u.getNick()) && !existeNick(u.getNick());
     }
+    
     @Override
     /**
      * {@inheritDoc}
@@ -72,7 +73,9 @@ public class BusinessSystem implements LeisureOffice{
      * {@inheritDoc}
      */
     public Usuario obtenerUsuario(String nick) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Usuario u = null;
+        
+        return u;
     }
 
     @Override
