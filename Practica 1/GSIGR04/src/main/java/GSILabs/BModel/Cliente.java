@@ -12,11 +12,9 @@ import java.util.Date;
  * @author LENOVO-arribass
  */
 public class Cliente extends Usuario{
-    
-    public Cliente(String nombre, String password, Date fechaNacimiento) throws Exception {
-        super(nombre, password, fechaNacimiento);
-    }
-    
 
+    public Cliente(String nick, String password, Date fechaNacimiento, int perfil) {
+        super(nick, password, fechaNacimiento, perfil);
+    }
     
 }

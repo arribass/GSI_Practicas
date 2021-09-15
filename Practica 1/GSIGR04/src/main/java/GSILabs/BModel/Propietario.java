@@ -13,8 +13,11 @@ import java.util.Date;
  */
 public class Propietario extends Usuario{
     
-    public Propietario(String nombre, String password, Date fechaNacimiento) throws Exception {
-        super(nombre, password, fechaNacimiento);
+    public Propietario(String nick, String password, Date fechaNacimiento, int perfil) {
+        super(nick, password, fechaNacimiento, perfil);
     }
+    
+
+   
     
 }

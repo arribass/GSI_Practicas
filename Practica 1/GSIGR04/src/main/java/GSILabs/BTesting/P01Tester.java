@@ -56,7 +56,7 @@ public class P01Tester {
                     
                     try {
                         fechaNacimientoUsuario = new SimpleDateFormat("dd/MM/yyyy").parse("13/11/1999");
-                        Usuario u = new Usuario(nombreUsuario, passwordUsuario, fechaNacimientoUsuario);
+                        Usuario u = new Usuario(nombreUsuario, passwordUsuario, fechaNacimientoUsuario,1);
                         if (bs.nuevoUsuario(u)){
                             System.out.println("Usuario registrado correctamente!");
                             System.out.println(u.toString());
