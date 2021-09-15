@@ -106,6 +106,6 @@ public class Main {
         String descripcionLocal = sc.nextLine();
         
         Local l = new Local(nombreLocal,d,descripcionLocal);
-        Locales.add(l);
+        Locales.add(l); 
     }
 }
