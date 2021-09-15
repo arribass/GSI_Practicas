@@ -26,7 +26,8 @@ public class P01Tester {
         Scanner sc = new Scanner(System.in);
         int choice;
         do {
-            System.out.println("1.Registrar Usuario"
+            System.out.println("1.Registrar Usuario\n"
+                                + "2.Buscar usuario por nick"
                                 + "\n Exit ");
             System.out.println("Enter your Choice : ");
 
@@ -61,8 +62,16 @@ public class P01Tester {
 
                     break;
                 case 2:
-                    //Listar usuarios
-                    System.out.println("");
+                    //Obtener usuario
+                    System.out.println("¿Que usuario quieres buscar?: ");  
+                    nombreUsuario = sc.nextLine(); 
+                    Usuario u = bs.obtenerUsuario(nombreUsuario);
+                    if(u != null){
+                        System.out.println("Usuario encontrado");
+                        System.out.println(u.toString());
+                    }else{
+                        System.out.println("Usuario NO encontrado");
+                    }
                     break;
                 default:
                     //EXIT

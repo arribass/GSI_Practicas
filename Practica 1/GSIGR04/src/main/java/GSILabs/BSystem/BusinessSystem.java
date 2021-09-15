@@ -12,6 +12,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -73,9 +74,11 @@ public class BusinessSystem implements LeisureOffice{
      * {@inheritDoc}
      */
     public Usuario obtenerUsuario(String nick) {
-        Usuario u = null;
-        
-        return u;
+        Usuario userFound = null;
+        List<Usuario> result = Usuarios.stream()
+                                .filter(item -> item.getNick().equals(nick))
+                                .collect(Collectors.toList());
+        return !result.isEmpty() ? result.get(0) : null;
     }
 
     @Override
