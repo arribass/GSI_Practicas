@@ -32,7 +32,7 @@ public class Usuario {
             this.nick = nick;
             this.password = password;
             this.fechaNacimiento = fechaNacimiento;
-            this.perfil = perfil == 1?"Cliente":"Dueno";
+            this.perfil = perfil == 1?"Cliente":"Propietario";
             Usuario.id.addAndGet(1);
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException("Parametros de usuario invalido");
@@ -79,9 +79,8 @@ public class Usuario {
     }
     
     /**
-     * Desc: Recibe una edad y devuelve la edad actual del usuario en el instante en 
-     * el que se calcula
-     * @return 
+     * Desc: Recibe una edad y devuelve la edad actual del usuario en el instante en el que se calcula
+     * @return true si la edad es valida
      */
     private boolean edadValida(Date fechaNacimiento) {
         long fechaActual = new java.util.Date().getTime();
@@ -95,11 +94,23 @@ public class Usuario {
         return period.getYears() > EDAD_MINIMA;
     }
     /**
+     * Desc: Comprueba que el tipo de usuario es valida 
+     * 1 - Cliente
+     * 2 - Propietario
+     * @param perfil
+     * @return 
+     */
+    private boolean perfilValido(int perfil) {
+        return perfil == 1 || perfil == 2;
+    }
+    
+    /**
      * Desc: Obtienes unos datos de usuario y comprueba si son validos para registrar
+     * Comprueba que el nick, la edad y el tipo de usuario es valido
      * @param nick
      * @param password1
      * @param fechaNacimiento1
-     * @return 
+     * @return true si el usuario tiene parametros validos
      */
     private boolean usuarioValido(String nick, String password, Date fechaNacimiento, int perfil) {
         if(!longitudNickValida(nick))
@@ -117,12 +128,9 @@ public class Usuario {
      * ID: {id} 
      * Nick: {nick}
      * Fecha nacimiento: {dateOfBirth}
+     * return @param String que contiene la informacion publica de usuario
      */
     public String toString() {
         return "ID:" + getId() + "\nNick: " + getNick() + "\nFecha nacimiento: " + getFechaNacimiento().toString() +"\n";
-    }
-
-    private boolean perfilValido(int perfil) {
-        return perfil == 1 || perfil == 2;
     }
 }
