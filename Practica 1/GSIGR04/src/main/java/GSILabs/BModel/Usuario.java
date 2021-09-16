@@ -77,24 +77,29 @@ public class Usuario {
     public boolean longitudNickValida(String nick){
         return nick.length() > LONGITUD_MINIMA_NICK;
     }
-    
     /**
-     * Desc: Recibe una edad y devuelve la edad actual del usuario en el instante en el que se calcula
-     * @return true si la edad es valida
+     * Desc: Calcula la edad actual en base a la fecha recibida como parametro
+     * @param fechaNacimiento1
+     * @return 
      */
-    private boolean edadValida(Date fechaNacimiento) {
+    private int calculaEdad(Date fechaNacimiento){
         long fechaActual = new java.util.Date().getTime();
         long diffInMillies = Math.abs(fechaNacimiento.getTime() - fechaActual);
         long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
 
         Period period = Period.between(fechaNacimiento.toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), LocalDate.now());
-        period.getYears();
-        System.out.println("Edad: " + period.getYears());
         
-        return period.getYears() > EDAD_MINIMA;
+        return period.getYears();
     }
     /**
-     * Desc: Comprueba que el tipo de usuario es valida 
+     * Desc: Recibe una edad y devuelve la edad actual del usuario en el instante en el que se calcula
+     * @return true si la edad es valida
+     */
+    private boolean edadValida(Date fechaNacimiento) {        
+        return calculaEdad(fechaNacimiento) > EDAD_MINIMA;
+    }
+    /**
+     * Desc: Comprueba que el tipo de usuario es valido
      * 1 - Cliente
      * 2 - Propietario
      * @param perfil
@@ -108,8 +113,8 @@ public class Usuario {
      * Desc: Obtienes unos datos de usuario y comprueba si son validos para registrar
      * Comprueba que el nick, la edad y el tipo de usuario es valido
      * @param nick
-     * @param password1
-     * @param fechaNacimiento1
+     * @param password
+     * @param fechaNacimiento
      * @return true si el usuario tiene parametros validos
      */
     private boolean usuarioValido(String nick, String password, Date fechaNacimiento, int perfil) {
@@ -118,7 +123,7 @@ public class Usuario {
         if(!edadValida(fechaNacimiento))
             throw new IllegalArgumentException("Edad minima 14");
         if(!perfilValido(perfil))
-            throw new IllegalArgumentException("El indice de perfil debe ser 1(Cliente) o 2(Dueno)");
+            throw new IllegalArgumentException("El indice de perfil debe ser 1(Cliente) o 2(Propietario)");
         return true;    
     }
         
@@ -127,7 +132,7 @@ public class Usuario {
      * Desc: Devuelve los datos de usuario en el siguiente formato
      * ID: {id} 
      * Nick: {nick}
-     * Fecha nacimiento: {dateOfBirth}
+     * Fecha nacimiento: {fechaNacimiento}
      * return @param String que contiene la informacion publica de usuario
      */
     public String toString() {
