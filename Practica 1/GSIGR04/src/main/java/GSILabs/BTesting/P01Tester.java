@@ -5,8 +5,11 @@
  */
 package GSILabs.BTesting;
 
+import GSILabs.BModel.Bar;
 import GSILabs.BModel.Direccion;
 import GSILabs.BModel.Local;
+import GSILabs.BModel.Pub;
+import GSILabs.BModel.Restaurante;
 import GSILabs.BModel.Usuario;
 import GSILabs.BSystem.BusinessSystem;
 import java.text.ParseException;
@@ -95,6 +98,15 @@ public class P01Tester {
         
         //Pido al usuario el nombre del nuevo local.
         Scanner sc = new Scanner(System.in);
+        
+        //Introducir si quiere crear un bar un pub o un restaurante y abajo instanciar ese tipo en funcion de esa variable
+        System.out.println("De que tipo quieres que sea el local: 1-Bar 2-Restaurante 3-Pub"); 
+        String tipo = sc.nextLine();
+        while(tipo != "1" && tipo !="2" && tipo!="3"){
+           System.out.println("caracter invalido repite la eleccion"); 
+           tipo = sc.nextLine(); 
+        }
+        
         System.out.println("Introduce el nombre del local: ");  
         String nombreLocal = sc.nextLine(); 
         
@@ -123,8 +135,20 @@ public class P01Tester {
             }
         }
         if(!existeDireccion){
-            Local l = new Local(nombreLocal,d,descripcionLocal);
-            Locales.add(l); 
+            switch (tipo) {
+                case "1":
+                    Bar b = new Bar(nombreLocal,d,descripcionLocal);
+                    Locales.add(b);
+                    break;
+                case "2":
+                    Restaurante r = new Restaurante(nombreLocal,d,descripcionLocal);
+                    Locales.add(r);
+                    break;
+                case "3":
+                    Pub p = new Pub(nombreLocal,d,descripcionLocal);
+                    Locales.add(p);
+                    break;
+            } 
         } else{
             System.out.println("Ya existe un local en esa direccion.");
         }        
