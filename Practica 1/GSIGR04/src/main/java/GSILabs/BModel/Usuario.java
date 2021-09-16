@@ -35,7 +35,7 @@ public class Usuario {
             this.perfil = perfil == 1?"Cliente":"Propietario";
             Usuario.id.addAndGet(1);
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("Parametros de usuario invalido");
+            throw new IllegalArgumentException("Parametros de usuario invalido" + e.toString());
         }
     }
     /*Getters and Setters*/
@@ -117,14 +117,13 @@ public class Usuario {
      * @param fechaNacimiento
      * @return true si el usuario tiene parametros validos
      */
-    private boolean usuarioValido(String nick, String password, Date fechaNacimiento, int perfil) {
+    public void usuarioValido(String nick, String password, Date fechaNacimiento, int perfil) {
         if(!longitudNickValida(nick))
             throw new IllegalArgumentException("Nick demasiado corto");
         if(!edadValida(fechaNacimiento))
             throw new IllegalArgumentException("Edad minima 14");
         if(!perfilValido(perfil))
-            throw new IllegalArgumentException("El indice de perfil debe ser 1(Cliente) o 2(Propietario)");
-        return true;    
+            throw new IllegalArgumentException("El indice de perfil debe ser 1(Cliente) o 2(Propietario)");  
     }
         
     @Override

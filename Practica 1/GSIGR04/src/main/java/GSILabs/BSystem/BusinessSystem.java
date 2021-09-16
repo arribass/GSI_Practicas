@@ -46,6 +46,7 @@ public class BusinessSystem implements LeisureOffice{
      * {@inheritDoc}
      */
     public boolean modificaUsuario(Usuario u, Usuario nuevoU) {
+//        nuevoU.usuarioValido(nick, password, fechaNacimiento, 0);
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
