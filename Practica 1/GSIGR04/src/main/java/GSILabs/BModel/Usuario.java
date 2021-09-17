@@ -115,7 +115,7 @@ public class Usuario {
      * @param nick
      * @param password
      * @param fechaNacimiento
-     * @return true si el usuario tiene parametros validos
+     * @param perfil
      */
     public void usuarioValido(String nick, String password, Date fechaNacimiento, int perfil) {
         if(!longitudNickValida(nick))
