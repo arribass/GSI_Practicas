@@ -19,6 +19,8 @@ import java.util.stream.Collectors;
  */
 public class BusinessSystem implements LeisureOffice{
     static List<Usuario> Usuarios = new ArrayList<>();
+    static List<Local> Locales = new ArrayList<>();
+    static List<Review> Reviews = new ArrayList<>();
     
     @Override
     /**

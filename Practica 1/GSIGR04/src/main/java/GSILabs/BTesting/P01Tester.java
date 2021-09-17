@@ -26,8 +26,6 @@ import java.util.Scanner;
  */
 public class P01Tester {
                
-    static List<Local> Locales = new ArrayList<>();
-    static List<Review> Reviews = new ArrayList<>();
     public static void main(String[] args) {
         // Instanciamos una clase BusinessSystem
         BusinessSystem bs = new BusinessSystem();
@@ -39,7 +37,8 @@ public class P01Tester {
         do {
             System.out.println("1. Registrar Usuario\n"
                                 + "2. Buscar usuario por nick\n"
-                                + "3. Registrar local"
+                                + "3. Registrar local\n"
+                                + "4. Puntuar un local"
                                 + "\n Exit ");
             System.out.print("Enter your Choice : ");
 
@@ -90,9 +89,10 @@ public class P01Tester {
                     break;
                 case 4:
                     System.out.println("¿cual es tu puntuacion de 1 a 5?");
+                    int valint;
                     do{
                         String valoracion = sc.nextLine();
-                        int valint = Integer.parseInt(valoracion)
+                        valint = Integer.parseInt(valoracion);
                     }while(valint < 1 || valint > 5);
                     
                     System.out.println("Escribe a continuación tu comentario");
@@ -114,7 +114,7 @@ public class P01Tester {
 
     private static void nuevaReview(Review r){
         //TODO: comprobar que no haya otra review para esa fecha y ese local
-        Reviews.add(r);
+//        Reviews.add(r);//Hay que añadir en businessSystem no en el tester CAMBIAR
     }
 
     private static void registrarLocal() {
@@ -150,6 +150,8 @@ public class P01Tester {
         System.out.println("Introduce la descripción del local: "); 
         String descripcionLocal = sc.nextLine();
         
+        //CAMBIAR 
+        //Esto hay que hacerlo en business system
         boolean existeDireccion = false;
         for (int i=0;i<Locales.size();i++) {      
             if(Locales.get(i).getDireccion().equals(d)){
