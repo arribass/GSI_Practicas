@@ -13,6 +13,7 @@ public class Review {
     private int valoracion;
     private String comentario;
     private Date fecha;
+    //añadir de alguna manera a que local pertenece
 
     public Review(int valoracion, String comentario, Date fecha){
         this.valoracion = valoracion;
