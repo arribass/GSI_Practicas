@@ -40,7 +40,17 @@ public class BusinessSystem implements LeisureOffice{
      * {@inheritDoc}
      */
     public boolean eliminaUsuario(Usuario u) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try{
+            Usuarios.remove(u);
+            System.out.print("Usuario eliminado");
+            return true;
+        }
+        catch(NullPointerException e){
+            System.out.print("El usuario no existe");
+            return false;
+        }
+        
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -48,8 +58,18 @@ public class BusinessSystem implements LeisureOffice{
      * {@inheritDoc}
      */
     public boolean modificaUsuario(Usuario u, Usuario nuevoU) {
-//        nuevoU.usuarioValido(nick, password, fechaNacimiento, 0);
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //nuevoU.usuarioValido(nick, password, fechaNacimiento, 0);
+        try{
+            Usuarios.remove(u);
+            System.out.print("Usuario modificado");
+            Usuarios.add(u);
+            return true;
+        }
+        catch(NullPointerException e){
+            System.out.print("El usuario no existe");
+            return false;
+        }
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -76,7 +96,13 @@ public class BusinessSystem implements LeisureOffice{
      * {@inheritDoc}
      */
     public boolean nuevaReview(Review r) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            Reviews.add(r);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
