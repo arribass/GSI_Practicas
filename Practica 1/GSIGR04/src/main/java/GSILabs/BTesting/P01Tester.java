@@ -86,6 +86,9 @@ public class P01Tester {
                 case 3:
                     registrarLocal();
                     break;
+                case 4:
+                    //nuevaReview(r);
+                    break;
                 default:
                     //EXIT
                     System.out.println("Accion no permitida");
