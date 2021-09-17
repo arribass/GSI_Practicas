@@ -6,6 +6,7 @@
 package GSILabs.BTesting;
 
 import GSILabs.BModel.Bar;
+import GSILabs.BModel.Review;
 import GSILabs.BModel.Direccion;
 import GSILabs.BModel.Local;
 import GSILabs.BModel.Pub;
@@ -26,6 +27,7 @@ import java.util.Scanner;
 public class P01Tester {
                
     static List<Local> Locales = new ArrayList<>();
+    static List<Review> Reviews = new ArrayList<>();
     public static void main(String[] args) {
         // Instanciamos una clase BusinessSystem
         BusinessSystem bs = new BusinessSystem();
@@ -86,6 +88,21 @@ public class P01Tester {
                 case 3:
                     registrarLocal();
                     break;
+                case 4:
+                    System.out.println("¿cual es tu puntuacion de 1 a 5?");
+                    do{
+                        String valoracion = sc.nextLine();
+                        int valint = Integer.parseInt(valoracion)
+                    }while(valint < 1 || valint > 5);
+                    
+                    System.out.println("Escribe a continuación tu comentario");
+                    String comentario = sc.nextLine();
+
+                    Date fecha = new Date(); //coge la fecha actual
+                
+                    Review r = new Review(valint,comentario,fecha);
+                    nuevaReview(r);
+                    break;
                 default:
                     //EXIT
                     System.out.println("Accion no permitida");
@@ -94,6 +111,12 @@ public class P01Tester {
             }
         } while ( choice < 3 && choice > 0 );
     }
+
+    private static void nuevaReview(Review r){
+        //TODO: comprobar que no haya otra review para esa fecha y ese local
+        Reviews.add(r);
+    }
+
     private static void registrarLocal() {
         
         //Pido al usuario el nombre del nuevo local.
