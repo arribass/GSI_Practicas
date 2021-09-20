@@ -13,7 +13,7 @@ import java.util.Set;
  * @author LENOVO-arribass
  */
 public class Local {
-    private static final Set<String> nombres = new HashSet<String>();
+    //private static final Set<String> nombres = new HashSet<String>();
 
     private String nombre;
     private Direccion direccion;
@@ -32,6 +32,14 @@ public class Local {
     
     public Direccion getDireccion(){
         return this.direccion;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
     }
 
     

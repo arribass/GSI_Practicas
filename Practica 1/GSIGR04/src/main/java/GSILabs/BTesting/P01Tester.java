@@ -85,7 +85,30 @@ public class P01Tester {
                     }
                     break;
                 case 3:
-                    registrarLocal();
+                    //Pido al usuario el nombre del nuevo local.                    
+
+                    System.out.println("Introduce el nombre del local: ");  
+                    String nombreLocal = sc.nextLine(); 
+
+                    //Pido al usuario los componentes de la direccion del local.        
+                    System.out.println("Vas a introducir la dirección \n");         
+                    System.out.println("Introduce la localidad: "); 
+                    String localidad = sc.nextLine();         
+                    System.out.println("Introduce la provincia: "); 
+                    String provincia = sc.nextLine();       
+                    System.out.println("Introduce la calle: "); 
+                    String calle = sc.nextLine();       
+                    System.out.println("Introduce el numero: "); 
+                    String numero = sc.nextLine();
+                    //Genero la dirección.
+                    Direccion d = new Direccion(localidad,provincia,calle,numero);
+
+                    //Pido la descripcion del local al usuario.
+                    System.out.println("Introduce la descripción del local: "); 
+                    String descripcionLocal = sc.nextLine();
+                    Local l = new Local(nombreLocal,d,descripcionLocal);
+                    //añado el nuevo local
+                    bs.nuevoLocal(l);
                     break;
                 case 4:
                     System.out.println("¿cual es tu puntuacion de 1 a 5?");
@@ -115,67 +138,5 @@ public class P01Tester {
     private static void nuevaReview(Review r){
         //TODO: comprobar que no haya otra review para esa fecha y ese local
 //        Reviews.add(r);//Hay que añadir en businessSystem no en el tester CAMBIAR
-    }
-
-    private static void registrarLocal() {
-        
-        //Pido al usuario el nombre del nuevo local.
-        Scanner sc = new Scanner(System.in);
-        
-        //Introducir si quiere crear un bar un pub o un restaurante y abajo instanciar ese tipo en funcion de esa variable
-        System.out.println("De que tipo quieres que sea el local: 1-Bar 2-Restaurante 3-Pub"); 
-        String tipo = sc.nextLine();
-        while(tipo != "1" && tipo !="2" && tipo!="3"){
-           System.out.println("caracter invalido repite la eleccion"); 
-           tipo = sc.nextLine(); 
-        }
-        
-        System.out.println("Introduce el nombre del local: ");  
-        String nombreLocal = sc.nextLine(); 
-        
-        //Pido al usuario los componentes de la direccion del local.        
-        System.out.println("Vas a introducir la dirección \n");         
-        System.out.println("Introduce la localidad: "); 
-        String localidad = sc.nextLine();         
-        System.out.println("Introduce la provincia: "); 
-        String provincia = sc.nextLine();       
-        System.out.println("Introduce la calle: "); 
-        String calle = sc.nextLine();       
-        System.out.println("Introduce el numero: "); 
-        String numero = sc.nextLine();
-        //Genero la dirección.
-        Direccion d = new Direccion(localidad,provincia,calle,numero);
-        
-        //Pido la descripcion del local al usuario.
-        System.out.println("Introduce la descripción del local: "); 
-        String descripcionLocal = sc.nextLine();
-        
-        //CAMBIAR 
-        //Esto hay que hacerlo en business system
-        boolean existeDireccion = false;
-        for (int i=0;i<Locales.size();i++) {      
-            if(Locales.get(i).getDireccion().equals(d)){
-                existeDireccion = true;
-                break;
-            }
-        }
-        if(!existeDireccion){
-            switch (tipo) {
-                case "1":
-                    Bar b = new Bar(nombreLocal,d,descripcionLocal);
-                    Locales.add(b);
-                    break;
-                case "2":
-                    Restaurante r = new Restaurante(nombreLocal,d,descripcionLocal);
-                    Locales.add(r);
-                    break;
-                case "3":
-                    Pub p = new Pub(nombreLocal,d,descripcionLocal);
-                    Locales.add(p);
-                    break;
-            } 
-        } else{
-            System.out.println("Ya existe un local en esa direccion.");
-        }        
     }
 }

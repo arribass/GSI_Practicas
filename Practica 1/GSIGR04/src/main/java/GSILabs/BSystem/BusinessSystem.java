@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
 /**
@@ -158,7 +159,43 @@ public class BusinessSystem implements LeisureOffice{
      * {@inheritDoc}
      */
     public boolean nuevoLocal(Local l) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Scanner sc = new Scanner(System.in);
+        //Introducir si quiere crear un bar un pub o un restaurante y abajo instanciar ese tipo en funcion de esa variable
+             System.out.println("De que tipo quieres que sea el local: 1-Bar 2-Restaurante 3-Pub"); 
+             String tipo = sc.nextLine();
+             while(tipo != "1" && tipo !="2" && tipo!="3"){
+                System.out.println("caracter invalido repite la eleccion"); 
+                tipo = sc.nextLine(); 
+             }
+        //CAMBIAR 
+        //Esto hay que hacerlo en business system
+        boolean existeDireccion = false;
+        for (int i=0;i<Locales.size();i++) {      
+            if(Locales.get(i).getDireccion().equals(l.getDireccion())){
+                existeDireccion = true;
+                break;
+            }
+        }
+        if(!existeDireccion){
+            switch (tipo) {
+                case "1":
+                    Bar b = new Bar(l.getNombre(),l.getDireccion(),l.getDescripcion());
+                    Locales.add(b);
+                    break;
+                case "2":
+                    Restaurante r = new Restaurante(l.getNombre(),l.getDireccion(),l.getDescripcion());
+                    Locales.add(r);
+                    break;
+                case "3":
+                    Pub p = new Pub(l.getNombre(),l.getDireccion(),l.getDescripcion());
+                    Locales.add(p);
+                    break;
+            } 
+            return true;
+        } else{
+            System.out.println("Ya existe un local en esa direccion.");
+            return true;
+        }        
     }
 
     @Override
