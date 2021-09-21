@@ -127,6 +127,7 @@ public class P01Tester {
                     nuevaReview(r);
                     break;
                 case 5:
+                    //Recogo la direccion del local que quiero eliminar para identificarlo
                     System.out.println("Introduce a continuación los datos del local a eliminar"); 
                     System.out.println("Introduce la localidad: "); 
                     String localidadB = sc.nextLine();         
@@ -138,7 +139,9 @@ public class P01Tester {
                     String numeroB = sc.nextLine();
                     //Genero la dirección.
                     Direccion dB = new Direccion(localidadB,provinciaB,calleB,numeroB);
+                    //Cojo el local de esa dirección
                     Local localEliminar = bs.obtenerLocal(dB);
+                    //elimino el local
                     bs.eliminarLocal(localEliminar);                    
                     break;
                 default:

@@ -216,7 +216,14 @@ public class BusinessSystem implements LeisureOffice{
      * {@inheritDoc}
      */
     public Local obtenerLocal(Direccion d) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //recorro el array buscando un local con dirección d y lo devuelvo.
+        for (int i=0;i<Locales.size();i++) {
+            if(Locales.get(i).getDireccion().equals(d)){
+                return Locales.get(i);
+            }
+        }
+        System.out.println("No existe ningún local en esa dirección");
+        return null;
     }
 
     @Override
