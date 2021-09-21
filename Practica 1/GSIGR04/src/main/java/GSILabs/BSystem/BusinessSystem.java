@@ -222,7 +222,7 @@ public class BusinessSystem implements LeisureOffice{
                 return Locales.get(i);
             }
         }
-        System.out.println("No existe ningún local en esa dirección");
+        System.out.println("No existe ningún local en esa dirección.");
         return null;
     }
 
@@ -247,7 +247,16 @@ public class BusinessSystem implements LeisureOffice{
      * {@inheritDoc}
      */
     public boolean actualizarLocal(Local viejoL, Local nuevoL) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for (int i=0;i<Locales.size();i++) {
+            if(Locales.get(i).getDireccion().equals(viejoL.getDescripcion())){
+                Locales.get(i).setDescripcion(nuevoL.getDescripcion());
+                Locales.get(i).setDireccion(nuevoL.getDireccion());
+                Locales.get(i).setNombre(nuevoL.getNombre());
+                return true;
+            }
+        }
+        System.out.println("No existe el local a modificar.");
+        return false;
     }
 
     @Override
