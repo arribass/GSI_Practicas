@@ -149,7 +149,11 @@ public class P01Tester {
                     String provinciaD = sc.nextLine();
                     System.out.println("Introduce la ciudad deseada "); 
                     String ciudadD = sc.nextLine();
-                    bs.listarLocales(ciudadD, provinciaD);
+                    Local[] localeslist = bs.listarLocales(ciudadD, provinciaD);
+                    System.out.println("Listado de locales: \n");                    
+                    for (int i=0;i<localeslist.length;i++) {
+                        System.out.println("- " + localeslist[i].getNombre() + ".\n");
+                    }
                     break;
                 default:
                     //EXIT
