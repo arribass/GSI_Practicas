@@ -312,7 +312,15 @@ public class BusinessSystem implements LeisureOffice{
      * {@inheritDoc}
      */
     public Local[] listarLocales(String ciudad, String provincia) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Local[] LocalesDE = null;
+        //Recorro el arraylist de los locales y los que están en la provincia y ciudad indicadas los añado al array
+        for (int i=0;i<Locales.size();i++) {
+            if(Locales.get(i).getDireccion().getLocalidad() == ciudad && Locales.get(i).getDireccion().getProvincia() == provincia){
+                LocalesDE[LocalesDE.length] = Locales.get(i);
+            }
+        }
+        
+        return LocalesDE;
     }
 
     @Override

@@ -144,6 +144,13 @@ public class P01Tester {
                     //elimino el local
                     bs.eliminarLocal(localEliminar);                    
                     break;
+                case 6:
+                    System.out.println("Introduce la provincia deseada "); 
+                    String provinciaD = sc.nextLine();
+                    System.out.println("Introduce la ciudad deseada "); 
+                    String ciudadD = sc.nextLine();
+                    bs.listarLocales(ciudadD, provinciaD);
+                    break;
                 default:
                     //EXIT
                     System.out.println("Accion no permitida");

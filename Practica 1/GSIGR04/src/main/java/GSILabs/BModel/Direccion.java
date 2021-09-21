@@ -24,6 +24,14 @@ public class Direccion {
         this.calle = Calle;
         this.numero = Numero;
     }
+
+    public String getLocalidad() {
+        return localidad;
+    }
+
+    public String getProvincia() {
+        return provincia;
+    }
     
     //Sobre escritura de metodos equals y toString.
     
