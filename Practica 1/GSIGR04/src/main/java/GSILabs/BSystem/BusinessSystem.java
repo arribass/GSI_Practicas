@@ -167,8 +167,7 @@ public class BusinessSystem implements LeisureOffice{
                 System.out.println("caracter invalido repite la eleccion"); 
                 tipo = sc.nextLine(); 
              }
-        //CAMBIAR 
-        //Esto hay que hacerlo en business system
+       
         boolean existeDireccion = false;
         for (int i=0;i<Locales.size();i++) {      
             if(Locales.get(i).getDireccion().equals(l.getDireccion())){
@@ -203,7 +202,13 @@ public class BusinessSystem implements LeisureOffice{
      * {@inheritDoc}
      */
     public boolean eliminarLocal(Local l) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for (int i=0;i<Locales.size();i++) {
+            if(Locales.get(i).getDireccion().equals(l.getDescripcion())){
+                Locales.remove(i);
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

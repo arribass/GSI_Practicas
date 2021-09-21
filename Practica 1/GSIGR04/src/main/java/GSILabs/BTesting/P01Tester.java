@@ -126,6 +126,21 @@ public class P01Tester {
                     Review r = new Review(valint,comentario,fecha);
                     nuevaReview(r);
                     break;
+                case 5:
+                    System.out.println("Introduce a continuación los datos del local a eliminar"); 
+                    System.out.println("Introduce la localidad: "); 
+                    String localidadB = sc.nextLine();         
+                    System.out.println("Introduce la provincia: "); 
+                    String provinciaB = sc.nextLine();       
+                    System.out.println("Introduce la calle: "); 
+                    String calleB = sc.nextLine();       
+                    System.out.println("Introduce el numero: "); 
+                    String numeroB = sc.nextLine();
+                    //Genero la dirección.
+                    Direccion dB = new Direccion(localidadB,provinciaB,calleB,numeroB);
+                    Local localEliminar = bs.obtenerLocal(dB);
+                    bs.eliminarLocal(localEliminar);                    
+                    break;
                 default:
                     //EXIT
                     System.out.println("Accion no permitida");
