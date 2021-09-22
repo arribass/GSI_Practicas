@@ -155,6 +155,12 @@ public class P01Tester {
                         System.out.println("- " + localeslist[i].getNombre() + ".\n");
                     }
                     break;
+                /*case 7: 
+                    System.out.println("Nombre del propietario"); 
+                    String prop = sc.nextLine();
+                    Usuario p = bs.obtenerUsuario(prop);
+                    bs.asociarLocal(l, p);
+                    break;*/
                 default:
                     //EXIT
                     System.out.println("Accion no permitida");

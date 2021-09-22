@@ -18,6 +18,7 @@ public class Local {
     private String nombre;
     private Direccion direccion;
     private String descripcion;
+    private Usuario[] propietarios;
     
     private final int maxDescripcion = 300;
 
@@ -28,6 +29,7 @@ public class Local {
             descripcion = descripcion.substring(0, maxDescripcion);
         }
         this.descripcion = descripcion;
+        this.propietarios = new Usuario[3];
     }
     
     public Direccion getDireccion(){
@@ -54,5 +56,17 @@ public class Local {
         this.descripcion = descripcion;
     }
 
-    
+    public boolean anadirPropietario(Usuario u){
+        if(propietarios[2] != null){
+            return false;
+        }else{
+          for(int i=0;i<propietarios.length;i++){
+            if(propietarios[i] == null){
+                propietarios[i] = u;
+                return true;
+            }
+            }
+            return false;  
+        }
+    }     
 }

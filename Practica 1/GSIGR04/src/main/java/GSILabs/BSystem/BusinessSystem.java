@@ -231,7 +231,12 @@ public class BusinessSystem implements LeisureOffice{
      * {@inheritDoc}
      */
     public boolean asociarLocal(Local l, Propietario p) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for (int i=0;i<Locales.size();i++) {
+            if(Locales.get(i).getDireccion().equals(l.getDireccion())){
+                return Locales.get(i).anadirPropietario(p);
+            }
+        }
+        return false;
     }
 
     @Override
