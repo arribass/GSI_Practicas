@@ -522,7 +522,25 @@ public class BusinessSystem implements LeisureOffice{
      * {@inheritDoc}
      */
     public boolean eliminaContestacion(Review r) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        //Comenzamos mirando si la review existe, si no existe acabamos
+        //Si la review existe buscamos en la lista de contestaciones aquellas que vengan de esa review y las borramos
+        
+        int cont = 0;
+        
+        if(Contestaciones.stream().anyMatch(item -> r.equals(item.getReview()))){
+            for(int i=0; i<Contestaciones.size(); i++){
+                if (Contestaciones.get(i).getReview().equals(r)){
+                    Contestaciones.remove(Contestaciones.get(i));
+                    cont ++;
+                }
+            }
+            System.out.println("Se han eliminado " + cont + " contestaciones de la review indicada.\n");
+            return true;
+        }else{
+            System.out.println("La review introducida no existe.\n");
+            return false;
+        }
     }
     
 }
