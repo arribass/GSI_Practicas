@@ -11,11 +11,27 @@ import java.util.Date;
  * @author Arribas
  */
 public class Contestacion {
+    private Review review;
     private String comentario;
     private Date fecha;
 
-    public Contestacion(String comentario, Date fecha){
+    public Contestacion(Review review, String comentario, Date fecha){
+        this.review = review;
         this.comentario = comentario;
         this.fecha = fecha;
     }
+
+    public Review getReview() {
+        return review;
+    }
+
+    public String getComentario() {
+        return comentario;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+    
+    
 }

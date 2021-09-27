@@ -292,7 +292,19 @@ public class BusinessSystem implements LeisureOffice{
      * {@inheritDoc}
      */
     public Review[] verReviews(Local l) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Review[] rev = new Review[100];
+        //List<Review> rev = new ArrayList<>();
+        int a = 0;
+        for (int i=0;i<Reviews.size();i++) {
+            if(Reviews.get(i).getLocal().equals(l)){
+                rev[a] = Reviews.get(i);
+                a = a+1;
+                //rev.add(Reviews.get(i));
+                //return Reviews.get(i);
+            }
+        }
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return rev;
     }
 
     @Override
