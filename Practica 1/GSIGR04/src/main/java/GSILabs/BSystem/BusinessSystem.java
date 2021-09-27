@@ -292,7 +292,7 @@ public class BusinessSystem implements LeisureOffice{
      * {@inheritDoc}
      */
     public Review[] verReviews(Local l) {
-        Review[] rev = new Review[100];
+        Review[] rev = null;
         //List<Review> rev = new ArrayList<>();
         int a = 0;
         for (int i=0;i<Reviews.size();i++) {
