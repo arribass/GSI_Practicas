@@ -5,22 +5,70 @@
  */
 package GSILabs.BModel;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 /**
  *
  * @author Arribas
  */
 public class Reserva {
-    private Date fecha;
-    private String hora;
-    private float descuento;
     
-    public Reserva(Date fecha, String hora, float descuento){
-        this.descuento = descuento;
+    private Cliente cliente;
+    private Reservable local;
+    private LocalDate fecha;
+    private LocalTime hora;
+    private float descuento;
+
+    public Reserva(Cliente cliente, Reservable local, LocalDate fecha, LocalTime hora, float descuento) {
+        this.cliente = cliente;
+        this.local = local;
         this.fecha = fecha;
-        //Si tengo un 25% de descuento calcularia 0.85 que es por lo que tengo que multiplicar el precio para que me salga un 25 de descuento.
-        //Ejemplo: vale 10 euros -> 10 * 0.85 = 8.5
+        this.hora = hora;
+        //Si tengo un 25% de descuento calcularia 0.75 que es por lo que tengo que multiplicar el precio para que me salga un 25 de descuento.
+        //Ejemplo: vale 10 euros -> 10 * 0.75 = 7.5
         this.descuento = 1 - (descuento/100); 
     }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public Reservable getLocal() {
+        return local;
+    }
+
+    public void setLocal(Reservable local) {
+        this.local = local;
+    }
+
+    public LocalDate getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(LocalDate fecha) {
+        this.fecha = fecha;
+    }
+
+    public LocalTime getHora() {
+        return hora;
+    }
+
+    public void setHora(LocalTime hora) {
+        this.hora = hora;
+    }
+
+    public float getDescuento() {
+        return descuento;
+    }
+
+    public void setDescuento(float descuento) {
+        this.descuento = descuento;
+    }
+    
+    
 }

@@ -369,18 +369,45 @@ public class BusinessSystem implements LeisureOffice{
      */
     public boolean nuevaReserva(Cliente c, Reservable r, LocalDate ld, LocalTime lt) {
         
-        
-        
-        
-        
+        //Comienzo comparando la fecha actual con la fecha de entrada, en caso de que sea igual o mayor continuo
+        //Ahora miro si la fecha actual es igual a la fecha de entrada, si es igual miro si la hora de entrada es posterior a la hora actual, en caso contrario paro
+        //Si las horas son correctas paso a mirar en las listas de usuarios y locales si existen el reservable y el cliente, en caso afirmativo de ambos creo la reserva y la agrego a la lista
+        //Si la hora de entrada es mayor a la hora actual, repito el comentario anterior
+        //Si alguna de las condiciones no se cumple se devuelve false y no se realiza la operacion
         
         if (ld.compareTo(LocalDate.now())>= 0){
             if (ld.compareTo(LocalDate.now())== 0){
                 if(lt.compareTo(LocalTime.now()) > 0 ){
                     //ver si el cliente existe y si el local existe
-                    
+                    if(Usuarios.stream().anyMatch(item -> c.equals(item))){
+                        if(Locales.stream().anyMatch(item -> r.equals(item))){
+                        Reserva res = new Reserva(c, r, ld, lt, 0);
+                        Reservas.add(res);
+                        return true;
+                        }else{
+                            System.out.println("El local no existe\n");
+                            return false;
+                        }
+                    }else{
+                        System.out.println("El cliente no existe\n");
+                        return false;
+                    }
                 }else{
                     System.out.println("Estás reservando para la fecha de hoy con una hora anterior a la actual\n");
+                    return false;
+                }
+            }else{
+                if(Usuarios.stream().anyMatch(item -> c.equals(item))){
+                    if(Locales.stream().anyMatch(item -> r.equals(item))){
+                        Reserva res = new Reserva(c, r, ld, lt, 0);
+                        Reservas.add(res);
+                        return true;
+                    }else{
+                        System.out.println("El local no existe\n");
+                        return false;
+                    }
+                }else{
+                    System.out.println("El cliente no existe\n");
                     return false;
                 }
             }
@@ -388,7 +415,6 @@ public class BusinessSystem implements LeisureOffice{
             System.out.println("La fecha es anterior a la fecha de hoy\n");
             return false;
         }
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
