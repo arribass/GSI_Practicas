@@ -465,7 +465,16 @@ public class BusinessSystem implements LeisureOffice{
      * {@inheritDoc}
      */
     public boolean eliminarReserva(Reserva r) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //Busca la reserva de entrada en la lista y lo elimina, si la reserva introducida es valida/existe
+        try{
+            Reservas.remove(r);
+            System.out.print("Reserva eliminada");
+            return true;
+        }
+        catch(NullPointerException e){
+            System.out.print("La reserva no existe");
+            return false;
+        }
     }
 
     @Override
