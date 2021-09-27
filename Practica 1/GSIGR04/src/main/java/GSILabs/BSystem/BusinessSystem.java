@@ -126,7 +126,23 @@ public class BusinessSystem implements LeisureOffice{
      * {@inheritDoc}
      */
     public boolean existeRewiew(Usuario u, Local l, LocalDate ld) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Boolean aaa = Usuarios.stream().anyMatch(item -> u.equals(item));
+        if (aaa == true){
+            Boolean bbb = Reviews.stream().anyMatch(item -> l.equals(item.getLocal()));
+            Boolean ccc = Reviews.stream().anyMatch(item -> ld.equals(item.getFecha()));
+            if (bbb == ccc == true){
+                System.out.println("El usuario ha escrito una review de ese local en esa fecha\n");
+                return true;
+            }else{
+                System.out.println("El usuario no ha escrito reviews para ese local en esa fecha\n");
+                return false;
+            }
+            
+        }else{
+            System.out.println("El usuario no existe\n");
+            return false;
+        }
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override

@@ -13,16 +13,21 @@ public class Review {
     private int valoracion;
     private String comentario;
     private Date fecha;
-    //añadir de alguna manera a que local pertenece
+    private Local local; //añadir de alguna manera a que local pertenece
 
-    public Review(int valoracion, String comentario, Date fecha){
+    public Review(int valoracion, String comentario, Date fecha, Local local){
         this.valoracion = valoracion;
         this.comentario = comentario;
         this.fecha = fecha;
+        this.local = local;
     }
 
     public Date getFecha(){
     return this.fecha;
+    }
+
+    public Local getLocal() {
+        return local;
     }
 
     
