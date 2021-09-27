@@ -23,6 +23,7 @@ public class BusinessSystem implements LeisureOffice{
     static List<Local> Locales = new ArrayList<>();
     static List<Review> Reviews = new ArrayList<>();
     static List<Contestacion> Contestaciones = new ArrayList<>();
+    static List<Reserva> Reservas = new ArrayList<>();
     
     @Override
     /**
@@ -367,7 +368,27 @@ public class BusinessSystem implements LeisureOffice{
      * {@inheritDoc}
      */
     public boolean nuevaReserva(Cliente c, Reservable r, LocalDate ld, LocalTime lt) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        
+        
+        
+        
+        
+        if (ld.compareTo(LocalDate.now())>= 0){
+            if (ld.compareTo(LocalDate.now())== 0){
+                if(lt.compareTo(LocalTime.now()) > 0 ){
+                    //ver si el cliente existe y si el local existe
+                    
+                }else{
+                    System.out.println("Estás reservando para la fecha de hoy con una hora anterior a la actual\n");
+                    return false;
+                }
+            }
+        }else{
+            System.out.println("La fecha es anterior a la fecha de hoy\n");
+            return false;
+        }
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
