@@ -313,6 +313,7 @@ public class BusinessSystem implements LeisureOffice{
         Locales.stream().filter(item -> item.getDireccion().equals(viejoL.getDireccion()))
                         .collect(Collectors.toList()).get(0).setNombre(nuevoL.getNombre());
         
+        System.out.print("Local actualizado\n");
         return true;
         /*
 >>>>>>> Stashed changes

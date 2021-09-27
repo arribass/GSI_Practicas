@@ -41,7 +41,9 @@ public class P01Tester {
                                 + "3. Registrar local\n"
                                 + "4. Añadir Review\n"
                                 + "5. Eliminar local\n"
-                                + "6. Buscar local por provincia y ciudad\n");
+                                + "6. Buscar local por provincia y ciudad\n"
+                                + "7. Obtener local\n"
+                                + "8. Modificar local\n");
             System.out.print("¿Qué deseas hacer? : \n");
 
             choice = sc.nextInt();
@@ -190,6 +192,63 @@ public class P01Tester {
                     }else{
                         System.out.println("Local NO encontrado");
                     }
+                    break;
+                case 8:
+                    System.out.println("Datos del local a modificar: \n"); 
+                    System.out.println("Introduce la localidad: "); 
+                    localidadc = sc.nextLine();         
+                    System.out.println("Introduce la provincia: "); 
+                    provinciac = sc.nextLine();       
+                    System.out.println("Introduce la calle: "); 
+                    callec = sc.nextLine();       
+                    System.out.println("Introduce el numero: "); 
+                    numeroc = sc.nextLine();
+                    //Genero la dirección.
+                    Direccion dd = new Direccion(localidadc,provinciac,callec,numeroc);
+                    Local localviejo = bs.obtenerLocal(dd);
+                    
+                    String nuevaDescripcion = null;
+                    Direccion nuevaDireccion = null;
+                    String nuevoNombre = null;
+                    
+                    int eleccion = 10;
+                    System.out.println("¿Que deseas modificar?\n 1- descripcion\n 2-nombre\n 3-direccion");
+                    eleccion = sc.nextInt();
+                    
+                    switch(eleccion){
+                        case 1:
+                            System.out.println("Introduce la descripción del local: "); 
+                            nuevaDescripcion = sc.nextLine();
+                            nuevoNombre = localviejo.getNombre();
+                            nuevaDireccion = localviejo.getDireccion();
+                            break;
+                        case 2:
+                            System.out.println("Introduce el nombre del local: "); 
+                            nuevoNombre = sc.nextLine();
+                            nuevaDescripcion = localviejo.getDescripcion();
+                            nuevaDireccion = localviejo.getDireccion();
+                            break;
+                        case 3:
+                            System.out.println("Introduce la localidad: "); 
+                            localidadc = sc.nextLine();         
+                            System.out.println("Introduce la provincia: "); 
+                            provinciac = sc.nextLine();       
+                            System.out.println("Introduce la calle: "); 
+                            callec = sc.nextLine();       
+                            System.out.println("Introduce el numero: "); 
+                            numeroc = sc.nextLine();
+                            nuevaDireccion = new Direccion(localidadc,provinciac,callec,numeroc);
+                            nuevaDescripcion = localviejo.getDescripcion();
+                            nuevoNombre = localviejo.getNombre();
+                            break;
+                        default:
+                            nuevaDescripcion = localviejo.getDescripcion();
+                            nuevoNombre = localviejo.getNombre();
+                            nuevaDireccion = localviejo.getDireccion();
+                            System.out.println("Seleccion no válida\n");
+                            break;
+                    }   
+                    bs.actualizarLocal(localviejo, new Local(nuevoNombre,nuevaDireccion,nuevaDescripcion));
                     break;
                 /*case 7: 
                     System.out.println("Nombre del propietario"); 
