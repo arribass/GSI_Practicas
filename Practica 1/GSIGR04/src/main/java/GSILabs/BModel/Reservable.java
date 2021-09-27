@@ -9,6 +9,6 @@ package GSILabs.BModel;
  *
  * @author Arribas
  */
-public class Reservable {
+public interface Reservable {
     
 }
