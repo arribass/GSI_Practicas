@@ -29,7 +29,7 @@ public class BusinessSystem implements LeisureOffice{
      * {@inheritDoc}
      */
     public boolean nuevoUsuario(Usuario u) {
-    //agrega el usuario de entrada en la lista de usuarios
+        //agrega el usuario de entrada en la lista de usuarios
         try {
             Usuarios.add(u);
             return true;
@@ -82,7 +82,7 @@ public class BusinessSystem implements LeisureOffice{
      * {@inheritDoc}
      */
     public boolean existeNick(String nick) {
-    //Busca en la lista de usuarios si el nick de entrada existe o no
+        //Busca en la lista de usuarios si el nick de entrada existe o no
         return Usuarios.stream().anyMatch(item -> nick.equals(item.getNick()));
     }
 
@@ -103,7 +103,7 @@ public class BusinessSystem implements LeisureOffice{
      * {@inheritDoc}
      */
     public boolean nuevaReview(Review r) {
-    //agrega una review a la lista
+        //agrega una review a la lista
         try {
             Reviews.add(r);
             return true;
@@ -117,7 +117,7 @@ public class BusinessSystem implements LeisureOffice{
      * {@inheritDoc}
      */
     public boolean eliminaReview(Review r) {
-    //elimina una review de la lista si esta existe
+        //elimina una review de la lista si esta existe
         try{
             Reviews.remove(r);
             return true;
@@ -125,7 +125,6 @@ public class BusinessSystem implements LeisureOffice{
             System.out.print("La review no existe");
             return false;
         }
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -150,7 +149,6 @@ public class BusinessSystem implements LeisureOffice{
             System.out.println("El usuario no existe\n");
             return false;
         }
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -158,7 +156,12 @@ public class BusinessSystem implements LeisureOffice{
      * {@inheritDoc}
      */
     public boolean nuevaContestacion(Contestacion c, Review r) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //Busca una review, y si existe agrega una contestacion    
+        if (Reviews.stream().anyMatch(item -> r.equals(item))){
+            return Contestaciones.add(c);
+        }else{
+            return false;
+        }
     }
 
     @Override
@@ -166,7 +169,8 @@ public class BusinessSystem implements LeisureOffice{
      * {@inheritDoc}
      */
     public boolean tieneContestacion(Review r) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //Busca en la lista de contestaciones la review de entrada, y devuelve si existe o no una contestación con dicha review como atributo
+        return Contestaciones.stream().anyMatch(item -> r.equals(item.getReview()));
     }
 
     @Override
@@ -174,7 +178,14 @@ public class BusinessSystem implements LeisureOffice{
      * {@inheritDoc}
      */
     public Contestacion obtenerContestacion(Review r) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //Recorre el array de contestaciones buscando la review de entrada, y si la encuentra devuelve la contestacion
+        for (int i=0;i<Contestaciones.size();i++) {
+            if(Contestaciones.get(i).getReview().equals(r)){
+                return Contestaciones.get(i);
+            }
+        }
+        System.out.println("No existe ninguna contestacion para esa review.");
+        return null;
     }
 
     @Override
@@ -182,7 +193,16 @@ public class BusinessSystem implements LeisureOffice{
      * {@inheritDoc}
      */
     public boolean eliminaContestacion(Contestacion c) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //Busca la contestacion en la lista de contestaciones y la elimina
+        try{
+            Contestaciones.remove(c);
+            System.out.print("Contestacion eliminada");
+            return true;
+        }
+        catch(NullPointerException e){
+            System.out.print("La contestacion no existe");
+            return false;
+        }
     }
 
     @Override
