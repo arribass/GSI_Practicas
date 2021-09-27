@@ -101,13 +101,27 @@ public class BusinessSystem implements LeisureOffice{
      * {@inheritDoc}
      */
     public boolean nuevaReview(Review r) {
-        //agrega una review a la lista
-        try {
-            Reviews.add(r);
-            return true;
-        } catch (Exception e) {
+        //agrega una review a la lista, antes mira para cada elemento de la lista si coinciden la fecha y el local con el elemento de la entrada, y en funcion de si se da ese caso o no agrega la review
+        Boolean flag = true;
+        for (int i=0;i<Reviews.size();i++) {
+            if(Reviews.get(i).getLocal() == r.getLocal() && Reviews.get(i).getFecha() == r.getFecha()){
+                flag = false;
+            }
+        }
+        if (flag){
+            try {
+                Reviews.add(r);
+                System.out.println("Review introducida\n");
+                return true;
+            }catch (Exception e) {
+                System.out.println("Error introduciendo review\n");
+                return false;
+            }
+        }else{
+            System.out.println("Una review ha sido introducida en esa fecha y en ese local anteriormente\n");
             return false;
         }
+
     }
 
     @Override
