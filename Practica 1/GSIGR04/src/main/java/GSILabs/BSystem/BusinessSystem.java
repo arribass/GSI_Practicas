@@ -31,14 +31,20 @@ public class BusinessSystem implements LeisureOffice{
      */
     public boolean nuevoUsuario(Usuario u) {
         // Agrega el usuario de entrada en la lista de usuarios
-        if(!existeNick(u.getNick())){
-            Usuarios.add(u);
-            return true;
-        }else{
+        if(Usuarios.stream().anyMatch(item -> u.equals(item))){
+            System.out.println("El usuario ya existe.\n");
             return false;
+        }else{
+            if(!existeNick(u.getNick())){
+                Usuarios.add(u);
+                return true;
+            }else{
+                System.out.println("El nick de este usuario esta en uso por otro usuario existente.\n");
+                return false;
+            }
         }
     }
-    
+
     @Override
     /**
      * {@inheritDoc}
