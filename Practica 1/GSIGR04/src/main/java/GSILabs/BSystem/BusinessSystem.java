@@ -29,6 +29,7 @@ public class BusinessSystem implements LeisureOffice{
      * {@inheritDoc}
      */
     public boolean nuevoUsuario(Usuario u) {
+    //agrega el usuario de entrada en la lista de usuarios
         try {
             Usuarios.add(u);
             return true;
@@ -42,6 +43,7 @@ public class BusinessSystem implements LeisureOffice{
      * {@inheritDoc}
      */
     public boolean eliminaUsuario(Usuario u) {
+        //Busca el usuario de entrada en la lista y lo elimina, si el usuario introducido es valido
         try{
             Usuarios.remove(u);
             System.out.print("Usuario eliminado");
@@ -60,6 +62,7 @@ public class BusinessSystem implements LeisureOffice{
      * {@inheritDoc}
      */
     public boolean modificaUsuario(Usuario u, Usuario nuevoU) {
+        //Busca el usuario de la entrada, lo borra e introduce el usuario de entrada modificado, si lo encuentra
         //nuevoU.usuarioValido(nick, password, fechaNacimiento, 0);
         try{
             Usuarios.remove(u);
@@ -79,6 +82,7 @@ public class BusinessSystem implements LeisureOffice{
      * {@inheritDoc}
      */
     public boolean existeNick(String nick) {
+    //Busca en la lista de usuarios si el nick de entrada existe o no
         return Usuarios.stream().anyMatch(item -> nick.equals(item.getNick()));
     }
 
@@ -87,6 +91,7 @@ public class BusinessSystem implements LeisureOffice{
      * {@inheritDoc}
      */
     public Usuario obtenerUsuario(String nick) {
+        //Busca y devuelve un usuario de la lista de usuarios
         Usuario userFound = Usuarios.stream()
                                 .filter(item -> item.getNick().equals(nick))
                                 .collect(Collectors.toList()).get(0);
@@ -98,6 +103,7 @@ public class BusinessSystem implements LeisureOffice{
      * {@inheritDoc}
      */
     public boolean nuevaReview(Review r) {
+    //agrega una review a la lista
         try {
             Reviews.add(r);
             return true;
@@ -111,6 +117,7 @@ public class BusinessSystem implements LeisureOffice{
      * {@inheritDoc}
      */
     public boolean eliminaReview(Review r) {
+    //elimina una review de la lista si esta existe
         try{
             Reviews.remove(r);
             return true;
@@ -126,6 +133,7 @@ public class BusinessSystem implements LeisureOffice{
      * {@inheritDoc}
      */
     public boolean existeRewiew(Usuario u, Local l, LocalDate ld) {
+        // Primero busca si un usuario existe, si existe busca un local y una fecha en el array de reviews, si ambas existen confirma la busqueda
         Boolean aaa = Usuarios.stream().anyMatch(item -> u.equals(item));
         if (aaa == true){
             Boolean bbb = Reviews.stream().anyMatch(item -> l.equals(item.getLocal()));
@@ -225,6 +233,7 @@ public class BusinessSystem implements LeisureOffice{
      * {@inheritDoc}
      */
     public boolean eliminarLocal(Local l) {
+    //Recorre el array de locales y elimina el local de entrada si se encuentra en la lista
         for (int i=0;i<Locales.size();i++) {
             if(Locales.get(i).getDireccion().equals(l.getDescripcion())){
                 Locales.remove(i);
@@ -254,6 +263,7 @@ public class BusinessSystem implements LeisureOffice{
      * {@inheritDoc}
      */
     public boolean asociarLocal(Local l, Propietario p) {
+        //Busco en el array de locales el local de entrada y agrego el propietario; el método se encargará de decidir si se puede agregar el propietario o no
         for (int i=0;i<Locales.size();i++) {
             if(Locales.get(i).getDireccion().equals(l.getDireccion())){
                 return Locales.get(i).anadirPropietario(p);
@@ -275,6 +285,7 @@ public class BusinessSystem implements LeisureOffice{
      * {@inheritDoc}
      */
     public boolean actualizarLocal(Local viejoL, Local nuevoL) {
+        //Recorro el array de locales buscando el local viejo y sustituyo por el nuevo atributo a atributo
         for (int i=0;i<Locales.size();i++) {
             if(Locales.get(i).getDireccion().equals(viejoL.getDescripcion())){
                 Locales.get(i).setDescripcion(nuevoL.getDescripcion());
@@ -293,8 +304,8 @@ public class BusinessSystem implements LeisureOffice{
      */
     public Review[] verReviews(Local l) {
         Review[] rev = null;
-        //List<Review> rev = new ArrayList<>();
         int a = 0;
+        //Recorro el array de reviews e incluyo en la lista de items las reviews que tengan ese local
         for (int i=0;i<Reviews.size();i++) {
             if(Reviews.get(i).getLocal().equals(l)){
                 rev[a] = Reviews.get(i);
@@ -303,7 +314,6 @@ public class BusinessSystem implements LeisureOffice{
                 //return Reviews.get(i);
             }
         }
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         return rev;
     }
 
