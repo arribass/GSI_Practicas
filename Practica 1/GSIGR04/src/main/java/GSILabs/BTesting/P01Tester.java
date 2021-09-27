@@ -35,16 +35,21 @@ public class P01Tester {
         Scanner sc = new Scanner(System.in);
         int choice;
         do {
-            System.out.println("1. Registrar Usuario\n"
+            System.out.println("0. Salir\n"
+                                + "1. Registrar Usuario\n"
                                 + "2. Buscar usuario por nick\n"
                                 + "3. Registrar local\n"
-                                + "4. Puntuar un local"
-                                + "\n Exit ");
-            System.out.print("Enter your Choice : ");
+                                + "4. Añadir Review\n"
+                                + "5. Eliminar local\n"
+                                + "6. Buscar local por provincia y ciudad\n");
+            System.out.print("¿Qué deseas hacer? : \n");
 
             choice = sc.nextInt();
             sc.nextLine();
             switch (choice) {
+                case 0:
+                    System.out.println("Cerrando programa...");
+                    break;
                 case 1:
                   
                     boolean registerOk = false;
@@ -167,7 +172,7 @@ public class P01Tester {
                     System.exit(0);
                     break;  
             }
-        } while ( choice < 3 && choice > 0 );
+        } while ( choice != 0 );
     }
 
     private static void nuevaReview(Review r){

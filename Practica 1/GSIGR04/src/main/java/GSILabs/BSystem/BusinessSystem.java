@@ -185,10 +185,10 @@ public class BusinessSystem implements LeisureOffice{
         Scanner sc = new Scanner(System.in);
         //Introducir si quiere crear un bar un pub o un restaurante y abajo instanciar ese tipo en funcion de esa variable
              System.out.println("De que tipo quieres que sea el local: 1-Bar 2-Restaurante 3-Pub"); 
-             String tipo = sc.nextLine();
-             while(tipo != "1" && tipo !="2" && tipo!="3"){
+             int tipo = sc.nextInt();
+             while(tipo != 1 && tipo != 2 && tipo!= 3){
                 System.out.println("caracter invalido repite la eleccion"); 
-                tipo = sc.nextLine(); 
+                tipo = sc.nextInt();
              }
        
         boolean existeDireccion = false;
@@ -200,15 +200,15 @@ public class BusinessSystem implements LeisureOffice{
         }
         if(!existeDireccion){
             switch (tipo) {
-                case "1":
+                case 1:
                     Bar b = new Bar(l.getNombre(),l.getDireccion(),l.getDescripcion());
                     Locales.add(b);
                     break;
-                case "2":
+                case 2:
                     Restaurante r = new Restaurante(l.getNombre(),l.getDireccion(),l.getDescripcion());
                     Locales.add(r);
                     break;
-                case "3":
+                case 3:
                     Pub p = new Pub(l.getNombre(),l.getDireccion(),l.getDescripcion());
                     Locales.add(p);
                     break;
