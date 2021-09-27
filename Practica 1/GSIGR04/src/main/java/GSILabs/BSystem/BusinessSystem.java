@@ -311,7 +311,29 @@ public class BusinessSystem implements LeisureOffice{
      * {@inheritDoc}
      */
     public boolean desasociarLocal(Local l, Propietario p) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        //Vemos si el local existe, si no existe hemos acabado
+        //Si el local existe, sacamos sus propietarios y buscamos el propietario de entrada, si no existe lo indicamos y acabamos, si sí existe lo borramos
+        //Si al durante el bucle for se borra el propietario lo indicamos y acabamos, ya que no puede haber dos propietarios iguales
+        //en caso contrario sabemos que podemos indicar que el propietario de entrada no era un propietario del local indicado
+        
+        if(Locales.stream().anyMatch(item -> l.equals(item))){
+            Usuario[] propietarios = l.getPropietarios();
+            
+            for (int i = 0; i<propietarios.length; i++){
+                if(propietarios[i] == p){
+                    propietarios[i] = null;
+                    System.out.println("Se ha borrado el propietario indicado.\n");
+                    return true;
+                }
+            }
+            System.out.println("El propietario indicado no formaba parte de los propietarios asociados al local.\n");
+            return false;
+        }else{
+            System.out.println("El local no existe.\n");
+            return false;
+        }
+
     }
 
     @Override
