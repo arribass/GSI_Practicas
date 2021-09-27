@@ -53,8 +53,6 @@ public class BusinessSystem implements LeisureOffice{
             System.out.print("El usuario no existe");
             return false;
         }
-        
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -189,7 +187,7 @@ public class BusinessSystem implements LeisureOffice{
     /**
      * {@inheritDoc}
      */
-    public boolean nuevoLocal(Local l) {
+    public boolean nuevoLocal(Local l) { //OK
         Scanner sc = new Scanner(System.in);
         //Introducir si quiere crear un bar un pub o un restaurante y abajo instanciar ese tipo en funcion de esa variable
              System.out.println("De que tipo quieres que sea el local: 1-Bar 2-Restaurante 3-Pub"); 
@@ -211,14 +209,17 @@ public class BusinessSystem implements LeisureOffice{
                 case 1:
                     Bar b = new Bar(l.getNombre(),l.getDireccion(),l.getDescripcion());
                     Locales.add(b);
+                    System.out.println("******Bar añadido*******");
                     break;
                 case 2:
                     Restaurante r = new Restaurante(l.getNombre(),l.getDireccion(),l.getDescripcion());
                     Locales.add(r);
+                    System.out.println("******Restaurante añadido*******");
                     break;
                 case 3:
                     Pub p = new Pub(l.getNombre(),l.getDireccion(),l.getDescripcion());
                     Locales.add(p);
+                    System.out.println("******Pub añadido*******");
                     break;
             } 
             return true;
@@ -232,6 +233,7 @@ public class BusinessSystem implements LeisureOffice{
     /**
      * {@inheritDoc}
      */
+<<<<<<< Updated upstream
     public boolean eliminarLocal(Local l) {
     //Recorre el array de locales y elimina el local de entrada si se encuentra en la lista
         for (int i=0;i<Locales.size();i++) {
@@ -239,23 +241,29 @@ public class BusinessSystem implements LeisureOffice{
                 Locales.remove(i);
                 return true;
             }
+=======
+    public boolean eliminarLocal(Local l) {//OK
+        try{
+            Locales.remove(l);
+            System.out.print("Local eliminado");
+            return true;
         }
-        return false;
+        catch(NullPointerException e){
+            System.out.print("El local no existe");
+            return false;
+>>>>>>> Stashed changes
+        }
     }
 
     @Override
     /**
      * {@inheritDoc}
      */
-    public Local obtenerLocal(Direccion d) {
-        //recorro el array buscando un local con dirección d y lo devuelvo.
-        for (int i=0;i<Locales.size();i++) {
-            if(Locales.get(i).getDireccion().equals(d)){
-                return Locales.get(i);
-            }
-        }
-        System.out.println("No existe ningún local en esa dirección.");
-        return null;
+    public Local obtenerLocal(Direccion d) {//OK
+        Local localFound = Locales.stream()
+                                .filter(item -> item.getDireccion().equals(d))
+                                .collect(Collectors.toList()).get(0);
+        return localFound;
     }
 
     @Override
@@ -285,7 +293,19 @@ public class BusinessSystem implements LeisureOffice{
      * {@inheritDoc}
      */
     public boolean actualizarLocal(Local viejoL, Local nuevoL) {
+<<<<<<< Updated upstream
         //Recorro el array de locales buscando el local viejo y sustituyo por el nuevo atributo a atributo
+=======
+        Locales.stream().filter(item -> item.getDireccion().equals(viejoL.getDireccion()))
+                        .collect(Collectors.toList()).get(0).setDescripcion(nuevoL.getDescripcion());
+        
+        Locales.stream().filter(item -> item.getDireccion().equals(viejoL.getDireccion()))
+                        .collect(Collectors.toList()).get(0).setDireccion(nuevoL.getDireccion());
+        
+        Locales.stream().filter(item -> item.getDireccion().equals(viejoL.getDireccion()))
+                        .collect(Collectors.toList()).get(0).setNombre(nuevoL.getNombre());
+        /*
+>>>>>>> Stashed changes
         for (int i=0;i<Locales.size();i++) {
             if(Locales.get(i).getDireccion().equals(viejoL.getDescripcion())){
                 Locales.get(i).setDescripcion(nuevoL.getDescripcion());
@@ -295,7 +315,7 @@ public class BusinessSystem implements LeisureOffice{
             }
         }
         System.out.println("No existe el local a modificar.");
-        return false;
+        return false;*/
     }
 
     @Override

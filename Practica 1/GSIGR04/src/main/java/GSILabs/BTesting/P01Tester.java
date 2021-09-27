@@ -171,6 +171,26 @@ public class P01Tester {
                         System.out.println("- " + localeslist[i].getNombre() + ".\n");
                     }
                     break;
+                case 7:
+                    System.out.println("Introduce la localidad: "); 
+                    String localidadc = sc.nextLine();         
+                    System.out.println("Introduce la provincia: "); 
+                    String provinciac = sc.nextLine();       
+                    System.out.println("Introduce la calle: "); 
+                    String callec = sc.nextLine();       
+                    System.out.println("Introduce el numero: "); 
+                    String numeroc = sc.nextLine();
+                    //Genero la dirección.
+                    Direccion dc = new Direccion(localidadc,provinciac,callec,numeroc);
+                    Local local1 = bs.obtenerLocal(dc);
+                    
+                    if(local1 != null){
+                        System.out.println("Local encontrado");
+                        System.out.println(local1.toString());
+                    }else{
+                        System.out.println("Local NO encontrado");
+                    }
+                    break;
                 /*case 7: 
                     System.out.println("Nombre del propietario"); 
                     String prop = sc.nextLine();

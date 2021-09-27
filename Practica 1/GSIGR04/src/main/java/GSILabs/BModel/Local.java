@@ -69,4 +69,18 @@ public class Local {
             return false;  
         }
     }     
+
+    public Usuario[] getPropietarios() {
+        return propietarios;
+    }
+
+    public void setPropietarios(Usuario[] propietarios) {
+        this.propietarios = propietarios;
+    }
+
+    @Override
+    public String toString() {
+        return "- nombre=" + nombre + "\n- direccion=" + direccion + "\n- descripcion=" + descripcion;
+        
+    }
 }

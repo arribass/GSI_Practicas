@@ -30,6 +30,10 @@ public class Review {
         return local;
     }
 
+    public String getComentario() {
+        return comentario;
+    }
+
     
 }
  
