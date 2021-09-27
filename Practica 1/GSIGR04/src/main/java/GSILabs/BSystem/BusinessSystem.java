@@ -29,11 +29,11 @@ public class BusinessSystem implements LeisureOffice{
      * {@inheritDoc}
      */
     public boolean nuevoUsuario(Usuario u) {
-        //agrega el usuario de entrada en la lista de usuarios
-        try {
+        // Agrega el usuario de entrada en la lista de usuarios
+        if(!existeNick(u.getNick())){
             Usuarios.add(u);
             return true;
-        } catch (Exception e) {
+        }else{
             return false;
         }
     }

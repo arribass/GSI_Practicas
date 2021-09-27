@@ -72,7 +72,7 @@ public class P01Tester {
                             System.out.println("Usuario registrado correctamente!");
                             System.out.println(u.toString());
                         }else{
-                            System.out.println("Usuario NO registrado!");
+                            System.out.println("El usuario " + u.getNick()+ " ya existe!");
                         }
                     } catch (IllegalArgumentException | ParseException ex) {
                         System.out.println(ex.toString());
