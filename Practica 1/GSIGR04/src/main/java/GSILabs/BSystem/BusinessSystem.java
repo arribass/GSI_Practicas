@@ -350,12 +350,10 @@ public class BusinessSystem implements LeisureOffice{
      */
     public Review[] verReviews(Local l) {
         Review[] rev = null;
-        int a = 0;
         //Recorro el array de reviews e incluyo en la lista de items las reviews que tengan ese local
         for (int i=0;i<Reviews.size();i++) {
             if(Reviews.get(i).getLocal().equals(l)){
-                rev[a] = Reviews.get(i);
-                a = a+1;
+                rev[rev.length] = Reviews.get(i);
                 //rev.add(Reviews.get(i));
                 //return Reviews.get(i);
             }
@@ -422,7 +420,14 @@ public class BusinessSystem implements LeisureOffice{
      * {@inheritDoc}
      */
     public Reserva[] obtenerReservas(Cliente c) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Reserva[] res = null;
+        //Recorro el array de reservas e incluyo en la lista de items las reservas que tengan ese cliente
+        for (int i=0;i<Reservas.size();i++) {
+            if(Reservas.get(i).getCliente().equals(c)){
+                res[res.length] = Reservas.get(i);
+            }
+        }
+        return res;
     }
 
     @Override
@@ -430,7 +435,14 @@ public class BusinessSystem implements LeisureOffice{
      * {@inheritDoc}
      */
     public Reserva[] obtenerReservas(Reservable r) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Reserva[] res = null;
+        //Recorro el array de reservas e incluyo en la lista de items las reservas que tengan ese reservable
+        for (int i=0;i<Reservas.size();i++) {
+            if(Reservas.get(i).getReservable().equals(r)){
+                res[res.length] = Reservas.get(i);
+            }
+        }
+        return res;
     }
 
     @Override
@@ -438,7 +450,14 @@ public class BusinessSystem implements LeisureOffice{
      * {@inheritDoc}
      */
     public Reserva[] obtenerReservas(LocalDate ld) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Reserva[] res = null;
+        //Recorro el array de reservas e incluyo en la lista de items las reservas que tengan esa fecha
+        for (int i=0;i<Reservas.size();i++) {
+            if(Reservas.get(i).getFecha().equals(ld)){
+                res[res.length] = Reservas.get(i);
+            }
+        }
+        return res;
     }
 
     @Override

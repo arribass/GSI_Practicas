@@ -20,7 +20,7 @@ public class Reserva {
     private LocalTime hora;
     private float descuento;
 
-    public Reserva(Cliente cliente, Reservable local, LocalDate fecha, LocalTime hora, float descuento) {
+    public Reserva(Cliente cliente, Reservable reservable, LocalDate fecha, LocalTime hora, float descuento) {
         this.cliente = cliente;
         this.local = local;
         this.fecha = fecha;
@@ -38,11 +38,11 @@ public class Reserva {
         this.cliente = cliente;
     }
 
-    public Reservable getLocal() {
+    public Reservable getReservable() {
         return local;
     }
 
-    public void setLocal(Reservable local) {
+    public void setReservable(Reservable local) {
         this.local = local;
     }
 
