@@ -292,6 +292,8 @@ public class BusinessSystem implements LeisureOffice{
         
         Locales.stream().filter(item -> item.getDireccion().equals(viejoL.getDireccion()))
                         .collect(Collectors.toList()).get(0).setNombre(nuevoL.getNombre());
+        
+        return true;
         /*
 >>>>>>> Stashed changes
         for (int i=0;i<Locales.size();i++) {
