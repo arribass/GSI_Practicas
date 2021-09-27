@@ -127,9 +127,20 @@ public class P01Tester {
                     String comentario = sc.nextLine();
 
                     Date fecha = new Date(); //coge la fecha actual
-                
-                    Review r = new Review(valint,comentario,fecha);
-                    nuevaReview(r);
+                    System.out.println("Vas a introducir la dirección del local al que quieres añadir comentario\n");         
+                    System.out.println("Introduce la localidad: "); 
+                    String loc = sc.nextLine();         
+                    System.out.println("Introduce la provincia: "); 
+                    String prov = sc.nextLine();       
+                    System.out.println("Introduce la calle: "); 
+                    String cal = sc.nextLine();       
+                    System.out.println("Introduce el numero: "); 
+                    String num = sc.nextLine();
+                    //Genero la dirección.
+                    Direccion dir = new Direccion(loc,prov,cal,num);
+                    Local local = bs.obtenerLocal(dir);
+                    Review r = new Review(valint,comentario,fecha,local);
+                    bs.nuevaReview(r);
                     break;
                 case 5:
                     //Recogo la direccion del local que quiero eliminar para identificarlo

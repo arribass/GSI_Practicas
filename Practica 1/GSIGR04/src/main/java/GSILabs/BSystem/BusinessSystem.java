@@ -22,6 +22,7 @@ public class BusinessSystem implements LeisureOffice{
     static List<Usuario> Usuarios = new ArrayList<>();
     static List<Local> Locales = new ArrayList<>();
     static List<Review> Reviews = new ArrayList<>();
+    static List<Contestacion> Contestaciones = new ArrayList<>();
     
     @Override
     /**
@@ -103,7 +104,6 @@ public class BusinessSystem implements LeisureOffice{
         } catch (Exception e) {
             return false;
         }
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
