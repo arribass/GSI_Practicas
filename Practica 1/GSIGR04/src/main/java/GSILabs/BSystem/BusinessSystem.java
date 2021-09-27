@@ -233,15 +233,7 @@ public class BusinessSystem implements LeisureOffice{
     /**
      * {@inheritDoc}
      */
-<<<<<<< Updated upstream
-    public boolean eliminarLocal(Local l) {
-    //Recorre el array de locales y elimina el local de entrada si se encuentra en la lista
-        for (int i=0;i<Locales.size();i++) {
-            if(Locales.get(i).getDireccion().equals(l.getDescripcion())){
-                Locales.remove(i);
-                return true;
-            }
-=======
+
     public boolean eliminarLocal(Local l) {//OK
         try{
             Locales.remove(l);
@@ -251,7 +243,6 @@ public class BusinessSystem implements LeisureOffice{
         catch(NullPointerException e){
             System.out.print("El local no existe");
             return false;
->>>>>>> Stashed changes
         }
     }
 
@@ -293,9 +284,6 @@ public class BusinessSystem implements LeisureOffice{
      * {@inheritDoc}
      */
     public boolean actualizarLocal(Local viejoL, Local nuevoL) {
-<<<<<<< Updated upstream
-        //Recorro el array de locales buscando el local viejo y sustituyo por el nuevo atributo a atributo
-=======
         Locales.stream().filter(item -> item.getDireccion().equals(viejoL.getDireccion()))
                         .collect(Collectors.toList()).get(0).setDescripcion(nuevoL.getDescripcion());
         
