@@ -108,7 +108,7 @@ public class BusinessSystem implements LeisureOffice{
     /**
      * {@inheritDoc}
      */
-    public boolean nuevaReview(Review r) {
+    public boolean nuevaReview(Review r) { //OK
         //agrega una review a la lista, antes mira para cada elemento de la lista si coinciden la fecha y el local con el elemento de la entrada, y en funcion de si se da ese caso o no agrega la review
         Boolean flag = true;
         for (int i=0;i<Reviews.size();i++) {

@@ -9,16 +9,20 @@ import GSILabs.BModel.Bar;
 import GSILabs.BModel.Review;
 import GSILabs.BModel.Direccion;
 import GSILabs.BModel.Local;
+import GSILabs.BModel.Contestacion;
 import GSILabs.BModel.Pub;
 import GSILabs.BModel.Restaurante;
 import GSILabs.BModel.Usuario;
 import GSILabs.BSystem.BusinessSystem;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -44,7 +48,10 @@ public class P01Tester {
                                 + "6. Listar locales por provincia y ciudad\n"
                                 + "7. Obtener local\n"
                                 + "8. Modificar local\n"
-                                + "9. Listar bares por provincia y ciudad\n");
+                                + "9. Listar bares por provincia y ciudad\n"
+                                + "12. Comprobación de ejercicio 4 apartado S10)\n"
+                                + "13. Comprobación de ejercicio 4 apartado S9) \n"
+                                + "14. Comprobación de ejercicio 4 apartado S8) \n");
             System.out.print("¿Qué deseas hacer? : \n");
 
             choice = sc.nextInt();
@@ -270,6 +277,137 @@ public class P01Tester {
                     System.out.println("Listado de pubs en: "+ ciudadD + ", "+ provinciaD +"\n");   
                     Local localeslist4[] = bs.listarPubs(ciudadD, provinciaD);                                        
                     break;
+                
+                //Ejercicio 4 S10, no se pueden añadir dos reviews del mismo usuario, el mismo dia para el mismo local
+                case 12:
+                    //Creamos un local y la fecha actual
+                    Date date = new Date();
+                    //Pido al usuario el nombre del nuevo local.                    
+
+                    System.out.println("Introduce el nombre del local: ");  
+                    String nombreLocal1 = sc.nextLine(); 
+
+                    //Pido al usuario los componentes de la direccion del local.        
+                    System.out.println("Vas a introducir la dirección \n");         
+                    System.out.println("Introduce la localidad: \n"); 
+                    String localidad1 = sc.nextLine();         
+                    System.out.println("Introduce la provincia: \n"); 
+                    String provincia1 = sc.nextLine();       
+                    System.out.println("Introduce la calle: \n"); 
+                    String calle1 = sc.nextLine();       
+                    System.out.println("Introduce el numero: \n"); 
+                    String numero1 = sc.nextLine();
+                    //Genero la dirección.
+                    Direccion d1 = new Direccion(localidad1,provincia1,calle1,numero1);
+
+                    //Pido la descripcion del local al usuario.
+                    System.out.println("Introduce la descripción del local: \n"); 
+                    String descripcionLocal2 = sc.nextLine();
+                    Local l2 = new Local(nombreLocal1,d1,descripcionLocal2);
+                    //añado el nuevo local
+                    bs.nuevoLocal(l2);
+                    
+                    //Creamos la primera review con la fecha y el local introducidos
+                    Review rev1 = new Review(5, "aaaaaaaaa",date, l2);
+                    System.out.println("Primera review introducida.\n");
+                            
+                    //agregamos la primera review
+                    bs.nuevaReview(rev1);
+
+                    //Creamos la segunda review con la misma fecha y el mismo local
+                    
+                    Review rev2 = new Review(3, "bbbbbbbbb",date, l2);
+                    System.out.println("Intentamos agregar la segunda review.\n");
+                    //Agregamos la segunda review
+                    Boolean resultado = bs.nuevaReview(rev2);
+                    
+                    if(resultado == false){
+                        System.out.println("Operación no completada: review del mismo local en la misma fecha ya existente.\n");
+                    }
+                    
+                    break;
+                
+                case 13:
+                    
+                    
+                    //Comenzamos agregando un local:
+                    System.out.println("Introduce el nombre del local: ");  
+                    String nombreLocal13 = sc.nextLine(); 
+
+                    //Pido al usuario los componentes de la direccion del local.        
+                    System.out.println("Vas a introducir la dirección \n");         
+                    System.out.println("Introduce la localidad: \n"); 
+                    String localidad13 = sc.nextLine();         
+                    System.out.println("Introduce la provincia: \n"); 
+                    String provincia13 = sc.nextLine();       
+                    System.out.println("Introduce la calle: \n"); 
+                    String calle13 = sc.nextLine();       
+                    System.out.println("Introduce el numero: \n"); 
+                    String numero13 = sc.nextLine();
+                    //Genero la dirección.
+                    Direccion d13 = new Direccion(localidad13,provincia13,calle13,numero13);
+
+                    //Pido la descripcion del local al usuario.
+                    System.out.println("Introduce la descripción del local: \n"); 
+                    String descripcionLocal23 = sc.nextLine();
+                    Local l23 = new Local(nombreLocal13,d13,descripcionLocal23);
+                    //añado el nuevo local
+                    bs.nuevoLocal(l23);
+                    
+                    //Una vez agregado el local vamos a agregar los tres propietarios
+                    
+                    String fechas = new String("13/11/1999");
+                    
+                
+                    try {
+                        
+                        
+                        fechaNacimientoUsuario = new SimpleDateFormat("dd/MM/yyyy").parse(fechas);
+                        Usuario pro1 = new Usuario("Aaaaa", "aaaaa", fechaNacimientoUsuario,1);
+                        Usuario pro2 = new Usuario("Bbbbb", "bbbbb", fechaNacimientoUsuario,1);
+                        Usuario pro3 = new Usuario("Ccccc", "ccccc", fechaNacimientoUsuario,1);
+                    
+                        l23.anadirPropietario(pro1);
+                        l23.anadirPropietario(pro2);
+                        l23.anadirPropietario(pro3);
+                        
+                        System.out.println("Tres propietarios agregados\n");
+                        
+                        System.out.println("Probamos a agregar un cuarto propietario\n");
+                        Usuario pro4 = new Usuario("Ddddd", "ddddd", fechaNacimientoUsuario,1);
+                        
+                        Boolean flag = l23.anadirPropietario(pro4);
+                        
+                        if(flag){
+                            System.out.println("Cuarto propietario agregado correctamente\n");
+                        }else{
+                            System.out.println("Cuarto propietario no agregado, maximo tres propietarios\n");
+                        }
+                        
+                    } catch (ParseException ex) {
+                        Logger.getLogger(P01Tester.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                
+                case 14:
+                    String fechas11 = new String("20/11/2020");
+                    try {
+                        Date fechaContestacion = new SimpleDateFormat("dd/MM/yyyy").parse(fechas11);
+                        //Simplemente vamos a crear una contestacion en cuyo constructor no va a haber una review válida ya que simplemente no la hemos creado
+                        //Para ello vamos a capturar el error que nos va a lanzar el compilador e indicar el porque
+                        try{
+                            Contestacion contestacion = new Contestacion(rev2345, "comentario", fechaContestacion);
+                        }catch(RuntimeException e){
+                            System.out.println("Se ha intentado crear una contestacion a una review que no existe");
+                        }
+                    } catch (ParseException ex) {
+                        Logger.getLogger(P01Tester.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
+
+                    
+
+                    
+                    
                 /*case 7: 
                     System.out.println("Nombre del propietario"); 
                     String prop = sc.nextLine();
