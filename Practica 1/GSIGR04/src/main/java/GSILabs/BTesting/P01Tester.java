@@ -450,13 +450,14 @@ public class P01Tester {
                     break;
 
                 case 15:
+                    //Creamos un local en la direccion dr
                     Direccion dr = new Direccion("Pamplona", "Navarra", "Tajonar", "4");
                     Local locaux = new Local("BarNistelroy", dr, "bonito");
                     
                     bs.nuevoLocal(locaux);
-                    
+                    //borramos el local
                     bs.eliminarLocal(locaux);
-                    
+                    //insertamos un nuevo bar en esa misma direccion y nos permite hacerlo
                     Bar bar = new Bar("BarNistelroy2", dr, "bonito");
                     bs.nuevoLocal(bar);
                 break;
@@ -536,18 +537,22 @@ public class P01Tester {
                     
                     
                 case 17:
+                    //inserto un local en la direccion dr
                     dr = new Direccion("Pamplona", "Navarra", "Tajonar", "4");
                     locaux = new Local("BarNistelroy", dr, "bonito");                    
-                    bs.nuevoLocal(locaux);                    
+                    bs.nuevoLocal(locaux);
+                    //intento insertar un nuevo bar en esa misma direccion y me dice que no se puede.
                     Local locaux2 = new Local("BarNistelroy2", dr, "bonito");
                     bs.nuevoLocal(locaux2);
                     break;
-                /*case 7: 
-                    System.out.println("Nombre del propietario"); 
-                    String prop = sc.nextLine();
-                    Usuario p = bs.obtenerUsuario(prop);
-                    bs.asociarLocal(l, p);
-                    break;*/
+                case 18:
+                    //Creo un usuario y lo inserto
+                    Date dat = new Date(95, 5,3);
+                    Usuario us = new Usuario("Sergio", "1234", dat , 1);
+                    bs.nuevoUsuario(us);
+                    //lo busco con el nick que le he insertado al usuario y me lo busca
+                    bs.obtenerUsuario("Sergio");
+                    break;
                 default:
                     //EXIT
                     System.out.println("Accion no permitida");
