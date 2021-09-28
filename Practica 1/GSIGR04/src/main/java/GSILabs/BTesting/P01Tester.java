@@ -55,7 +55,8 @@ public class P01Tester {
                                 + "12. Comprobación de ejercicio 4 apartado S10)\n"
                                 + "13. Comprobación de ejercicio 4 apartado S9) \n"
                                 + "14. Comprobación de ejercicio 4 apartado S8) \n"
-                                + "20. Comprobacion del ejercicio 4 apartado S5)\n");
+                                + "15. Comprobación de ejercicio 4 apartado S4) \n"
+                                + "16. Comprobacion del ejercicio 4 apartado S5)\n");
             System.out.print("¿Qué deseas hacer? : \n");
             //Recogo su elección y si no es válida se lo notifico.
             try{
@@ -420,7 +421,7 @@ public class P01Tester {
                     } catch (ParseException ex) {
                         Logger.getLogger(P01Tester.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                
+                break;
                 case 14:
                     String fechas11 = new String("20/11/2020");
                     Review rev2345 = null; //Comentar esta linea para realizar la comprobacion
@@ -436,8 +437,11 @@ public class P01Tester {
                     } catch (ParseException ex) {
                         Logger.getLogger(P01Tester.class.getName()).log(Level.SEVERE, null, ex);
                     }
+                    break;
+                case 15:
                     
-                case 20:
+                
+                case 16:
                     
                     //Para comprobar que no podemos introducir un usuario menor de 14 años simplemente vamos a crear un usuario con una fecha de nacimiento del 2019
                     System.out.println("Introduce el nombre de usuario: ");  
@@ -465,7 +469,7 @@ public class P01Tester {
 
 
                     
-
+break;
                     
                     
                 /*case 7: 
