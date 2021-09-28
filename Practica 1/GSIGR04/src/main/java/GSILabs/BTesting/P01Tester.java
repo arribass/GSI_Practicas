@@ -33,7 +33,7 @@ public class P01Tester {
         String nombreUsuario;
         
         Scanner sc = new Scanner(System.in);
-        int choice;
+        int choice=999;
         do {
             System.out.println("0. Salir\n"
                                 + "1. Registrar Usuario\n"
@@ -48,8 +48,12 @@ public class P01Tester {
                                 + "10. Listar restaruantes por provincia y ciudad\n"
                                 + "11. Listar pubs por provincia y ciudad\n");
             System.out.print("¿Qué deseas hacer? : \n");
-
-            choice = sc.nextInt();
+            try{
+                choice = sc.nextInt();
+            }catch(Exception e){
+                System.out.println("Caracter inválido");
+            }
+            
             sc.nextLine();
             switch (choice) {
                 case 0:
@@ -214,21 +218,34 @@ public class P01Tester {
                     int eleccion = 10;
                     //Escojo el atributo que deseo modificar.
                     System.out.println("¿Que deseas modificar?\n 1- descripcion\n 2-nombre \n 3-dirección");
-                    eleccion = sc.nextInt();
+                    try{
+                        eleccion = sc.nextInt();
+                    }catch(Exception e){
+                        System.out.println("Caracter inváido");
+                    }
+                    
                     
                     Scanner sc2 = new Scanner(System.in);
                     switch(eleccion){
                         case 1:
                             System.out.println("Introduce la descripción del local: "); 
                             nuevaDescripcion = sc2.nextLine();
-                            nuevoNombre = localviejo.getNombre();
-                            nuevaDireccion = localviejo.getDireccion();
+                            try{
+                                nuevoNombre = localviejo.getNombre();
+                                nuevaDireccion = localviejo.getDireccion();
+                            }catch(NullPointerException e){
+                              System.out.println("");  
+                            }                            
                             break;
                         case 2:
                             System.out.println("Introduce el nombre del local: "); 
                             nuevoNombre = sc2.nextLine();
-                            nuevaDescripcion = localviejo.getDescripcion();
-                            nuevaDireccion = localviejo.getDireccion();
+                            try{
+                                nuevaDescripcion = localviejo.getDescripcion();
+                                nuevaDireccion = localviejo.getDireccion();
+                            }catch(NullPointerException e){
+                              System.out.println("");  
+                            }
                             break;
                         case 3:
                             System.out.println("Introduce la localidad: "); 
@@ -240,8 +257,12 @@ public class P01Tester {
                             System.out.println("Introduce el numero: "); 
                             numeroc = sc2.nextLine();
                             nuevaDireccion = new Direccion(localidadc,provinciac,callec,numeroc);
-                            nuevaDescripcion = localviejo.getDescripcion();
-                            nuevoNombre = localviejo.getNombre();
+                            try{
+                               nuevaDescripcion = localviejo.getDescripcion();
+                                nuevoNombre = localviejo.getNombre(); 
+                            }catch(NullPointerException e){
+                              System.out.println("");  
+                            }                           
                             break;
                         default:
                             nuevaDescripcion = localviejo.getDescripcion();
@@ -250,7 +271,11 @@ public class P01Tester {
                             System.out.println("Seleccion no válida\n");
                             break;
                     }   
-                    bs.actualizarLocal(localviejo, new Local(nuevoNombre,nuevaDireccion,nuevaDescripcion));
+                    try{
+                        bs.actualizarLocal(localviejo, new Local(nuevoNombre,nuevaDireccion,nuevaDescripcion));
+                    }catch(Exception e){
+                        System.out.println("no se ha podido actualizar porque no existe un local en esa direccion");
+                    }
                     break;
                 case 9:
                     System.out.println("Introduce la provincia deseada "); 
@@ -285,6 +310,7 @@ public class P01Tester {
                 default:
                     //EXIT
                     System.out.println("Accion no permitida");
+                    System.out.println("Cerrando programa...");
                     System.exit(0);
                     break;  
             }

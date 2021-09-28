@@ -376,6 +376,7 @@ public class BusinessSystem implements LeisureOffice{
      * {@inheritDoc}
      */
     public boolean actualizarLocal(Local viejoL, Local nuevoL) { //OK
+        try{
         Locales.stream().filter(item -> item.getDireccion().equals(viejoL.getDireccion()))
                         .collect(Collectors.toList()).get(0).setDescripcion(nuevoL.getDescripcion());
         
@@ -387,6 +388,10 @@ public class BusinessSystem implements LeisureOffice{
         
         System.out.print("Local actualizado\n");
         return true;
+        }catch(Exception ex){
+            System.out.print("No ha sido posible actualizar el local\n");
+            return false;
+        }
     }
 
     @Override
