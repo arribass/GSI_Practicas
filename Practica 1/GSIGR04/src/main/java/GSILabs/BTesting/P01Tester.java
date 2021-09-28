@@ -524,10 +524,11 @@ public class P01Tester {
                     bs.nuevoLocal(locaux2);
                     break;
                 case 18:
+                    //Creo un usuario y lo inserto
                     Date dat = new Date(95, 5,3);
                     Usuario us = new Usuario("Sergio", "1234", dat , 1);
                     bs.nuevoUsuario(us);
-                    
+                    //lo busco con el nick que le he insertado al usuario y me lo busca
                     bs.obtenerUsuario("Sergio");
                     break;
                 /*case 7: 
