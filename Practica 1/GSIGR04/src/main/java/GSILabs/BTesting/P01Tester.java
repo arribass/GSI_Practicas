@@ -473,13 +473,15 @@ public class P01Tester {
                         }
                     } catch (IllegalArgumentException | ParseException ex) {
                         System.out.println(ex.toString());
-                    }
-
-
-                    
-break;
-                    
-                    
+                    }                    
+                    break;
+                case 17:
+                    dr = new Direccion("Pamplona", "Navarra", "Tajonar", "4");
+                    locaux = new Local("BarNistelroy", dr, "bonito");                    
+                    bs.nuevoLocal(locaux);                    
+                    Local locaux2 = new Local("BarNistelroy2", dr, "bonito");
+                    bs.nuevoLocal(locaux2);
+                    break;
                 /*case 7: 
                     System.out.println("Nombre del propietario"); 
                     String prop = sc.nextLine();
