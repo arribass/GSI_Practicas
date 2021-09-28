@@ -30,7 +30,7 @@ public class BusinessSystem implements LeisureOffice{
     /**
      * {@inheritDoc}
      */
-    public boolean nuevoUsuario(Usuario u) {
+    public boolean nuevoUsuario(Usuario u) { //OK
         // Agrega el usuario de entrada en la lista de usuarios
         if(Usuarios.stream().anyMatch(item -> u.equals(item))){
             System.out.println("El usuario ya existe.\n");
@@ -50,7 +50,7 @@ public class BusinessSystem implements LeisureOffice{
     /**
      * {@inheritDoc}
      */
-    public boolean eliminaUsuario(Usuario u) {
+    public boolean eliminaUsuario(Usuario u) { //OK
         //Busca el usuario de entrada en la lista y lo elimina, si el usuario introducido es valido
         try{
             Usuarios.remove(u);
@@ -67,7 +67,7 @@ public class BusinessSystem implements LeisureOffice{
     /**
      * {@inheritDoc}
      */
-    public boolean modificaUsuario(Usuario u, Usuario nuevoU) {
+    public boolean modificaUsuario(Usuario u, Usuario nuevoU) { //OK
         //Busca el usuario de la entrada, lo borra e introduce el usuario de entrada modificado, si lo encuentra
         //nuevoU.usuarioValido(nick, password, fechaNacimiento, 0);
         try{
@@ -87,7 +87,7 @@ public class BusinessSystem implements LeisureOffice{
     /**
      * {@inheritDoc}
      */
-    public boolean existeNick(String nick) {
+    public boolean existeNick(String nick) { //OK
         //Busca en la lista de usuarios si el nick de entrada existe o no
         return Usuarios.stream().anyMatch(item -> nick.equals(item.getNick()));
     }
@@ -96,7 +96,7 @@ public class BusinessSystem implements LeisureOffice{
     /**
      * {@inheritDoc}
      */
-    public Usuario obtenerUsuario(String nick) {
+    public Usuario obtenerUsuario(String nick) { //OK
         //Busca y devuelve un usuario de la lista de usuarios
         Usuario userFound = Usuarios.stream()
                                 .filter(item -> item.getNick().equals(nick))
@@ -281,8 +281,9 @@ public class BusinessSystem implements LeisureOffice{
             } 
             return true;
         } else{
+            //Si ya habia un local en esa dirección lo notifico al usuario.
             System.out.println("Ya existe un local en esa direccion.");
-            return true;
+            return false;
         }  
              }
     }
@@ -374,7 +375,8 @@ public class BusinessSystem implements LeisureOffice{
     /**
      * {@inheritDoc}
      */
-    public boolean actualizarLocal(Local viejoL, Local nuevoL) {
+    public boolean actualizarLocal(Local viejoL, Local nuevoL) { //OK
+        try{
         Locales.stream().filter(item -> item.getDireccion().equals(viejoL.getDireccion()))
                         .collect(Collectors.toList()).get(0).setDescripcion(nuevoL.getDescripcion());
         
@@ -386,6 +388,10 @@ public class BusinessSystem implements LeisureOffice{
         
         System.out.print("Local actualizado\n");
         return true;
+        }catch(Exception ex){
+            System.out.print("No ha sido posible actualizar el local\n");
+            return false;
+        }
     }
 
     @Override
