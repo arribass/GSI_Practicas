@@ -50,11 +50,12 @@ public class P01Tester {
                                 + "7. Obtener local\n"
                                 + "8. Modificar local\n"
                                 + "9. Listar bares por provincia y ciudad\n"
+                                + "10. Listar restaruantes por provincia y ciudad\n"
+                                + "11. Listar pubs por provincia y ciudad\n"                    
                                 + "12. Comprobación de ejercicio 4 apartado S10)\n"
                                 + "13. Comprobación de ejercicio 4 apartado S9) \n"
                                 + "14. Comprobación de ejercicio 4 apartado S8) \n"
-                                + "10. Listar restaruantes por provincia y ciudad\n"
-                                + "11. Listar pubs por provincia y ciudad\n");
+                                + "20. Comprobacion del ejercicio 4 apartado S5)\n");
             System.out.print("¿Qué deseas hacer? : \n");
             //Recogo su elección y si no es válida se lo notifico.
             try{
@@ -436,6 +437,32 @@ public class P01Tester {
                         Logger.getLogger(P01Tester.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     
+                case 20:
+                    
+                    //Para comprobar que no podemos introducir un usuario menor de 14 años simplemente vamos a crear un usuario con una fecha de nacimiento del 2019
+                    System.out.println("Introduce el nombre de usuario: ");  
+                    nombreUsuario = sc.nextLine();      
+
+                    System.out.println("Introduce la contraseña: "); 
+                    passwordUsuario = sc.nextLine();
+
+//                    System.out.println("Introduce la fecha de nacimiento (dd/MM/yyyy): "); 
+//                    String edadUsuario = sc.nextLine();
+                    Date fechaNacimientoUsuario123;
+                    
+                    try {
+                        fechaNacimientoUsuario123 = new SimpleDateFormat("dd/MM/yyyy").parse("20/09/2019");
+                        Usuario u123 = new Usuario(nombreUsuario, passwordUsuario, fechaNacimientoUsuario123,1);
+                        if (bs.nuevoUsuario(u123)){
+                            System.out.println("Usuario registrado correctamente!");
+                            System.out.println(u123.toString());
+                        }else{
+                            System.out.println("La fecha de nacimiento es invalida\n");
+                        }
+                    } catch (IllegalArgumentException | ParseException ex) {
+                        System.out.println(ex.toString());
+                    }
+
 
                     
 
