@@ -439,7 +439,15 @@ public class P01Tester {
                     }
                     break;
                 case 15:
+                    Direccion dr = new Direccion("Pamplona", "Navarra", "Tajonar", "4");
+                    Local locaux = new Local("BarNistelroy", dr, "bonito");
                     
+                    bs.nuevoLocal(locaux);
+                    
+                    bs.eliminarLocal(locaux);
+                    
+                    Bar bar = new Bar("BarNistelroy2", dr, "bonito");
+                    bs.nuevoLocal(bar);
                 
                 case 16:
                     
