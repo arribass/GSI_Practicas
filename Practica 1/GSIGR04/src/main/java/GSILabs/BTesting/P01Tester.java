@@ -59,10 +59,11 @@ public class P01Tester {
                                 + "12. Comprobación de ejercicio 4 apartado S10)\n"
                                 + "13. Comprobación de ejercicio 4 apartado S9) \n"
                                 + "14. Comprobación de ejercicio 4 apartado S8) \n"
-                                + "20. Comprobacion de ejercicio 4 apartado S5) \n"
-                                + "21. Comprobación de ejercicio 4 apartado S6) \n"
                                 + "15. Comprobación de ejercicio 4 apartado S4) \n"
-                                + "16. Comprobacion del ejercicio 4 apartado S5)\n");
+                                + "16. Comprobacion de ejercicio 4 apartado S5) \n"
+                                + "21. Comprobación de ejercicio 4 apartado S6) \n");
+
+ 
             System.out.print("¿Qué deseas hacer? : \n");
             //Recogo su elección y si no es válida se lo notifico.
             try{
