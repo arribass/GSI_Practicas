@@ -98,10 +98,24 @@ public class BusinessSystem implements LeisureOffice{
      */
     public Usuario obtenerUsuario(String nick) { //OK
         //Busca y devuelve un usuario de la lista de usuarios
+        //Recorre la lista comparando, si llega al final sin encontrar nada devuelve null
+        //Boolean usuarioEncontrado = false;
+        for (int i = 0; i<Usuarios.size(); i++){
+            if(Usuarios.get(i).getNick() == nick){
+                return Usuarios.get(i);
+            }
+        }
+        
+        return null;
+        /*
         Usuario userFound = Usuarios.stream()
                                 .filter(item -> item.getNick().equals(nick))
                                 .collect(Collectors.toList()).get(0);
-        return userFound;
+        if (userFound == null){
+            return null;
+        }else{
+            return userFound;
+        }*/
     }
 
     @Override

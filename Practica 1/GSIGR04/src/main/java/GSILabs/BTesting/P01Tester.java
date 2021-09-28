@@ -513,6 +513,28 @@ public class P01Tester {
                     }
                     
                     break;
+                    
+                    
+                    
+                case 27:
+                    //Buscar un usuario que no existe con findClient devuelve null
+                    
+                    //creamos un nick que no esté en uso y analizamos lo que devuelve la funcion
+                    String nickInvent = "Paquito";
+                    
+                   
+
+                    Usuario user1234567 =    bs.obtenerUsuario(nickInvent);
+
+                    if (user1234567 == null){
+                        System.out.println("El nick no tiene un usuario que le corresponda\n");
+                    }else{
+                        System.out.println("Usuario encontrado\n");
+                    }
+                    break;
+                    
+                    
+                    
                 case 17:
                     dr = new Direccion("Pamplona", "Navarra", "Tajonar", "4");
                     locaux = new Local("BarNistelroy", dr, "bonito");                    
