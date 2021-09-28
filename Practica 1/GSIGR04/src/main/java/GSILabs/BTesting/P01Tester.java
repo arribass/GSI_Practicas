@@ -450,13 +450,14 @@ public class P01Tester {
                     break;
 
                 case 15:
+                    //Creamos un local en la direccion dr
                     Direccion dr = new Direccion("Pamplona", "Navarra", "Tajonar", "4");
                     Local locaux = new Local("BarNistelroy", dr, "bonito");
                     
                     bs.nuevoLocal(locaux);
-                    
+                    //borramos el local
                     bs.eliminarLocal(locaux);
-                    
+                    //insertamos un nuevo bar en esa misma direccion y nos permite hacerlo
                     Bar bar = new Bar("BarNistelroy2", dr, "bonito");
                     bs.nuevoLocal(bar);
                 break;
@@ -514,9 +515,11 @@ public class P01Tester {
                     
                     break;
                 case 17:
+                    //inserto un local en la direccion dr
                     dr = new Direccion("Pamplona", "Navarra", "Tajonar", "4");
                     locaux = new Local("BarNistelroy", dr, "bonito");                    
-                    bs.nuevoLocal(locaux);                    
+                    bs.nuevoLocal(locaux);
+                    //intento insertar un nuevo bar en esa misma direccion y me dice que no se puede.
                     Local locaux2 = new Local("BarNistelroy2", dr, "bonito");
                     bs.nuevoLocal(locaux2);
                     break;
