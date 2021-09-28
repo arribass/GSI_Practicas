@@ -60,7 +60,7 @@ public class P01Tester {
                                 + "13. Comprobación de ejercicio 4 apartado S9) \n"
                                 + "14. Comprobación de ejercicio 4 apartado S8) \n"
                                 + "20. Comprobacion de ejercicio 4 apartado S5) \n"
-                                + "21. Comprobación de ejercicio 4 apartado S6) \n");
+                                + "21. Comprobación de ejercicio 4 apartado S6) \n"
                                 + "15. Comprobación de ejercicio 4 apartado S4) \n"
                                 + "16. Comprobacion del ejercicio 4 apartado S5)\n");
             System.out.print("¿Qué deseas hacer? : \n");
@@ -427,12 +427,10 @@ public class P01Tester {
                     } catch (ParseException ex) {
                         Logger.getLogger(P01Tester.class.getName()).log(Level.SEVERE, null, ex);
                     }
-<<<<<<< HEAD
                     break;
                 
-=======
-                break;
->>>>>>> 88298ff16769ae14120f2633ad6984f41792cfab
+
+
                 case 14:
                     String fechas11 = new String("20/11/2020");
                     Review rev2345 = null; //Comentar esta linea para realizar la comprobacion
@@ -449,8 +447,7 @@ public class P01Tester {
                         Logger.getLogger(P01Tester.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     break;
-<<<<<<< HEAD
-=======
+
                 case 15:
                     Direccion dr = new Direccion("Pamplona", "Navarra", "Tajonar", "4");
                     Local locaux = new Local("BarNistelroy", dr, "bonito");
@@ -458,7 +455,6 @@ public class P01Tester {
                     bs.nuevoLocal(locaux);
                     
                     bs.eliminarLocal(locaux);
->>>>>>> 88298ff16769ae14120f2633ad6984f41792cfab
                     
                     Bar bar = new Bar("BarNistelroy2", dr, "bonito");
                     bs.nuevoLocal(bar);
@@ -487,7 +483,7 @@ public class P01Tester {
                         }
                     } catch (IllegalArgumentException | ParseException ex) {
                         System.out.println(ex.toString());
-<<<<<<< HEAD
+
                     }
                     break;
 
@@ -514,9 +510,7 @@ public class P01Tester {
                     }catch(ParseException ex) {
                        Logger.getLogger(P01Tester.class.getName()).log(Level.SEVERE, null, ex);
                     }
-
-=======
-                    }                    
+                    
                     break;
                 case 17:
                     dr = new Direccion("Pamplona", "Navarra", "Tajonar", "4");
@@ -524,7 +518,6 @@ public class P01Tester {
                     bs.nuevoLocal(locaux);                    
                     Local locaux2 = new Local("BarNistelroy2", dr, "bonito");
                     bs.nuevoLocal(locaux2);
->>>>>>> 88298ff16769ae14120f2633ad6984f41792cfab
                     break;
                 /*case 7: 
                     System.out.println("Nombre del propietario"); 
