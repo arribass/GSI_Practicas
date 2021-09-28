@@ -32,6 +32,7 @@ public class P01Tester {
         String passwordUsuario;
         String nombreUsuario;
         
+        //Menú principal, el usuario elige que quiere hacer.
         Scanner sc = new Scanner(System.in);
         int choice=999;
         do {
@@ -48,19 +49,19 @@ public class P01Tester {
                                 + "10. Listar restaruantes por provincia y ciudad\n"
                                 + "11. Listar pubs por provincia y ciudad\n");
             System.out.print("¿Qué deseas hacer? : \n");
+            //Recogo su elección y si no es válida se lo notifico.
             try{
                 choice = sc.nextInt();
             }catch(Exception e){
                 System.out.println("Caracter inválido");
             }
-            
+            //En función de lo que haya elegido hacemos una acción u otra.
             sc.nextLine();
             switch (choice) {
-                case 0:
+                case 0: //cerrar programa
                     System.out.println("Cerrando programa...");
                     break;
-                case 1:
-                  
+                case 1:  //Añadir usuario                
                     boolean registerOk = false;
                     System.out.println("Introduce el nombre de usuario: ");  
                     nombreUsuario = sc.nextLine();      
@@ -86,7 +87,7 @@ public class P01Tester {
                     }
 
                     break;
-                case 2:
+                case 2: //Buscar usuario por nick
                     //Obtener usuario
                     System.out.println("¿Que usuario quieres buscar?: ");  
                     nombreUsuario = sc.nextLine(); 
@@ -98,7 +99,7 @@ public class P01Tester {
                         System.out.println("Usuario NO encontrado");
                     }
                     break;
-                case 3:
+                case 3: //Registrar local
                     //Pido al usuario el nombre del nuevo local.                    
 
                     System.out.println("Introduce el nombre del local: ");  
@@ -124,7 +125,7 @@ public class P01Tester {
                     //añado el nuevo local
                     bs.nuevoLocal(l);
                     break;
-                case 4:
+                case 4://Añadir review
                     System.out.println("¿cual es tu puntuacion de 1 a 5?");
                     int valint;
                     do{
@@ -151,7 +152,7 @@ public class P01Tester {
                     Review r = new Review(valint,comentario,fecha,local);
                     bs.nuevaReview(r);
                     break;
-                case 5:
+                case 5: //Eliminar local
                     //Recogo la direccion del local que quiero eliminar para identificarlo
                     System.out.println("Introduce a continuación los datos del local a eliminar"); 
                     System.out.println("Introduce la localidad: "); 
@@ -169,7 +170,7 @@ public class P01Tester {
                     //elimino el local
                     bs.eliminarLocal(localEliminar);                    
                     break;
-                case 6:
+                case 6: //Listar locales
                     System.out.println("Introduce la provincia deseada "); 
                     String provinciaD = sc.nextLine();
                     System.out.println("Introduce la ciudad deseada "); 
@@ -177,7 +178,7 @@ public class P01Tester {
                     System.out.println("Listado de locales en: "+ ciudadD + ", "+ provinciaD +"\n");   
                     Local localeslist[] = bs.listarLocales(ciudadD, provinciaD);                                        
                     break;
-                case 7:
+                case 7: //Obtener Local
                     System.out.println("Introduce la localidad: "); 
                     String localidadc = sc.nextLine();         
                     System.out.println("Introduce la provincia: "); 
@@ -195,7 +196,7 @@ public class P01Tester {
                         System.out.println(local1.toString());
                     }
                     break;
-                case 8:
+                case 8: //Modificar Local
                     //identifico el local que quiero modificar con su dirección que es única.
                     System.out.println("Datos del local a modificar: \n"); 
                     System.out.println("Introduce la localidad: "); 
@@ -277,7 +278,7 @@ public class P01Tester {
                         System.out.println("no se ha podido actualizar porque no existe un local en esa direccion");
                     }
                     break;
-                case 9:
+                case 9: //Listar solo bares
                     System.out.println("Introduce la provincia deseada "); 
                     provinciaD = sc.nextLine();
                     System.out.println("Introduce la ciudad deseada "); 
@@ -285,7 +286,7 @@ public class P01Tester {
                     System.out.println("Listado de bares en: "+ ciudadD + ", "+ provinciaD +"\n");   
                     Local localeslist2[] = bs.listarBares(ciudadD, provinciaD);                                        
                     break;
-                case 10:
+                case 10: //Listar solo restaurantes
                     System.out.println("Introduce la provincia deseada "); 
                     provinciaD = sc.nextLine();
                     System.out.println("Introduce la ciudad deseada "); 
@@ -293,7 +294,7 @@ public class P01Tester {
                     System.out.println("Listado de restaurantes en: "+ ciudadD + ", "+ provinciaD +"\n");   
                     Local localeslist3[] = bs.listarRestaurantes(ciudadD, provinciaD);                                        
                     break;
-                case 11:
+                case 11: //Listar solo pubs
                     System.out.println("Introduce la provincia deseada "); 
                     provinciaD = sc.nextLine();
                     System.out.println("Introduce la ciudad deseada "); 
