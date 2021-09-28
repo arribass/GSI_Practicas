@@ -448,7 +448,7 @@ public class P01Tester {
                     
                     Bar bar = new Bar("BarNistelroy2", dr, "bonito");
                     bs.nuevoLocal(bar);
-                
+                break;
                 case 16:
                     
                     //Para comprobar que no podemos introducir un usuario menor de 14 años simplemente vamos a crear un usuario con una fecha de nacimiento del 2019
