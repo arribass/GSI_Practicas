@@ -231,20 +231,25 @@ public class BusinessSystem implements LeisureOffice{
      */
     public boolean nuevoLocal(Local l) { //OK
         Scanner sc = new Scanner(System.in);
-        //Introducir si quiere crear un bar un pub o un restaurante y abajo instanciar ese tipo en funcion de esa variable
+        //Primero consulto al usuario si lo que desea eliminar es un bar, restaurante o pub.
              System.out.println("De que tipo quieres que sea el local: 1-Bar 2-Restaurante 3-Pub"); 
-             int tipo = 4;
+             int tipo = 4; //variable auxiliar
+             //realizo un try-catch del tipo por si el usuario introduce valores incorrectos, como pueden ser en lugar de
+             //un entero un caracter o una expresión del estilo "4.-", o cualquier otra que no sea un entero.
              try{
                  tipo = sc.nextInt();
              }catch(InputMismatchException e){
                  System.out.println("Caracter invalido");
              }
+             //Compruebo que ya sabiendo que es un entero correcto, este esté en los valores posibles (1, 2 o 3)
+             // y si no es así no añado el local.
              if(tipo != 1 && tipo != 2 && tipo!= 3){
                  System.out.println("No existe el tipo deseado, no se ha podido insertar el local, vuelva a intentarlo");
                  return false;
              }else{
                 
-       
+       //Miro a ver si hay ya un local en esa dirección, ya que en caso afirmativo
+       // no podría añadir otro más.
         boolean existeDireccion = false;
         for (int i=0;i<Locales.size();i++) {      
             if(Locales.get(i).getDireccion().equals(l.getDireccion())){
@@ -252,6 +257,10 @@ public class BusinessSystem implements LeisureOffice{
                 break;
             }
         }
+        
+        //En caso de estar la dirección libre procedo a añadir el local en esta
+        //en lugar de añadir un objeto de tipo local añado un objeto del tipo que haya 
+        //dictaminado el usuario anteriormente.
         if(!existeDireccion){
             switch (tipo) {
                 case 1:
@@ -284,6 +293,8 @@ public class BusinessSystem implements LeisureOffice{
      */
 
     public boolean eliminarLocal(Local l) {//OK
+        //Recibo un objeto de tipo local, hago un try intentando eliminarlo del
+        //arraylist locales, si no esta saltará una excepcion que recojo con el catch e indico que no existe.
         try{
             Locales.remove(l);
             System.out.print("Ya no existen locales en la dirección introducida");
