@@ -482,6 +482,13 @@ public class P01Tester {
                     Local locaux2 = new Local("BarNistelroy2", dr, "bonito");
                     bs.nuevoLocal(locaux2);
                     break;
+                case 18:
+                    Date dat = new Date(95, 5,3);
+                    Usuario us = new Usuario("Sergio", "1234", dat , 1);
+                    bs.nuevoUsuario(us);
+                    
+                    bs.obtenerUsuario("Sergio");
+                    break;
                 /*case 7: 
                     System.out.println("Nombre del propietario"); 
                     String prop = sc.nextLine();
