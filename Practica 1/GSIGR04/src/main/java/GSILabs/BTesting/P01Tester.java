@@ -7,9 +7,12 @@ package GSILabs.BTesting;
 
 import GSILabs.BModel.Bar;
 import GSILabs.BModel.Review;
+import GSILabs.BModel.Reserva;
+import GSILabs.BModel.Reservable;
 import GSILabs.BModel.Direccion;
 import GSILabs.BModel.Local;
 import GSILabs.BModel.Contestacion;
+import GSILabs.BModel.Cliente;
 import GSILabs.BModel.Pub;
 import GSILabs.BModel.Restaurante;
 import GSILabs.BModel.Usuario;
@@ -17,6 +20,7 @@ import GSILabs.BSystem.BusinessSystem;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -55,7 +59,8 @@ public class P01Tester {
                                 + "12. Comprobación de ejercicio 4 apartado S10)\n"
                                 + "13. Comprobación de ejercicio 4 apartado S9) \n"
                                 + "14. Comprobación de ejercicio 4 apartado S8) \n"
-                                + "20. Comprobacion del ejercicio 4 apartado S5)\n");
+                                + "20. Comprobacion de ejercicio 4 apartado S5) \n"
+                                + "21. Comprobación de ejercicio 4 apartado S6) \n");
             System.out.print("¿Qué deseas hacer? : \n");
             //Recogo su elección y si no es válida se lo notifico.
             try{
@@ -420,6 +425,7 @@ public class P01Tester {
                     } catch (ParseException ex) {
                         Logger.getLogger(P01Tester.class.getName()).log(Level.SEVERE, null, ex);
                     }
+                    break;
                 
                 case 14:
                     String fechas11 = new String("20/11/2020");
@@ -436,6 +442,7 @@ public class P01Tester {
                     } catch (ParseException ex) {
                         Logger.getLogger(P01Tester.class.getName()).log(Level.SEVERE, null, ex);
                     }
+                    break;
                     
                 case 20:
                     
@@ -462,12 +469,33 @@ public class P01Tester {
                     } catch (IllegalArgumentException | ParseException ex) {
                         System.out.println(ex.toString());
                     }
+                    break;
 
+                case 21:
+                    
+                    String fechaNacimiento123344 = new String("20/11/1997");
+                    Reservable localAux = null; //Comentar esta linea para realizar la comprobacion
 
+                    //Simplemente vamos a crear una contestacion en cuyo constructor no va a haber una review válida ya que simplemente no la hemos creado
+                    //Para ello vamos a capturar el error que nos va a lanzar el compilador e indicar el porque
                     
+                    //Creamos un cliente
+                     try {
+                        fechaNacimientoUsuario = new SimpleDateFormat("dd/MM/yyyy").parse(fechaNacimiento123344);
+                        Cliente cliente = new Cliente("Aaaaa", "aaaaa", fechaNacimientoUsuario,1);
+                        
+                        try{
+                            Reserva reserva = new Reserva(cliente, localAux, LocalDate.now(), LocalTime.MAX, 1);
+                        //Contestacion contestacion = new Contestacion(rev2345, "comentario", fechaContestacion);
+                        }catch(RuntimeException e){
+                            System.out.println("Se ha intentado crear una reserva a un local que no existe");
+                        }
 
-                    
-                    
+                    }catch(ParseException ex) {
+                       Logger.getLogger(P01Tester.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                    break;
                 /*case 7: 
                     System.out.println("Nombre del propietario"); 
                     String prop = sc.nextLine();
