@@ -358,18 +358,6 @@ public class BusinessSystem implements LeisureOffice{
         
         System.out.print("Local actualizado\n");
         return true;
-        /*
->>>>>>> Stashed changes
-        for (int i=0;i<Locales.size();i++) {
-            if(Locales.get(i).getDireccion().equals(viejoL.getDescripcion())){
-                Locales.get(i).setDescripcion(nuevoL.getDescripcion());
-                Locales.get(i).setDireccion(nuevoL.getDireccion());
-                Locales.get(i).setNombre(nuevoL.getNombre());
-                return true;
-            }
-        }
-        System.out.println("No existe el local a modificar.");
-        return false;*/
     }
 
     @Override
@@ -509,13 +497,18 @@ public class BusinessSystem implements LeisureOffice{
     /**
      * {@inheritDoc}
      */
-    public Local[] listarLocales(String ciudad, String provincia) {
-        Local[] LocalesDE = null;
+    public Local[] listarLocales(String ciudad, String provincia) { //OK
+        Local LocalesDE[] = new Local[Locales.size()];
         //Recorro el arraylist de los locales y los que están en la provincia y ciudad indicadas los añado al array
+        int contador = 0;
         for (int i=0;i<Locales.size();i++) {
-            if(Locales.get(i).getDireccion().getLocalidad() == ciudad && Locales.get(i).getDireccion().getProvincia() == provincia){
-                LocalesDE[LocalesDE.length] = Locales.get(i);
-            }
+            if(Locales.get(i).getDireccion().getLocalidad().equals(ciudad) && Locales.get(i).getDireccion().getProvincia().equals(provincia)){
+                LocalesDE[contador] = Locales.get(i);
+                contador++;
+            }            
+        }
+        for (int i=0;i<contador;i++) {
+         System.out.println("- " + LocalesDE[i].getNombre() + ".\n");
         }
         
         return LocalesDE;
@@ -525,8 +518,23 @@ public class BusinessSystem implements LeisureOffice{
     /**
      * {@inheritDoc}
      */
-    public Bar[] listarBares(String ciudad, String provincia) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Bar[] listarBares(String ciudad, String provincia) { //OK
+        Local LocalesDE[] = new Local[Locales.size()];
+        Direccion d = new Direccion("haro","larioja","alemania","1");
+        Bar bar = new Bar("aux",d,"bonito");
+        //Recorro el arraylist de los locales y los que están en la provincia y ciudad indicadas los añado al array
+        int contador = 0;
+        for (int i=0;i<Locales.size();i++) {
+            if(Locales.get(i).getDireccion().getLocalidad().equals(ciudad) && Locales.get(i).getDireccion().getProvincia().equals(provincia) && Locales.get(i).getClass().equals(bar.getClass())){
+                LocalesDE[contador] = Locales.get(i);
+                contador++;
+            }            
+        }
+        for (int i=0;i<contador;i++) {
+         System.out.println("- " + LocalesDE[i].getNombre() + ".\n");
+        }
+        
+        return null;
     }
 
     @Override
@@ -534,7 +542,22 @@ public class BusinessSystem implements LeisureOffice{
      * {@inheritDoc}
      */
     public Restaurante[] listarRestaurantes(String ciudad, String provincia) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Local LocalesDE[] = new Local[Locales.size()];
+        Direccion d = new Direccion("haro","larioja","alemania","1");
+        Restaurante restaurante = new Restaurante("aux",d,"bonito");
+        //Recorro el arraylist de los locales y los que están en la provincia y ciudad indicadas los añado al array
+        int contador = 0;
+        for (int i=0;i<Locales.size();i++) {
+            if(Locales.get(i).getDireccion().getLocalidad().equals(ciudad) && Locales.get(i).getDireccion().getProvincia().equals(provincia) && Locales.get(i).getClass().equals(restaurante.getClass())){
+                LocalesDE[contador] = Locales.get(i);
+                contador++;
+            }            
+        }
+        for (int i=0;i<contador;i++) {
+         System.out.println("- " + LocalesDE[i].getNombre() + ".\n");
+        }
+        
+        return null;
     }
 
     @Override
@@ -542,7 +565,22 @@ public class BusinessSystem implements LeisureOffice{
      * {@inheritDoc}
      */
     public Pub[] listarPubs(String ciudad, String provincia) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Local LocalesDE[] = new Local[Locales.size()];
+        Direccion d = new Direccion("haro","larioja","alemania","1");
+        Pub pub = new Pub("aux",d,"bonito");
+        //Recorro el arraylist de los locales y los que están en la provincia y ciudad indicadas los añado al array
+        int contador = 0;
+        for (int i=0;i<Locales.size();i++) {
+            if(Locales.get(i).getDireccion().getLocalidad().equals(ciudad) && Locales.get(i).getDireccion().getProvincia().equals(provincia) && Locales.get(i).getClass().equals(pub.getClass())){
+                LocalesDE[contador] = Locales.get(i);
+                contador++;
+            }            
+        }
+        for (int i=0;i<contador;i++) {
+         System.out.println("- " + LocalesDE[i].getNombre() + ".\n");
+        }
+        
+        return null;
     }
 
     @Override

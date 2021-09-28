@@ -41,9 +41,10 @@ public class P01Tester {
                                 + "3. Registrar local\n"
                                 + "4. Añadir Review\n"
                                 + "5. Eliminar local\n"
-                                + "6. Buscar local por provincia y ciudad\n"
+                                + "6. Listar locales por provincia y ciudad\n"
                                 + "7. Obtener local\n"
-                                + "8. Modificar local\n");
+                                + "8. Modificar local\n"
+                                + "9. Listar bares por provincia y ciudad\n");
             System.out.print("¿Qué deseas hacer? : \n");
 
             choice = sc.nextInt();
@@ -167,11 +168,8 @@ public class P01Tester {
                     String provinciaD = sc.nextLine();
                     System.out.println("Introduce la ciudad deseada "); 
                     String ciudadD = sc.nextLine();
-                    Local[] localeslist = bs.listarLocales(ciudadD, provinciaD);
-                    System.out.println("Listado de locales: \n");                    
-                    for (int i=0;i<localeslist.length;i++) {
-                        System.out.println("- " + localeslist[i].getNombre() + ".\n");
-                    }
+                    System.out.println("Listado de locales en: "+ ciudadD + ", "+ provinciaD +"\n");   
+                    Local localeslist[] = bs.listarLocales(ciudadD, provinciaD);                                        
                     break;
                 case 7:
                     System.out.println("Introduce la localidad: "); 
@@ -249,6 +247,30 @@ public class P01Tester {
                             break;
                     }   
                     bs.actualizarLocal(localviejo, new Local(nuevoNombre,nuevaDireccion,nuevaDescripcion));
+                    break;
+                case 9:
+                    System.out.println("Introduce la provincia deseada "); 
+                    provinciaD = sc.nextLine();
+                    System.out.println("Introduce la ciudad deseada "); 
+                    ciudadD = sc.nextLine();
+                    System.out.println("Listado de bares en: "+ ciudadD + ", "+ provinciaD +"\n");   
+                    Local localeslist2[] = bs.listarBares(ciudadD, provinciaD);                                        
+                    break;
+                case 10:
+                    System.out.println("Introduce la provincia deseada "); 
+                    provinciaD = sc.nextLine();
+                    System.out.println("Introduce la ciudad deseada "); 
+                    ciudadD = sc.nextLine();
+                    System.out.println("Listado de restaurantes en: "+ ciudadD + ", "+ provinciaD +"\n");   
+                    Local localeslist3[] = bs.listarRestaurantes(ciudadD, provinciaD);                                        
+                    break;
+                case 11:
+                    System.out.println("Introduce la provincia deseada "); 
+                    provinciaD = sc.nextLine();
+                    System.out.println("Introduce la ciudad deseada "); 
+                    ciudadD = sc.nextLine();
+                    System.out.println("Listado de pubs en: "+ ciudadD + ", "+ provinciaD +"\n");   
+                    Local localeslist4[] = bs.listarPubs(ciudadD, provinciaD);                                        
                     break;
                 /*case 7: 
                     System.out.println("Nombre del propietario"); 
