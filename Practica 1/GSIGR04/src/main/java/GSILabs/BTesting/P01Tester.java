@@ -422,6 +422,7 @@ public class P01Tester {
                 
                 case 14:
                     String fechas11 = new String("20/11/2020");
+                    Review rev2345 = null;
                     try {
                         Date fechaContestacion = new SimpleDateFormat("dd/MM/yyyy").parse(fechas11);
                         //Simplemente vamos a crear una contestacion en cuyo constructor no va a haber una review válida ya que simplemente no la hemos creado
