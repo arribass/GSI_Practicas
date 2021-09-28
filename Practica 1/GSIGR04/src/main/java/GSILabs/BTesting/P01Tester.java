@@ -52,7 +52,7 @@ public class P01Tester {
                                 + "9. Listar bares por provincia y ciudad\n"
                                 + "12. Comprobación de ejercicio 4 apartado S10)\n"
                                 + "13. Comprobación de ejercicio 4 apartado S9) \n"
-                                + "14. Comprobación de ejercicio 4 apartado S8) \n");
+                                + "14. Comprobación de ejercicio 4 apartado S8) \n"
                                 + "10. Listar restaruantes por provincia y ciudad\n"
                                 + "11. Listar pubs por provincia y ciudad\n");
             System.out.print("¿Qué deseas hacer? : \n");
