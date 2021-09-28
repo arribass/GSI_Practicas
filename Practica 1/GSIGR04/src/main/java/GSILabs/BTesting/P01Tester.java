@@ -61,8 +61,10 @@ public class P01Tester {
                                 + "14. Comprobación de ejercicio 4 apartado S8) \n"
                                 + "15. Comprobación de ejercicio 4 apartado S4) \n"
                                 + "16. Comprobacion de ejercicio 4 apartado S5) \n"
-                                + "21. Comprobación de ejercicio 4 apartado S6) \n"
-                                + "27. Comprobacion de ejercicio 4 apartado S2) \n");
+                                + "17. Comprobacion de ejercicio 4 apartado S3) \n"
+                                + "18. Comprobacion de ejercicio 4 apartado S1) \n"
+                                + "19. Comprobación de ejercicio 4 apartado S6) \n"
+                                + "20. Comprobacion de ejercicio 4 apartado S2) \n");
 
  
             System.out.print("¿Qué deseas hacer? : \n");
@@ -490,7 +492,7 @@ public class P01Tester {
                     }
                     break;
 
-                case 21:
+                case 19:
                     
                     String fechaNacimiento123344 = new String("20/11/1997");
                     Reservable localAux = null; //Comentar esta linea para realizar la comprobacion
@@ -518,7 +520,7 @@ public class P01Tester {
                     
                     
                     
-                case 27:
+                case 20:
                     //Buscar un usuario que no existe con findClient devuelve null
                     
                     //creamos un nick que no esté en uso y analizamos lo que devuelve la funcion
