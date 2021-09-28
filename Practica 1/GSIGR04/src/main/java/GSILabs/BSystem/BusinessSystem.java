@@ -281,8 +281,9 @@ public class BusinessSystem implements LeisureOffice{
             } 
             return true;
         } else{
+            //Si ya habia un local en esa dirección lo notifico al usuario.
             System.out.println("Ya existe un local en esa direccion.");
-            return true;
+            return false;
         }  
              }
     }
@@ -374,7 +375,7 @@ public class BusinessSystem implements LeisureOffice{
     /**
      * {@inheritDoc}
      */
-    public boolean actualizarLocal(Local viejoL, Local nuevoL) {
+    public boolean actualizarLocal(Local viejoL, Local nuevoL) { //OK
         Locales.stream().filter(item -> item.getDireccion().equals(viejoL.getDireccion()))
                         .collect(Collectors.toList()).get(0).setDescripcion(nuevoL.getDescripcion());
         

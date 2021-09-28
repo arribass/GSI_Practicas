@@ -44,7 +44,9 @@ public class P01Tester {
                                 + "6. Listar locales por provincia y ciudad\n"
                                 + "7. Obtener local\n"
                                 + "8. Modificar local\n"
-                                + "9. Listar bares por provincia y ciudad\n");
+                                + "9. Listar bares por provincia y ciudad\n"
+                                + "10. Listar restaruantes por provincia y ciudad\n"
+                                + "11. Listar pubs por provincia y ciudad\n");
             System.out.print("¿Qué deseas hacer? : \n");
 
             choice = sc.nextInt();
@@ -190,6 +192,7 @@ public class P01Tester {
                     }
                     break;
                 case 8:
+                    //identifico el local que quiero modificar con su dirección que es única.
                     System.out.println("Datos del local a modificar: \n"); 
                     System.out.println("Introduce la localidad: "); 
                     localidadc = sc.nextLine();         
@@ -203,36 +206,39 @@ public class P01Tester {
                     Direccion dd = new Direccion(localidadc,provinciac,callec,numeroc);
                     Local localviejo = bs.obtenerLocal(dd);
                     
+                    //Variables auxiliares.
                     String nuevaDescripcion = null;
                     Direccion nuevaDireccion = null;
                     String nuevoNombre = null;
                     
                     int eleccion = 10;
-                    System.out.println("¿Que deseas modificar?\n 1- descripcion\n 2-nombre\n 3-direccion");
+                    //Escojo el atributo que deseo modificar.
+                    System.out.println("¿Que deseas modificar?\n 1- descripcion\n 2-nombre \n 3-dirección");
                     eleccion = sc.nextInt();
                     
+                    Scanner sc2 = new Scanner(System.in);
                     switch(eleccion){
                         case 1:
                             System.out.println("Introduce la descripción del local: "); 
-                            nuevaDescripcion = sc.nextLine();
+                            nuevaDescripcion = sc2.nextLine();
                             nuevoNombre = localviejo.getNombre();
                             nuevaDireccion = localviejo.getDireccion();
                             break;
                         case 2:
                             System.out.println("Introduce el nombre del local: "); 
-                            nuevoNombre = sc.nextLine();
+                            nuevoNombre = sc2.nextLine();
                             nuevaDescripcion = localviejo.getDescripcion();
                             nuevaDireccion = localviejo.getDireccion();
                             break;
                         case 3:
                             System.out.println("Introduce la localidad: "); 
-                            localidadc = sc.nextLine();         
+                            localidadc = sc2.nextLine();         
                             System.out.println("Introduce la provincia: "); 
-                            provinciac = sc.nextLine();       
+                            provinciac = sc2.nextLine();       
                             System.out.println("Introduce la calle: "); 
-                            callec = sc.nextLine();       
+                            callec = sc2.nextLine();       
                             System.out.println("Introduce el numero: "); 
-                            numeroc = sc.nextLine();
+                            numeroc = sc2.nextLine();
                             nuevaDireccion = new Direccion(localidadc,provinciac,callec,numeroc);
                             nuevaDescripcion = localviejo.getDescripcion();
                             nuevoNombre = localviejo.getNombre();

@@ -57,9 +57,13 @@ public class Local {
     }
 
     public boolean anadirPropietario(Usuario u){
-        if(propietarios[2] != null){
+        //si ya existen los 3 propietarios indico que no se pueden añadir más y salgo
+        if(propietarios[0] != null && propietarios[1] != null && propietarios[2] != null){
+            System.out.println("Máximo de propietarios (3) ya alcanzado");
             return false;
         }else{
+            //En caso de que quede algún hueco de propietario libre lo busco recorriendo
+            // el array de 3 posiciones y en el primer hueco que encuentro meto al nuevo propietario.
           for(int i=0;i<propietarios.length;i++){
             if(propietarios[i] == null){
                 propietarios[i] = u;
