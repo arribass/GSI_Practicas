@@ -187,8 +187,6 @@ public class P01Tester {
                     if(local1 != null){
                         System.out.println("Local encontrado");
                         System.out.println(local1.toString());
-                    }else{
-                        System.out.println("Local NO encontrado");
                     }
                     break;
                 case 8:

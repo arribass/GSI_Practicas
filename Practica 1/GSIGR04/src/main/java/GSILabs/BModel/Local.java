@@ -80,7 +80,7 @@ public class Local {
 
     @Override
     public String toString() {
-        return "- nombre=" + nombre + "\n- direccion=" + direccion + "\n- descripcion=" + descripcion;
+        return "- nombre= " + nombre + "\n- direccion= " + direccion + "\n- descripcion= " + descripcion;
         
     }
 }

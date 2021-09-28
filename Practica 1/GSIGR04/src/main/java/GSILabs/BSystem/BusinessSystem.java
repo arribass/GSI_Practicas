@@ -292,10 +292,18 @@ public class BusinessSystem implements LeisureOffice{
      * {@inheritDoc}
      */
     public Local obtenerLocal(Direccion d) {//OK
-        Local localFound = Locales.stream()
+        //Recibo como parametro una dirección (sabemos que existe un único local en una misma dirección)
+        //Recorro el arraylist que almacena los locales y cuando encuentro un local en esa dirección lo devuelvo.
+        try{
+            Local localFound = Locales.stream()
                                 .filter(item -> item.getDireccion().equals(d))
                                 .collect(Collectors.toList()).get(0);
-        return localFound;
+            return localFound;
+        }catch(IndexOutOfBoundsException e){
+            System.out.println("Local no encontrado");
+            return null;
+        }
+        
     }
 
     @Override
@@ -541,7 +549,7 @@ public class BusinessSystem implements LeisureOffice{
     /**
      * {@inheritDoc}
      */
-    public Restaurante[] listarRestaurantes(String ciudad, String provincia) {
+    public Restaurante[] listarRestaurantes(String ciudad, String provincia) {//OK
         Local LocalesDE[] = new Local[Locales.size()];
         Direccion d = new Direccion("haro","larioja","alemania","1");
         Restaurante restaurante = new Restaurante("aux",d,"bonito");
@@ -564,7 +572,7 @@ public class BusinessSystem implements LeisureOffice{
     /**
      * {@inheritDoc}
      */
-    public Pub[] listarPubs(String ciudad, String provincia) {
+    public Pub[] listarPubs(String ciudad, String provincia) {//OK
         Local LocalesDE[] = new Local[Locales.size()];
         Direccion d = new Direccion("haro","larioja","alemania","1");
         Pub pub = new Pub("aux",d,"bonito");
