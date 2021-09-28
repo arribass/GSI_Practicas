@@ -10,6 +10,7 @@ import GSILabs.BModel.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -232,11 +233,17 @@ public class BusinessSystem implements LeisureOffice{
         Scanner sc = new Scanner(System.in);
         //Introducir si quiere crear un bar un pub o un restaurante y abajo instanciar ese tipo en funcion de esa variable
              System.out.println("De que tipo quieres que sea el local: 1-Bar 2-Restaurante 3-Pub"); 
-             int tipo = sc.nextInt();
-             while(tipo != 1 && tipo != 2 && tipo!= 3){
-                System.out.println("caracter invalido repite la eleccion"); 
-                tipo = sc.nextInt();
+             int tipo = 4;
+             try{
+                 tipo = sc.nextInt();
+             }catch(InputMismatchException e){
+                 System.out.println("Caracter invalido");
              }
+             if(tipo != 1 && tipo != 2 && tipo!= 3){
+                 System.out.println("No existe el tipo deseado, no se ha podido insertar el local, vuelva a intentarlo");
+                 return false;
+             }else{
+                
        
         boolean existeDireccion = false;
         for (int i=0;i<Locales.size();i++) {      
@@ -267,7 +274,8 @@ public class BusinessSystem implements LeisureOffice{
         } else{
             System.out.println("Ya existe un local en esa direccion.");
             return true;
-        }        
+        }  
+             }
     }
 
     @Override
@@ -278,7 +286,7 @@ public class BusinessSystem implements LeisureOffice{
     public boolean eliminarLocal(Local l) {//OK
         try{
             Locales.remove(l);
-            System.out.print("Local eliminado");
+            System.out.print("Ya no existen locales en la dirección introducida");
             return true;
         }
         catch(NullPointerException e){
@@ -294,13 +302,14 @@ public class BusinessSystem implements LeisureOffice{
     public Local obtenerLocal(Direccion d) {//OK
         //Recibo como parametro una dirección (sabemos que existe un único local en una misma dirección)
         //Recorro el arraylist que almacena los locales y cuando encuentro un local en esa dirección lo devuelvo.
+        //En caso de no haber ninguno recogo la excepcion y digo al usuario que no hay ningun local.
         try{
             Local localFound = Locales.stream()
                                 .filter(item -> item.getDireccion().equals(d))
                                 .collect(Collectors.toList()).get(0);
             return localFound;
         }catch(IndexOutOfBoundsException e){
-            System.out.println("Local no encontrado");
+            System.out.println("No existe ningún local en la dirección que buscas");
             return null;
         }
         
