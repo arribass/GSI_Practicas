@@ -5,7 +5,6 @@
  */
 package GSILabs.BSystem;
 
-
 import GSILabs.BModel.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
