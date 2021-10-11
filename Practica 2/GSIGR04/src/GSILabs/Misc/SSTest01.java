@@ -7,11 +7,9 @@ package GSILabs.Misc;
 import java.io.File;
 import java.io.IOException;
 import java.util.Random;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import org.jopendocument.dom.OOUtils;
 import org.jopendocument.dom.spreadsheet.SpreadSheet;
-//import org.apache.poi;
+import org.jopendocument.dom.spreadsheet.Sheet;
 
 /**
  *
@@ -21,22 +19,31 @@ public class SSTest01 {
     
     public static void main(String[] args) throws IOException {
 
-        final Object[][] array = new Object[4][7];
+        SpreadSheet s = SpreadSheet.create(1, 20, 20);
         
+        //First sheet
+        Sheet sheet = s.getSheet(0);
+
+        final int[][] array = new int[4][6];
         Random random = new Random();
         for(int i = 0; i<4; i++){
-            for(int j = 0; j<7; j++){
+            for(int j = 0; j<6; j++){
                 int randInt = random.nextInt(100);
                 array[i][j] = (int) randInt;
                 System.out.println(array[i][j]);
             }
         }
         
-        String[] columns = new String[] { "", "", "", "", "", "" };
-        TableModel model = new DefaultTableModel(array, columns);
+        for(int i = 0; i<4; i++){
+            for(int j = 0; j<6; j++){
+            
+                sheet.setValueAt(array[i][j], j, i); //(Value,x,y)
+            }
+        }
         
         final File file = new File("test01.ods");
-        SpreadSheet.createEmpty(model).saveAs(file);
+        s.saveAs(file);
+        
         OOUtils.open(file);
     }
 }

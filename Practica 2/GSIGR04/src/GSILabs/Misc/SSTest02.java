@@ -5,13 +5,13 @@
  */
 package GSILabs.Misc;
 
+import java.awt.Color;
 import java.io.File;
 import java.io.IOException;
 import java.util.Random;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import org.jopendocument.dom.OOUtils;
 import org.jopendocument.dom.spreadsheet.SpreadSheet;
+import org.jopendocument.dom.spreadsheet.Sheet;
 
 /**
  *
@@ -20,9 +20,13 @@ import org.jopendocument.dom.spreadsheet.SpreadSheet;
 public class SSTest02 {
     
     public static void main(String[] args) throws IOException {
-
-        final Object[][] array = new Object[4][6];
         
+
+        SpreadSheet s = SpreadSheet.create(1, 20, 20);
+        //First sheet
+        Sheet sheet = s.getSheet(0);
+       
+        final int[][] array = new int[4][6];
         Random random = new Random();
         for(int i = 0; i<4; i++){
             for(int j = 0; j<6; j++){
@@ -32,13 +36,20 @@ public class SSTest02 {
             }
         }
         
+        for(int i = 5; i<9; i++){
+            for(int j = 3; j<9; j++){
+            
+                sheet.setValueAt(array[i-5][j-3], j, i); //(Value,x,y)
+                if (array[i-5][j-3] >= 10)
+                    sheet.getCellAt(j, i).setBackgroundColor(Color.blue);
+                else
+                    sheet.getCellAt(j, i).setBackgroundColor(Color.red);
+            }
+        }
         
+        final File file = new File("test02.ods");
+        s.saveAs(file);
         
-        
-        //String[] columns = new String[] { "", "", "", "", "", "" };
-        //TableModel model = new DefaultTableModel(array, columns);
-        //final File file = new File("test01.ods");
-        //SpreadSheet.createEmpty(model).saveAs(file);
-        //OOUtils.open(file);
+        OOUtils.open(file);
     }
 }
