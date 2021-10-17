@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-/**
+/*
  *
  * @author Arribas
  */
@@ -116,7 +116,7 @@ public class BusinessSystem implements LeisureOffice{
             return userFound;
         }*/
     }
-
+    
     @Override
     /**
      * {@inheritDoc}
@@ -583,6 +583,71 @@ public class BusinessSystem implements LeisureOffice{
         
         return null;
     }
+    
+    /*
+        Jaime
+    */
+    public List <Local> listarTodosBares() { //OK
+        
+        List<Local> LocalesBares = new ArrayList<>();
+        Direccion d = new Direccion("haro","larioja","alemania","1");
+        Bar bar = new Bar("aux",d,"bonito");
+        //Recorro el arraylist de los locales y los que están en la provincia y ciudad indicadas los añado al array
+        int contador = 0;
+        for (int i=0;i<Locales.size();i++) {
+            if(Locales.get(i).getClass().equals(bar.getClass())){
+               
+                LocalesBares.add(Locales.get(i));
+                contador++;
+            }            
+        }
+        
+        
+        return LocalesBares;
+    }
+    /*
+        Jaime
+    */
+    public List <Local> listarTodosRestaurantes() { //OK
+        
+        List<Local> LocalesRestaurantes = new ArrayList<>();
+        Direccion d = new Direccion("haro","larioja","alemania","1");
+        Restaurante restaurante = new Restaurante("aux",d,"bonito");
+        //Recorro el arraylist de los locales y los que están en la provincia y ciudad indicadas los añado al array
+        int contador = 0;
+        for (int i=0;i<Locales.size();i++) {
+            if(Locales.get(i).getClass().equals(restaurante.getClass())){
+               
+                LocalesRestaurantes.add(Locales.get(i));
+                contador++;
+            }            
+        }
+        return LocalesRestaurantes;
+    }
+    
+    
+    /*
+        Jaime
+    */
+    public List <Local> listarTodosPubs() { //OK
+        
+        List<Local> LocalesPubs = new ArrayList<>();
+        Direccion d = new Direccion("haro","larioja","alemania","1");
+        Pub pub = new Pub("aux",d,"bonito");
+        //Recorro el arraylist de los locales y los que están en la provincia y ciudad indicadas los añado al array
+        int contador = 0;
+        for (int i=0;i<Locales.size();i++) {
+            if(Locales.get(i).getClass().equals(pub.getClass())){
+               
+                LocalesPubs.add(Locales.get(i));
+                contador++;
+            }            
+        }
+        return LocalesPubs;
+    }
+    
+    
+    
 
     @Override
     /**
