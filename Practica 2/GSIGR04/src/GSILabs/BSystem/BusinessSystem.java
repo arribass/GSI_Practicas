@@ -23,7 +23,7 @@ import org.jopendocument.dom.spreadsheet.SpreadSheet;
  *
  * @author Arribas
  */
-public class BusinessSystem implements LeisureOffice{
+public class BusinessSystem implements LeisureOffice, ODSPersistente{
     static List<Usuario> Usuarios = new ArrayList<>();
     static List<Local> Locales = new ArrayList<>();
     static List<Review> Reviews = new ArrayList<>();
