@@ -569,7 +569,8 @@ public class P01Tester {
                 case 21:
                     //Importa datos de locales tipo bares de una hoja de calculo
                     final File file = new File("test06.ods");
-                    bs.importarBares(file);
+                    int exitos = bs.importarBares(file);
+                    System.out.println("Numero de bares añadidos con éxito: " + exitos);
                     //Local listaLocales[] = bs.listarLocales("Barcelona", "Barcelona");
                     break;
             }

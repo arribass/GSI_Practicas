@@ -733,8 +733,8 @@ public class BusinessSystem implements LeisureOffice{
      * 
      * {@inheritDoc}
      */
-    public void importarBares(File f) throws IOException{
-        OOUtils.open(f);
+    public int importarBares(File f) throws IOException{
+       
          SpreadSheet s = SpreadSheet.createFromFile(f);
         //First sheet
         Sheet sheet = s.getSheet(0);
@@ -743,6 +743,8 @@ public class BusinessSystem implements LeisureOffice{
         
         System.out.println("El numero de filas es: "+ numeroFilas);
         String nombreBar, direccion, localidad,provincia;
+        
+        int contadorExitos = 0;
         for (int i = 0; i < numeroFilas; i++) {
            nombreBar =  (String) sheet.getCellAt(0 , i).getValue();//nombre del bar
            direccion = (String)  sheet.getCellAt(1 , i).getValue();//direccion
@@ -762,10 +764,13 @@ public class BusinessSystem implements LeisureOffice{
             //Generamos local tipo bar
             Bar b = new Bar(l.getNombre(),l.getDireccion(),l.getDescripcion());
             //Lo añadimos a los locales
-            Locales.add(b);
-                   
+            
+            if(Locales.add(b)){
+                contadorExitos ++;
+            }    
         }
         
         System.out.println("Fin de la importación");
+        return contadorExitos;
     }
 }
