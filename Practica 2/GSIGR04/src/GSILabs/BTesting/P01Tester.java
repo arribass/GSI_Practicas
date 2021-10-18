@@ -17,6 +17,8 @@ import GSILabs.BModel.Pub;
 import GSILabs.BModel.Restaurante;
 import GSILabs.BModel.Usuario;
 import GSILabs.BSystem.BusinessSystem;
+import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -34,7 +36,7 @@ import java.util.logging.Logger;
  */
 public class P01Tester {
                
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         // Instanciamos una clase BusinessSystem
         BusinessSystem bs = new BusinessSystem();
         String passwordUsuario;
@@ -64,7 +66,8 @@ public class P01Tester {
                                 + "17. Comprobacion de ejercicio 4 apartado S3) \n"
                                 + "18. Comprobacion de ejercicio 4 apartado S1) \n"
                                 + "19. Comprobación de ejercicio 4 apartado S6) \n"
-                                + "20. Comprobacion de ejercicio 4 apartado S2) \n");
+                                + "20. Comprobacion de ejercicio 4 apartado S2) \n"
+                                + "21. Comprobacion de ejercicio 6 practica 2   \n");
 
  
             System.out.print("¿Qué deseas hacer? : \n");
@@ -561,7 +564,14 @@ public class P01Tester {
                     System.out.println("Accion no permitida");
                     System.out.println("Cerrando programa...");
                     System.exit(0);
-                    break;  
+                    break; 
+                    
+                case 21:
+                    //Importa datos de locales tipo bares de una hoja de calculo
+                    final File file = new File("test06.ods");
+                    bs.importarBares(file);
+                    //Local listaLocales[] = bs.listarLocales("Barcelona", "Barcelona");
+                    break;
             }
         } while ( choice != 0 );
     }

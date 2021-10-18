@@ -6,6 +6,8 @@
 package GSILabs.BSystem;
 
 import GSILabs.BModel.*;
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -13,6 +15,9 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import org.jopendocument.dom.OOUtils;
+import org.jopendocument.dom.spreadsheet.Sheet;
+import org.jopendocument.dom.spreadsheet.SpreadSheet;
 
 /*
  *
@@ -584,71 +589,9 @@ public class BusinessSystem implements LeisureOffice{
         return null;
     }
     
-    /*
-        Jaime
-    */
-    public List <Local> listarTodosBares() { //OK
-        
-        List<Local> LocalesBares = new ArrayList<>();
-        Direccion d = new Direccion("haro","larioja","alemania","1");
-        Bar bar = new Bar("aux",d,"bonito");
-        //Recorro el arraylist de los locales y los que están en la provincia y ciudad indicadas los añado al array
-        int contador = 0;
-        for (int i=0;i<Locales.size();i++) {
-            if(Locales.get(i).getClass().equals(bar.getClass())){
-               
-                LocalesBares.add(Locales.get(i));
-                contador++;
-            }            
-        }
-        
-        
-        return LocalesBares;
-    }
-    /*
-        Jaime
-    */
-    public List <Local> listarTodosRestaurantes() { //OK
-        
-        List<Local> LocalesRestaurantes = new ArrayList<>();
-        Direccion d = new Direccion("haro","larioja","alemania","1");
-        Restaurante restaurante = new Restaurante("aux",d,"bonito");
-        //Recorro el arraylist de los locales y los que están en la provincia y ciudad indicadas los añado al array
-        int contador = 0;
-        for (int i=0;i<Locales.size();i++) {
-            if(Locales.get(i).getClass().equals(restaurante.getClass())){
-               
-                LocalesRestaurantes.add(Locales.get(i));
-                contador++;
-            }            
-        }
-        return LocalesRestaurantes;
-    }
     
     
-    /*
-        Jaime
-    */
-    public List <Local> listarTodosPubs() { //OK
-        
-        List<Local> LocalesPubs = new ArrayList<>();
-        Direccion d = new Direccion("haro","larioja","alemania","1");
-        Pub pub = new Pub("aux",d,"bonito");
-        //Recorro el arraylist de los locales y los que están en la provincia y ciudad indicadas los añado al array
-        int contador = 0;
-        for (int i=0;i<Locales.size();i++) {
-            if(Locales.get(i).getClass().equals(pub.getClass())){
-               
-                LocalesPubs.add(Locales.get(i));
-                contador++;
-            }            
-        }
-        return LocalesPubs;
-    }
-    
-    
-    
-
+ 
     @Override
     /**
      * {@inheritDoc}
@@ -721,4 +664,108 @@ public class BusinessSystem implements LeisureOffice{
         }
     }
     
+    /* Funciones implementadas para realizar la practica 2*/
+   
+    /**
+     * {@inheritDoc}
+     */
+    public List <Local> listarTodosBares() { //OK
+        
+        List<Local> LocalesBares = new ArrayList<>();
+        Direccion d = new Direccion("haro","larioja","alemania","1");
+        Bar bar = new Bar("aux",d,"bonito");
+        //Recorro el arraylist de los locales y los que están en la provincia y ciudad indicadas los añado al array
+        int contador = 0;
+        for (int i=0;i<Locales.size();i++) {
+            if(Locales.get(i).getClass().equals(bar.getClass())){
+               
+                LocalesBares.add(Locales.get(i));
+                contador++;
+            }            
+        }
+        
+        
+        return LocalesBares;
+    }
+    /**
+     * {@inheritDoc}
+     */
+    public List <Local> listarTodosRestaurantes() { //OK
+        
+        List<Local> LocalesRestaurantes = new ArrayList<>();
+        Direccion d = new Direccion("haro","larioja","alemania","1");
+        Restaurante restaurante = new Restaurante("aux",d,"bonito");
+        //Recorro el arraylist de los locales y los que están en la provincia y ciudad indicadas los añado al array
+        int contador = 0;
+        for (int i=0;i<Locales.size();i++) {
+            if(Locales.get(i).getClass().equals(restaurante.getClass())){
+               
+                LocalesRestaurantes.add(Locales.get(i));
+                contador++;
+            }            
+        }
+        return LocalesRestaurantes;
+    }
+    
+    
+    /**
+     * {@inheritDoc}
+     */
+    public List <Local> listarTodosPubs() { //OK
+        
+        List<Local> LocalesPubs = new ArrayList<>();
+        Direccion d = new Direccion("haro","larioja","alemania","1");
+        Pub pub = new Pub("aux",d,"bonito");
+        //Recorro el arraylist de los locales y los que están en la provincia y ciudad indicadas los añado al array
+        int contador = 0;
+        for (int i=0;i<Locales.size();i++) {
+            if(Locales.get(i).getClass().equals(pub.getClass())){
+               
+                LocalesPubs.add(Locales.get(i));
+                contador++;
+            }            
+        }
+        return LocalesPubs;
+    }
+    
+    /**
+     * Función que importa una tabla con registros de bares de un fichero .ods
+     * 
+     * {@inheritDoc}
+     */
+    public void importarBares(File f) throws IOException{
+        OOUtils.open(f);
+         SpreadSheet s = SpreadSheet.createFromFile(f);
+        //First sheet
+        Sheet sheet = s.getSheet(0);
+        int numeroFilas = sheet.getRowCount();
+        String[] tokens ;
+        
+        System.out.println("El numero de filas es: "+ numeroFilas);
+        String nombreBar, direccion, localidad,provincia;
+        for (int i = 0; i < numeroFilas; i++) {
+           nombreBar =  (String) sheet.getCellAt(0 , i).getValue();//nombre del bar
+           direccion = (String)  sheet.getCellAt(1 , i).getValue();//direccion
+           tokens = direccion.split(" ");
+           
+           localidad =  (String) sheet.getCellAt(2 , i).getValue();//localidad
+           provincia = (String) sheet.getCellAt(3 , i).getValue();//provincia
+           
+            System.out.println("Linea: " + i + " nombre bar: " + nombreBar
+                                + " calle: " +tokens[0] + " " + tokens[1]
+                                + " Numero: " + tokens[2] + " localidad: " + localidad
+                                + " provincia:" + provincia);
+            //Generamos la direccion
+            Direccion d = new Direccion(localidad,provincia,tokens[0] + " " + tokens[1],tokens[2]);
+            //Generamos el local
+            Local l = new Local(nombreBar,d,"");
+            //Generamos local tipo bar
+            Bar b = new Bar(l.getNombre(),l.getDireccion(),l.getDescripcion());
+            //Lo añadimos a los locales
+            Locales.add(b);
+                   
+        }
+        
+        System.out.println("Fin de la importación");
+    }
 }
