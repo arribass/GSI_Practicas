@@ -67,7 +67,8 @@ public class P01Tester {
                                 + "18. Comprobacion de ejercicio 4 apartado S1) \n"
                                 + "19. Comprobación de ejercicio 4 apartado S6) \n"
                                 + "20. Comprobacion de ejercicio 4 apartado S2) \n"
-                                + "21. Comprobacion de ejercicio 6 practica 2   \n");
+                                + "21. Comprobacion de ejercicio 6 practica 2   \n"
+                                + "22. Comprobacion de ejercicio extra e2.1     \n");
 
  
             System.out.print("¿Qué deseas hacer? : \n");
@@ -568,11 +569,21 @@ public class P01Tester {
                     
                 case 21:
                     //Importa datos de locales tipo bares de una hoja de calculo
-                    final File file = new File("test06.ods");
-                    int exitos = bs.importarBares(file);
-                    System.out.println("Numero de bares añadidos con éxito: " + exitos);
+                    final File fileBares = new File("test06.ods");
+                    int exitosBares = bs.importarBares(fileBares);
+                    System.out.println("Numero de bares añadidos con éxito: " + exitosBares);
                     //Local listaLocales[] = bs.listarLocales("Barcelona", "Barcelona");
                     break;
+                case 22:
+                     //Importa datos de locales tipo bares de una hoja de calculo
+                    /*Aunque test06.ods es una hoja con bares se puede utilizar tambien para
+                    comprobar el funcionamiento de la función importarPubs*/
+                    final File filePubs = new File("test06.ods");
+                    int exitosPubs = bs.importarPubs(filePubs);
+                    System.out.println("Numero de Pubs añadidos con éxito: " + exitosPubs);
+                    //Local listaLocales[] = bs.listarLocales("Barcelona", "Barcelona");
+                    break;
+                 
             }
         } while ( choice != 0 );
     }

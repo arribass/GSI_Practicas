@@ -741,7 +741,7 @@ public class BusinessSystem implements LeisureOffice{
         int numeroFilas = sheet.getRowCount();
         String[] tokens ;
         
-        System.out.println("El numero de filas es: "+ numeroFilas);
+        //System.out.println("El numero de filas es: "+ numeroFilas);
         String nombreBar, direccion, localidad,provincia;
         
         int contadorExitos = 0;
@@ -753,16 +753,62 @@ public class BusinessSystem implements LeisureOffice{
            localidad =  (String) sheet.getCellAt(2 , i).getValue();//localidad
            provincia = (String) sheet.getCellAt(3 , i).getValue();//provincia
            
-            System.out.println("Linea: " + i + " nombre bar: " + nombreBar
+            /*System.out.println("Linea: " + i + " nombre bar: " + nombreBar
                                 + " calle: " +tokens[0] + " " + tokens[1]
                                 + " Numero: " + tokens[2] + " localidad: " + localidad
-                                + " provincia:" + provincia);
+                                + " provincia:" + provincia);*/
             //Generamos la direccion
             Direccion d = new Direccion(localidad,provincia,tokens[0] + " " + tokens[1],tokens[2]);
             //Generamos el local
             Local l = new Local(nombreBar,d,"");
             //Generamos local tipo bar
             Bar b = new Bar(l.getNombre(),l.getDireccion(),l.getDescripcion());
+            //Lo añadimos a los locales
+            
+            if(Locales.add(b)){
+                contadorExitos ++;
+            }    
+        }
+        
+        System.out.println("Fin de la importación");
+        return contadorExitos;
+    }
+    
+     /**
+     * Función que importa una tabla con registros de Pubs de un fichero .ods
+     * 
+     * {@inheritDoc}
+     */
+    public int importarPubs(File f) throws IOException{
+       
+         SpreadSheet s = SpreadSheet.createFromFile(f);
+        //First sheet
+        Sheet sheet = s.getSheet(0);
+        int numeroFilas = sheet.getRowCount();
+        String[] tokens ;
+        
+        //System.out.println("El numero de filas es: "+ numeroFilas);
+        String nombreBar, direccion, localidad,provincia;
+        
+        int contadorExitos = 0;
+        for (int i = 0; i < numeroFilas; i++) {
+           nombreBar =  (String) sheet.getCellAt(0 , i).getValue();//nombre del bar
+           direccion = (String)  sheet.getCellAt(1 , i).getValue();//direccion
+           tokens = direccion.split(" ");
+           
+           localidad =  (String) sheet.getCellAt(2 , i).getValue();//localidad
+           provincia = (String) sheet.getCellAt(3 , i).getValue();//provincia
+           
+            /*System.out.println("Linea: " + i + " nombre bar: " + nombreBar
+                                + " calle: " +tokens[0] + " " + tokens[1]
+                                + " Numero: " + tokens[2] + " localidad: " + localidad
+                                + " provincia:" + provincia);*/
+            //Generamos la direccion
+            Direccion d = new Direccion(localidad,provincia,tokens[0] + " " + tokens[1],tokens[2]);
+            //Generamos el local
+            Local l = new Local(nombreBar,d,"");
+            //Generamos local tipo bar
+            Pub b = new Pub(l.getNombre(),l.getDireccion(),l.getDescripcion());
             //Lo añadimos a los locales
             
             if(Locales.add(b)){
