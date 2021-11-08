@@ -5,11 +5,13 @@
  */
 package GSILabs.BModel;
 
+import GSILabs.BSystem.XMLRepresentable;
+
 /**
  *
  * @author Arribas
  */
-public class Pub extends Local implements Reservable{
+public class Pub extends Local implements Reservable, XMLRepresentable{
     
     public Pub(String nombre, Direccion direccion, String descripcion) {
         super(nombre, direccion, descripcion);

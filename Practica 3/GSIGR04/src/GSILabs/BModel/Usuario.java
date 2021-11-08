@@ -3,6 +3,8 @@
  */
 package GSILabs.BModel;
 
+import GSILabs.BSystem.XMLRepresentable;
+import java.io.File;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
@@ -15,7 +17,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  *
  * @author LENOVO-arribass
  */
-public class Usuario {
+public class Usuario  implements XMLRepresentable{
     private static final AtomicInteger id = new AtomicInteger();
 
     private String nick;
@@ -136,5 +138,20 @@ public class Usuario {
      */
     public String toString() {
         return "ID:" + getId() + "\nNick: " + getNick() + "\nFecha nacimiento: " + getFechaNacimiento().toString() +"\n";
+    }
+
+    @Override
+    public String toXML() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean saveToXML(File f) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean saveToXML(String filePath) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

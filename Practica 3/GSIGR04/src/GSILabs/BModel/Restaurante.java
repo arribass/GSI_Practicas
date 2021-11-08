@@ -5,11 +5,13 @@
  */
 package GSILabs.BModel;
 
+import GSILabs.BSystem.XMLRepresentable;
+
 /**
  *
  * @author Arribas
  */
-public class Restaurante extends Local implements Reservable{
+public class Restaurante extends Local implements Reservable,XMLRepresentable{
     
     public Restaurante(String nombre, Direccion direccion, String descripcion) {
         super(nombre, direccion, descripcion);

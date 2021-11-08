@@ -5,13 +5,15 @@
  */
 package GSILabs.BModel;
 
+import GSILabs.BSystem.XMLRepresentable;
+import java.io.File;
 import java.util.Objects;
 
 /**
  *
  * @author Arribas
  */
-public class Direccion {
+public class Direccion implements XMLRepresentable {
     
     private String localidad;
     private String provincia;
@@ -65,6 +67,21 @@ public class Direccion {
     @Override
     public String toString() {
         return "Direccion{" + "Localidad=" + localidad + ", Provincia=" + provincia + ", Calle=" + calle + ", Numero=" + numero + '}';
+    }
+
+    @Override
+    public String toXML() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean saveToXML(File f) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean saveToXML(String filePath) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     

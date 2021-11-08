@@ -4,13 +4,15 @@
  * and open the template in the editor.
  */
 package GSILabs.BModel;
+import GSILabs.BSystem.XMLRepresentable;
+import java.io.File;
 import java.util.Date;
 
 /**
  *
  * @author Arribas
  */
-public class Contestacion {
+public class Contestacion implements XMLRepresentable {
     private Review review;
     private String comentario;
     private Date fecha;
@@ -31,6 +33,21 @@ public class Contestacion {
 
     public Date getFecha() {
         return fecha;
+    }
+
+    @Override
+    public String toXML() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean saveToXML(File f) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean saveToXML(String filePath) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     
