@@ -5,6 +5,7 @@
  */
 package GSILabs.BModel;
 import GSILabs.BSystem.XMLRepresentable;
+import GSILabs.persistence.XMLParsingException;
 import java.io.File;
 import java.util.Date;
 /**
@@ -38,17 +39,35 @@ public class Review  implements XMLRepresentable{
 
     @Override
     public String toXML() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try{
+            
+            throw new XMLParsingException("Error XML");
+            
+        }catch(XMLParsingException e){
+            System.out.println("Error al convertir a XML");
+        }
     }
 
     @Override
     public boolean saveToXML(File f) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try{
+            
+            throw new XMLParsingException("Error XML");
+            
+        }catch(XMLParsingException e){
+            System.out.println("Error al guardar en XML");
+        }
     }
 
     @Override
     public boolean saveToXML(String filePath) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try{
+            
+            throw new XMLParsingException("Error XML");
+            
+        }catch(XMLParsingException e){
+            System.out.println("Error al guardar en XML");
+        }
     }
 
     

@@ -9,6 +9,7 @@
  package GSILabs.BSystem;
 
 import java.io.File;
+import GSILabs.persistence.XMLParsingException;
 
 /**
  * This interface embodies the ability of a a class of objects to represent itself
@@ -20,10 +21,10 @@ import java.io.File;
  */
 public interface XMLRepresentable {
     
-    public String toXML();
+    public String toXML() throws XMLParsingException;
     
-    public boolean saveToXML(File f);
+    public boolean saveToXML(File f) throws XMLParsingException;
     
-    public boolean saveToXML(String filePath);
+    public boolean saveToXML(String filePath) throws XMLParsingException;
     
 }
