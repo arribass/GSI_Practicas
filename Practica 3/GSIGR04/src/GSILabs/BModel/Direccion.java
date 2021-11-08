@@ -11,7 +11,7 @@ import java.util.Objects;
  *
  * @author Arribas
  */
-public class Direccion {
+public class Direccion implements XMLPrepresentable{
     
     private String localidad;
     private String provincia;

@@ -9,7 +9,7 @@ package GSILabs.BModel;
  *
  * @author Arribas
  */
-public class Pub extends Local implements Reservable{
+public class Pub extends Local implements Reservable implements XMLPrepresentable{
     
     public Pub(String nombre, Direccion direccion, String descripcion) {
         super(nombre, direccion, descripcion);

@@ -9,7 +9,7 @@ package GSILabs.BModel;
  *
  * @author Arribas
  */
-public class Bar extends Local{
+public class Bar extends Local implements XMLPrepresentable{
     
     private String Duenos[] = new String[3];
     

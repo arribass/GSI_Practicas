@@ -12,7 +12,7 @@ import java.time.LocalTime;
  *
  * @author Arribas
  */
-public class Reserva {
+public class Reserva implements XMLPrepresentable{
     
     private Cliente cliente;
     private Reservable local;

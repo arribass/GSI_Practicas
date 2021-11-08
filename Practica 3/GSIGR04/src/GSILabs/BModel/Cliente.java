@@ -11,7 +11,7 @@ import java.util.Date;
  *
  * @author LENOVO-arribass
  */
-public class Cliente extends Usuario{
+public class Cliente extends Usuario implements XMLPrepresentable{
 
     public Cliente(String nick, String password, Date fechaNacimiento, int perfil) {
         super(nick, password, fechaNacimiento, perfil);

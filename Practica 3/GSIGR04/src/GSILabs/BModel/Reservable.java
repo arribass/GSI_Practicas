@@ -9,6 +9,6 @@ package GSILabs.BModel;
  *
  * @author Arribas
  */
-public interface Reservable {
+public interface Reservable implements XMLPrepresentable{
     
 }

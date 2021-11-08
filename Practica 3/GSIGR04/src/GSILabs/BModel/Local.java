@@ -12,7 +12,7 @@ import java.util.Set;
  *
  * @author LENOVO-arribass
  */
-public class Local {
+public class Local implements XMLPrepresentable{
     //private static final Set<String> nombres = new HashSet<String>();
 
     private String nombre;

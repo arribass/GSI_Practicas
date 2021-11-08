@@ -11,7 +11,7 @@ import java.util.Date;
  *
  * @author Arribas
  */
-public class Propietario extends Usuario{
+public class Propietario extends Usuario implements XMLPrepresentable{
     
     public Propietario(String nick, String password, Date fechaNacimiento, int perfil) {
         super(nick, password, fechaNacimiento, perfil);

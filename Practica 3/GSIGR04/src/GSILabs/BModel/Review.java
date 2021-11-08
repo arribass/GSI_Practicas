@@ -9,7 +9,7 @@ import java.util.Date;
  *
  * @author Arribas
  */
-public class Review {
+public class Review implements XMLPrepresentable{
     private int valoracion;
     private String comentario;
     private Date fecha;

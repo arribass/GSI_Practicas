@@ -9,7 +9,7 @@ package GSILabs.BModel;
  *
  * @author Arribas
  */
-public class Restaurante extends Local implements Reservable{
+public class Restaurante extends Local implements Reservable implements XMLPrepresentable{
     
     public Restaurante(String nombre, Direccion direccion, String descripcion) {
         super(nombre, direccion, descripcion);

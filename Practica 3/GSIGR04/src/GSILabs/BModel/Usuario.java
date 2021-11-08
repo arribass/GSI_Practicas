@@ -15,7 +15,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  *
  * @author LENOVO-arribass
  */
-public class Usuario {
+public class Usuario implements XMLPrepresentable{
     private static final AtomicInteger id = new AtomicInteger();
 
     private String nick;
