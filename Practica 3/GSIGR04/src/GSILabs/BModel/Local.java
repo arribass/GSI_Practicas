@@ -5,6 +5,8 @@
  */
 package GSILabs.BModel;
 
+import GSILabs.BSystem.XMLRepresentable;
+import java.io.File;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,7 +14,7 @@ import java.util.Set;
  *
  * @author LENOVO-arribass
  */
-public class Local implements XMLPrepresentable{
+public class Local implements XMLRepresentable {
     //private static final Set<String> nombres = new HashSet<String>();
 
     private String nombre;
@@ -86,5 +88,20 @@ public class Local implements XMLPrepresentable{
     public String toString() {
         return "- nombre= " + nombre + "\n- direccion= " + direccion + "\n- descripcion= " + descripcion;
         
+    }
+
+    @Override
+    public String toXML() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean saveToXML(File f) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean saveToXML(String filePath) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

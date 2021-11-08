@@ -4,12 +4,14 @@
  * and open the template in the editor.
  */
 package GSILabs.BModel;
+import GSILabs.BSystem.XMLRepresentable;
+import java.io.File;
 import java.util.Date;
 /**
  *
  * @author Arribas
  */
-public class Review implements XMLPrepresentable{
+public class Review  implements XMLRepresentable{
     private int valoracion;
     private String comentario;
     private Date fecha;
@@ -32,6 +34,21 @@ public class Review implements XMLPrepresentable{
 
     public String getComentario() {
         return comentario;
+    }
+
+    @Override
+    public String toXML() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean saveToXML(File f) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean saveToXML(String filePath) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     

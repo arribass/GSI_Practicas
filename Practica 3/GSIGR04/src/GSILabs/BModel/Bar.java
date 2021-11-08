@@ -5,11 +5,14 @@
  */
 package GSILabs.BModel;
 
+import GSILabs.BSystem.XMLRepresentable;
+import java.io.File;
+
 /**
  *
  * @author Arribas
  */
-public class Bar extends Local implements XMLPrepresentable{
+public class Bar extends Local implements XMLRepresentable{
     
     private String Duenos[] = new String[3];
     
@@ -27,6 +30,21 @@ public class Bar extends Local implements XMLPrepresentable{
         } else if(this.Duenos[2] != null){
             System.out.println("Este bar ya tiene 3 dueños.");
         }
+    }
+
+    @Override
+    public String toXML() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean saveToXML(File f) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean saveToXML(String filePath) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

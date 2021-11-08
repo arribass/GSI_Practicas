@@ -5,6 +5,8 @@
  */
 package GSILabs.BModel;
 
+import GSILabs.BSystem.XMLRepresentable;
+import java.io.File;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -12,7 +14,7 @@ import java.time.LocalTime;
  *
  * @author Arribas
  */
-public class Reserva implements XMLPrepresentable{
+public class Reserva  implements XMLRepresentable{
     
     private Cliente cliente;
     private Reservable local;
@@ -68,6 +70,21 @@ public class Reserva implements XMLPrepresentable{
 
     public void setDescuento(float descuento) {
         this.descuento = descuento;
+    }
+
+    @Override
+    public String toXML() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean saveToXML(File f) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean saveToXML(String filePath) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     
