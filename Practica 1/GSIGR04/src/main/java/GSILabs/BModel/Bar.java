@@ -25,6 +25,7 @@ public class Bar extends Local{
         } else if(this.Duenos[2] == null){
             this.Duenos[2] = dueno;
         } else if(this.Duenos[2] != null){
+			//hola
             System.out.println("Este bar ya tiene 3 dueños.");
         }
     }
