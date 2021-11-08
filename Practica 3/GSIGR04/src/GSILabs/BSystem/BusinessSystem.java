@@ -23,7 +23,7 @@ import org.jopendocument.dom.spreadsheet.SpreadSheet;
  *
  * @author Arribas
  */
-public class BusinessSystem implements LeisureOffice, ODSPersistente{
+public class BusinessSystem implements LeisureOffice, ODSPersistente, XMLRepresentable{
     static List<Usuario> Usuarios = new ArrayList<>();
     static List<Local> Locales = new ArrayList<>();
     static List<Review> Reviews = new ArrayList<>();
@@ -819,4 +819,31 @@ public class BusinessSystem implements LeisureOffice, ODSPersistente{
         System.out.println("Fin de la importación");
         return contadorExitos;
     }
+    
+    @Override
+    public String toXML() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean saveToXML(File f) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean saveToXML(String filePath) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean loadFromFile(File f) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean saveToFile(File f) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    
 }
