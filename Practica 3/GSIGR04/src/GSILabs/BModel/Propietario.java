@@ -9,6 +9,7 @@ import GSILabs.BSystem.XMLRepresentable;
 import GSILabs.persistence.XMLParsingException;
 import java.io.File;
 import java.util.Date;
+import javax.xml.bind.JAXBException;
 
 /**
  *
@@ -18,6 +19,10 @@ public class Propietario extends Usuario implements XMLRepresentable{
     
     public Propietario(String nick, String password, Date fechaNacimiento, int perfil) {
         super(nick, password, fechaNacimiento, perfil);
+    }
+    
+    public Propietario(String stringXML) throws JAXBException{
+        super(stringXML);
     }
 
     @Override

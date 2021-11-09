@@ -8,6 +8,7 @@ package GSILabs.BModel;
 import GSILabs.BSystem.XMLRepresentable;
 import GSILabs.persistence.XMLParsingException;
 import java.io.File;
+import javax.xml.bind.JAXBException;
 
 /**
  *
@@ -18,6 +19,10 @@ public class Restaurante extends Local implements Reservable,XMLRepresentable{
     public Restaurante(String nombre, Direccion direccion, String descripcion) {
         super(nombre, direccion, descripcion);
     }
+
+    public Restaurante(String stringXML) throws JAXBException{
+        super(stringXML);
+    }    
     
     @Override
     public String toXML() {

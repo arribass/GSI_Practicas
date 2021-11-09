@@ -28,20 +28,12 @@ public class Bar extends Local implements XMLRepresentable{
     }
     
     
-    /*
+    
     public Bar(String stringXML) throws JAXBException{
-        
-         
-        JAXBContext jaxbContext = JAXBContext.newInstance(Bar.class);
-        Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-
-        StringReader reader = new StringReader(stringXML);
-        Bar bar = (Bar) unmarshaller.unmarshal(reader);
-        
-        //super(bar.getNombre(), bar.getDireccion(), bar.getDescripcion());
+        super(stringXML);
         
     }
-    */
+    
     
     
     private void anadirDueno(String dueno){

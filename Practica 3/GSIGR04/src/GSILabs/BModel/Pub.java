@@ -24,11 +24,11 @@ public class Pub extends Local implements Reservable, XMLRepresentable{
         super(nombre, direccion, descripcion);
     }
     
-    /*
-    public Pub(String stringXML) throws JAXBException{
     
+    public Pub(String stringXML) throws JAXBException{
+        super(stringXML);
     }
-    */
+    
     
     @Override
     public String toXML() {

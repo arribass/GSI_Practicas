@@ -2,15 +2,18 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-<<<<<<< Updated upstream
         <group>
-            <file>file:/C:/Users/ASier/Desktop/GSI_Practicas/Practica%203/GSIGR04/src/GSILabs/BSystem/LeisureOffice.java</file>
+            <file>file:/C:/Users/ASier/Desktop/GSI_Practicas/Practica%203/GSIGR04/src/GSILabs/BModel/Pub.java</file>
+            <file>file:/C:/Users/ASier/Desktop/GSI_Practicas/Practica%203/GSIGR04/src/GSILabs/BModel/Direccion.java</file>
             <file>file:/C:/Users/ASier/Desktop/GSI_Practicas/Practica%203/GSIGR04/src/GSILabs/BSystem/BusinessSystem.java</file>
-            <file>file:/C:/Users/ASier/Desktop/GSI_Practicas/Practica%203/GSIGR04/src/GSILabs/BSystem/ODSPersistente.java</file>
-            <file>file:/C:/Users/ASier/Desktop/GSI_Practicas/Practica%203/GSIGR04/src/GSILabs/BSystem/XMLRepresentable.java</file>
+            <file>file:/C:/Users/ASier/Desktop/GSI_Practicas/Practica%203/GSIGR04/src/GSILabs/BModel/Reserva.java</file>
+            <file>file:/C:/Users/ASier/Desktop/GSI_Practicas/Practica%203/GSIGR04/src/GSILabs/BModel/Reservable.java</file>
+            <file>file:/C:/Users/ASier/Desktop/GSI_Practicas/Practica%203/GSIGR04/src/GSILabs/BModel/Contestacion.java</file>
+            <file>file:/C:/Users/ASier/Desktop/GSI_Practicas/Practica%203/GSIGR04/src/GSILabs/BModel/Local.java</file>
+            <file>file:/C:/Users/ASier/Desktop/GSI_Practicas/Practica%203/GSIGR04/src/GSILabs/BModel/Cliente.java</file>
+            <file>file:/C:/Users/ASier/Desktop/GSI_Practicas/Practica%203/GSIGR04/src/GSILabs/BModel/Usuario.java</file>
+            <file>file:/C:/Users/ASier/Desktop/GSI_Practicas/Practica%203/GSIGR04/src/GSILabs/BModel/Review.java</file>
+            <file>file:/C:/Users/ASier/Desktop/GSI_Practicas/Practica%203/GSIGR04/src/GSILabs/BModel/Bar.java</file>
         </group>
-=======
-        <group/>
->>>>>>> Stashed changes
     </open-files>
 </project-private>
