@@ -849,24 +849,24 @@ public class BusinessSystem implements LeisureOffice, ODSPersistente, XMLReprese
     }
     
     public boolean loadXMLFile(File f){
-    try {
-        // create an instance of `JAXBContext`
-        JAXBContext context = JAXBContext.newInstance(BusinessSystem.class);
+        try {
+            // create an instance of `JAXBContext`
+            JAXBContext context = JAXBContext.newInstance(BusinessSystem.class);
 
-        // create an instance of `Unmarshaller`
-        Unmarshaller unmarshaller = context.createUnmarshaller();
+            // create an instance of `Unmarshaller`
+            Unmarshaller unmarshaller = context.createUnmarshaller();
 
-        // convert XML file to `BusinessSystem` object
-        BusinessSystem bs = (BusinessSystem) unmarshaller.unmarshal(f);
+            // convert XML file to `BusinessSystem` object
+            BusinessSystem bs = (BusinessSystem) unmarshaller.unmarshal(f);
 
-        // print BusinessSystem object
-        System.out.println(bs);
-        return true;
+            // print BusinessSystem object
+            System.out.println(bs);
+            return true;
 
-    } catch (JAXBException ex) {
-        ex.printStackTrace();
-        return false;
-    }
+        } catch (JAXBException ex) {
+            ex.printStackTrace();
+            return false;
+        }
     
     }
 
