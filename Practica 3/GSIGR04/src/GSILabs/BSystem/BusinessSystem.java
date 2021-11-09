@@ -15,6 +15,9 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
 import org.jopendocument.dom.OOUtils;
 import org.jopendocument.dom.spreadsheet.Sheet;
 import org.jopendocument.dom.spreadsheet.SpreadSheet;
@@ -843,6 +846,27 @@ public class BusinessSystem implements LeisureOffice, ODSPersistente, XMLReprese
     @Override
     public boolean saveToFile(File f) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public boolean loadXMLFile(File f){
+    try {
+        // create an instance of `JAXBContext`
+        JAXBContext context = JAXBContext.newInstance(BusinessSystem.class);
+
+        // create an instance of `Unmarshaller`
+        Unmarshaller unmarshaller = context.createUnmarshaller();
+
+        // convert XML file to `BusinessSystem` object
+        BusinessSystem bs = (BusinessSystem) unmarshaller.unmarshal(f);
+
+        // print BusinessSystem object
+        System.out.println(bs);
+
+    } catch (JAXBException ex) {
+        ex.printStackTrace();
+    }
+        return false;
+    
     }
 
     
