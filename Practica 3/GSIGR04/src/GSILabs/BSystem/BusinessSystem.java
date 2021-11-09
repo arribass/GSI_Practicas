@@ -861,11 +861,12 @@ public class BusinessSystem implements LeisureOffice, ODSPersistente, XMLReprese
 
         // print BusinessSystem object
         System.out.println(bs);
+        return true;
 
     } catch (JAXBException ex) {
         ex.printStackTrace();
-    }
         return false;
+    }
     
     }
 
