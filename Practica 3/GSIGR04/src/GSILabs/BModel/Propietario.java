@@ -29,6 +29,7 @@ public class Propietario extends Usuario implements XMLRepresentable{
         }catch(XMLParsingException e){
             System.out.println("Error al convertir a XML");
         }
+        return null;
     }
 
     @Override
@@ -40,6 +41,7 @@ public class Propietario extends Usuario implements XMLRepresentable{
         }catch(XMLParsingException e){
             System.out.println("Error al guardar en XML");
         }
+        return false;
     }
 
     @Override
@@ -51,6 +53,7 @@ public class Propietario extends Usuario implements XMLRepresentable{
         }catch(XMLParsingException e){
             System.out.println("Error al guardar en XML");
         }
+        return false;
     }
     
 

@@ -28,6 +28,7 @@ public class Restaurante extends Local implements Reservable,XMLRepresentable{
         }catch(XMLParsingException e){
             System.out.println("Error al convertir a XML");
         }
+        return null;
     }
 
     @Override
@@ -39,6 +40,7 @@ public class Restaurante extends Local implements Reservable,XMLRepresentable{
         }catch(XMLParsingException e){
             System.out.println("Error al guardar en XML");
         }
+        return false;
     }
 
     @Override
@@ -50,5 +52,6 @@ public class Restaurante extends Local implements Reservable,XMLRepresentable{
         }catch(XMLParsingException e){
             System.out.println("Error al guardar en XML");
         }
+        return false;
     }
 }

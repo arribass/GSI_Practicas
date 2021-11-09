@@ -9,6 +9,10 @@ import GSILabs.BSystem.XMLRepresentable;
 import GSILabs.persistence.XMLParsingException;
 import java.io.File;
 import java.util.Objects;
+import javax.xml.bind.JAXBException;
+import java.io.StringReader;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Unmarshaller;
 
 /**
  *
@@ -27,6 +31,18 @@ public class Direccion implements XMLRepresentable {
         this.calle = Calle;
         this.numero = Numero;
     }
+    
+    public Direccion(String stringXML) throws JAXBException{
+        JAXBContext jaxbContext = JAXBContext.newInstance(Direccion.class);
+        Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+
+        StringReader reader = new StringReader(stringXML);
+        Direccion direccion = (Direccion) unmarshaller.unmarshal(reader);
+        this.localidad = direccion.getLocalidad();
+        this.provincia = direccion.getProvincia();
+        this.calle = direccion.getCalle();
+        this.numero = direccion.getNumero();        
+    }
 
     public String getLocalidad() {
         return localidad;
@@ -35,6 +51,15 @@ public class Direccion implements XMLRepresentable {
     public String getProvincia() {
         return provincia;
     }
+
+    public String getCalle() {
+        return calle;
+    }
+
+    public String getNumero() {
+        return numero;
+    }
+    
     
     //Sobre escritura de metodos equals y toString.
     
@@ -74,6 +99,7 @@ public class Direccion implements XMLRepresentable {
         }catch(XMLParsingException e){
             System.out.println("Error al convertir a XML");
         }
+        return null;
     }
 
     @Override
@@ -85,6 +111,7 @@ public class Direccion implements XMLRepresentable {
         }catch(XMLParsingException e){
             System.out.println("Error al guardar en XML");
         }
+        return false;
     }
 
     @Override
@@ -96,6 +123,7 @@ public class Direccion implements XMLRepresentable {
         }catch(XMLParsingException e){
             System.out.println("Error al guardar en XML");
         }
+        return false;
     }
     
     

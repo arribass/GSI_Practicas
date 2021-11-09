@@ -8,6 +8,11 @@ import GSILabs.BSystem.XMLRepresentable;
 import GSILabs.persistence.XMLParsingException;
 import java.io.File;
 import java.util.Date;
+
+import javax.xml.bind.JAXBException;
+import java.io.StringReader;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Unmarshaller;
 /**
  *
  * @author Arribas
@@ -25,6 +30,21 @@ public class Review  implements XMLRepresentable{
         this.local = local;
     }
 
+    public Review(String stringXML) throws JAXBException{
+        JAXBContext jaxbContext = JAXBContext.newInstance(Review.class);
+        Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+
+        StringReader reader = new StringReader(stringXML);
+        Review review = (Review) unmarshaller.unmarshal(reader);
+        
+        this.valoracion = review.getValoracion();
+        this.comentario = review.getComentario();
+        this.fecha = review.getFecha();
+        this.local = review.getLocal();
+
+        
+    }
+    
     public Date getFecha(){
     return this.fecha;
     }
@@ -37,6 +57,10 @@ public class Review  implements XMLRepresentable{
         return comentario;
     }
 
+    public int getValoracion() {
+        return valoracion;
+    }
+
     @Override
     public String toXML() {
         try{
@@ -46,6 +70,7 @@ public class Review  implements XMLRepresentable{
         }catch(XMLParsingException e){
             System.out.println("Error al convertir a XML");
         }
+        return null;
     }
 
     @Override
@@ -57,6 +82,7 @@ public class Review  implements XMLRepresentable{
         }catch(XMLParsingException e){
             System.out.println("Error al guardar en XML");
         }
+        return false;
     }
 
     @Override
@@ -68,6 +94,7 @@ public class Review  implements XMLRepresentable{
         }catch(XMLParsingException e){
             System.out.println("Error al guardar en XML");
         }
+        return false;
     }
 
     

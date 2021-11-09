@@ -10,6 +10,10 @@ import GSILabs.persistence.XMLParsingException;
 import java.io.File;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import javax.xml.bind.JAXBException;
+import java.io.StringReader;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Unmarshaller;
 
 /**
  *
@@ -31,6 +35,21 @@ public class Reserva  implements XMLRepresentable{
         //Si tengo un 25% de descuento calcularia 0.75 que es por lo que tengo que multiplicar el precio para que me salga un 25 de descuento.
         //Ejemplo: vale 10 euros -> 10 * 0.75 = 7.5
         this.descuento = 1 - (descuento/100); 
+    }
+    
+    public Reserva(String stringXML)throws JAXBException{
+        JAXBContext jaxbContext = JAXBContext.newInstance(Reserva.class);
+        Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+
+        StringReader reader = new StringReader(stringXML);
+        Reserva reserva = (Reserva) unmarshaller.unmarshal(reader);
+        this.cliente = reserva.getCliente();
+        this.local = reserva.getLocal();
+        this.fecha = reserva.getFecha();
+        this.hora = reserva.getHora();
+        //Si tengo un 25% de descuento calcularia 0.75 que es por lo que tengo que multiplicar el precio para que me salga un 25 de descuento.
+        //Ejemplo: vale 10 euros -> 10 * 0.75 = 7.5
+        this.descuento = 1 - (reserva.getDescuento()/100);
     }
 
     public Cliente getCliente() {
@@ -73,6 +92,10 @@ public class Reserva  implements XMLRepresentable{
         this.descuento = descuento;
     }
 
+    public Reservable getLocal() {
+        return local;
+    }
+
     @Override
     public String toXML() {
         try{
@@ -82,6 +105,7 @@ public class Reserva  implements XMLRepresentable{
         }catch(XMLParsingException e){
             System.out.println("Error al convertir a XML");
         }
+        return null;
     }
 
     @Override
@@ -93,6 +117,7 @@ public class Reserva  implements XMLRepresentable{
         }catch(XMLParsingException e){
             System.out.println("Error al guardar en XML");
         }
+        return false;
     }
 
     @Override
@@ -104,6 +129,7 @@ public class Reserva  implements XMLRepresentable{
         }catch(XMLParsingException e){
             System.out.println("Error al guardar en XML");
         }
+        return false;
     }
     
     

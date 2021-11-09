@@ -9,6 +9,10 @@ import GSILabs.persistence.XMLParsingException;
 import java.io.File;
 import java.util.Date;
 
+import javax.xml.bind.JAXBException;
+import java.io.StringReader;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Unmarshaller;
 /**
  *
  * @author Arribas
@@ -24,6 +28,18 @@ public class Contestacion implements XMLRepresentable {
         this.fecha = fecha;
     }
 
+    public Contestacion(String stringXML) throws JAXBException{
+        JAXBContext jaxbContext = JAXBContext.newInstance(Contestacion.class);
+        Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+
+        StringReader reader = new StringReader(stringXML);
+        Contestacion contestacion = (Contestacion) unmarshaller.unmarshal(reader);
+        
+        this.review = contestacion.getReview();
+        this.comentario = contestacion.getComentario();
+        this.fecha = contestacion.getFecha();
+    }
+    
     public Review getReview() {
         return review;
     }
@@ -45,6 +61,7 @@ public class Contestacion implements XMLRepresentable {
         }catch(XMLParsingException e){
             System.out.println("Error al convertir a XML");
         }
+        return null;
     }
 
     @Override
@@ -56,6 +73,7 @@ public class Contestacion implements XMLRepresentable {
         }catch(XMLParsingException e){
             System.out.println("Error al guardar en XML");
         }
+        return false;
     }
 
     @Override
@@ -67,6 +85,7 @@ public class Contestacion implements XMLRepresentable {
         }catch(XMLParsingException e){
             System.out.println("Error al guardar en XML");
         }
+        return false;
     }
     
     

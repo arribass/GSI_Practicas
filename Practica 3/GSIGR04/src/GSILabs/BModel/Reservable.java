@@ -5,10 +5,12 @@
  */
 package GSILabs.BModel;
 
+import GSILabs.BSystem.XMLRepresentable;
+
 /**
  *
  * @author Arribas
  */
-public interface Reservable implements XMLPrepresentable{
+public interface Reservable extends XMLRepresentable{ //una interfaz no puede implementar otra pero si extender su comportamiento
     
 }

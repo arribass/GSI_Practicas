@@ -13,6 +13,12 @@ import java.util.Date;
 
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import java.io.StringReader;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
+import org.mozilla.javascript.JavaScriptException;
         
 /**
  *
@@ -29,6 +35,8 @@ public class Usuario  implements XMLRepresentable{
     private final int EDAD_MINIMA  = 14;
     private final int LONGITUD_MINIMA_NICK = 3;
 
+    
+
     public Usuario(String nick, String password, Date fechaNacimiento, int perfil) {
         try {
             usuarioValido(nick,password,fechaNacimiento,perfil);
@@ -41,6 +49,26 @@ public class Usuario  implements XMLRepresentable{
             throw new IllegalArgumentException("Parametros de usuario invalido" + e.toString());
         }
     }
+    
+    public Usuario(String stringXML) throws JAXBException{
+        try{
+            JAXBContext jaxbContext = JAXBContext.newInstance(Usuario.class);
+            Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+
+            StringReader reader = new StringReader(stringXML);
+            Usuario usuario = (Usuario) unmarshaller.unmarshal(reader);
+
+            this.nick = usuario.getNick();
+            this.password = usuario.getPassword();
+            this.fechaNacimiento = usuario.getFechaNacimiento();
+            this.perfil = usuario.getPerfil();
+            Usuario.id.addAndGet(1);
+        } catch(IllegalArgumentException e) {
+            throw new IllegalArgumentException("Parametros de usuario invalido" + e.toString());
+        }
+    }
+    
+    
     /*Getters and Setters*/
     public AtomicInteger getId() {
         return id;
@@ -70,6 +98,14 @@ public class Usuario  implements XMLRepresentable{
         this.password = password;
     }
     
+    
+    public String getPerfil() {
+        return perfil;
+    }
+
+    public void setPerfil(String perfil) {
+        this.perfil = perfil;
+    }
     /*METODOS*/
     
     /**
@@ -150,6 +186,7 @@ public class Usuario  implements XMLRepresentable{
         }catch(XMLParsingException e){
             System.out.println("Error al convertir a XML");
         }
+        return null;
     }
 
     @Override
@@ -161,6 +198,7 @@ public class Usuario  implements XMLRepresentable{
         }catch(XMLParsingException e){
             System.out.println("Error al guardar en XML");
         }
+        return false;
     }
 
     @Override
@@ -172,5 +210,6 @@ public class Usuario  implements XMLRepresentable{
         }catch(XMLParsingException e){
             System.out.println("Error al guardar en XML");
         }
+        return false;
     }
 }

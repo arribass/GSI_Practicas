@@ -8,6 +8,11 @@ package GSILabs.BModel;
 import GSILabs.BSystem.XMLRepresentable;
 import GSILabs.persistence.XMLParsingException;
 import java.io.File;
+import javax.xml.bind.JAXBException;
+import java.io.StringReader;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
 
 /**
  *
@@ -19,6 +24,12 @@ public class Pub extends Local implements Reservable, XMLRepresentable{
         super(nombre, direccion, descripcion);
     }
     
+    /*
+    public Pub(String stringXML) throws JAXBException{
+    
+    }
+    */
+    
     @Override
     public String toXML() {
         try{
@@ -28,6 +39,7 @@ public class Pub extends Local implements Reservable, XMLRepresentable{
         }catch(XMLParsingException e){
             System.out.println("Error al convertir a XML");
         }
+        return null;
     }
 
     @Override
@@ -39,6 +51,7 @@ public class Pub extends Local implements Reservable, XMLRepresentable{
         }catch(XMLParsingException e){
             System.out.println("Error al guardar en XML");
         }
+        return false;
     }
 
     @Override
@@ -50,5 +63,6 @@ public class Pub extends Local implements Reservable, XMLRepresentable{
         }catch(XMLParsingException e){
             System.out.println("Error al guardar en XML");
         }
+        return false;
     }
 }

@@ -8,6 +8,10 @@ package GSILabs.BModel;
 import GSILabs.BSystem.XMLRepresentable;
 import java.io.File;
 import GSILabs.persistence.XMLParsingException;
+import java.io.StringReader;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
 
 /**
  *
@@ -17,9 +21,28 @@ public class Bar extends Local implements XMLRepresentable{
     
     private String Duenos[] = new String[3];
     
+   
+    
     public Bar(String nombre, Direccion direccion, String descripcion) {
         super(nombre, direccion, descripcion);
     }
+    
+    
+    /*
+    public Bar(String stringXML) throws JAXBException{
+        
+         
+        JAXBContext jaxbContext = JAXBContext.newInstance(Bar.class);
+        Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+
+        StringReader reader = new StringReader(stringXML);
+        Bar bar = (Bar) unmarshaller.unmarshal(reader);
+        
+        //super(bar.getNombre(), bar.getDireccion(), bar.getDescripcion());
+        
+    }
+    */
+    
     
     private void anadirDueno(String dueno){
         if(this.Duenos[0] == null){
@@ -42,6 +65,7 @@ public class Bar extends Local implements XMLRepresentable{
         }catch(XMLParsingException e){
             System.out.println("Error al convertir a XML");
         }
+        return null;
     }
 
     @Override
@@ -53,6 +77,7 @@ public class Bar extends Local implements XMLRepresentable{
         }catch(XMLParsingException e){
             System.out.println("Error al guardar en XML");
         }
+        return false;
     }
 
     @Override
@@ -64,6 +89,7 @@ public class Bar extends Local implements XMLRepresentable{
         }catch(XMLParsingException e){
             System.out.println("Error al guardar en XML");
         }
+        return false;
     }
     
 }
