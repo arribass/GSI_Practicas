@@ -873,8 +873,16 @@ public class BusinessSystem implements LeisureOffice, ODSPersistente, XMLReprese
     }
 
     @Override
-    public boolean eliminaLocal(Local l) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean eliminaLocal(Local l) throws RemoteException { //copia de eliminaRLocal, ya comprobado que funciona
+        try{
+            Locales.remove(l);
+            System.out.print("Ya no existen locales en la dirección introducida");
+            return true;
+        }
+        catch(NullPointerException e){
+            System.out.print("El local no existe");
+            return false;
+        }
     }
 
     @Override
@@ -893,8 +901,16 @@ public class BusinessSystem implements LeisureOffice, ODSPersistente, XMLReprese
     }
 
     @Override
-    public Local getLocal(String name) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Local getLocal(String name) throws RemoteException { //copia de obtenerLocal, cambiando direccion por nombre
+        try{
+            Local localFound = Locales.stream()
+                                .filter(item -> item.getNombre().equals(name))
+                                .collect(Collectors.toList()).get(0);
+            return localFound;
+        }catch(IndexOutOfBoundsException e){
+            System.out.println("No existe ningún local en la dirección que buscas");
+            return null;
+        }
     }
 
     @Override
