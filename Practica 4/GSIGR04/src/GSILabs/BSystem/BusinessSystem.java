@@ -6,8 +6,10 @@
 package GSILabs.BSystem;
 
 import GSILabs.BModel.*;
+import GSILabs.connect.*;
 import java.io.File;
 import java.io.IOException;
+import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -26,7 +28,7 @@ import org.jopendocument.dom.spreadsheet.SpreadSheet;
  *
  * @author Arribas
  */
-public class BusinessSystem implements LeisureOffice, ODSPersistente, XMLRepresentable{
+public class BusinessSystem implements LeisureOffice, ODSPersistente, XMLRepresentable, AdminGateway, ClientGateway{
     static List<Usuario> Usuarios = new ArrayList<>();
     static List<Local> Locales = new ArrayList<>();
     static List<Review> Reviews = new ArrayList<>();
@@ -157,7 +159,7 @@ public class BusinessSystem implements LeisureOffice, ODSPersistente, XMLReprese
     /**
      * {@inheritDoc}
      */
-    public boolean eliminaReview(Review r) {
+    public boolean eliminaReview(Review r) throws RemoteException{
         //elimina una review de la lista si esta existe
         try{
             Reviews.remove(r);
@@ -868,6 +870,56 @@ public class BusinessSystem implements LeisureOffice, ODSPersistente, XMLReprese
             return false;
         }
     
+    }
+
+    @Override
+    public boolean eliminaLocal(Local l) throws RemoteException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean eliminaReviewsDeLocal(Local l) throws RemoteException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int eliminaReviewsDeUsuario(Cliente c) throws RemoteException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean insertaReviewFalsa(Local l, Integer puntuacion) throws RemoteException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Local getLocal(String name) throws RemoteException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Local[] getLocals(String name) throws RemoteException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean insertaReview(Review r) throws RemoteException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean quitaReview(Review r) throws RemoteException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Bar mejorBar(String ciudad) throws RemoteException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Restaurante[] mejoresRestaurantes(String ciudad, Integer num) throws RemoteException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     

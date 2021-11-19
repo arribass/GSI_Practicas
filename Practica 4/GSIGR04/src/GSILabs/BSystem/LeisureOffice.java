@@ -79,7 +79,7 @@ public interface LeisureOffice {
      * @param r Review a eliminar
      * @return True si y solo si la operacion fue completada.
      */
-    public boolean eliminaReview(Review r);
+    //public boolean eliminaReview(Review r);
     
     /**
      * Comprueba si la visita de un usuario a un local en una fecha dada ha sido 
