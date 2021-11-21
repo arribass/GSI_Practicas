@@ -122,4 +122,31 @@ public class BusinessServer implements AdminGateway,ClientGateway{
     public Restaurante[] mejoresRestaurantes(String ciudad, Integer num) throws RemoteException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    public static void main(String[] args) throws RemoteException{
+        AdminGateway ag = new BusinessSystem();
+        ClientGateway cg = new BusinessSystem();
+        AdminGateway stubAG;
+        ClientGateway stubCG;
+        Registry registroAG,registroCG;
+        stubAG = (AdminGateway) UnicastRemoteObject.exportObject(ag,9998);
+        stubCG = (ClientGateway) UnicastRemoteObject.exportObject(cg,9999);
+        
+        try{
+            LocateRegistry.createRegistry(1099);
+            System.out.println("Created register for ADMIN");
+            LocateRegistry.createRegistry(1100);
+            System.out.println("Created register for CLIENT");
+            registroAG = LocateRegistry.getRegistry(1099);
+            System.out.println("Got register for ADMNIN");
+            registroAG.rebind("ADMIN", stubAG);
+            System.out.println("Stub rebind for ADMIN done");
+            registroCG = LocateRegistry.getRegistry(1100);
+            System.out.println("Got register for CLIENT");
+            registroCG.rebind("CLIENT", stubCG);
+            System.out.println("Stub rebind for CLIENT done");
+        }catch (RemoteException re){
+             System.out.println("RMI Error in publishing the stub: "+re.getMessage());
+        }
+    }
 }
