@@ -8,6 +8,7 @@ package GSILabs.BModel;
 import GSILabs.BSystem.XMLRepresentable;
 import GSILabs.persistence.XMLParsingException;
 import java.io.File;
+import java.io.Serializable;
 import java.io.StringReader;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -20,7 +21,7 @@ import java.util.Set;
  *
  * @author LENOVO-arribass
  */
-public class Local implements XMLRepresentable {
+public class Local implements XMLRepresentable, Serializable{
     //private static final Set<String> nombres = new HashSet<String>();
 
     private String nombre;

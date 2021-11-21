@@ -34,7 +34,7 @@ public class BusinessSystem implements LeisureOffice, ODSPersistente, XMLReprese
     static List<Review> Reviews = new ArrayList<>();
     static List<Contestacion> Contestaciones = new ArrayList<>();
     static List<Reserva> Reservas = new ArrayList<>();
-    
+
     @Override
     /**
      * {@inheritDoc}
@@ -919,8 +919,27 @@ public class BusinessSystem implements LeisureOffice, ODSPersistente, XMLReprese
     }
 
     @Override
-    public boolean insertaReview(Review r) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean insertaReview(Review r) throws RemoteException { //copia de nuevareview
+        Boolean flag = true;
+        for (int i=0;i<Reviews.size();i++) {
+            if(Reviews.get(i).getLocal() == r.getLocal() && Reviews.get(i).getFecha() == r.getFecha()){
+                flag = false;
+            }
+        }
+        if (flag){
+            try {
+                Reviews.add(r);
+                System.out.println("Review introducida\n");
+                return true;
+            }catch (Exception e) {
+                System.out.println("Error introduciendo review\n");
+                return false;
+            }
+        }else{
+            System.out.println("Una review ha sido introducida en esa fecha y en ese local anteriormente\n");
+            return false;
+        }
+
     }
 
     @Override

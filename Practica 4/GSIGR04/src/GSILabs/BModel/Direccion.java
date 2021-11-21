@@ -8,6 +8,7 @@ package GSILabs.BModel;
 import GSILabs.BSystem.XMLRepresentable;
 import GSILabs.persistence.XMLParsingException;
 import java.io.File;
+import java.io.Serializable;
 import java.util.Objects;
 import javax.xml.bind.JAXBException;
 import java.io.StringReader;
@@ -18,7 +19,7 @@ import javax.xml.bind.Unmarshaller;
  *
  * @author Arribas
  */
-public class Direccion implements XMLRepresentable {
+public class Direccion implements XMLRepresentable, Serializable {
     
     private String localidad;
     private String provincia;

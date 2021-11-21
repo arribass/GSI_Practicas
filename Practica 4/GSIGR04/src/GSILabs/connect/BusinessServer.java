@@ -26,7 +26,12 @@ import java.util.stream.Collectors;
  *
  * @author sergi
  */
-public class BusinessServer implements AdminGateway,ClientGateway{
+public class BusinessServer /*implements AdminGateway,ClientGateway*/{
+    
+    private static int RMI_PORT_ADMIN=1099;
+    private static int RMI_PORT_CLIENT=1100;
+    
+    /*
     //Variables para servidor
     AdminGateway ag = new BusinessSystem();
     ClientGateway cg = new BusinessSystem();
@@ -122,26 +127,26 @@ public class BusinessServer implements AdminGateway,ClientGateway{
     public Restaurante[] mejoresRestaurantes(String ciudad, Integer num) throws RemoteException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+    */
     public static void main(String[] args) throws RemoteException{
         AdminGateway ag = new BusinessSystem();
         ClientGateway cg = new BusinessSystem();
         AdminGateway stubAG;
         ClientGateway stubCG;
-        Registry registroAG,registroCG;
+        Registry registroAG, registroCG;
         stubAG = (AdminGateway) UnicastRemoteObject.exportObject(ag,9998);
-        stubCG = (ClientGateway) UnicastRemoteObject.exportObject(cg,9999);
+        stubCG = (ClientGateway) UnicastRemoteObject.exportObject(cg,0);
         
         try{
             LocateRegistry.createRegistry(1099);
             System.out.println("Created register for ADMIN");
             LocateRegistry.createRegistry(1100);
             System.out.println("Created register for CLIENT");
-            registroAG = LocateRegistry.getRegistry(1099);
+            registroAG = LocateRegistry.getRegistry(RMI_PORT_ADMIN);
             System.out.println("Got register for ADMNIN");
             registroAG.rebind("ADMIN", stubAG);
             System.out.println("Stub rebind for ADMIN done");
-            registroCG = LocateRegistry.getRegistry(1100);
+            registroCG = LocateRegistry.getRegistry(RMI_PORT_CLIENT);
             System.out.println("Got register for CLIENT");
             registroCG.rebind("CLIENT", stubCG);
             System.out.println("Stub rebind for CLIENT done");

@@ -7,6 +7,7 @@ package GSILabs.BModel;
 import GSILabs.BSystem.XMLRepresentable;
 import GSILabs.persistence.XMLParsingException;
 import java.io.File;
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.xml.bind.JAXBException;
@@ -17,7 +18,7 @@ import javax.xml.bind.Unmarshaller;
  *
  * @author Arribas
  */
-public class Review  implements XMLRepresentable{
+public class Review  implements XMLRepresentable, Serializable{
     private int valoracion;
     private String comentario;
     private Date fecha;
