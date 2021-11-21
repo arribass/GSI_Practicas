@@ -30,7 +30,7 @@ public class ClientHub {
             System.out.println("¿Cuál es el tag del objeto?");
             String tag = sc.nextLine();
             //Instanciar el registro RMI
-            Registry registro=LocateRegistry.getRegistry(puerto);	
+            Registry registro=LocateRegistry.getRegistry(direccion, puerto);	
             //Instanciar un objeto de la clase del servidor
             ClientGateway cg=(ClientGateway) registro.lookup(tag);	
             //Uso del servicio
