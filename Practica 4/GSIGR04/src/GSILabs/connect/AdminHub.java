@@ -5,6 +5,7 @@
  */
 package GSILabs.connect;
 
+import GSILabs.BModel.Cliente;
 import GSILabs.BModel.Direccion;
 import GSILabs.BModel.Local;
 import GSILabs.BModel.Review;
@@ -12,6 +13,7 @@ import static GSILabs.connect.ClientHub.sc;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.Date;
@@ -60,4 +62,7 @@ public class AdminHub {
             e.printStackTrace();
         }
     }
+    
+    
+    
 }

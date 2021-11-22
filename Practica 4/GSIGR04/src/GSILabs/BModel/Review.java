@@ -23,12 +23,14 @@ public class Review  implements XMLRepresentable, Serializable{
     private String comentario;
     private Date fecha;
     private Local local; //añadir de alguna manera a que local pertenece
+    private Cliente cliente;
 
-    public Review(int valoracion, String comentario, Date fecha, Local local){
+    public Review(int valoracion, String comentario, Date fecha, Local local, Cliente cliente){
         this.valoracion = valoracion;
         this.comentario = comentario;
         this.fecha = fecha;
         this.local = local;
+        this.cliente = cliente;
     }
 
     public Review(String stringXML) throws JAXBException{
@@ -60,6 +62,10 @@ public class Review  implements XMLRepresentable, Serializable{
 
     public int getValoracion() {
         return valoracion;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
     }
 
     @Override

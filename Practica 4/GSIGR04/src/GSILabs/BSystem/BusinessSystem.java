@@ -13,6 +13,9 @@ import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.Iterator;
@@ -891,17 +894,64 @@ public class BusinessSystem implements LeisureOffice, ODSPersistente, XMLReprese
 
     @Override
     public boolean eliminaReviewsDeLocal(Local l) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Boolean flag = false;
+        for (int i=0;i<Reviews.size();i++) {
+            if(Reviews.get(i).getLocal() == l){
+                try {
+                    Reviews.remove(i);
+                    System.out.println("Review eliminada\n");
+                    flag = true;
+                }catch (Exception e) {
+                    System.out.println("Error eliminando review\n");
+                    return false;
+                 }
+            }
+        }
+        
+         if(flag == false){
+            return false;
+        }else{
+             return true;
+         }
     }
+    
 
     @Override
     public int eliminaReviewsDeUsuario(Cliente c) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int count = 0;
+        for (int i=0;i<Reviews.size();i++) {
+            if(Reviews.get(i).getCliente() == c){
+                try {
+                    Reviews.remove(i);
+                    System.out.println("Review eliminada\n");
+                    count++;
+                }catch (Exception e) {
+                    System.out.println("Error eliminando review\n");
+                    return -1;
+                 }
+            }
+        }
+        
+        return count;
     }
 
     @Override
     public boolean insertaReviewFalsa(Local l, Integer puntuacion) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        Date hoy = new GregorianCalendar(2014, Calendar.FEBRUARY, 11).getTime();
+        Cliente c = new Cliente("james876", "12345", new GregorianCalendar(1997, Calendar.APRIL, 23).getTime(), 999);
+        Review r = new Review(puntuacion, "Nice", hoy, l, c);
+        try{
+            if (Locales.contains(l) == true){
+                Reviews.add(r);
+                return true;
+            }else{
+                return false;
+            }
+        }catch(Exception e){
+            System.out.println("No existe ningún local en la dirección que buscas");
+            return false;
+        }
     }
 
     @Override
@@ -1027,6 +1077,4 @@ public class BusinessSystem implements LeisureOffice, ODSPersistente, XMLReprese
         }
         return arr;
     }
-
-    
 }

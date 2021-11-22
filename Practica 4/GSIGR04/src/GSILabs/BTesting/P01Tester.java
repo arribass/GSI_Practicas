@@ -24,7 +24,9 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -41,7 +43,7 @@ public class P01Tester {
         BusinessSystem bs = new BusinessSystem();
         String passwordUsuario;
         String nombreUsuario;
-        
+        Cliente c = new Cliente("james876", "12345", new GregorianCalendar(1997, Calendar.APRIL, 23).getTime(), 999);
         //Menú principal, el usuario elige que quiere hacer.
         Scanner sc = new Scanner(System.in);
         int choice=999;
@@ -171,8 +173,8 @@ public class P01Tester {
                     String num = sc.nextLine();
                     //Genero la dirección.
                     Direccion dir = new Direccion(loc,prov,cal,num);
-                    Local local = bs.obtenerLocal(dir);
-                    Review r = new Review(valint,comentario,fecha,local);
+                    Local local = bs.obtenerLocal(dir);;
+                    Review r = new Review(valint,comentario,fecha,local, c);
                     bs.nuevaReview(r);
                     break;
                 case 5: //Eliminar local
@@ -354,9 +356,10 @@ public class P01Tester {
                     Local l2 = new Local(nombreLocal1,d1,descripcionLocal2);
                     //añado el nuevo local
                     bs.nuevoLocal(l2);
-                    
+                    //Creo cliente
+        
                     //Creamos la primera review con la fecha y el local introducidos
-                    Review rev1 = new Review(5, "aaaaaaaaa",date, l2);
+                    Review rev1 = new Review(5, "aaaaaaaaa",date, l2, c);
                     System.out.println("Primera review introducida.\n");
                             
                     //agregamos la primera review
@@ -364,7 +367,7 @@ public class P01Tester {
 
                     //Creamos la segunda review con la misma fecha y el mismo local
                     
-                    Review rev2 = new Review(3, "bbbbbbbbb",date, l2);
+                    Review rev2 = new Review(3, "bbbbbbbbb",date, l2, c);
                     System.out.println("Intentamos agregar la segunda review.\n");
                     //Agregamos la segunda review
                     Boolean resultado = bs.nuevaReview(rev2);
