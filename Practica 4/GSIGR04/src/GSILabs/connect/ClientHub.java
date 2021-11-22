@@ -53,9 +53,24 @@ public class ClientHub {
             Local l = new Local("Casa Paco", d, "Bar elegante en el centro.");
             Date fecha = new Date();
             Review r = new Review(6, "Muy limpio y bonito.", fecha, l);
+            //Comprobación insertarReview
             cg.insertaReview(r);
-            System.out.println("aux5");
             
+            //Comprobación quitarReview
+            cg.quitaReview(r);
+            
+            //Comprobación mejorBar
+            //cg.mejorBar("ciudad");
+            /*Como en ClienteGateway.java no está declarada la función añadir local
+              no se puede comprobar la función mejorar bar ya que no podemos insertar 
+              locales tipo bares.*/
+            
+            //Comprobación mejoresRestaurantes
+            /*Misma situación*/
+            
+            
+            
+            System.out.println("Todo correcto");
         }catch (Exception e)
         {
             System.err.println("Excepción en el ClientHub:");

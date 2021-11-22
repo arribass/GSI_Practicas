@@ -13,8 +13,12 @@ import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.InputMismatchException;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import javax.xml.bind.JAXBContext;
@@ -944,17 +948,84 @@ public class BusinessSystem implements LeisureOffice, ODSPersistente, XMLReprese
 
     @Override
     public boolean quitaReview(Review r) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       Boolean flag = false;
+        for (int i=0;i<Reviews.size();i++) {
+            if(Reviews.get(i).getLocal() == r.getLocal() && Reviews.get(i).getFecha() == r.getFecha()){
+                try {
+                    Reviews.remove(r);
+                    System.out.println("Review eliminada\n");
+                    flag = true;
+                    return true;
+                }catch (Exception e) {
+                    System.out.println("Error eliminando review\n");
+                    return false;
+                 }
+            }
+        }
+        
+         if(flag == false){
+            return false;
+        }else{
+             return true;
+         }
     }
+    
 
     @Override
     public Bar mejorBar(String ciudad) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Map<String, Integer> map = new HashMap<String, Integer>();
+        String localidad;
+        String nombre;
+        Integer punt,punt_aux;
+        
+        //meto todos los bares de la ciudad en el mapa
+         for (int i=0;i<Reviews.size();i++) {
+            localidad = Reviews.get(i).getLocal().getDireccion().getLocalidad();
+            if( localidad.equals(ciudad)){
+                nombre = Reviews.get(i).getLocal().getNombre();
+                map.put(nombre,0);
+            }
+         }
+         
+         //sumo todas sus puntuaciones
+          for (int i=0;i<Reviews.size();i++) {
+            localidad = Reviews.get(i).getLocal().getDireccion().getLocalidad();
+            if( localidad.equals(ciudad)){
+                nombre = Reviews.get(i).getLocal().getNombre();
+                punt = Reviews.get(i).getValoracion();
+                punt_aux = map.get(nombre);
+                
+                map.put(nombre,punt + punt_aux);
+            }
+         }
+         
+         List<Entry<String, Integer>> list = new ArrayList<>(map.entrySet());
+         list.sort(Entry.comparingByValue());
+         list.forEach(System.out::println);
+         
+        
+        
+         return  (Bar) list.get(list.size() -1);
+         
+         
     }
 
     @Override
     public Restaurante[] mejoresRestaurantes(String ciudad, Integer num) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Restaurante[] arr = new Restaurante[num];
+         List<Local> LocalesRestaurantes = new ArrayList<>();
+        Direccion d = new Direccion("haro","larioja","alemania","1");
+        Restaurante restaurante = new Restaurante("aux",d,"bonito");
+        //Recorro el arraylist de los locales y los que están en la provincia y ciudad indicadas los añado al array
+        int contador = 0;
+        for (int i=0;i<Locales.size();i++) {
+            if(Locales.get(i).getClass().equals(restaurante.getClass())){
+             
+                LocalesRestaurantes.add(Locales.get(i));
+                contador++;
+            }            
+        }
+        return arr;
     }
 
     
