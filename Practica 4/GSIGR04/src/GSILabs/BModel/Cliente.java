@@ -9,13 +9,14 @@ import GSILabs.BSystem.XMLRepresentable;
 import GSILabs.persistence.XMLParsingException;
 import java.io.File;
 import java.util.Date;
+import java.io.Serializable;
 import javax.xml.bind.JAXBException;
 
 /**
  *
  * @author LENOVO-arribass
  */
-public class Cliente extends Usuario implements XMLRepresentable{
+public class Cliente extends Usuario implements XMLRepresentable, Serializable{
 
     public Cliente(String nick, String password, Date fechaNacimiento, int perfil) {
         super(nick, password, fechaNacimiento, perfil);

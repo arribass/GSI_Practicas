@@ -55,7 +55,7 @@ public class ClientHub {
             Direccion d = new Direccion("Haro", "La Rioja", "Avenida mayor", "3");
             Local l = new Local("Casa Paco", d, "Bar elegante en el centro.");
             Date fecha = new Date();
-            Cliente c = new Cliente("davidgnomo", "12345", new GregorianCalendar(1996, Calendar.MARCH, 14).getTime(), 995);
+            Cliente c = new Cliente("davidgnomo", "12345", new GregorianCalendar(1996, Calendar.MARCH, 14).getTime(), 1);
             Review r = new Review(6, "Muy limpio y bonito.", fecha, l, c);
             //Comprobación insertarReview
             cg.insertaReview(r);

@@ -18,13 +18,14 @@ import java.io.StringReader;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
+import java.io.Serializable;
 import org.mozilla.javascript.JavaScriptException;
         
 /**
  *
  * @author LENOVO-arribass
  */
-public class Usuario  implements XMLRepresentable{
+public class Usuario  implements XMLRepresentable, Serializable{
     private static final AtomicInteger id = new AtomicInteger();
 
     private String nick;
