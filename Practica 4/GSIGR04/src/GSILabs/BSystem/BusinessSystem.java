@@ -883,11 +883,11 @@ public class BusinessSystem implements LeisureOffice, ODSPersistente, XMLReprese
     public boolean eliminaLocal(Local l) throws RemoteException { //copia de eliminaRLocal, ya comprobado que funciona
         try{
             Locales.remove(l);
-            System.out.print("Ya no existen locales en la dirección introducida");
+            System.out.print("Ya no existen locales en la dirección introducida\n");
             return true;
         }
         catch(NullPointerException e){
-            System.out.print("El local no existe");
+            System.out.print("El local no existe\n");
             return false;
         }
     }
@@ -983,14 +983,14 @@ public class BusinessSystem implements LeisureOffice, ODSPersistente, XMLReprese
         if (flag){
             try {
                 Reviews.add(r);
-                System.out.println("Review introducida\n");
+                System.out.print("Review introducida\n");
                 return true;
             }catch (Exception e) {
-                System.out.println("Error introduciendo review\n");
+                System.out.print("Error introduciendo review\n");
                 return false;
             }
         }else{
-            System.out.println("Una review ha sido introducida en esa fecha y en ese local anteriormente\n");
+            System.out.print("Una review ha sido introducida en esa fecha y en ese local anteriormente\n");
             return false;
         }
 
@@ -1003,11 +1003,11 @@ public class BusinessSystem implements LeisureOffice, ODSPersistente, XMLReprese
             if(Reviews.get(i).getLocal() == r.getLocal() && Reviews.get(i).getFecha() == r.getFecha()){
                 try {
                     Reviews.remove(r);
-                    System.out.println("Review eliminada\n");
+                    System.out.print("Review eliminada\n");
                     flag = true;
                     return true;
                 }catch (Exception e) {
-                    System.out.println("Error eliminando review\n");
+                    System.out.print("Error eliminando review\n");
                     return false;
                  }
             }
