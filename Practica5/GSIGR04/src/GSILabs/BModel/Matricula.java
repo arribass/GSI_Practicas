@@ -21,20 +21,18 @@ import javax.xml.bind.Unmarshaller;
  */
 public class Matricula  implements XMLRepresentable{
     
-    private Alumno cliente;
-    private Matriculable local;
+    private Alumno alumno;
+    private Matriculable curso;
     private LocalDate fecha;
     private LocalTime hora;
-    private float descuento;
+    private float sobreCosteRepeticion;
 
     public Matricula(Alumno cliente, Matriculable reservable, LocalDate fecha, LocalTime hora, float descuento) {
-        this.cliente = cliente;
-        this.local = local;
+        this.alumno = cliente;
+        this.curso = curso;
         this.fecha = fecha;
         this.hora = hora;
-        //Si tengo un 25% de descuento calcularia 0.75 que es por lo que tengo que multiplicar el precio para que me salga un 25 de descuento.
-        //Ejemplo: vale 10 euros -> 10 * 0.75 = 7.5
-        this.descuento = 1 - (descuento/100); 
+        this.sobreCosteRepeticion = 1 + (descuento/100); 
     }
     
     public Matricula(String stringXML)throws JAXBException{
@@ -42,30 +40,30 @@ public class Matricula  implements XMLRepresentable{
         Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 
         StringReader reader = new StringReader(stringXML);
-        Matricula reserva = (Matricula) unmarshaller.unmarshal(reader);
-        this.cliente = reserva.getCliente();
-        this.local = reserva.getLocal();
-        this.fecha = reserva.getFecha();
-        this.hora = reserva.getHora();
+        Matricula matricula = (Matricula) unmarshaller.unmarshal(reader);
+        this.alumno = matricula.getAlumno();
+        this.curso = matricula.getCurso();
+        this.fecha = matricula.getFecha();
+        this.hora = matricula.getHora();
         //Si tengo un 25% de descuento calcularia 0.75 que es por lo que tengo que multiplicar el precio para que me salga un 25 de descuento.
         //Ejemplo: vale 10 euros -> 10 * 0.75 = 7.5
-        this.descuento = 1 - (reserva.getDescuento()/100);
+        this.sobreCosteRepeticion = 1 + (matricula.getSobreCosteRepeticion()/100);
     }
 
-    public Alumno getCliente() {
-        return cliente;
+    public Alumno getAlumno() {
+        return alumno;
     }
 
-    public void setCliente(Alumno cliente) {
-        this.cliente = cliente;
+    public void setAlumno(Alumno alumno) {
+        this.alumno = alumno;
     }
 
     public Matriculable getReservable() {
-        return local;
+        return curso;
     }
 
     public void setReservable(Matriculable local) {
-        this.local = local;
+        this.curso = local;
     }
 
     public LocalDate getFecha() {
@@ -84,16 +82,16 @@ public class Matricula  implements XMLRepresentable{
         this.hora = hora;
     }
 
-    public float getDescuento() {
-        return descuento;
+    public float getSobreCosteRepeticion() {
+        return sobreCosteRepeticion;
     }
 
-    public void setDescuento(float descuento) {
-        this.descuento = descuento;
+    public void setSobreCosteRepeticion(float sobreCosteRepeticion) {
+        this.sobreCosteRepeticion = sobreCosteRepeticion;
     }
 
-    public Matriculable getLocal() {
-        return local;
+    public Matriculable getCurso() {
+        return curso;
     }
 
     @Override

@@ -16,8 +16,8 @@ import javax.xml.bind.JAXBException;
  */
 public class Grado extends Curso implements Matriculable,XMLRepresentable{
     
-    public Grado(String nombre, Nombre direccion, String descripcion) {
-        super(nombre, direccion, descripcion);
+    public Grado(String nombre, EscuelaPertenece escuelaPertenece, String contenidos) {
+        super(nombre, escuelaPertenece, contenidos);
     }
 
     public Grado(String stringXML) throws JAXBException{

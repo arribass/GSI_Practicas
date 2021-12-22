@@ -6,7 +6,7 @@
 package GSILabs.connect;
 
 import GSILabs.BModel.Alumno;
-import GSILabs.BModel.Nombre;
+import GSILabs.BModel.EscuelaPertenece;
 import GSILabs.BModel.Curso;
 import GSILabs.BModel.Examen;
 import static GSILabs.connect.ClientHub.sc;
@@ -52,7 +52,7 @@ public class AdminHub {
             //Instanciar un objeto de la clase del servidor
             AdminGateway ag=(AdminGateway) registro.lookup(tag);	
             //Uso del servicio
-            Nombre d = new Nombre("Haro", "La Rioja", "Avenida mayor", "3");
+            EscuelaPertenece d = new EscuelaPertenece("Haro", "La Rioja", "Avenida mayor", "3");
             Curso l = new Curso("Casa Paco", d, "Bar elegante en el centro.");
             ag.eliminaLocal(l);
             System.out.println("Fin");

@@ -8,7 +8,7 @@ package GSILabs.Misc;
 import GSILabs.BModel.Master;
 import GSILabs.BModel.Examen;
 import GSILabs.BModel.Matricula;
-import GSILabs.BModel.Nombre;
+import GSILabs.BModel.EscuelaPertenece;
 import GSILabs.BModel.Curso;
 import GSILabs.BModel.Nota;
 import GSILabs.BModel.Alumno;
@@ -90,7 +90,7 @@ public class SSTest04 {
                             System.out.println("Usuario registrado correctamente!");
                             System.out.println(u.toString());
                         }else{
-                            System.out.println("El usuario " + u.getNick()+ " ya existe!");
+                            System.out.println("El usuario " + u.getNIA()+ " ya existe!");
                         }
                     } catch (IllegalArgumentException | ParseException ex) {
                         System.out.println(ex.toString());
@@ -116,7 +116,7 @@ public class SSTest04 {
                    System.out.println("Introduce el numero: "); 
                    String numero = sc.nextLine();
                    //Genero la dirección.
-                   Nombre d = new Nombre(localidad,provincia,calle,numero);
+                   EscuelaPertenece d = new EscuelaPertenece(localidad,provincia,calle,numero);
 
                    //Pido la descripcion del local al usuario.
                    System.out.println("Introduce la descripción del local: "); 
@@ -150,8 +150,8 @@ public class SSTest04 {
                         Curso bar = listaBares.get(i);
                         
                         hojaBares.setValueAt(bar.getNombre(),0,i);
-                        hojaBares.setValueAt(bar.getDireccion(),1,i);
-                        hojaBares.setValueAt(bar.getDescripcion(),2,i);
+                        hojaBares.setValueAt(bar.getEscuelaPertenece(),1,i);
+                        hojaBares.setValueAt(bar.getContenidos(),2,i);
                        // hojaBares.setValueAt(bar.getPropietarios()[0].getNick(),3,i);
                         
                     }       
@@ -168,9 +168,9 @@ public class SSTest04 {
                     for (int i=0;i<listaRestaurantes.size();i++) {
                         Curso restaurante = listaRestaurantes.get(i);
                         hojaRestaurantes.setValueAt(restaurante.getNombre(),0,i);                        
-                        hojaRestaurantes.setValueAt(restaurante.getDireccion(),1,i);
-                        hojaRestaurantes.setValueAt(restaurante.getDescripcion(),2,i);
-                        hojaRestaurantes.setValueAt(restaurante.getPropietarios(),3,i);
+                        hojaRestaurantes.setValueAt(restaurante.getEscuelaPertenece(),1,i);
+                        hojaRestaurantes.setValueAt(restaurante.getContenidos(),2,i);
+                        hojaRestaurantes.setValueAt(restaurante.getDocentes(),3,i);
                     }
                     
                     //Hoja Restaurantes
@@ -184,9 +184,9 @@ public class SSTest04 {
                     for (int i=0;i<listaPubs.size();i++) {
                         Curso pub = listaPubs.get(i);
                         hojaPubs.setValueAt(pub.getNombre(),0,i);                        
-                        hojaPubs.setValueAt(pub.getDireccion(),1,i);
-                        hojaPubs.setValueAt(pub.getDescripcion(),2,i);
-                        hojaPubs.setValueAt(pub.getPropietarios(),3,i);
+                        hojaPubs.setValueAt(pub.getEscuelaPertenece(),1,i);
+                        hojaPubs.setValueAt(pub.getContenidos(),2,i);
+                        hojaPubs.setValueAt(pub.getDocentes(),3,i);
                     }
                     
                     final File file = new File("test04.ods");

@@ -28,26 +28,26 @@ import org.mozilla.javascript.JavaScriptException;
 public class Persona  implements XMLRepresentable, Serializable{
     private static final AtomicInteger id = new AtomicInteger();
 
-    private String nick;
-    private String password;
+    private String NIA;
+    private String nombre;
     private Date fechaNacimiento;
-    private String perfil;
+    private String centroUltimosEstudiosAnteriores;
    
-    private final int EDAD_MINIMA  = 14;
-    private final int LONGITUD_MINIMA_NICK = 3;
+    private final int EDAD_MINIMA  = 18;
+    private final int LONGITUD_MINIMA_NICK = 6;
 
     
 
-    public Persona(String nick, String password, Date fechaNacimiento, int perfil) {
+    public Persona(String NIA, String nombre, Date fechaNacimiento, int centroUltimosEstudiosAnteriores) {
         try {
-            usuarioValido(nick,password,fechaNacimiento,perfil);
-            this.nick = nick;
-            this.password = password;
+            usuarioValido(NIA,nombre,fechaNacimiento,centroUltimosEstudiosAnteriores);
+            this.NIA = NIA;
+            this.nombre = nombre;
             this.fechaNacimiento = fechaNacimiento;
-            this.perfil = perfil == 1?"Cliente":"Propietario";
+            this.centroUltimosEstudiosAnteriores = centroUltimosEstudiosAnteriores == 1?"Cliente":"Propietario";
             Persona.id.addAndGet(1);
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("Parametros de usuario invalido" + e.toString());
+            throw new IllegalArgumentException("Datos de persona invalidos" + e.toString());
         }
     }
     
@@ -59,13 +59,13 @@ public class Persona  implements XMLRepresentable, Serializable{
             StringReader reader = new StringReader(stringXML);
             Persona usuario = (Persona) unmarshaller.unmarshal(reader);
 
-            this.nick = usuario.getNick();
-            this.password = usuario.getPassword();
+            this.NIA = usuario.getNIA();
+            this.nombre = usuario.getNombre();
             this.fechaNacimiento = usuario.getFechaNacimiento();
-            this.perfil = usuario.getPerfil();
+            this.centroUltimosEstudiosAnteriores = usuario.getCentroUltimosEstudiosAnteriores();
             Persona.id.addAndGet(1);
         } catch(IllegalArgumentException e) {
-            throw new IllegalArgumentException("Parametros de usuario invalido" + e.toString());
+            throw new IllegalArgumentException("Datos de persona invalidos" + e.toString());
         }
     }
     
@@ -75,8 +75,8 @@ public class Persona  implements XMLRepresentable, Serializable{
         return id;
     }
     
-    public String getNick() {
-        return nick;
+    public String getNIA() {
+        return NIA;
     }
 
     public Date getFechaNacimiento() {
@@ -87,25 +87,25 @@ public class Persona  implements XMLRepresentable, Serializable{
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public void setNick(String nick) {
-        this.nick = nick;
+    public void setNIA(String NIA) {
+        this.NIA = NIA;
     }
 
-    public String getPassword() {
-        return password;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
     
     
-    public String getPerfil() {
-        return perfil;
+    public String getCentroUltimosEstudiosAnteriores() {
+        return centroUltimosEstudiosAnteriores;
     }
 
-    public void setPerfil(String perfil) {
-        this.perfil = perfil;
+    public void setCentroUltimosEstudiosAnteriores(String centroUltimosEstudiosAnteriores) {
+        this.centroUltimosEstudiosAnteriores = centroUltimosEstudiosAnteriores;
     }
     /*METODOS*/
     
@@ -152,18 +152,18 @@ public class Persona  implements XMLRepresentable, Serializable{
     /**
      * Desc: Obtienes unos datos de usuario y comprueba si son validos para registrar
      * Comprueba que el nick, la edad y el tipo de usuario es valido
-     * @param nick
-     * @param password
+     * @param NIA
+     * @param nombre
      * @param fechaNacimiento
      * @param perfil
      */
-    public void usuarioValido(String nick, String password, Date fechaNacimiento, int perfil) {
-        if(!longitudNickValida(nick))
-            throw new IllegalArgumentException("Nick demasiado corto");
+    public void usuarioValido(String NIA, String nombre, Date fechaNacimiento, int perfil) {
+        if(!longitudNickValida(NIA))
+            throw new IllegalArgumentException("NIA demasiado corto");
         if(!edadValida(fechaNacimiento))
-            throw new IllegalArgumentException("Edad minima 14");
+            throw new IllegalArgumentException("Edad minima 18");
         if(!perfilValido(perfil))
-            throw new IllegalArgumentException("El indice de perfil debe ser 1(Cliente) o 2(Propietario)");  
+            throw new IllegalArgumentException("El indice de perfil debe ser 1(Alumno) o 2(Profesor)");  
     }
         
     @Override
@@ -175,7 +175,7 @@ public class Persona  implements XMLRepresentable, Serializable{
      * return @param String que contiene la informacion publica de usuario
      */
     public String toString() {
-        return "ID:" + getId() + "\nNick: " + getNick() + "\nFecha nacimiento: " + getFechaNacimiento().toString() +"\n";
+        return "ID:" + getId() + "\nNIA: " + getNIA() + "\nFecha nacimiento: " + getFechaNacimiento().toString() +"\n";
     }
 
     @Override

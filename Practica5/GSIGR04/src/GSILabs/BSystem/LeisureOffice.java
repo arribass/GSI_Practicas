@@ -159,7 +159,7 @@ public interface LeisureOffice {
      * @param d Direccion del local.
      * @return El local almacenado en el sistema, o null si no existe.
      */
-    public Curso obtenerLocal(Nombre d);
+    public Curso obtenerLocal(EscuelaPertenece d);
     
     /**
      * Asocia un local a un propietario, en caso de que ambos existan y no se haya llegado

@@ -19,48 +19,41 @@ import javax.xml.bind.Unmarshaller;
  *
  * @author Arribas
  */
-public class Nombre implements XMLRepresentable, Serializable {
+public class EscuelaPertenece implements XMLRepresentable, Serializable {
     
-    private String localidad;
-    private String provincia;
-    private String calle;
-    private String numero;
+    private String nombre;
+    private String nombreDirector;
+    private String nombreEdificioSede;
 
-    public Nombre(String Localidad, String Provincia, String Calle, String Numero) {
-        this.localidad = Localidad;
-        this.provincia = Provincia;
-        this.calle = Calle;
-        this.numero = Numero;
+    public EscuelaPertenece(String nombre, String nombreDirector, String nombreEdificioSede){
+        this.nombre = nombre;
+        this.nombreDirector = nombreDirector;
+        this.nombreEdificioSede = nombreEdificioSede;
     }
     
-    public Nombre(String stringXML) throws JAXBException{
-        JAXBContext jaxbContext = JAXBContext.newInstance(Nombre.class);
+    public EscuelaPertenece(String stringXML) throws JAXBException{
+        JAXBContext jaxbContext = JAXBContext.newInstance(EscuelaPertenece.class);
         Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 
         StringReader reader = new StringReader(stringXML);
-        Nombre direccion = (Nombre) unmarshaller.unmarshal(reader);
-        this.localidad = direccion.getLocalidad();
-        this.provincia = direccion.getProvincia();
-        this.calle = direccion.getCalle();
-        this.numero = direccion.getNumero();        
+        EscuelaPertenece direccion = (EscuelaPertenece) unmarshaller.unmarshal(reader);
+        this.nombre = direccion.getNombre();
+        this.nombreDirector = direccion.getNombreDirector();
+        this.nombreEdificioSede = direccion.getNombreEdificioSede(); 
     }
 
-    public String getLocalidad() {
-        return localidad;
+    public String getNombre() {
+        return nombre;
     }
 
-    public String getProvincia() {
-        return provincia;
+    public String getNombreDirector() {
+        return nombreDirector;
     }
 
-    public String getCalle() {
-        return calle;
+    public String getNombreEdificioSede() {
+        return nombreEdificioSede;
     }
 
-    public String getNumero() {
-        return numero;
-    }
-    
     
     //Sobre escritura de metodos equals y toString.
     
@@ -75,17 +68,14 @@ public class Nombre implements XMLRepresentable, Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Nombre other = (Nombre) obj;
-        if (!Objects.equals(this.localidad, other.localidad)) {
+        final EscuelaPertenece other = (EscuelaPertenece) obj;
+        if (!Objects.equals(this.nombre, other.nombre)) {
             return false;
         }
-        if (!Objects.equals(this.provincia, other.provincia)) {
+        if (!Objects.equals(this.nombreDirector, other.nombreDirector)) {
             return false;
         }
-        if (!Objects.equals(this.calle, other.calle)) {
-            return false;
-        }
-        if (!Objects.equals(this.numero, other.numero)) {
+        if (!Objects.equals(this.nombreEdificioSede, other.nombreEdificioSede)) {
             return false;
         }
         return true;

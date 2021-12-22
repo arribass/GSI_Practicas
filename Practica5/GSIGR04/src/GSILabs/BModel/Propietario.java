@@ -17,8 +17,8 @@ import javax.xml.bind.JAXBException;
  */
 public class Propietario extends Persona implements XMLRepresentable{
     
-    public Propietario(String nick, String password, Date fechaNacimiento, int perfil) {
-        super(nick, password, fechaNacimiento, perfil);
+    public Propietario(String NIA, String nombre, Date fechaNacimiento, int perfil) {
+        super(NIA, nombre, fechaNacimiento, perfil);
     }
     
     public Propietario(String stringXML) throws JAXBException{

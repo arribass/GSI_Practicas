@@ -19,12 +19,12 @@ import javax.xml.bind.Unmarshaller;
  */
 public class Master extends Curso implements XMLRepresentable{
     
-    private String Duenos[] = new String[3];
+    private String docentes[] = new String[3];
     
    
     
-    public Master(String nombre, Nombre direccion, String descripcion) {
-        super(nombre, direccion, descripcion);
+    public Master(String nombre, EscuelaPertenece escuelaPertenece, String contenidos) {
+        super(nombre, escuelaPertenece, contenidos);
     }
     
     
@@ -36,15 +36,15 @@ public class Master extends Curso implements XMLRepresentable{
     
     
     
-    private void anadirDueno(String dueno){
-        if(this.Duenos[0] == null){
-            this.Duenos[0] = dueno;
-        } else if(this.Duenos[1] == null){
-            this.Duenos[1] = dueno;
-        } else if(this.Duenos[2] == null){
-            this.Duenos[2] = dueno;
-        } else if(this.Duenos[2] != null){
-            System.out.println("Este bar ya tiene 3 dueños.");
+    private void anadirDocente(String dueno){
+        if(this.docentes[0] == null){
+            this.docentes[0] = dueno;
+        } else if(this.docentes[1] == null){
+            this.docentes[1] = dueno;
+        } else if(this.docentes[2] == null){
+            this.docentes[2] = dueno;        
+        } else if(this.docentes[2] != null){
+            System.out.println("Este bar ya tiene 3 docentes, no se pueden añadir más.");
         }
     }
 

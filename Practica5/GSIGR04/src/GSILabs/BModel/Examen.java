@@ -19,18 +19,18 @@ import javax.xml.bind.Unmarshaller;
  * @author Arribas
  */
 public class Examen  implements XMLRepresentable, Serializable{
-    private int valoracion;
-    private String comentario;
+    private int puntuacionMaxima;
+    private String preguntas;
     private Date fecha;
-    private Curso local; //añadir de alguna manera a que local pertenece
-    private Alumno cliente;
+    private Curso curso; 
+    private Alumno alumno;
 
-    public Examen(int valoracion, String comentario, Date fecha, Curso local, Alumno cliente){
-        this.valoracion = valoracion;
-        this.comentario = comentario;
+    public Examen(int puntuacionMax, String preguntas, Date fecha, Curso curso, Alumno alumno){
+        this.puntuacionMaxima = puntuacionMax;
+        this.preguntas = preguntas;
         this.fecha = fecha;
-        this.local = local;
-        this.cliente = cliente;
+        this.curso = curso;
+        this.alumno = alumno;
     }
 
     public Examen(String stringXML) throws JAXBException{
@@ -40,10 +40,10 @@ public class Examen  implements XMLRepresentable, Serializable{
         StringReader reader = new StringReader(stringXML);
         Examen review = (Examen) unmarshaller.unmarshal(reader);
         
-        this.valoracion = review.getValoracion();
-        this.comentario = review.getComentario();
+        this.puntuacionMaxima = review.getPuntuacionMaxima();
+        this.preguntas = review.getPreguntas();
         this.fecha = review.getFecha();
-        this.local = review.getLocal();
+        this.curso = review.getCurso();
 
         
     }
@@ -52,20 +52,20 @@ public class Examen  implements XMLRepresentable, Serializable{
     return this.fecha;
     }
 
-    public Curso getLocal() {
-        return local;
+    public Curso getCurso() {
+        return curso;
     }
 
-    public String getComentario() {
-        return comentario;
+    public String getPreguntas() {
+        return preguntas;
     }
 
-    public int getValoracion() {
-        return valoracion;
+    public int getPuntuacionMaxima() {
+        return puntuacionMaxima;
     }
 
-    public Alumno getCliente() {
-        return cliente;
+    public Alumno getAlumno() {
+        return alumno;
     }
 
     @Override

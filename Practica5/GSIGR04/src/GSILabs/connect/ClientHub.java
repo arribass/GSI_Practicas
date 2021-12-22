@@ -6,7 +6,7 @@
 package GSILabs.connect;
 
 import GSILabs.BModel.Alumno;
-import GSILabs.BModel.Nombre;
+import GSILabs.BModel.EscuelaPertenece;
 import GSILabs.BModel.Curso;
 import GSILabs.BModel.Examen;
 import java.io.BufferedReader;
@@ -52,7 +52,7 @@ public class ClientHub {
             //Instanciar un objeto de la clase del servidor
             ClientGateway cg = (ClientGateway) registro.lookup(tag);
             //Uso del servicio
-            Nombre d = new Nombre("Haro", "La Rioja", "Avenida mayor", "3");
+            EscuelaPertenece d = new EscuelaPertenece("Haro", "La Rioja", "Avenida mayor", "3");
             Curso l = new Curso("Casa Paco", d, "Bar elegante en el centro.");
             Date fecha = new Date();
             Alumno c = new Alumno("davidgnomo", "12345", new GregorianCalendar(1996, Calendar.MARCH, 14).getTime(), 1);

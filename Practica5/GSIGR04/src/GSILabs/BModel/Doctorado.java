@@ -20,8 +20,8 @@ import javax.xml.bind.Unmarshaller;
  */
 public class Doctorado extends Curso implements Matriculable, XMLRepresentable{
     
-    public Doctorado(String nombre, Nombre direccion, String descripcion) {
-        super(nombre, direccion, descripcion);
+    public Doctorado(String nombre, EscuelaPertenece escuelaPertenece, String contenidos) {
+        super(nombre, escuelaPertenece, contenidos);
     }
     
     

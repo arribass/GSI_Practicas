@@ -8,7 +8,7 @@ package GSILabs.BTesting;
 import GSILabs.BModel.Master;
 import GSILabs.BModel.Examen;
 import GSILabs.BModel.Matricula;
-import GSILabs.BModel.Nombre;
+import GSILabs.BModel.EscuelaPertenece;
 import GSILabs.BModel.Curso;
 import GSILabs.BModel.Nota;
 import GSILabs.BModel.Alumno;
@@ -105,7 +105,7 @@ public class P01Tester {
                             System.out.println("Usuario registrado correctamente!");
                             System.out.println(u.toString());
                         }else{
-                            System.out.println("El usuario " + u.getNick()+ " ya existe!");
+                            System.out.println("El usuario " + u.getNIA()+ " ya existe!");
                         }
                     } catch (IllegalArgumentException | ParseException ex) {
                         System.out.println(ex.toString());
@@ -141,7 +141,7 @@ public class P01Tester {
                     System.out.println("Introduce el numero: "); 
                     String numero = sc.nextLine();
                     //Genero la dirección.
-                    Nombre d = new Nombre(localidad,provincia,calle,numero);
+                    EscuelaPertenece d = new EscuelaPertenece(localidad,provincia,calle,numero);
 
                     //Pido la descripcion del local al usuario.
                     System.out.println("Introduce la descripción del local: "); 
@@ -172,7 +172,7 @@ public class P01Tester {
                     System.out.println("Introduce el numero: "); 
                     String num = sc.nextLine();
                     //Genero la dirección.
-                    Nombre dir = new Nombre(loc,prov,cal,num);
+                    EscuelaPertenece dir = new EscuelaPertenece(loc,prov,cal,num);
                     Curso local = bs.obtenerLocal(dir);
                     Examen r = new Examen(valint,comentario,fecha,local, c);
                     bs.nuevaReview(r);
@@ -189,7 +189,7 @@ public class P01Tester {
                     System.out.println("Introduce el numero: "); 
                     String numeroB = sc.nextLine();
                     //Genero la dirección.
-                    Nombre dB = new Nombre(localidadB,provinciaB,calleB,numeroB);
+                    EscuelaPertenece dB = new EscuelaPertenece(localidadB,provinciaB,calleB,numeroB);
                     //Cojo el local de esa dirección
                     Curso localEliminar = bs.obtenerLocal(dB);
                     //elimino el local
@@ -213,7 +213,7 @@ public class P01Tester {
                     System.out.println("Introduce el numero: "); 
                     String numeroc = sc.nextLine();
                     //Genero la dirección.
-                    Nombre dc = new Nombre(localidadc,provinciac,callec,numeroc);
+                    EscuelaPertenece dc = new EscuelaPertenece(localidadc,provinciac,callec,numeroc);
                     Curso local1 = bs.obtenerLocal(dc);
                     
                     if(local1 != null){
@@ -233,12 +233,12 @@ public class P01Tester {
                     System.out.println("Introduce el numero: "); 
                     numeroc = sc.nextLine();
                     //Genero la dirección.
-                    Nombre dd = new Nombre(localidadc,provinciac,callec,numeroc);
+                    EscuelaPertenece dd = new EscuelaPertenece(localidadc,provinciac,callec,numeroc);
                     Curso localviejo = bs.obtenerLocal(dd);
                     
                     //Variables auxiliares.
                     String nuevaDescripcion = null;
-                    Nombre nuevaDireccion = null;
+                    EscuelaPertenece nuevaDireccion = null;
                     String nuevoNombre = null;
                     
                     int eleccion = 10;
@@ -258,7 +258,7 @@ public class P01Tester {
                             nuevaDescripcion = sc2.nextLine();
                             try{
                                 nuevoNombre = localviejo.getNombre();
-                                nuevaDireccion = localviejo.getDireccion();
+                                nuevaDireccion = localviejo.getEscuelaPertenece();
                             }catch(NullPointerException e){
                               System.out.println("");  
                             }                            
@@ -267,8 +267,8 @@ public class P01Tester {
                             System.out.println("Introduce el nombre del local: "); 
                             nuevoNombre = sc2.nextLine();
                             try{
-                                nuevaDescripcion = localviejo.getDescripcion();
-                                nuevaDireccion = localviejo.getDireccion();
+                                nuevaDescripcion = localviejo.getContenidos();
+                                nuevaDireccion = localviejo.getEscuelaPertenece();
                             }catch(NullPointerException e){
                               System.out.println("");  
                             }
@@ -282,18 +282,18 @@ public class P01Tester {
                             callec = sc2.nextLine();       
                             System.out.println("Introduce el numero: "); 
                             numeroc = sc2.nextLine();
-                            nuevaDireccion = new Nombre(localidadc,provinciac,callec,numeroc);
+                            nuevaDireccion = new EscuelaPertenece(localidadc,provinciac,callec,numeroc);
                             try{
-                               nuevaDescripcion = localviejo.getDescripcion();
+                               nuevaDescripcion = localviejo.getContenidos();
                                 nuevoNombre = localviejo.getNombre(); 
                             }catch(NullPointerException e){
                               System.out.println("");  
                             }                           
                             break;
                         default:
-                            nuevaDescripcion = localviejo.getDescripcion();
+                            nuevaDescripcion = localviejo.getContenidos();
                             nuevoNombre = localviejo.getNombre();
-                            nuevaDireccion = localviejo.getDireccion();
+                            nuevaDireccion = localviejo.getEscuelaPertenece();
                             System.out.println("Seleccion no válida\n");
                             break;
                     }   
@@ -348,7 +348,7 @@ public class P01Tester {
                     System.out.println("Introduce el numero: \n"); 
                     String numero1 = sc.nextLine();
                     //Genero la dirección.
-                    Nombre d1 = new Nombre(localidad1,provincia1,calle1,numero1);
+                    EscuelaPertenece d1 = new EscuelaPertenece(localidad1,provincia1,calle1,numero1);
 
                     //Pido la descripcion del local al usuario.
                     System.out.println("Introduce la descripción del local: \n"); 
@@ -396,7 +396,7 @@ public class P01Tester {
                     System.out.println("Introduce el numero: \n"); 
                     String numero13 = sc.nextLine();
                     //Genero la dirección.
-                    Nombre d13 = new Nombre(localidad13,provincia13,calle13,numero13);
+                    EscuelaPertenece d13 = new EscuelaPertenece(localidad13,provincia13,calle13,numero13);
 
                     //Pido la descripcion del local al usuario.
                     System.out.println("Introduce la descripción del local: \n"); 
@@ -461,7 +461,7 @@ public class P01Tester {
 
                 case 15:
                     //Creamos un local en la direccion dr
-                    Nombre dr = new Nombre("Pamplona", "Navarra", "Tajonar", "4");
+                    EscuelaPertenece dr = new EscuelaPertenece("Pamplona", "Navarra", "Tajonar", "4");
                     Curso locaux = new Curso("BarNistelroy", dr, "bonito");
                     
                     bs.nuevoLocal(locaux);
@@ -548,7 +548,7 @@ public class P01Tester {
                     
                 case 17:
                     //inserto un local en la direccion dr
-                    dr = new Nombre("Pamplona", "Navarra", "Tajonar", "4");
+                    dr = new EscuelaPertenece("Pamplona", "Navarra", "Tajonar", "4");
                     locaux = new Curso("BarNistelroy", dr, "bonito");                    
                     bs.nuevoLocal(locaux);
                     //intento insertar un nuevo bar en esa misma direccion y me dice que no se puede.

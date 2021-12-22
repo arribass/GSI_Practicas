@@ -18,8 +18,8 @@ import javax.xml.bind.JAXBException;
  */
 public class Alumno extends Persona implements XMLRepresentable, Serializable{
 
-    public Alumno(String nick, String password, Date fechaNacimiento, int perfil) {
-        super(nick, password, fechaNacimiento, perfil);
+    public Alumno(String NIA, String nombre, Date fechaNacimiento, int centroUltimosEstudiosAnteriores) {
+        super(NIA, nombre, fechaNacimiento, centroUltimosEstudiosAnteriores);
     }
     
     public Alumno(String stringXML) throws JAXBException{

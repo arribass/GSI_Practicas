@@ -25,20 +25,20 @@ public class Curso implements XMLRepresentable, Serializable{
     //private static final Set<String> nombres = new HashSet<String>();
 
     private String nombre;
-    private Nombre direccion;
-    private String descripcion;
-    private Persona[] propietarios;
+    private EscuelaPertenece escuelaPertenece;
+    private String contenidos;
+    private Persona[] docentes;
     
-    private final int maxDescripcion = 300;
+    private final int maxLongitudContenidos = 600;
 
-    public Curso(String nombre, Nombre direccion, String descripcion) {
+    public Curso(String nombre, EscuelaPertenece escuelaPertenece, String contenidos) {
         this.nombre = nombre;
-        this.direccion = direccion;
-        if (descripcion.length() > maxDescripcion){
-            descripcion = descripcion.substring(0, maxDescripcion);
+        this.escuelaPertenece = escuelaPertenece;
+        if (contenidos.length() > maxLongitudContenidos){
+            contenidos = contenidos.substring(0, maxLongitudContenidos);
         }
-        this.descripcion = descripcion;
-        this.propietarios = new Persona[3];
+        this.contenidos = contenidos;
+        this.docentes = new Persona[3]; //3 profesores
     }
     
     public Curso(String stringXML) throws JAXBException{
@@ -48,46 +48,46 @@ public class Curso implements XMLRepresentable, Serializable{
         StringReader reader = new StringReader(stringXML);
         Curso local = (Curso) unmarshaller.unmarshal(reader);
         this.nombre = local.getNombre();
-        this.direccion = local.getDireccion();
-        this.descripcion = local.getDescripcion();
-        this.propietarios = local.getPropietarios();
+        this.escuelaPertenece = local.getEscuelaPertenece();
+        this.contenidos = local.getContenidos();
+        this.docentes = local.getDocentes();
     }
     
-    public Nombre getDireccion(){
-        return this.direccion;
+    public EscuelaPertenece getEscuelaPertenece(){
+        return this.escuelaPertenece;
     }
 
     public String getNombre() {
         return nombre;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getContenidos() {
+        return contenidos;
     }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    public void setDireccion(Nombre direccion) {
-        this.direccion = direccion;
+    public void setEscuelaPertenece(EscuelaPertenece escuelaPertenece) {
+        this.escuelaPertenece = escuelaPertenece;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setContenidos(String contenidos) {
+        this.contenidos = contenidos;
     }
 
     public boolean anadirPropietario(Persona u){
-        //si ya existen los 3 propietarios indico que no se pueden añadir más y salgo
-        if(propietarios[0] != null && propietarios[1] != null && propietarios[2] != null){
-            System.out.println("Máximo de propietarios (3) ya alcanzado");
+        //si ya existen los 22 participantes indico que no se pueden añadir más y salgo
+        if(docentes[0] != null && docentes[1] != null && docentes[2] != null){
+            System.out.println("Máximo de decoentes(3) ya alcanzado");
             return false;
         }else{
-            //En caso de que quede algún hueco de propietario libre lo busco recorriendo
-            // el array de 3 posiciones y en el primer hueco que encuentro meto al nuevo propietario.
-          for(int i=0;i<propietarios.length;i++){
-            if(propietarios[i] == null){
-                propietarios[i] = u;
+            //En caso de que quede algún hueco de docente libre lo busco recorriendo
+            // el array de 3 posiciones y en el primer hueco que encuentro meto al nuevo participante.
+          for(int i=0;i<docentes.length;i++){
+            if(docentes[i] == null){
+                docentes[i] = u;
                 return true;
             }
             }
@@ -95,17 +95,17 @@ public class Curso implements XMLRepresentable, Serializable{
         }
     }     
 
-    public Persona[] getPropietarios() {
-        return propietarios;
+    public Persona[] getDocentes() {
+        return docentes;
     }
 
-    public void setPropietarios(Persona[] propietarios) {
-        this.propietarios = propietarios;
+    public void setDocentes(Persona[] docentes) {
+        this.docentes = docentes;
     }
 
     @Override
     public String toString() {
-        return "- nombre= " + nombre + "\n- direccion= " + direccion + "\n- descripcion= " + descripcion;
+        return "- Nombre-> " + nombre + "\n- escuela-> " + escuelaPertenece + "\n- contenidos-> " + contenidos;
         
     }
 

@@ -52,7 +52,7 @@ public class UniSystem implements LeisureOffice, ODSPersistente, XMLRepresentabl
             System.out.println("El usuario ya existe.\n");
             return false;
         }else{
-            if(!existeNick(u.getNick())){
+            if(!existeNick(u.getNIA())){
                 Usuarios.add(u);
                 return true;
             }else{
@@ -105,7 +105,7 @@ public class UniSystem implements LeisureOffice, ODSPersistente, XMLRepresentabl
      */
     public boolean existeNick(String nick) { //OK
         //Busca en la lista de usuarios si el nick de entrada existe o no
-        return Usuarios.stream().anyMatch(item -> nick.equals(item.getNick()));
+        return Usuarios.stream().anyMatch(item -> nick.equals(item.getNIA()));
     }
 
     @Override
@@ -117,7 +117,7 @@ public class UniSystem implements LeisureOffice, ODSPersistente, XMLRepresentabl
         //Recorre la lista comparando, si llega al final sin encontrar nada devuelve null
         //Boolean usuarioEncontrado = false;
         for (int i = 0; i<Usuarios.size(); i++){
-            if(Usuarios.get(i).getNick() == nick){
+            if(Usuarios.get(i).getNIA() == nick){
                 return Usuarios.get(i);
             }
         }
@@ -142,7 +142,7 @@ public class UniSystem implements LeisureOffice, ODSPersistente, XMLRepresentabl
         //agrega una review a la lista, antes mira para cada elemento de la lista si coinciden la fecha y el local con el elemento de la entrada, y en funcion de si se da ese caso o no agrega la review
         Boolean flag = true;
         for (int i=0;i<Reviews.size();i++) {
-            if(Reviews.get(i).getLocal() == r.getLocal() && Reviews.get(i).getFecha() == r.getFecha()){
+            if(Reviews.get(i).getCurso() == r.getCurso() && Reviews.get(i).getFecha() == r.getFecha()){
                 flag = false;
             }
         }
@@ -185,7 +185,7 @@ public class UniSystem implements LeisureOffice, ODSPersistente, XMLRepresentabl
         // Primero busca si un usuario existe, si existe busca un local y una fecha en el array de reviews, si ambas existen confirma la busqueda
         Boolean aaa = Usuarios.stream().anyMatch(item -> u.equals(item));
         if (aaa == true){
-            Boolean bbb = Reviews.stream().anyMatch(item -> l.equals(item.getLocal()));
+            Boolean bbb = Reviews.stream().anyMatch(item -> l.equals(item.getCurso()));
             Boolean ccc = Reviews.stream().anyMatch(item -> ld.equals(item.getFecha()));
             if (bbb == ccc == true){
                 System.out.println("El usuario ha escrito una review de ese local en esa fecha\n");
@@ -220,7 +220,7 @@ public class UniSystem implements LeisureOffice, ODSPersistente, XMLRepresentabl
      */
     public boolean tieneContestacion(Examen r) {
         //Busca en la lista de contestaciones la review de entrada, y devuelve si existe o no una contestación con dicha review como atributo
-        return Contestaciones.stream().anyMatch(item -> r.equals(item.getReview()));
+        return Contestaciones.stream().anyMatch(item -> r.equals(item.getExamen()));
     }
 
     @Override
@@ -230,7 +230,7 @@ public class UniSystem implements LeisureOffice, ODSPersistente, XMLRepresentabl
     public Nota obtenerContestacion(Examen r) {
         //Recorre el array de contestaciones buscando la review de entrada, y si la encuentra devuelve la contestacion
         for (int i=0;i<Contestaciones.size();i++) {
-            if(Contestaciones.get(i).getReview().equals(r)){
+            if(Contestaciones.get(i).getExamen().equals(r)){
                 return Contestaciones.get(i);
             }
         }
@@ -282,7 +282,7 @@ public class UniSystem implements LeisureOffice, ODSPersistente, XMLRepresentabl
        // no podría añadir otro más.
         boolean existeDireccion = false;
         for (int i=0;i<Locales.size();i++) {      
-            if(Locales.get(i).getDireccion().equals(l.getDireccion())){
+            if(Locales.get(i).getEscuelaPertenece().equals(l.getEscuelaPertenece())){
                 existeDireccion = true;
                 break;
             }
@@ -294,17 +294,17 @@ public class UniSystem implements LeisureOffice, ODSPersistente, XMLRepresentabl
         if(!existeDireccion){
             switch (tipo) {
                 case 1:
-                    Master b = new Master(l.getNombre(),l.getDireccion(),l.getDescripcion());
+                    Master b = new Master(l.getNombre(),l.getEscuelaPertenece(),l.getContenidos());
                     Locales.add(b);
                     System.out.println("******Bar añadido*******");
                     break;
                 case 2:
-                    Grado r = new Grado(l.getNombre(),l.getDireccion(),l.getDescripcion());
+                    Grado r = new Grado(l.getNombre(),l.getEscuelaPertenece(),l.getContenidos());
                     Locales.add(r);
                     System.out.println("******Restaurante añadido*******");
                     break;
                 case 3:
-                    Doctorado p = new Doctorado(l.getNombre(),l.getDireccion(),l.getDescripcion());
+                    Doctorado p = new Doctorado(l.getNombre(),l.getEscuelaPertenece(),l.getContenidos());
                     Locales.add(p);
                     System.out.println("******Pub añadido*******");
                     break;
@@ -341,13 +341,13 @@ public class UniSystem implements LeisureOffice, ODSPersistente, XMLRepresentabl
     /**
      * {@inheritDoc}
      */
-    public Curso obtenerLocal(Nombre d) {//OK
+    public Curso obtenerLocal(EscuelaPertenece d) {//OK
         //Recibo como parametro una dirección (sabemos que existe un único local en una misma dirección)
         //Recorro el arraylist que almacena los locales y cuando encuentro un local en esa dirección lo devuelvo.
         //En caso de no haber ninguno recogo la excepcion y digo al usuario que no hay ningun local.
         try{
             Curso localFound = Locales.stream()
-                                .filter(item -> item.getDireccion().equals(d))
+                                .filter(item -> item.getEscuelaPertenece().equals(d))
                                 .collect(Collectors.toList()).get(0);
             return localFound;
         }catch(IndexOutOfBoundsException e){
@@ -364,7 +364,7 @@ public class UniSystem implements LeisureOffice, ODSPersistente, XMLRepresentabl
     public boolean asociarLocal(Curso l, Propietario p) {
         //Busco en el array de locales el local de entrada y agrego el propietario; el método se encargará de decidir si se puede agregar el propietario o no
         for (int i=0;i<Locales.size();i++) {
-            if(Locales.get(i).getDireccion().equals(l.getDireccion())){
+            if(Locales.get(i).getEscuelaPertenece().equals(l.getEscuelaPertenece())){
                 return Locales.get(i).anadirPropietario(p);
             }
         }
@@ -383,7 +383,7 @@ public class UniSystem implements LeisureOffice, ODSPersistente, XMLRepresentabl
         //en caso contrario sabemos que podemos indicar que el propietario de entrada no era un propietario del local indicado
         
         if(Locales.stream().anyMatch(item -> l.equals(item))){
-            Persona[] propietarios = l.getPropietarios();
+            Persona[] propietarios = l.getDocentes();
             
             for (int i = 0; i<propietarios.length; i++){
                 if(propietarios[i] == p){
@@ -407,13 +407,13 @@ public class UniSystem implements LeisureOffice, ODSPersistente, XMLRepresentabl
      */
     public boolean actualizarLocal(Curso viejoL, Curso nuevoL) { //OK
         try{
-        Locales.stream().filter(item -> item.getDireccion().equals(viejoL.getDireccion()))
-                        .collect(Collectors.toList()).get(0).setDescripcion(nuevoL.getDescripcion());
+        Locales.stream().filter(item -> item.getEscuelaPertenece().equals(viejoL.getEscuelaPertenece()))
+                        .collect(Collectors.toList()).get(0).setContenidos(nuevoL.getContenidos());
         
-        Locales.stream().filter(item -> item.getDireccion().equals(viejoL.getDireccion()))
-                        .collect(Collectors.toList()).get(0).setDireccion(nuevoL.getDireccion());
+        Locales.stream().filter(item -> item.getEscuelaPertenece().equals(viejoL.getEscuelaPertenece()))
+                        .collect(Collectors.toList()).get(0).setEscuelaPertenece(nuevoL.getEscuelaPertenece());
         
-        Locales.stream().filter(item -> item.getDireccion().equals(viejoL.getDireccion()))
+        Locales.stream().filter(item -> item.getEscuelaPertenece().equals(viejoL.getEscuelaPertenece()))
                         .collect(Collectors.toList()).get(0).setNombre(nuevoL.getNombre());
         
         System.out.print("Local actualizado\n");
@@ -432,7 +432,7 @@ public class UniSystem implements LeisureOffice, ODSPersistente, XMLRepresentabl
         Examen[] rev = null;
         //Recorro el array de reviews e incluyo en la lista de items las reviews que tengan ese local
         for (int i=0;i<Reviews.size();i++) {
-            if(Reviews.get(i).getLocal().equals(l)){
+            if(Reviews.get(i).getCurso().equals(l)){
                 rev[rev.length] = Reviews.get(i);
                 //rev.add(Reviews.get(i));
                 //return Reviews.get(i);
@@ -503,7 +503,7 @@ public class UniSystem implements LeisureOffice, ODSPersistente, XMLRepresentabl
         Matricula[] res = null;
         //Recorro el array de reservas e incluyo en la lista de items las reservas que tengan ese cliente
         for (int i=0;i<Reservas.size();i++) {
-            if(Reservas.get(i).getCliente().equals(c)){
+            if(Reservas.get(i).getAlumno().equals(c)){
                 res[res.length] = Reservas.get(i);
             }
         }
@@ -566,7 +566,7 @@ public class UniSystem implements LeisureOffice, ODSPersistente, XMLRepresentabl
         //Recorro el arraylist de los locales y los que están en la provincia y ciudad indicadas los añado al array
         int contador = 0;
         for (int i=0;i<Locales.size();i++) {
-            if(Locales.get(i).getDireccion().getLocalidad().equals(ciudad) && Locales.get(i).getDireccion().getProvincia().equals(provincia)){
+            if(Locales.get(i).getEscuelaPertenece().getNombre().equals(ciudad) && Locales.get(i).getEscuelaPertenece().getNombreDirector().equals(provincia)){
                 LocalesDE[contador] = Locales.get(i);
                 contador++;
             }            
@@ -584,12 +584,12 @@ public class UniSystem implements LeisureOffice, ODSPersistente, XMLRepresentabl
      */
     public Master[] listarBares(String ciudad, String provincia) { //OK
         Curso LocalesDE[] = new Curso[Locales.size()];
-        Nombre d = new Nombre("haro","larioja","alemania","1");
+        EscuelaPertenece d = new EscuelaPertenece("haro","larioja","alemania","1");
         Master bar = new Master("aux",d,"bonito");
         //Recorro el arraylist de los locales y los que están en la provincia y ciudad indicadas los añado al array
         int contador = 0;
         for (int i=0;i<Locales.size();i++) {
-            if(Locales.get(i).getDireccion().getLocalidad().equals(ciudad) && Locales.get(i).getDireccion().getProvincia().equals(provincia) && Locales.get(i).getClass().equals(bar.getClass())){
+            if(Locales.get(i).getEscuelaPertenece().getNombre().equals(ciudad) && Locales.get(i).getEscuelaPertenece().getNombreDirector().equals(provincia) && Locales.get(i).getClass().equals(bar.getClass())){
                 LocalesDE[contador] = Locales.get(i);
                 contador++;
             }            
@@ -610,12 +610,12 @@ public class UniSystem implements LeisureOffice, ODSPersistente, XMLRepresentabl
      */
     public Grado[] listarRestaurantes(String ciudad, String provincia) {//OK
         Curso LocalesDE[] = new Curso[Locales.size()];
-        Nombre d = new Nombre("haro","larioja","alemania","1");
+        EscuelaPertenece d = new EscuelaPertenece("haro","larioja","alemania","1");
         Grado restaurante = new Grado("aux",d,"bonito");
         //Recorro el arraylist de los locales y los que están en la provincia y ciudad indicadas los añado al array
         int contador = 0;
         for (int i=0;i<Locales.size();i++) {
-            if(Locales.get(i).getDireccion().getLocalidad().equals(ciudad) && Locales.get(i).getDireccion().getProvincia().equals(provincia) && Locales.get(i).getClass().equals(restaurante.getClass())){
+            if(Locales.get(i).getEscuelaPertenece().getNombre().equals(ciudad) && Locales.get(i).getEscuelaPertenece().getNombreDirector().equals(provincia) && Locales.get(i).getClass().equals(restaurante.getClass())){
                 LocalesDE[contador] = Locales.get(i);
                 contador++;
             }            
@@ -633,12 +633,12 @@ public class UniSystem implements LeisureOffice, ODSPersistente, XMLRepresentabl
      */
     public Doctorado[] listarPubs(String ciudad, String provincia) {//OK
         Curso LocalesDE[] = new Curso[Locales.size()];
-        Nombre d = new Nombre("haro","larioja","alemania","1");
+        EscuelaPertenece d = new EscuelaPertenece("haro","larioja","alemania","1");
         Doctorado pub = new Doctorado("aux",d,"bonito");
         //Recorro el arraylist de los locales y los que están en la provincia y ciudad indicadas los añado al array
         int contador = 0;
         for (int i=0;i<Locales.size();i++) {
-            if(Locales.get(i).getDireccion().getLocalidad().equals(ciudad) && Locales.get(i).getDireccion().getProvincia().equals(provincia) && Locales.get(i).getClass().equals(pub.getClass())){
+            if(Locales.get(i).getEscuelaPertenece().getNombre().equals(ciudad) && Locales.get(i).getEscuelaPertenece().getNombreDirector().equals(provincia) && Locales.get(i).getClass().equals(pub.getClass())){
                 LocalesDE[contador] = Locales.get(i);
                 contador++;
             }            
@@ -661,9 +661,9 @@ public class UniSystem implements LeisureOffice, ODSPersistente, XMLRepresentabl
         
         int cont = 0;
         
-        if(Contestaciones.stream().anyMatch(item -> r.equals(item.getReview()))){
+        if(Contestaciones.stream().anyMatch(item -> r.equals(item.getExamen()))){
             for(int i=0; i<Contestaciones.size(); i++){
-                if (Contestaciones.get(i).getReview().equals(r)){
+                if (Contestaciones.get(i).getExamen().equals(r)){
                     Contestaciones.remove(Contestaciones.get(i));
                     cont ++;
                 }
@@ -684,7 +684,7 @@ public class UniSystem implements LeisureOffice, ODSPersistente, XMLRepresentabl
     public List <Curso> listarTodosBares() { //OK
         
         List<Curso> LocalesBares = new ArrayList<>();
-        Nombre d = new Nombre("haro","larioja","alemania","1");
+        EscuelaPertenece d = new EscuelaPertenece("haro","larioja","alemania","1");
         Master bar = new Master("aux",d,"bonito");
         //Recorro el arraylist de los locales y los que están en la provincia y ciudad indicadas los añado al array
         int contador = 0;
@@ -705,7 +705,7 @@ public class UniSystem implements LeisureOffice, ODSPersistente, XMLRepresentabl
     public List <Curso> listarTodosRestaurantes() { //OK
         
         List<Curso> LocalesRestaurantes = new ArrayList<>();
-        Nombre d = new Nombre("haro","larioja","alemania","1");
+        EscuelaPertenece d = new EscuelaPertenece("haro","larioja","alemania","1");
         Grado restaurante = new Grado("aux",d,"bonito");
         //Recorro el arraylist de los locales y los que están en la provincia y ciudad indicadas los añado al array
         int contador = 0;
@@ -726,7 +726,7 @@ public class UniSystem implements LeisureOffice, ODSPersistente, XMLRepresentabl
     public List <Curso> listarTodosPubs() { //OK
         
         List<Curso> LocalesPubs = new ArrayList<>();
-        Nombre d = new Nombre("haro","larioja","alemania","1");
+        EscuelaPertenece d = new EscuelaPertenece("haro","larioja","alemania","1");
         Doctorado pub = new Doctorado("aux",d,"bonito");
         //Recorro el arraylist de los locales y los que están en la provincia y ciudad indicadas los añado al array
         int contador = 0;
@@ -818,7 +818,7 @@ public class UniSystem implements LeisureOffice, ODSPersistente, XMLRepresentabl
     public boolean eliminaReviewsDeLocal(Local l) throws RemoteException {
         Boolean flag = false;
         for (int i=0;i<Reviews.size();i++) {
-            if(Reviews.get(i).getLocal() == l){
+            if(Reviews.get(i).getCurso() == l){
                 try {
                     Reviews.remove(i);
                     System.out.println("Review eliminada\n");
@@ -842,7 +842,7 @@ public class UniSystem implements LeisureOffice, ODSPersistente, XMLRepresentabl
     public int eliminaReviewsDeUsuario(Cliente c) throws RemoteException {
         int count = 0;
         for (int i=0;i<Reviews.size();i++) {
-            if(Reviews.get(i).getCliente() == c){
+            if(Reviews.get(i).getAlumno() == c){
                 try {
                     Reviews.remove(i);
                     System.out.println("Review eliminada\n");
@@ -898,7 +898,7 @@ public class UniSystem implements LeisureOffice, ODSPersistente, XMLRepresentabl
     public boolean insertaReview(Examen r) throws RemoteException { //copia de nuevareview
         Boolean flag = true;
         for (int i=0;i<Reviews.size();i++) {
-            if(Reviews.get(i).getLocal() == r.getLocal() && Reviews.get(i).getFecha() == r.getFecha()){
+            if(Reviews.get(i).getCurso() == r.getCurso() && Reviews.get(i).getFecha() == r.getFecha()){
                 flag = false;
             }
         }
@@ -922,7 +922,7 @@ public class UniSystem implements LeisureOffice, ODSPersistente, XMLRepresentabl
     public boolean quitaReview(Examen r) throws RemoteException {
        Boolean flag = false;
         for (int i=0;i<Reviews.size();i++) {
-            if(Reviews.get(i).getLocal() == r.getLocal() && Reviews.get(i).getFecha() == r.getFecha()){
+            if(Reviews.get(i).getCurso() == r.getCurso() && Reviews.get(i).getFecha() == r.getFecha()){
                 try {
                     Reviews.remove(r);
                     System.out.print("Review eliminada\n");

@@ -18,13 +18,13 @@ import javax.xml.bind.Unmarshaller;
  * @author Arribas
  */
 public class Nota implements XMLRepresentable {
-    private Examen review;
-    private String comentario;
+    private Examen examen;
+    private float valor;
     private Date fecha;
 
-    public Nota(Examen review, String comentario, Date fecha){
-        this.review = review;
-        this.comentario = comentario;
+    public Nota(Examen examen, float valor, Date fecha){
+        this.examen = examen;
+        this.valor = valor;
         this.fecha = fecha;
     }
 
@@ -33,19 +33,19 @@ public class Nota implements XMLRepresentable {
         Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 
         StringReader reader = new StringReader(stringXML);
-        Nota contestacion = (Nota) unmarshaller.unmarshal(reader);
+        Nota nota = (Nota) unmarshaller.unmarshal(reader);
         
-        this.review = contestacion.getReview();
-        this.comentario = contestacion.getComentario();
-        this.fecha = contestacion.getFecha();
+        this.examen = nota.getExamen();
+        this.valor = nota.getValor();
+        this.fecha = nota.getFecha();
     }
     
-    public Examen getReview() {
-        return review;
+    public Examen getExamen() {
+        return examen;
     }
 
-    public String getComentario() {
-        return comentario;
+    public float getValor() {
+        return valor;
     }
 
     public Date getFecha() {
