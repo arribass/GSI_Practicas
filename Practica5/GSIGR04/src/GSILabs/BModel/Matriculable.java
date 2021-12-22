@@ -11,6 +11,6 @@ import GSILabs.BSystem.XMLRepresentable;
  *
  * @author Arribas
  */
-public interface Reservable extends XMLRepresentable{ //una interfaz no puede implementar otra pero si extender su comportamiento
+public interface Matriculable extends XMLRepresentable{ //una interfaz no puede implementar otra pero si extender su comportamiento
     
 }

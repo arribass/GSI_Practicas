@@ -27,14 +27,14 @@ public interface LeisureOffice {
      * @param u El nuevo usuario
      * @return Cierto si el usuario pudo ser añadido.
      */
-    public boolean nuevoUsuario(Usuario u);
+    public boolean nuevoUsuario(Persona u);
     
     /**
      * Elimina al usuario que se pase como argument.
      * @param u El usuario
      * @return True si y solo si el usuario existia y pudo ser eliminado.
      */
-    public boolean eliminaUsuario(Usuario u);
+    public boolean eliminaUsuario(Persona u);
     
     /**
      * Reemplaza en el sistema al usuario viejo por el nuevo. Para que esto suceda debe
@@ -44,7 +44,7 @@ public interface LeisureOffice {
      * @param nuevoU El nuevo usuario
      * @return True si el usuario se encontro y pudo ser modificado
      */
-    public boolean modificaUsuario(Usuario u, Usuario nuevoU);
+    public boolean modificaUsuario(Persona u, Persona nuevoU);
     
     /**
      * Comprueba si existe algun usuario con ese mismo nick
@@ -58,7 +58,7 @@ public interface LeisureOffice {
      * @param nick
      * @return El usuario con el nick. Debe devolver null si existeNick(nick) es falso.
      */
-    public Usuario obtenerUsuario(String nick);
+    public Persona obtenerUsuario(String nick);
  
     
     
@@ -71,7 +71,7 @@ public interface LeisureOffice {
      * @param r La review a introducir al sistema.
      * @return True si y solo si la operacion fue completada.
      */
-    public boolean nuevaReview(Review r);
+    public boolean nuevaReview(Examen r);
     
     /**
      * Elimina una review del sistema, siempre y cuando exista y no tenga una 
@@ -90,7 +90,7 @@ public interface LeisureOffice {
      * @param ld la fecha de visita
      * @return True si y solo si la review existe.
      */
-    public boolean existeRewiew(Usuario u, Local l, LocalDate ld);
+    public boolean existeRewiew(Persona u, Curso l, LocalDate ld);
             
     
     
@@ -105,7 +105,7 @@ public interface LeisureOffice {
      * @param r Review
      * @return True si y solo si la operacion fue completada y se pudo añadir la review.
      */
-    public boolean nuevaContestacion(Contestacion c, Review r);
+    public boolean nuevaContestacion(Nota c, Examen r);
     
     /**
      * Consulta la existencia de una contestacion para una review. Devolvera
@@ -114,28 +114,28 @@ public interface LeisureOffice {
      * @param r Review a añadir
      * @return True si y solo si la Review existe y tiene contestacion
      */
-    public boolean tieneContestacion(Review r);
+    public boolean tieneContestacion(Examen r);
     
     /**
      * Recupera la contestacion para una review dada, si esta existe.
      * @param r Review a consultar
      * @return La contestacion, o null si esta, o la propia review, no existen
      */
-    public Contestacion obtenerContestacion(Review r);
+    public Nota obtenerContestacion(Examen r);
     
     /**
      * Elimina la contestacion pasada como argumento
      * @param c Contestacion a eliminar
      * @return True si y solo si la operacion fue completada.
      */
-    public boolean eliminaContestacion(Contestacion c);        
+    public boolean eliminaContestacion(Nota c);        
     
     /**
      * Elimina la contestacion asociada a una review
      * @param r La review cuya contestacion hay que elimnar
      * @return True si y solo si la operacion fue completada.
      */
-    public boolean eliminaContestacion(Review r);      
+    public boolean eliminaContestacion(Examen r);      
     
     
     /** Locales **/
@@ -145,21 +145,21 @@ public interface LeisureOffice {
      * @param l El nuevo local
      * @return True si y solo si la operacion fue completada.
      */
-    public boolean nuevoLocal(Local l);
+    public boolean nuevoLocal(Curso l);
     
     /**
      * Elimina un local determinado, si este existe como tal en el sistema.
      * @param l EL local a eliminar
      * @return True si y solo si la operacion fue completada.
      */
-    public boolean eliminarLocal(Local l);
+    public boolean eliminarLocal(Curso l);
     
     /**
      * Obtiene los datos del local instalado en una determinada direccion fisica
      * @param d Direccion del local.
      * @return El local almacenado en el sistema, o null si no existe.
      */
-    public Local obtenerLocal(Direccion d);
+    public Curso obtenerLocal(Nombre d);
     
     /**
      * Asocia un local a un propietario, en caso de que ambos existan y no se haya llegado
@@ -168,7 +168,7 @@ public interface LeisureOffice {
      * @param p Propietario existente en el sistema
      * @return True si y solo si la operacion fue completada.
      */
-    public boolean asociarLocal(Local l, Propietario p);
+    public boolean asociarLocal(Curso l, Propietario p);
     
     /**
      * Desliga un local de un propietario, en caso de que ambos existan y estén
@@ -177,7 +177,7 @@ public interface LeisureOffice {
      * @param p Propietario existente en el sistema
      * @return True si y solo si la operacion fue completada.
      */
-    public boolean desasociarLocal(Local l, Propietario p);
+    public boolean desasociarLocal(Curso l, Propietario p);
     
     /**
      * 
@@ -185,7 +185,7 @@ public interface LeisureOffice {
      * @param nuevoL
      * @return 
      */
-    public boolean actualizarLocal(Local viejoL, Local nuevoL);
+    public boolean actualizarLocal(Curso viejoL, Curso nuevoL);
     
     /**
      * Ver las review asociadas a un local
@@ -193,7 +193,7 @@ public interface LeisureOffice {
      * @return Lista de reviews del sistema. En caso de que el Local no exista, sera
      *  el valor null.
      */
-    public Review[] verReviews(Local l);
+    public Examen[] verReviews(Curso l);
  
     
     
@@ -211,35 +211,35 @@ public interface LeisureOffice {
      * @param lt Hora de la reserva
      * @return True si y solo si la operacion fue completada.
      */
-    public boolean nuevaReserva(Cliente c, Reservable r, LocalDate ld, LocalTime lt);
+    public boolean nuevaReserva(Alumno c, Matriculable r, LocalDate ld, LocalTime lt);
     
     /**
      * Obtiene todas las reservas (futuras y pasadas) del cliente.
      * @param c El cliente a consultar
      * @return La lista de las reservas, o null si el cliente no existe.
      */
-    public Reserva[] obtenerReservas(Cliente c);
+    public Matricula[] obtenerReservas(Alumno c);
     
     /**
      * Obtiene todas las reservas (futuras y pasadas) del local.
      * @param r El local a consultar
      * @return La lista de las reservas, o null si el local no existe.
      */
-    public Reserva[] obtenerReservas(Reservable r);
+    public Matricula[] obtenerReservas(Matriculable r);
     
     /**
      * Obtiene todas las reservas del dia usado como argumento
      * @param ld la fecha a consultar
      * @return La lista de las reservas.
      */
-    public Reserva[] obtenerReservas(LocalDate ld);
+    public Matricula[] obtenerReservas(LocalDate ld);
     
     /**
      * Elimina una reserva del sistema, en caso de que esta exista
      * @param r La reserva a eliminar.
      * @return True si y solo si la operacion fue completada.
      */
-    public boolean eliminarReserva(Reserva r);
+    public boolean eliminarReserva(Matricula r);
  
     
     
@@ -252,7 +252,7 @@ public interface LeisureOffice {
      * @param provincia Provincia en la que se encuentra la ciudad
      * @return La lista de locales, potencialmente de longitud 0.
      */
-    public Local[] listarLocales(String ciudad, String provincia);
+    public Curso[] listarLocales(String ciudad, String provincia);
     
     /**
      * Lista los bares en una ciudad dada
@@ -260,7 +260,7 @@ public interface LeisureOffice {
      * @param provincia Provincia en la que se encuentra la ciudad
      * @return La lista de bares, potencialmente de longitud 0.
      */
-    public Bar[] listarBares(String ciudad, String provincia);
+    public Master[] listarBares(String ciudad, String provincia);
     
     
     /**
@@ -269,7 +269,7 @@ public interface LeisureOffice {
      * @param provincia Provincia en la que se encuentra la ciudad
      * @return La lista de bares, potencialmente de longitud 0.
      */
-    public Restaurante[] listarRestaurantes(String ciudad, String provincia);
+    public Grado[] listarRestaurantes(String ciudad, String provincia);
     
 
     
@@ -279,6 +279,6 @@ public interface LeisureOffice {
      * @param provincia Provincia en la que se encuentra la ciudad
      * @return La lista de bares, potencialmente de longitud 0.
      */
-    public Pub[] listarPubs(String ciudad, String provincia);
+    public Doctorado[] listarPubs(String ciudad, String provincia);
     
 }

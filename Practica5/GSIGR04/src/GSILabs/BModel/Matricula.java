@@ -19,15 +19,15 @@ import javax.xml.bind.Unmarshaller;
  *
  * @author Arribas
  */
-public class Reserva  implements XMLRepresentable{
+public class Matricula  implements XMLRepresentable{
     
-    private Cliente cliente;
-    private Reservable local;
+    private Alumno cliente;
+    private Matriculable local;
     private LocalDate fecha;
     private LocalTime hora;
     private float descuento;
 
-    public Reserva(Cliente cliente, Reservable reservable, LocalDate fecha, LocalTime hora, float descuento) {
+    public Matricula(Alumno cliente, Matriculable reservable, LocalDate fecha, LocalTime hora, float descuento) {
         this.cliente = cliente;
         this.local = local;
         this.fecha = fecha;
@@ -37,12 +37,12 @@ public class Reserva  implements XMLRepresentable{
         this.descuento = 1 - (descuento/100); 
     }
     
-    public Reserva(String stringXML)throws JAXBException{
-        JAXBContext jaxbContext = JAXBContext.newInstance(Reserva.class);
+    public Matricula(String stringXML)throws JAXBException{
+        JAXBContext jaxbContext = JAXBContext.newInstance(Matricula.class);
         Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 
         StringReader reader = new StringReader(stringXML);
-        Reserva reserva = (Reserva) unmarshaller.unmarshal(reader);
+        Matricula reserva = (Matricula) unmarshaller.unmarshal(reader);
         this.cliente = reserva.getCliente();
         this.local = reserva.getLocal();
         this.fecha = reserva.getFecha();
@@ -52,19 +52,19 @@ public class Reserva  implements XMLRepresentable{
         this.descuento = 1 - (reserva.getDescuento()/100);
     }
 
-    public Cliente getCliente() {
+    public Alumno getCliente() {
         return cliente;
     }
 
-    public void setCliente(Cliente cliente) {
+    public void setCliente(Alumno cliente) {
         this.cliente = cliente;
     }
 
-    public Reservable getReservable() {
+    public Matriculable getReservable() {
         return local;
     }
 
-    public void setReservable(Reservable local) {
+    public void setReservable(Matriculable local) {
         this.local = local;
     }
 
@@ -92,7 +92,7 @@ public class Reserva  implements XMLRepresentable{
         this.descuento = descuento;
     }
 
-    public Reservable getLocal() {
+    public Matriculable getLocal() {
         return local;
     }
 

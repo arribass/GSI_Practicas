@@ -5,10 +5,10 @@
  */
 package GSILabs.connect;
 
-import GSILabs.BModel.Cliente;
-import GSILabs.BModel.Direccion;
-import GSILabs.BModel.Local;
-import GSILabs.BModel.Review;
+import GSILabs.BModel.Alumno;
+import GSILabs.BModel.Nombre;
+import GSILabs.BModel.Curso;
+import GSILabs.BModel.Examen;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -52,11 +52,11 @@ public class ClientHub {
             //Instanciar un objeto de la clase del servidor
             ClientGateway cg = (ClientGateway) registro.lookup(tag);
             //Uso del servicio
-            Direccion d = new Direccion("Haro", "La Rioja", "Avenida mayor", "3");
-            Local l = new Local("Casa Paco", d, "Bar elegante en el centro.");
+            Nombre d = new Nombre("Haro", "La Rioja", "Avenida mayor", "3");
+            Curso l = new Curso("Casa Paco", d, "Bar elegante en el centro.");
             Date fecha = new Date();
-            Cliente c = new Cliente("davidgnomo", "12345", new GregorianCalendar(1996, Calendar.MARCH, 14).getTime(), 1);
-            Review r = new Review(6, "Muy limpio y bonito.", fecha, l, c);
+            Alumno c = new Alumno("davidgnomo", "12345", new GregorianCalendar(1996, Calendar.MARCH, 14).getTime(), 1);
+            Examen r = new Examen(6, "Muy limpio y bonito.", fecha, l, c);
             //Comprobación insertarReview
             cg.insertaReview(r);
             

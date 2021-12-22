@@ -5,7 +5,7 @@
  */
 package GSILabs.connect;
 
-import GSILabs.BSystem.BusinessSystem;
+import GSILabs.BSystem.UniSystem;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -22,8 +22,8 @@ public class BusinessServer {
     
     
     public static void main(String[] args) throws RemoteException{
-        AdminGateway ag = new BusinessSystem();
-        ClientGateway cg = new BusinessSystem();
+        AdminGateway ag = new UniSystem();
+        ClientGateway cg = new UniSystem();
         AdminGateway stubAG;
         ClientGateway stubCG;
         Registry registroAG, registroCG;

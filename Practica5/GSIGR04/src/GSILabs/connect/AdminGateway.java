@@ -8,9 +8,9 @@
 
 package GSILabs.connect;
 
-import GSILabs.BModel.Local;
-import GSILabs.BModel.Review;
-import GSILabs.BModel.Cliente;
+import GSILabs.BModel.Curso;
+import GSILabs.BModel.Examen;
+import GSILabs.BModel.Alumno;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
@@ -28,7 +28,7 @@ public interface AdminGateway extends Remote,LocalFinder{
      * @return  True sí y sólo si se pudo completar la tarea
      * @throws RemoteException If some error happens in the remove invocation.
      */
-   public boolean eliminaLocal(Local l) throws RemoteException;
+   public boolean eliminaLocal(Curso l) throws RemoteException;
    
    /**
     * Elimina todas la reviews (y contestaciones asociadas) de un local
@@ -37,7 +37,7 @@ public interface AdminGateway extends Remote,LocalFinder{
      * @throws RemoteException If some error happens in the remove invocation.
     */
    
-   public boolean eliminaReviewsDeLocal(Local l) throws RemoteException;
+   public boolean eliminaReviewsDeLocal(Curso l) throws RemoteException;
    
    /**
     * Elimina una review determinada del sistema
@@ -45,7 +45,7 @@ public interface AdminGateway extends Remote,LocalFinder{
     * @return True sí y sólo si se pudo completar la tarea
      * @throws RemoteException If some error happens in the remove invocation.
     */
-   public boolean eliminaReview(Review r) throws RemoteException;
+   public boolean eliminaReview(Examen r) throws RemoteException;
    
    /**
     * Elimina todas la reviews de un cliente determinado
@@ -53,7 +53,7 @@ public interface AdminGateway extends Remote,LocalFinder{
     * @return Número de reviews eliminadas, o -1 si el cliente no existe.
      * @throws RemoteException If some error happens in the remove invocation.
     */
-   public int eliminaReviewsDeUsuario(Cliente c) throws RemoteException;
+   public int eliminaReviewsDeUsuario(Alumno c) throws RemoteException;
    
    /**
     * Crea un usuario falso al que se le añade una review falsa con la puntuación
@@ -63,7 +63,7 @@ public interface AdminGateway extends Remote,LocalFinder{
     * @return True sí y sólo si se pudo completar la tarea
      * @throws RemoteException If some error happens in the remove invocation.
     */
-   public boolean insertaReviewFalsa(Local l, Integer puntuacion) throws RemoteException;
+   public boolean insertaReviewFalsa(Curso l, Integer puntuacion) throws RemoteException;
    
     
 }

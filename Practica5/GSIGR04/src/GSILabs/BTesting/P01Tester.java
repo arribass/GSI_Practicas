@@ -5,18 +5,17 @@
  */
 package GSILabs.BTesting;
 
-import GSILabs.BModel.Bar;
-import GSILabs.BModel.Review;
-import GSILabs.BModel.Reserva;
-import GSILabs.BModel.Reservable;
-import GSILabs.BModel.Direccion;
-import GSILabs.BModel.Local;
-import GSILabs.BModel.Contestacion;
-import GSILabs.BModel.Cliente;
-import GSILabs.BModel.Pub;
-import GSILabs.BModel.Restaurante;
-import GSILabs.BModel.Usuario;
-import GSILabs.BSystem.BusinessSystem;
+import GSILabs.BModel.Master;
+import GSILabs.BModel.Examen;
+import GSILabs.BModel.Matricula;
+import GSILabs.BModel.Nombre;
+import GSILabs.BModel.Curso;
+import GSILabs.BModel.Nota;
+import GSILabs.BModel.Alumno;
+import GSILabs.BModel.Doctorado;
+import GSILabs.BModel.Grado;
+import GSILabs.BModel.Persona;
+import GSILabs.BSystem.UniSystem;
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
@@ -31,6 +30,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import GSILabs.BModel.Matriculable;
 
 /**
  *
@@ -40,10 +40,10 @@ public class P01Tester {
                
     public static void main(String[] args) throws IOException {
         // Instanciamos una clase BusinessSystem
-        BusinessSystem bs = new BusinessSystem();
+        UniSystem bs = new UniSystem();
         String passwordUsuario;
         String nombreUsuario;
-        Cliente c = new Cliente("james876", "12345", new GregorianCalendar(1997, Calendar.APRIL, 23).getTime(), 999);
+        Alumno c = new Alumno("james876", "12345", new GregorianCalendar(1997, Calendar.APRIL, 23).getTime(), 999);
         //Menú principal, el usuario elige que quiere hacer.
         Scanner sc = new Scanner(System.in);
         int choice=999;
@@ -100,7 +100,7 @@ public class P01Tester {
                     
                     try {
                         fechaNacimientoUsuario = new SimpleDateFormat("dd/MM/yyyy").parse("13/11/1999");
-                        Usuario u = new Usuario(nombreUsuario, passwordUsuario, fechaNacimientoUsuario,1);
+                        Persona u = new Persona(nombreUsuario, passwordUsuario, fechaNacimientoUsuario,1);
                         if (bs.nuevoUsuario(u)){
                             System.out.println("Usuario registrado correctamente!");
                             System.out.println(u.toString());
@@ -116,7 +116,7 @@ public class P01Tester {
                     //Obtener usuario
                     System.out.println("¿Que usuario quieres buscar?: ");  
                     nombreUsuario = sc.nextLine(); 
-                    Usuario u = bs.obtenerUsuario(nombreUsuario);
+                    Persona u = bs.obtenerUsuario(nombreUsuario);
                     if(u != null){
                         System.out.println("Usuario encontrado");
                         System.out.println(u.toString());
@@ -141,12 +141,12 @@ public class P01Tester {
                     System.out.println("Introduce el numero: "); 
                     String numero = sc.nextLine();
                     //Genero la dirección.
-                    Direccion d = new Direccion(localidad,provincia,calle,numero);
+                    Nombre d = new Nombre(localidad,provincia,calle,numero);
 
                     //Pido la descripcion del local al usuario.
                     System.out.println("Introduce la descripción del local: "); 
                     String descripcionLocal = sc.nextLine();
-                    Local l = new Local(nombreLocal,d,descripcionLocal);
+                    Curso l = new Curso(nombreLocal,d,descripcionLocal);
                     //añado el nuevo local
                     bs.nuevoLocal(l);
                     break;
@@ -172,9 +172,9 @@ public class P01Tester {
                     System.out.println("Introduce el numero: "); 
                     String num = sc.nextLine();
                     //Genero la dirección.
-                    Direccion dir = new Direccion(loc,prov,cal,num);
-                    Local local = bs.obtenerLocal(dir);;
-                    Review r = new Review(valint,comentario,fecha,local, c);
+                    Nombre dir = new Nombre(loc,prov,cal,num);
+                    Curso local = bs.obtenerLocal(dir);
+                    Examen r = new Examen(valint,comentario,fecha,local, c);
                     bs.nuevaReview(r);
                     break;
                 case 5: //Eliminar local
@@ -189,9 +189,9 @@ public class P01Tester {
                     System.out.println("Introduce el numero: "); 
                     String numeroB = sc.nextLine();
                     //Genero la dirección.
-                    Direccion dB = new Direccion(localidadB,provinciaB,calleB,numeroB);
+                    Nombre dB = new Nombre(localidadB,provinciaB,calleB,numeroB);
                     //Cojo el local de esa dirección
-                    Local localEliminar = bs.obtenerLocal(dB);
+                    Curso localEliminar = bs.obtenerLocal(dB);
                     //elimino el local
                     bs.eliminarLocal(localEliminar);                    
                     break;
@@ -201,7 +201,7 @@ public class P01Tester {
                     System.out.println("Introduce la ciudad deseada "); 
                     String ciudadD = sc.nextLine();
                     System.out.println("Listado de locales en: "+ ciudadD + ", "+ provinciaD +"\n");   
-                    Local localeslist[] = bs.listarLocales(ciudadD, provinciaD);                                        
+                    Curso localeslist[] = bs.listarLocales(ciudadD, provinciaD);                                        
                     break;
                 case 7: //Obtener Local
                     System.out.println("Introduce la localidad: "); 
@@ -213,8 +213,8 @@ public class P01Tester {
                     System.out.println("Introduce el numero: "); 
                     String numeroc = sc.nextLine();
                     //Genero la dirección.
-                    Direccion dc = new Direccion(localidadc,provinciac,callec,numeroc);
-                    Local local1 = bs.obtenerLocal(dc);
+                    Nombre dc = new Nombre(localidadc,provinciac,callec,numeroc);
+                    Curso local1 = bs.obtenerLocal(dc);
                     
                     if(local1 != null){
                         System.out.println("Local encontrado");
@@ -233,12 +233,12 @@ public class P01Tester {
                     System.out.println("Introduce el numero: "); 
                     numeroc = sc.nextLine();
                     //Genero la dirección.
-                    Direccion dd = new Direccion(localidadc,provinciac,callec,numeroc);
-                    Local localviejo = bs.obtenerLocal(dd);
+                    Nombre dd = new Nombre(localidadc,provinciac,callec,numeroc);
+                    Curso localviejo = bs.obtenerLocal(dd);
                     
                     //Variables auxiliares.
                     String nuevaDescripcion = null;
-                    Direccion nuevaDireccion = null;
+                    Nombre nuevaDireccion = null;
                     String nuevoNombre = null;
                     
                     int eleccion = 10;
@@ -282,7 +282,7 @@ public class P01Tester {
                             callec = sc2.nextLine();       
                             System.out.println("Introduce el numero: "); 
                             numeroc = sc2.nextLine();
-                            nuevaDireccion = new Direccion(localidadc,provinciac,callec,numeroc);
+                            nuevaDireccion = new Nombre(localidadc,provinciac,callec,numeroc);
                             try{
                                nuevaDescripcion = localviejo.getDescripcion();
                                 nuevoNombre = localviejo.getNombre(); 
@@ -298,7 +298,7 @@ public class P01Tester {
                             break;
                     }   
                     try{
-                        bs.actualizarLocal(localviejo, new Local(nuevoNombre,nuevaDireccion,nuevaDescripcion));
+                        bs.actualizarLocal(localviejo, new Curso(nuevoNombre,nuevaDireccion,nuevaDescripcion));
                     }catch(Exception e){
                         System.out.println("no se ha podido actualizar porque no existe un local en esa direccion");
                     }
@@ -309,7 +309,7 @@ public class P01Tester {
                     System.out.println("Introduce la ciudad deseada "); 
                     ciudadD = sc.nextLine();
                     System.out.println("Listado de bares en: "+ ciudadD + ", "+ provinciaD +"\n");   
-                    Local localeslist2[] = bs.listarBares(ciudadD, provinciaD);                                        
+                    Curso localeslist2[] = bs.listarBares(ciudadD, provinciaD);                                        
                     break;
                 case 10: //Listar solo restaurantes
                     System.out.println("Introduce la provincia deseada "); 
@@ -317,7 +317,7 @@ public class P01Tester {
                     System.out.println("Introduce la ciudad deseada "); 
                     ciudadD = sc.nextLine();
                     System.out.println("Listado de restaurantes en: "+ ciudadD + ", "+ provinciaD +"\n");   
-                    Local localeslist3[] = bs.listarRestaurantes(ciudadD, provinciaD);                                        
+                    Curso localeslist3[] = bs.listarRestaurantes(ciudadD, provinciaD);                                        
                     break;
                 case 11: //Listar solo pubs
                     System.out.println("Introduce la provincia deseada "); 
@@ -325,7 +325,7 @@ public class P01Tester {
                     System.out.println("Introduce la ciudad deseada "); 
                     ciudadD = sc.nextLine();
                     System.out.println("Listado de pubs en: "+ ciudadD + ", "+ provinciaD +"\n");   
-                    Local localeslist4[] = bs.listarPubs(ciudadD, provinciaD);                                        
+                    Curso localeslist4[] = bs.listarPubs(ciudadD, provinciaD);                                        
                     break;
                 
                 //Ejercicio 4 S10, no se pueden añadir dos reviews del mismo usuario, el mismo dia para el mismo local
@@ -348,18 +348,18 @@ public class P01Tester {
                     System.out.println("Introduce el numero: \n"); 
                     String numero1 = sc.nextLine();
                     //Genero la dirección.
-                    Direccion d1 = new Direccion(localidad1,provincia1,calle1,numero1);
+                    Nombre d1 = new Nombre(localidad1,provincia1,calle1,numero1);
 
                     //Pido la descripcion del local al usuario.
                     System.out.println("Introduce la descripción del local: \n"); 
                     String descripcionLocal2 = sc.nextLine();
-                    Local l2 = new Local(nombreLocal1,d1,descripcionLocal2);
+                    Curso l2 = new Curso(nombreLocal1,d1,descripcionLocal2);
                     //añado el nuevo local
                     bs.nuevoLocal(l2);
                     //Creo cliente
         
                     //Creamos la primera review con la fecha y el local introducidos
-                    Review rev1 = new Review(5, "aaaaaaaaa",date, l2, c);
+                    Examen rev1 = new Examen(5, "aaaaaaaaa",date, l2, c);
                     System.out.println("Primera review introducida.\n");
                             
                     //agregamos la primera review
@@ -367,7 +367,7 @@ public class P01Tester {
 
                     //Creamos la segunda review con la misma fecha y el mismo local
                     
-                    Review rev2 = new Review(3, "bbbbbbbbb",date, l2, c);
+                    Examen rev2 = new Examen(3, "bbbbbbbbb",date, l2, c);
                     System.out.println("Intentamos agregar la segunda review.\n");
                     //Agregamos la segunda review
                     Boolean resultado = bs.nuevaReview(rev2);
@@ -396,12 +396,12 @@ public class P01Tester {
                     System.out.println("Introduce el numero: \n"); 
                     String numero13 = sc.nextLine();
                     //Genero la dirección.
-                    Direccion d13 = new Direccion(localidad13,provincia13,calle13,numero13);
+                    Nombre d13 = new Nombre(localidad13,provincia13,calle13,numero13);
 
                     //Pido la descripcion del local al usuario.
                     System.out.println("Introduce la descripción del local: \n"); 
                     String descripcionLocal23 = sc.nextLine();
-                    Local l23 = new Local(nombreLocal13,d13,descripcionLocal23);
+                    Curso l23 = new Curso(nombreLocal13,d13,descripcionLocal23);
                     //añado el nuevo local
                     bs.nuevoLocal(l23);
                     
@@ -414,9 +414,9 @@ public class P01Tester {
                         
                         
                         fechaNacimientoUsuario = new SimpleDateFormat("dd/MM/yyyy").parse(fechas);
-                        Usuario pro1 = new Usuario("Aaaaa", "aaaaa", fechaNacimientoUsuario,1);
-                        Usuario pro2 = new Usuario("Bbbbb", "bbbbb", fechaNacimientoUsuario,1);
-                        Usuario pro3 = new Usuario("Ccccc", "ccccc", fechaNacimientoUsuario,1);
+                        Persona pro1 = new Persona("Aaaaa", "aaaaa", fechaNacimientoUsuario,1);
+                        Persona pro2 = new Persona("Bbbbb", "bbbbb", fechaNacimientoUsuario,1);
+                        Persona pro3 = new Persona("Ccccc", "ccccc", fechaNacimientoUsuario,1);
                     
                         l23.anadirPropietario(pro1);
                         l23.anadirPropietario(pro2);
@@ -425,7 +425,7 @@ public class P01Tester {
                         System.out.println("Tres propietarios agregados\n");
                         
                         System.out.println("Probamos a agregar un cuarto propietario\n");
-                        Usuario pro4 = new Usuario("Ddddd", "ddddd", fechaNacimientoUsuario,1);
+                        Persona pro4 = new Persona("Ddddd", "ddddd", fechaNacimientoUsuario,1);
                         
                         Boolean flag = l23.anadirPropietario(pro4);
                         
@@ -444,13 +444,13 @@ public class P01Tester {
 
                 case 14:
                     String fechas11 = new String("20/11/2020");
-                    Review rev2345 = null; //Comentar esta linea para realizar la comprobacion
+                    Examen rev2345 = null; //Comentar esta linea para realizar la comprobacion
                     try {
                         Date fechaContestacion = new SimpleDateFormat("dd/MM/yyyy").parse(fechas11);
                         //Simplemente vamos a crear una contestacion en cuyo constructor no va a haber una review válida ya que simplemente no la hemos creado
                         //Para ello vamos a capturar el error que nos va a lanzar el compilador e indicar el porque
                         try{
-                            Contestacion contestacion = new Contestacion(rev2345, "comentario", fechaContestacion);
+                            Nota contestacion = new Nota(rev2345, "comentario", fechaContestacion);
                         }catch(RuntimeException e){
                             System.out.println("Se ha intentado crear una contestacion a una review que no existe");
                         }
@@ -461,14 +461,14 @@ public class P01Tester {
 
                 case 15:
                     //Creamos un local en la direccion dr
-                    Direccion dr = new Direccion("Pamplona", "Navarra", "Tajonar", "4");
-                    Local locaux = new Local("BarNistelroy", dr, "bonito");
+                    Nombre dr = new Nombre("Pamplona", "Navarra", "Tajonar", "4");
+                    Curso locaux = new Curso("BarNistelroy", dr, "bonito");
                     
                     bs.nuevoLocal(locaux);
                     //borramos el local
                     bs.eliminarLocal(locaux);
                     //insertamos un nuevo bar en esa misma direccion y nos permite hacerlo
-                    Bar bar = new Bar("BarNistelroy2", dr, "bonito");
+                    Master bar = new Master("BarNistelroy2", dr, "bonito");
                     bs.nuevoLocal(bar);
                 break;
                 case 16:
@@ -486,7 +486,7 @@ public class P01Tester {
                     
                     try {
                         fechaNacimientoUsuario123 = new SimpleDateFormat("dd/MM/yyyy").parse("20/09/2019");
-                        Usuario u123 = new Usuario(nombreUsuario, passwordUsuario, fechaNacimientoUsuario123,1);
+                        Persona u123 = new Persona(nombreUsuario, passwordUsuario, fechaNacimientoUsuario123,1);
                         if (bs.nuevoUsuario(u123)){
                             System.out.println("Usuario registrado correctamente!");
                             System.out.println(u123.toString());
@@ -502,7 +502,7 @@ public class P01Tester {
                 case 19:
                     
                     String fechaNacimiento123344 = new String("20/11/1997");
-                    Reservable localAux = null; //Comentar esta linea para realizar la comprobacion
+                    Matriculable localAux = null; //Comentar esta linea para realizar la comprobacion
 
                     //Simplemente vamos a crear una contestacion en cuyo constructor no va a haber una review válida ya que simplemente no la hemos creado
                     //Para ello vamos a capturar el error que nos va a lanzar el compilador e indicar el porque
@@ -510,10 +510,10 @@ public class P01Tester {
                     //Creamos un cliente
                      try {
                         fechaNacimientoUsuario = new SimpleDateFormat("dd/MM/yyyy").parse(fechaNacimiento123344);
-                        Cliente cliente = new Cliente("Aaaaa", "aaaaa", fechaNacimientoUsuario,1);
+                        Alumno cliente = new Alumno("Aaaaa", "aaaaa", fechaNacimientoUsuario,1);
                         
                         try{
-                            Reserva reserva = new Reserva(cliente, localAux, LocalDate.now(), LocalTime.MAX, 1);
+                            Matricula reserva = new Matricula(cliente, localAux, LocalDate.now(), LocalTime.MAX, 1);
                         //Contestacion contestacion = new Contestacion(rev2345, "comentario", fechaContestacion);
                         }catch(RuntimeException e){
                             System.out.println("Se ha intentado crear una reserva a un local que no existe");
@@ -535,7 +535,7 @@ public class P01Tester {
                     
                    
 
-                    Usuario user1234567 =    bs.obtenerUsuario(nickInvent);
+                    Persona user1234567 =    bs.obtenerUsuario(nickInvent);
 
                     if (user1234567 == null){
                         System.out.println("El nick no tiene un usuario que le corresponda\n");
@@ -548,17 +548,17 @@ public class P01Tester {
                     
                 case 17:
                     //inserto un local en la direccion dr
-                    dr = new Direccion("Pamplona", "Navarra", "Tajonar", "4");
-                    locaux = new Local("BarNistelroy", dr, "bonito");                    
+                    dr = new Nombre("Pamplona", "Navarra", "Tajonar", "4");
+                    locaux = new Curso("BarNistelroy", dr, "bonito");                    
                     bs.nuevoLocal(locaux);
                     //intento insertar un nuevo bar en esa misma direccion y me dice que no se puede.
-                    Local locaux2 = new Local("BarNistelroy2", dr, "bonito");
+                    Curso locaux2 = new Curso("BarNistelroy2", dr, "bonito");
                     bs.nuevoLocal(locaux2);
                     break;
                 case 18:
                     //Creo un usuario y lo inserto
                     Date dat = new Date(95, 5,3);
-                    Usuario us = new Usuario("Sergio", "1234", dat , 1);
+                    Persona us = new Persona("Sergio", "1234", dat , 1);
                     bs.nuevoUsuario(us);
                     //lo busco con el nick que le he insertado al usuario y me lo busca
                     bs.obtenerUsuario("Sergio");
@@ -591,7 +591,7 @@ public class P01Tester {
         } while ( choice != 0 );
     }
 
-    private static void nuevaReview(Review r){
+    private static void nuevaReview(Examen r){
         //TODO: comprobar que no haya otra review para esa fecha y ese local
 //        Reviews.add(r);//Hay que añadir en businessSystem no en el tester CAMBIAR
     }

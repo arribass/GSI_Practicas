@@ -5,18 +5,17 @@
  */
 package GSILabs.Misc;
 
-import GSILabs.BModel.Bar;
-import GSILabs.BModel.Review;
-import GSILabs.BModel.Reserva;
-import GSILabs.BModel.Reservable;
-import GSILabs.BModel.Direccion;
-import GSILabs.BModel.Local;
-import GSILabs.BModel.Contestacion;
-import GSILabs.BModel.Cliente;
-import GSILabs.BModel.Pub;
-import GSILabs.BModel.Restaurante;
-import GSILabs.BModel.Usuario;
-import GSILabs.BSystem.BusinessSystem;
+import GSILabs.BModel.Master;
+import GSILabs.BModel.Examen;
+import GSILabs.BModel.Matricula;
+import GSILabs.BModel.Nombre;
+import GSILabs.BModel.Curso;
+import GSILabs.BModel.Nota;
+import GSILabs.BModel.Alumno;
+import GSILabs.BModel.Doctorado;
+import GSILabs.BModel.Grado;
+import GSILabs.BModel.Persona;
+import GSILabs.BSystem.UniSystem;
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
@@ -32,6 +31,7 @@ import java.util.logging.Logger;
 import org.jopendocument.dom.OOUtils;
 import org.jopendocument.dom.spreadsheet.Sheet;
 import org.jopendocument.dom.spreadsheet.SpreadSheet;
+import GSILabs.BModel.Matriculable;
 
 /**
  *
@@ -44,7 +44,7 @@ public class SSTest04 {
      */
     public static void main(String[] args) throws IOException {
         // Instanciamos una clase BusinessSystem
-        BusinessSystem bs = new BusinessSystem();
+        UniSystem bs = new UniSystem();
         String passwordUsuario;
         String nombreUsuario;
         
@@ -85,7 +85,7 @@ public class SSTest04 {
                     
                     try {
                         fechaNacimientoUsuario = new SimpleDateFormat("dd/MM/yyyy").parse("13/11/1999");
-                        Usuario u = new Usuario(nombreUsuario, passwordUsuario, fechaNacimientoUsuario,1);
+                        Persona u = new Persona(nombreUsuario, passwordUsuario, fechaNacimientoUsuario,1);
                         if (bs.nuevoUsuario(u)){
                             System.out.println("Usuario registrado correctamente!");
                             System.out.println(u.toString());
@@ -116,12 +116,12 @@ public class SSTest04 {
                    System.out.println("Introduce el numero: "); 
                    String numero = sc.nextLine();
                    //Genero la dirección.
-                   Direccion d = new Direccion(localidad,provincia,calle,numero);
+                   Nombre d = new Nombre(localidad,provincia,calle,numero);
 
                    //Pido la descripcion del local al usuario.
                    System.out.println("Introduce la descripción del local: "); 
                    String descripcionLocal = sc.nextLine();
-                   Local l = new Local(nombreLocal,d,descripcionLocal);
+                   Curso l = new Curso(nombreLocal,d,descripcionLocal);
                    
                    
                    //Pido al usuario el nombre del propietarios                    
@@ -129,7 +129,7 @@ public class SSTest04 {
                    System.out.println("Introduce el nombre del Propietario: ");  
                    String nombrePro = sc.nextLine(); 
                    
-                   Usuario u = bs.obtenerUsuario(nombrePro);
+                   Persona u = bs.obtenerUsuario(nombrePro);
                   
                    l.anadirPropietario(u);
                    bs.nuevoLocal(l);
@@ -142,12 +142,12 @@ public class SSTest04 {
                     Sheet hojaBares = s.getSheet(0);
                     hojaBares.setName("Bares");
                     //Listar todos los bares 
-                    List<Local> listaBares = new ArrayList<>();
+                    List<Curso> listaBares = new ArrayList<>();
                     listaBares = bs.listarTodosBares();
                     
                    
                     for (int i=0;i<listaBares.size();i++) {
-                        Local bar = listaBares.get(i);
+                        Curso bar = listaBares.get(i);
                         
                         hojaBares.setValueAt(bar.getNombre(),0,i);
                         hojaBares.setValueAt(bar.getDireccion(),1,i);
@@ -161,12 +161,12 @@ public class SSTest04 {
                     Sheet hojaRestaurantes = s.getSheet(1);
                     hojaRestaurantes.setName("Restaurantes");
                     //Listar todos los Restaurantes
-                    List<Local> listaRestaurantes = new ArrayList<>();
+                    List<Curso> listaRestaurantes = new ArrayList<>();
                     listaRestaurantes = bs.listarTodosRestaurantes();
                     
                     
                     for (int i=0;i<listaRestaurantes.size();i++) {
-                        Local restaurante = listaRestaurantes.get(i);
+                        Curso restaurante = listaRestaurantes.get(i);
                         hojaRestaurantes.setValueAt(restaurante.getNombre(),0,i);                        
                         hojaRestaurantes.setValueAt(restaurante.getDireccion(),1,i);
                         hojaRestaurantes.setValueAt(restaurante.getDescripcion(),2,i);
@@ -177,12 +177,12 @@ public class SSTest04 {
                     Sheet hojaPubs = s.getSheet(2);
                     hojaPubs.setName("Pubs");
                     //Listar todos los Restaurantes
-                    List<Local> listaPubs = new ArrayList<>();
+                    List<Curso> listaPubs = new ArrayList<>();
                     listaPubs = bs.listarTodosPubs();
                     
                     
                     for (int i=0;i<listaPubs.size();i++) {
-                        Local pub = listaPubs.get(i);
+                        Curso pub = listaPubs.get(i);
                         hojaPubs.setValueAt(pub.getNombre(),0,i);                        
                         hojaPubs.setValueAt(pub.getDireccion(),1,i);
                         hojaPubs.setValueAt(pub.getDescripcion(),2,i);

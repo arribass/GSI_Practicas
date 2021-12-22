@@ -21,7 +21,7 @@ public interface LookupService {
      * @param l Local de interés.
      * @return La valoración media de las reviews asociadas, o 0 si no existen reviews.
      */
-    public float obtenerValoracionMedia(Local l);
+    public float obtenerValoracionMedia(Curso l);
     
     /**
      * Obtiene la valoración media de un propietario, o -1 si éste no existe.
@@ -39,7 +39,7 @@ public interface LookupService {
      * @param edadHasta Edad maxima del rango (incluida)
      * @return 
      */
-    public float obtenerValoracionMedia(Local l, int edadEntre, int edadHasta);
+    public float obtenerValoracionMedia(Curso l, int edadEntre, int edadHasta);
     
     
     /**
@@ -50,7 +50,7 @@ public interface LookupService {
      * @param provincia Provincia en la que se encuentra la ciudad
      * @return Los locales ordenados por nota descendente
      */
-    public Local[] obtenerLocalesOrdenados(String ciudad, String provincia);
+    public Curso[] obtenerLocalesOrdenados(String ciudad, String provincia);
     
     /**
      * Obtiene los locales de una provincia ordenados por su valoración media
@@ -59,7 +59,7 @@ public interface LookupService {
      * @param provincia Provincia en la que se encuentra la ciudad
      * @return Los locales ordenados por nota descendente
      */
-    public Local[] obtenerLocalesOrdenados(String provincia);
+    public Curso[] obtenerLocalesOrdenados(String provincia);
     
     /**
      * Obtiene los bares de una ciudad y provincia ordenados por su valoración media
@@ -69,7 +69,7 @@ public interface LookupService {
      * @param provincia Provincia en la que se encuentra la ciudad
      * @return Los bares ordenados por nota descendente
      */
-    public Bar[] obtenerBaresOrdenados(String ciudad, String provincia);
+    public Master[] obtenerBaresOrdenados(String ciudad, String provincia);
     
     /**
      * Obtiene los restaurantes de una ciudad y provincia ordenados por su valoración media
@@ -79,7 +79,7 @@ public interface LookupService {
      * @param provincia Provincia en la que se encuentra la ciudad
      * @return Los restaurantes ordenados por nota descendente
      */
-    public Restaurante[] obtenerRestaurantesOrdenados(String ciudad, String provincia);
+    public Grado[] obtenerRestaurantesOrdenados(String ciudad, String provincia);
     
     /**
      * Obtiene los pubs de una ciudad y provincia ordenados por su valoración media
@@ -89,6 +89,6 @@ public interface LookupService {
      * @param provincia Provincia en la que se encuentra la ciudad
      * @return Los pubs ordenados por nota descendente
      */
-    public Pub[] obtenerPubOrdenados(String ciudad, String provincia);
+    public Doctorado[] obtenerPubOrdenados(String ciudad, String provincia);
     
 }

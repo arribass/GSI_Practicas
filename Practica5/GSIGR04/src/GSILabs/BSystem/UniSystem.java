@@ -35,18 +35,18 @@ import org.jopendocument.dom.spreadsheet.SpreadSheet;
  *
  * @author Arribas
  */
-public class BusinessSystem implements LeisureOffice, ODSPersistente, XMLRepresentable, AdminGateway, ClientGateway{
-    static List<Usuario> Usuarios = new ArrayList<>();
-    static List<Local> Locales = new ArrayList<>();
-    static List<Review> Reviews = new ArrayList<>();
-    static List<Contestacion> Contestaciones = new ArrayList<>();
-    static List<Reserva> Reservas = new ArrayList<>();
+public class UniSystem implements LeisureOffice, ODSPersistente, XMLRepresentable, AdminGateway, ClientGateway{
+    static List<Persona> Usuarios = new ArrayList<>();
+    static List<Curso> Locales = new ArrayList<>();
+    static List<Examen> Reviews = new ArrayList<>();
+    static List<Nota> Contestaciones = new ArrayList<>();
+    static List<Matricula> Reservas = new ArrayList<>();
 
     @Override
     /**
      * {@inheritDoc}
      */
-    public boolean nuevoUsuario(Usuario u) { //OK
+    public boolean nuevoUsuario(Persona u) { //OK
         // Agrega el usuario de entrada en la lista de usuarios
         if(Usuarios.stream().anyMatch(item -> u.equals(item))){
             System.out.println("El usuario ya existe.\n");
@@ -66,7 +66,7 @@ public class BusinessSystem implements LeisureOffice, ODSPersistente, XMLReprese
     /**
      * {@inheritDoc}
      */
-    public boolean eliminaUsuario(Usuario u) { //OK
+    public boolean eliminaUsuario(Persona u) { //OK
         //Busca el usuario de entrada en la lista y lo elimina, si el usuario introducido es valido
         try{
             Usuarios.remove(u);
@@ -83,7 +83,7 @@ public class BusinessSystem implements LeisureOffice, ODSPersistente, XMLReprese
     /**
      * {@inheritDoc}
      */
-    public boolean modificaUsuario(Usuario u, Usuario nuevoU) { //OK
+    public boolean modificaUsuario(Persona u, Persona nuevoU) { //OK
         //Busca el usuario de la entrada, lo borra e introduce el usuario de entrada modificado, si lo encuentra
         //nuevoU.usuarioValido(nick, password, fechaNacimiento, 0);
         try{
@@ -112,7 +112,7 @@ public class BusinessSystem implements LeisureOffice, ODSPersistente, XMLReprese
     /**
      * {@inheritDoc}
      */
-    public Usuario obtenerUsuario(String nick) { //OK
+    public Persona obtenerUsuario(String nick) { //OK
         //Busca y devuelve un usuario de la lista de usuarios
         //Recorre la lista comparando, si llega al final sin encontrar nada devuelve null
         //Boolean usuarioEncontrado = false;
@@ -138,7 +138,7 @@ public class BusinessSystem implements LeisureOffice, ODSPersistente, XMLReprese
     /**
      * {@inheritDoc}
      */
-    public boolean nuevaReview(Review r) { //OK
+    public boolean nuevaReview(Examen r) { //OK
         //agrega una review a la lista, antes mira para cada elemento de la lista si coinciden la fecha y el local con el elemento de la entrada, y en funcion de si se da ese caso o no agrega la review
         Boolean flag = true;
         for (int i=0;i<Reviews.size();i++) {
@@ -166,7 +166,7 @@ public class BusinessSystem implements LeisureOffice, ODSPersistente, XMLReprese
     /**
      * {@inheritDoc}
      */
-    public boolean eliminaReview(Review r) throws RemoteException{
+    public boolean eliminaReview(Examen r) throws RemoteException{
         //elimina una review de la lista si esta existe
         try{
             Reviews.remove(r);
@@ -181,7 +181,7 @@ public class BusinessSystem implements LeisureOffice, ODSPersistente, XMLReprese
     /**
      * {@inheritDoc}
      */
-    public boolean existeRewiew(Usuario u, Local l, LocalDate ld) {
+    public boolean existeRewiew(Persona u, Curso l, LocalDate ld) {
         // Primero busca si un usuario existe, si existe busca un local y una fecha en el array de reviews, si ambas existen confirma la busqueda
         Boolean aaa = Usuarios.stream().anyMatch(item -> u.equals(item));
         if (aaa == true){
@@ -205,7 +205,7 @@ public class BusinessSystem implements LeisureOffice, ODSPersistente, XMLReprese
     /**
      * {@inheritDoc}
      */
-    public boolean nuevaContestacion(Contestacion c, Review r) {
+    public boolean nuevaContestacion(Nota c, Examen r) {
         //Busca una review, y si existe agrega una contestacion    
         if (Reviews.stream().anyMatch(item -> r.equals(item))){
             return Contestaciones.add(c);
@@ -218,7 +218,7 @@ public class BusinessSystem implements LeisureOffice, ODSPersistente, XMLReprese
     /**
      * {@inheritDoc}
      */
-    public boolean tieneContestacion(Review r) {
+    public boolean tieneContestacion(Examen r) {
         //Busca en la lista de contestaciones la review de entrada, y devuelve si existe o no una contestación con dicha review como atributo
         return Contestaciones.stream().anyMatch(item -> r.equals(item.getReview()));
     }
@@ -227,7 +227,7 @@ public class BusinessSystem implements LeisureOffice, ODSPersistente, XMLReprese
     /**
      * {@inheritDoc}
      */
-    public Contestacion obtenerContestacion(Review r) {
+    public Nota obtenerContestacion(Examen r) {
         //Recorre el array de contestaciones buscando la review de entrada, y si la encuentra devuelve la contestacion
         for (int i=0;i<Contestaciones.size();i++) {
             if(Contestaciones.get(i).getReview().equals(r)){
@@ -242,7 +242,7 @@ public class BusinessSystem implements LeisureOffice, ODSPersistente, XMLReprese
     /**
      * {@inheritDoc}
      */
-    public boolean eliminaContestacion(Contestacion c) {
+    public boolean eliminaContestacion(Nota c) {
         //Busca la contestacion en la lista de contestaciones y la elimina
         try{
             Contestaciones.remove(c);
@@ -259,7 +259,7 @@ public class BusinessSystem implements LeisureOffice, ODSPersistente, XMLReprese
     /**
      * {@inheritDoc}
      */
-    public boolean nuevoLocal(Local l) { //OK
+    public boolean nuevoLocal(Curso l) { //OK
         Scanner sc = new Scanner(System.in);
         //Primero consulto al usuario si lo que desea eliminar es un bar, restaurante o pub.
              System.out.println("De que tipo quieres que sea el local: 1-Bar 2-Restaurante 3-Pub"); 
@@ -294,17 +294,17 @@ public class BusinessSystem implements LeisureOffice, ODSPersistente, XMLReprese
         if(!existeDireccion){
             switch (tipo) {
                 case 1:
-                    Bar b = new Bar(l.getNombre(),l.getDireccion(),l.getDescripcion());
+                    Master b = new Master(l.getNombre(),l.getDireccion(),l.getDescripcion());
                     Locales.add(b);
                     System.out.println("******Bar añadido*******");
                     break;
                 case 2:
-                    Restaurante r = new Restaurante(l.getNombre(),l.getDireccion(),l.getDescripcion());
+                    Grado r = new Grado(l.getNombre(),l.getDireccion(),l.getDescripcion());
                     Locales.add(r);
                     System.out.println("******Restaurante añadido*******");
                     break;
                 case 3:
-                    Pub p = new Pub(l.getNombre(),l.getDireccion(),l.getDescripcion());
+                    Doctorado p = new Doctorado(l.getNombre(),l.getDireccion(),l.getDescripcion());
                     Locales.add(p);
                     System.out.println("******Pub añadido*******");
                     break;
@@ -323,7 +323,7 @@ public class BusinessSystem implements LeisureOffice, ODSPersistente, XMLReprese
      * {@inheritDoc}
      */
 
-    public boolean eliminarLocal(Local l) {//OK
+    public boolean eliminarLocal(Curso l) {//OK
         //Recibo un objeto de tipo local, hago un try intentando eliminarlo del
         //arraylist locales, si no esta saltará una excepcion que recojo con el catch e indico que no existe.
         try{
@@ -341,12 +341,12 @@ public class BusinessSystem implements LeisureOffice, ODSPersistente, XMLReprese
     /**
      * {@inheritDoc}
      */
-    public Local obtenerLocal(Direccion d) {//OK
+    public Curso obtenerLocal(Nombre d) {//OK
         //Recibo como parametro una dirección (sabemos que existe un único local en una misma dirección)
         //Recorro el arraylist que almacena los locales y cuando encuentro un local en esa dirección lo devuelvo.
         //En caso de no haber ninguno recogo la excepcion y digo al usuario que no hay ningun local.
         try{
-            Local localFound = Locales.stream()
+            Curso localFound = Locales.stream()
                                 .filter(item -> item.getDireccion().equals(d))
                                 .collect(Collectors.toList()).get(0);
             return localFound;
@@ -361,7 +361,7 @@ public class BusinessSystem implements LeisureOffice, ODSPersistente, XMLReprese
     /**
      * {@inheritDoc}
      */
-    public boolean asociarLocal(Local l, Propietario p) {
+    public boolean asociarLocal(Curso l, Propietario p) {
         //Busco en el array de locales el local de entrada y agrego el propietario; el método se encargará de decidir si se puede agregar el propietario o no
         for (int i=0;i<Locales.size();i++) {
             if(Locales.get(i).getDireccion().equals(l.getDireccion())){
@@ -375,7 +375,7 @@ public class BusinessSystem implements LeisureOffice, ODSPersistente, XMLReprese
     /**
      * {@inheritDoc}
      */
-    public boolean desasociarLocal(Local l, Propietario p) {
+    public boolean desasociarLocal(Curso l, Propietario p) {
         
         //Vemos si el local existe, si no existe hemos acabado
         //Si el local existe, sacamos sus propietarios y buscamos el propietario de entrada, si no existe lo indicamos y acabamos, si sí existe lo borramos
@@ -383,7 +383,7 @@ public class BusinessSystem implements LeisureOffice, ODSPersistente, XMLReprese
         //en caso contrario sabemos que podemos indicar que el propietario de entrada no era un propietario del local indicado
         
         if(Locales.stream().anyMatch(item -> l.equals(item))){
-            Usuario[] propietarios = l.getPropietarios();
+            Persona[] propietarios = l.getPropietarios();
             
             for (int i = 0; i<propietarios.length; i++){
                 if(propietarios[i] == p){
@@ -405,7 +405,7 @@ public class BusinessSystem implements LeisureOffice, ODSPersistente, XMLReprese
     /**
      * {@inheritDoc}
      */
-    public boolean actualizarLocal(Local viejoL, Local nuevoL) { //OK
+    public boolean actualizarLocal(Curso viejoL, Curso nuevoL) { //OK
         try{
         Locales.stream().filter(item -> item.getDireccion().equals(viejoL.getDireccion()))
                         .collect(Collectors.toList()).get(0).setDescripcion(nuevoL.getDescripcion());
@@ -428,8 +428,8 @@ public class BusinessSystem implements LeisureOffice, ODSPersistente, XMLReprese
     /**
      * {@inheritDoc}
      */
-    public Review[] verReviews(Local l) {
-        Review[] rev = null;
+    public Examen[] verReviews(Curso l) {
+        Examen[] rev = null;
         //Recorro el array de reviews e incluyo en la lista de items las reviews que tengan ese local
         for (int i=0;i<Reviews.size();i++) {
             if(Reviews.get(i).getLocal().equals(l)){
@@ -445,7 +445,7 @@ public class BusinessSystem implements LeisureOffice, ODSPersistente, XMLReprese
     /**
      * {@inheritDoc}
      */
-    public boolean nuevaReserva(Cliente c, Reservable r, LocalDate ld, LocalTime lt) {
+    public boolean nuevaReserva(Alumno c, Matriculable r, LocalDate ld, LocalTime lt) {
         
         //Comienzo comparando la fecha actual con la fecha de entrada, en caso de que sea igual o mayor continuo
         //Ahora miro si la fecha actual es igual a la fecha de entrada, si es igual miro si la hora de entrada es posterior a la hora actual, en caso contrario paro
@@ -459,7 +459,7 @@ public class BusinessSystem implements LeisureOffice, ODSPersistente, XMLReprese
                     //ver si el cliente existe y si el local existe
                     if(Usuarios.stream().anyMatch(item -> c.equals(item))){
                         if(Locales.stream().anyMatch(item -> r.equals(item))){
-                        Reserva res = new Reserva(c, r, ld, lt, 0);
+                        Matricula res = new Matricula(c, r, ld, lt, 0);
                         Reservas.add(res);
                         return true;
                         }else{
@@ -477,7 +477,7 @@ public class BusinessSystem implements LeisureOffice, ODSPersistente, XMLReprese
             }else{
                 if(Usuarios.stream().anyMatch(item -> c.equals(item))){
                     if(Locales.stream().anyMatch(item -> r.equals(item))){
-                        Reserva res = new Reserva(c, r, ld, lt, 0);
+                        Matricula res = new Matricula(c, r, ld, lt, 0);
                         Reservas.add(res);
                         return true;
                     }else{
@@ -499,8 +499,8 @@ public class BusinessSystem implements LeisureOffice, ODSPersistente, XMLReprese
     /**
      * {@inheritDoc}
      */
-    public Reserva[] obtenerReservas(Cliente c) {
-        Reserva[] res = null;
+    public Matricula[] obtenerReservas(Alumno c) {
+        Matricula[] res = null;
         //Recorro el array de reservas e incluyo en la lista de items las reservas que tengan ese cliente
         for (int i=0;i<Reservas.size();i++) {
             if(Reservas.get(i).getCliente().equals(c)){
@@ -514,8 +514,8 @@ public class BusinessSystem implements LeisureOffice, ODSPersistente, XMLReprese
     /**
      * {@inheritDoc}
      */
-    public Reserva[] obtenerReservas(Reservable r) {
-        Reserva[] res = null;
+    public Matricula[] obtenerReservas(Matriculable r) {
+        Matricula[] res = null;
         //Recorro el array de reservas e incluyo en la lista de items las reservas que tengan ese reservable
         for (int i=0;i<Reservas.size();i++) {
             if(Reservas.get(i).getReservable().equals(r)){
@@ -529,8 +529,8 @@ public class BusinessSystem implements LeisureOffice, ODSPersistente, XMLReprese
     /**
      * {@inheritDoc}
      */
-    public Reserva[] obtenerReservas(LocalDate ld) {
-        Reserva[] res = null;
+    public Matricula[] obtenerReservas(LocalDate ld) {
+        Matricula[] res = null;
         //Recorro el array de reservas e incluyo en la lista de items las reservas que tengan esa fecha
         for (int i=0;i<Reservas.size();i++) {
             if(Reservas.get(i).getFecha().equals(ld)){
@@ -544,7 +544,7 @@ public class BusinessSystem implements LeisureOffice, ODSPersistente, XMLReprese
     /**
      * {@inheritDoc}
      */
-    public boolean eliminarReserva(Reserva r) {
+    public boolean eliminarReserva(Matricula r) {
         //Busca la reserva de entrada en la lista y lo elimina, si la reserva introducida es valida/existe
         try{
             Reservas.remove(r);
@@ -561,8 +561,8 @@ public class BusinessSystem implements LeisureOffice, ODSPersistente, XMLReprese
     /**
      * {@inheritDoc}
      */
-    public Local[] listarLocales(String ciudad, String provincia) { //OK
-        Local LocalesDE[] = new Local[Locales.size()];
+    public Curso[] listarLocales(String ciudad, String provincia) { //OK
+        Curso LocalesDE[] = new Curso[Locales.size()];
         //Recorro el arraylist de los locales y los que están en la provincia y ciudad indicadas los añado al array
         int contador = 0;
         for (int i=0;i<Locales.size();i++) {
@@ -582,10 +582,10 @@ public class BusinessSystem implements LeisureOffice, ODSPersistente, XMLReprese
     /**
      * {@inheritDoc}
      */
-    public Bar[] listarBares(String ciudad, String provincia) { //OK
-        Local LocalesDE[] = new Local[Locales.size()];
-        Direccion d = new Direccion("haro","larioja","alemania","1");
-        Bar bar = new Bar("aux",d,"bonito");
+    public Master[] listarBares(String ciudad, String provincia) { //OK
+        Curso LocalesDE[] = new Curso[Locales.size()];
+        Nombre d = new Nombre("haro","larioja","alemania","1");
+        Master bar = new Master("aux",d,"bonito");
         //Recorro el arraylist de los locales y los que están en la provincia y ciudad indicadas los añado al array
         int contador = 0;
         for (int i=0;i<Locales.size();i++) {
@@ -608,10 +608,10 @@ public class BusinessSystem implements LeisureOffice, ODSPersistente, XMLReprese
     /**
      * {@inheritDoc}
      */
-    public Restaurante[] listarRestaurantes(String ciudad, String provincia) {//OK
-        Local LocalesDE[] = new Local[Locales.size()];
-        Direccion d = new Direccion("haro","larioja","alemania","1");
-        Restaurante restaurante = new Restaurante("aux",d,"bonito");
+    public Grado[] listarRestaurantes(String ciudad, String provincia) {//OK
+        Curso LocalesDE[] = new Curso[Locales.size()];
+        Nombre d = new Nombre("haro","larioja","alemania","1");
+        Grado restaurante = new Grado("aux",d,"bonito");
         //Recorro el arraylist de los locales y los que están en la provincia y ciudad indicadas los añado al array
         int contador = 0;
         for (int i=0;i<Locales.size();i++) {
@@ -631,10 +631,10 @@ public class BusinessSystem implements LeisureOffice, ODSPersistente, XMLReprese
     /**
      * {@inheritDoc}
      */
-    public Pub[] listarPubs(String ciudad, String provincia) {//OK
-        Local LocalesDE[] = new Local[Locales.size()];
-        Direccion d = new Direccion("haro","larioja","alemania","1");
-        Pub pub = new Pub("aux",d,"bonito");
+    public Doctorado[] listarPubs(String ciudad, String provincia) {//OK
+        Curso LocalesDE[] = new Curso[Locales.size()];
+        Nombre d = new Nombre("haro","larioja","alemania","1");
+        Doctorado pub = new Doctorado("aux",d,"bonito");
         //Recorro el arraylist de los locales y los que están en la provincia y ciudad indicadas los añado al array
         int contador = 0;
         for (int i=0;i<Locales.size();i++) {
@@ -654,7 +654,7 @@ public class BusinessSystem implements LeisureOffice, ODSPersistente, XMLReprese
     /**
      * {@inheritDoc}
      */
-    public boolean eliminaContestacion(Review r) {
+    public boolean eliminaContestacion(Examen r) {
         
         //Comenzamos mirando si la review existe, si no existe acabamos
         //Si la review existe buscamos en la lista de contestaciones aquellas que vengan de esa review y las borramos
@@ -681,11 +681,11 @@ public class BusinessSystem implements LeisureOffice, ODSPersistente, XMLReprese
     /**
      * {@inheritDoc}
      */
-    public List <Local> listarTodosBares() { //OK
+    public List <Curso> listarTodosBares() { //OK
         
-        List<Local> LocalesBares = new ArrayList<>();
-        Direccion d = new Direccion("haro","larioja","alemania","1");
-        Bar bar = new Bar("aux",d,"bonito");
+        List<Curso> LocalesBares = new ArrayList<>();
+        Nombre d = new Nombre("haro","larioja","alemania","1");
+        Master bar = new Master("aux",d,"bonito");
         //Recorro el arraylist de los locales y los que están en la provincia y ciudad indicadas los añado al array
         int contador = 0;
         for (int i=0;i<Locales.size();i++) {
@@ -702,11 +702,11 @@ public class BusinessSystem implements LeisureOffice, ODSPersistente, XMLReprese
     /**
      * {@inheritDoc}
      */
-    public List <Local> listarTodosRestaurantes() { //OK
+    public List <Curso> listarTodosRestaurantes() { //OK
         
-        List<Local> LocalesRestaurantes = new ArrayList<>();
-        Direccion d = new Direccion("haro","larioja","alemania","1");
-        Restaurante restaurante = new Restaurante("aux",d,"bonito");
+        List<Curso> LocalesRestaurantes = new ArrayList<>();
+        Nombre d = new Nombre("haro","larioja","alemania","1");
+        Grado restaurante = new Grado("aux",d,"bonito");
         //Recorro el arraylist de los locales y los que están en la provincia y ciudad indicadas los añado al array
         int contador = 0;
         for (int i=0;i<Locales.size();i++) {
@@ -723,11 +723,11 @@ public class BusinessSystem implements LeisureOffice, ODSPersistente, XMLReprese
     /**
      * {@inheritDoc}
      */
-    public List <Local> listarTodosPubs() { //OK
+    public List <Curso> listarTodosPubs() { //OK
         
-        List<Local> LocalesPubs = new ArrayList<>();
-        Direccion d = new Direccion("haro","larioja","alemania","1");
-        Pub pub = new Pub("aux",d,"bonito");
+        List<Curso> LocalesPubs = new ArrayList<>();
+        Nombre d = new Nombre("haro","larioja","alemania","1");
+        Doctorado pub = new Doctorado("aux",d,"bonito");
         //Recorro el arraylist de los locales y los que están en la provincia y ciudad indicadas los añado al array
         int contador = 0;
         for (int i=0;i<Locales.size();i++) {
@@ -745,92 +745,14 @@ public class BusinessSystem implements LeisureOffice, ODSPersistente, XMLReprese
      * 
      * {@inheritDoc}
      */
-    public int importarBares(File f) throws IOException{
-       
-         SpreadSheet s = SpreadSheet.createFromFile(f);
-        //First sheet
-        Sheet sheet = s.getSheet(0);
-        int numeroFilas = sheet.getRowCount();
-        String[] tokens ;
-        
-        //System.out.println("El numero de filas es: "+ numeroFilas);
-        String nombreBar, direccion, localidad,provincia;
-        
-        int contadorExitos = 0;
-        for (int i = 0; i < numeroFilas; i++) {
-           nombreBar =  (String) sheet.getCellAt(0 , i).getValue();//nombre del bar
-           direccion = (String)  sheet.getCellAt(1 , i).getValue();//direccion
-           tokens = direccion.split(" ");
-           
-           localidad =  (String) sheet.getCellAt(2 , i).getValue();//localidad
-           provincia = (String) sheet.getCellAt(3 , i).getValue();//provincia
-           
-            /*System.out.println("Linea: " + i + " nombre bar: " + nombreBar
-                                + " calle: " +tokens[0] + " " + tokens[1]
-                                + " Numero: " + tokens[2] + " localidad: " + localidad
-                                + " provincia:" + provincia);*/
-            //Generamos la direccion
-            Direccion d = new Direccion(localidad,provincia,tokens[0] + " " + tokens[1],tokens[2]);
-            //Generamos el local
-            Local l = new Local(nombreBar,d,"");
-            //Generamos local tipo bar
-            Bar b = new Bar(l.getNombre(),l.getDireccion(),l.getDescripcion());
-            //Lo añadimos a los locales
-            
-            if(Locales.add(b)){
-                contadorExitos ++;
-            }    
-        }
-        
-        System.out.println("Fin de la importación");
-        return contadorExitos;
-    }
+    public int importarBares(File f) throws IOException
     
      /**
      * Función que importa una tabla con registros de Pubs de un fichero .ods
      * 
      * {@inheritDoc}
      */
-    public int importarPubs(File f) throws IOException{
-       
-         SpreadSheet s = SpreadSheet.createFromFile(f);
-        //First sheet
-        Sheet sheet = s.getSheet(0);
-        int numeroFilas = sheet.getRowCount();
-        String[] tokens ;
-        
-        //System.out.println("El numero de filas es: "+ numeroFilas);
-        String nombreBar, direccion, localidad,provincia;
-        
-        int contadorExitos = 0;
-        for (int i = 0; i < numeroFilas; i++) {
-           nombreBar =  (String) sheet.getCellAt(0 , i).getValue();//nombre del bar
-           direccion = (String)  sheet.getCellAt(1 , i).getValue();//direccion
-           tokens = direccion.split(" ");
-           
-           localidad =  (String) sheet.getCellAt(2 , i).getValue();//localidad
-           provincia = (String) sheet.getCellAt(3 , i).getValue();//provincia
-           
-            /*System.out.println("Linea: " + i + " nombre bar: " + nombreBar
-                                + " calle: " +tokens[0] + " " + tokens[1]
-                                + " Numero: " + tokens[2] + " localidad: " + localidad
-                                + " provincia:" + provincia);*/
-            //Generamos la direccion
-            Direccion d = new Direccion(localidad,provincia,tokens[0] + " " + tokens[1],tokens[2]);
-            //Generamos el local
-            Local l = new Local(nombreBar,d,"");
-            //Generamos local tipo bar
-            Pub b = new Pub(l.getNombre(),l.getDireccion(),l.getDescripcion());
-            //Lo añadimos a los locales
-            
-            if(Locales.add(b)){
-                contadorExitos ++;
-            }    
-        }
-        
-        System.out.println("Fin de la importación");
-        return contadorExitos;
-    }
+    public int importarPubs(File f) throws IOException
     
     @Override
     public String toXML() {
@@ -860,13 +782,13 @@ public class BusinessSystem implements LeisureOffice, ODSPersistente, XMLReprese
     public boolean loadXMLFile(File f){
         try {
             // create an instance of `JAXBContext`
-            JAXBContext context = JAXBContext.newInstance(BusinessSystem.class);
+            JAXBContext context = JAXBContext.newInstance(UniSystem.class);
 
             // create an instance of `Unmarshaller`
             Unmarshaller unmarshaller = context.createUnmarshaller();
 
             // convert XML file to `BusinessSystem` object
-            BusinessSystem bs = (BusinessSystem) unmarshaller.unmarshal(f);
+            UniSystem bs = (UniSystem) unmarshaller.unmarshal(f);
 
             // print BusinessSystem object
             System.out.println(bs);
@@ -940,7 +862,7 @@ public class BusinessSystem implements LeisureOffice, ODSPersistente, XMLReprese
 
         Date hoy = new GregorianCalendar(2014, Calendar.FEBRUARY, 11).getTime();
         Cliente c = new Cliente("james876", "12345", new GregorianCalendar(1997, Calendar.APRIL, 23).getTime(), 999);
-        Review r = new Review(puntuacion, "Nice", hoy, l, c);
+        Examen r = new Examen(puntuacion, "Nice", hoy, l, c);
         try{
             if (Locales.contains(l) == true){
                 Reviews.add(r);
@@ -973,7 +895,7 @@ public class BusinessSystem implements LeisureOffice, ODSPersistente, XMLReprese
     }
 
     @Override
-    public boolean insertaReview(Review r) throws RemoteException { //copia de nuevareview
+    public boolean insertaReview(Examen r) throws RemoteException { //copia de nuevareview
         Boolean flag = true;
         for (int i=0;i<Reviews.size();i++) {
             if(Reviews.get(i).getLocal() == r.getLocal() && Reviews.get(i).getFecha() == r.getFecha()){
@@ -997,7 +919,7 @@ public class BusinessSystem implements LeisureOffice, ODSPersistente, XMLReprese
     }
 
     @Override
-    public boolean quitaReview(Review r) throws RemoteException {
+    public boolean quitaReview(Examen r) throws RemoteException {
        Boolean flag = false;
         for (int i=0;i<Reviews.size();i++) {
             if(Reviews.get(i).getLocal() == r.getLocal() && Reviews.get(i).getFecha() == r.getFecha()){
@@ -1022,46 +944,10 @@ public class BusinessSystem implements LeisureOffice, ODSPersistente, XMLReprese
     
 
     @Override
-    public Bar mejorBar(String ciudad) throws RemoteException {
-        Map<String, Integer> map = new HashMap<String, Integer>();
-        String localidad;
-        String nombre;
-        Integer punt,punt_aux;
-        
-        //meto todos los bares de la ciudad en el mapa
-         for (int i=0;i<Reviews.size();i++) {
-            localidad = Reviews.get(i).getLocal().getDireccion().getLocalidad();
-            if( localidad.equals(ciudad)){
-                nombre = Reviews.get(i).getLocal().getNombre();
-                map.put(nombre,0);
-            }
-         }
-         
-         //sumo todas sus puntuaciones
-          for (int i=0;i<Reviews.size();i++) {
-            localidad = Reviews.get(i).getLocal().getDireccion().getLocalidad();
-            if( localidad.equals(ciudad)){
-                nombre = Reviews.get(i).getLocal().getNombre();
-                punt = Reviews.get(i).getValoracion();
-                punt_aux = map.get(nombre);
-                
-                map.put(nombre,punt + punt_aux);
-            }
-         }
-         
-         List<Entry<String, Integer>> list = new ArrayList<>(map.entrySet());
-         list.sort(Entry.comparingByValue());
-         list.forEach(System.out::println);
-         
-        
-        
-         return  (Bar) list.get(list.size() -1);
-         
-         
-    }
+    public Master mejorBar(String ciudad) throws RemoteException 
 
     @Override
-    public Restaurante[] mejoresRestaurantes(String ciudad, Integer num) throws RemoteException {
+    public Grado[] mejoresRestaurantes(String ciudad, Integer num) throws RemoteException {
         Restaurante[] arr = new Restaurante[num];
          List<Local> LocalesRestaurantes = new ArrayList<>();
         Direccion d = new Direccion("haro","larioja","alemania","1");

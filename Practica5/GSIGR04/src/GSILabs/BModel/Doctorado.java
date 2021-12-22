@@ -9,20 +9,26 @@ import GSILabs.BSystem.XMLRepresentable;
 import GSILabs.persistence.XMLParsingException;
 import java.io.File;
 import javax.xml.bind.JAXBException;
+import java.io.StringReader;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
 
 /**
  *
  * @author Arribas
  */
-public class Restaurante extends Local implements Reservable,XMLRepresentable{
+public class Doctorado extends Curso implements Matriculable, XMLRepresentable{
     
-    public Restaurante(String nombre, Direccion direccion, String descripcion) {
+    public Doctorado(String nombre, Nombre direccion, String descripcion) {
         super(nombre, direccion, descripcion);
     }
-
-    public Restaurante(String stringXML) throws JAXBException{
+    
+    
+    public Doctorado(String stringXML) throws JAXBException{
         super(stringXML);
-    }    
+    }
+    
     
     @Override
     public String toXML() {

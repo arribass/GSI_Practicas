@@ -19,26 +19,26 @@ import javax.xml.bind.Unmarshaller;
  *
  * @author Arribas
  */
-public class Direccion implements XMLRepresentable, Serializable {
+public class Nombre implements XMLRepresentable, Serializable {
     
     private String localidad;
     private String provincia;
     private String calle;
     private String numero;
 
-    public Direccion(String Localidad, String Provincia, String Calle, String Numero) {
+    public Nombre(String Localidad, String Provincia, String Calle, String Numero) {
         this.localidad = Localidad;
         this.provincia = Provincia;
         this.calle = Calle;
         this.numero = Numero;
     }
     
-    public Direccion(String stringXML) throws JAXBException{
-        JAXBContext jaxbContext = JAXBContext.newInstance(Direccion.class);
+    public Nombre(String stringXML) throws JAXBException{
+        JAXBContext jaxbContext = JAXBContext.newInstance(Nombre.class);
         Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 
         StringReader reader = new StringReader(stringXML);
-        Direccion direccion = (Direccion) unmarshaller.unmarshal(reader);
+        Nombre direccion = (Nombre) unmarshaller.unmarshal(reader);
         this.localidad = direccion.getLocalidad();
         this.provincia = direccion.getProvincia();
         this.calle = direccion.getCalle();
@@ -75,7 +75,7 @@ public class Direccion implements XMLRepresentable, Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Direccion other = (Direccion) obj;
+        final Nombre other = (Nombre) obj;
         if (!Objects.equals(this.localidad, other.localidad)) {
             return false;
         }

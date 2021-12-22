@@ -8,7 +8,7 @@
 
 package GSILabs.connect;
 
-import GSILabs.BModel.Local;
+import GSILabs.BModel.Curso;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
@@ -27,7 +27,7 @@ public interface LocalFinder extends Remote {
      * @return The local , or a null response
      * @throws RemoteException If some error happens in the remove invocation.
      */
-    public Local getLocal(String name) throws RemoteException;
+    public Curso getLocal(String name) throws RemoteException;
     
     /**
      * Retrieves all the Locals that match, either partial o totally (up to the case and/or spacing),
@@ -36,7 +36,7 @@ public interface LocalFinder extends Remote {
      * @return The list of local, that might eventually contain zero elements
      * @throws RemoteException If some error happens in the remove invocation.
      */
-    public Local[] getLocals(String name) throws RemoteException;
+    public Curso[] getLocals(String name) throws RemoteException;
     
     
 }

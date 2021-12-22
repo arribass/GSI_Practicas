@@ -25,7 +25,7 @@ import org.mozilla.javascript.JavaScriptException;
  *
  * @author LENOVO-arribass
  */
-public class Usuario  implements XMLRepresentable, Serializable{
+public class Persona  implements XMLRepresentable, Serializable{
     private static final AtomicInteger id = new AtomicInteger();
 
     private String nick;
@@ -38,32 +38,32 @@ public class Usuario  implements XMLRepresentable, Serializable{
 
     
 
-    public Usuario(String nick, String password, Date fechaNacimiento, int perfil) {
+    public Persona(String nick, String password, Date fechaNacimiento, int perfil) {
         try {
             usuarioValido(nick,password,fechaNacimiento,perfil);
             this.nick = nick;
             this.password = password;
             this.fechaNacimiento = fechaNacimiento;
             this.perfil = perfil == 1?"Cliente":"Propietario";
-            Usuario.id.addAndGet(1);
+            Persona.id.addAndGet(1);
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException("Parametros de usuario invalido" + e.toString());
         }
     }
     
-    public Usuario(String stringXML) throws JAXBException{
+    public Persona(String stringXML) throws JAXBException{
         try{
-            JAXBContext jaxbContext = JAXBContext.newInstance(Usuario.class);
+            JAXBContext jaxbContext = JAXBContext.newInstance(Persona.class);
             Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 
             StringReader reader = new StringReader(stringXML);
-            Usuario usuario = (Usuario) unmarshaller.unmarshal(reader);
+            Persona usuario = (Persona) unmarshaller.unmarshal(reader);
 
             this.nick = usuario.getNick();
             this.password = usuario.getPassword();
             this.fechaNacimiento = usuario.getFechaNacimiento();
             this.perfil = usuario.getPerfil();
-            Usuario.id.addAndGet(1);
+            Persona.id.addAndGet(1);
         } catch(IllegalArgumentException e) {
             throw new IllegalArgumentException("Parametros de usuario invalido" + e.toString());
         }

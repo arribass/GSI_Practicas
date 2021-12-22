@@ -16,13 +16,13 @@ import javax.xml.bind.JAXBException;
  *
  * @author LENOVO-arribass
  */
-public class Cliente extends Usuario implements XMLRepresentable, Serializable{
+public class Alumno extends Persona implements XMLRepresentable, Serializable{
 
-    public Cliente(String nick, String password, Date fechaNacimiento, int perfil) {
+    public Alumno(String nick, String password, Date fechaNacimiento, int perfil) {
         super(nick, password, fechaNacimiento, perfil);
     }
     
-    public Cliente(String stringXML) throws JAXBException{
+    public Alumno(String stringXML) throws JAXBException{
         super(stringXML);
         
     }

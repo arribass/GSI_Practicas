@@ -5,10 +5,10 @@
  */
 package GSILabs.connect;
 
-import GSILabs.BModel.Cliente;
-import GSILabs.BModel.Direccion;
-import GSILabs.BModel.Local;
-import GSILabs.BModel.Review;
+import GSILabs.BModel.Alumno;
+import GSILabs.BModel.Nombre;
+import GSILabs.BModel.Curso;
+import GSILabs.BModel.Examen;
 import static GSILabs.connect.ClientHub.sc;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -52,8 +52,8 @@ public class AdminHub {
             //Instanciar un objeto de la clase del servidor
             AdminGateway ag=(AdminGateway) registro.lookup(tag);	
             //Uso del servicio
-            Direccion d = new Direccion("Haro", "La Rioja", "Avenida mayor", "3");
-            Local l = new Local("Casa Paco", d, "Bar elegante en el centro.");
+            Nombre d = new Nombre("Haro", "La Rioja", "Avenida mayor", "3");
+            Curso l = new Curso("Casa Paco", d, "Bar elegante en el centro.");
             ag.eliminaLocal(l);
             System.out.println("Fin");
             

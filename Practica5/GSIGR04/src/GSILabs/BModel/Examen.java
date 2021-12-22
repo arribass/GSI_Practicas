@@ -18,14 +18,14 @@ import javax.xml.bind.Unmarshaller;
  *
  * @author Arribas
  */
-public class Review  implements XMLRepresentable, Serializable{
+public class Examen  implements XMLRepresentable, Serializable{
     private int valoracion;
     private String comentario;
     private Date fecha;
-    private Local local; //añadir de alguna manera a que local pertenece
-    private Cliente cliente;
+    private Curso local; //añadir de alguna manera a que local pertenece
+    private Alumno cliente;
 
-    public Review(int valoracion, String comentario, Date fecha, Local local, Cliente cliente){
+    public Examen(int valoracion, String comentario, Date fecha, Curso local, Alumno cliente){
         this.valoracion = valoracion;
         this.comentario = comentario;
         this.fecha = fecha;
@@ -33,12 +33,12 @@ public class Review  implements XMLRepresentable, Serializable{
         this.cliente = cliente;
     }
 
-    public Review(String stringXML) throws JAXBException{
-        JAXBContext jaxbContext = JAXBContext.newInstance(Review.class);
+    public Examen(String stringXML) throws JAXBException{
+        JAXBContext jaxbContext = JAXBContext.newInstance(Examen.class);
         Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 
         StringReader reader = new StringReader(stringXML);
-        Review review = (Review) unmarshaller.unmarshal(reader);
+        Examen review = (Examen) unmarshaller.unmarshal(reader);
         
         this.valoracion = review.getValoracion();
         this.comentario = review.getComentario();
@@ -52,7 +52,7 @@ public class Review  implements XMLRepresentable, Serializable{
     return this.fecha;
     }
 
-    public Local getLocal() {
+    public Curso getLocal() {
         return local;
     }
 
@@ -64,7 +64,7 @@ public class Review  implements XMLRepresentable, Serializable{
         return valoracion;
     }
 
-    public Cliente getCliente() {
+    public Alumno getCliente() {
         return cliente;
     }
 

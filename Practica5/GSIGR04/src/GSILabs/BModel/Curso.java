@@ -21,39 +21,39 @@ import java.util.Set;
  *
  * @author LENOVO-arribass
  */
-public class Local implements XMLRepresentable, Serializable{
+public class Curso implements XMLRepresentable, Serializable{
     //private static final Set<String> nombres = new HashSet<String>();
 
     private String nombre;
-    private Direccion direccion;
+    private Nombre direccion;
     private String descripcion;
-    private Usuario[] propietarios;
+    private Persona[] propietarios;
     
     private final int maxDescripcion = 300;
 
-    public Local(String nombre, Direccion direccion, String descripcion) {
+    public Curso(String nombre, Nombre direccion, String descripcion) {
         this.nombre = nombre;
         this.direccion = direccion;
         if (descripcion.length() > maxDescripcion){
             descripcion = descripcion.substring(0, maxDescripcion);
         }
         this.descripcion = descripcion;
-        this.propietarios = new Usuario[3];
+        this.propietarios = new Persona[3];
     }
     
-    public Local(String stringXML) throws JAXBException{
-        JAXBContext jaxbContext = JAXBContext.newInstance(Local.class);
+    public Curso(String stringXML) throws JAXBException{
+        JAXBContext jaxbContext = JAXBContext.newInstance(Curso.class);
         Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 
         StringReader reader = new StringReader(stringXML);
-        Local local = (Local) unmarshaller.unmarshal(reader);
+        Curso local = (Curso) unmarshaller.unmarshal(reader);
         this.nombre = local.getNombre();
         this.direccion = local.getDireccion();
         this.descripcion = local.getDescripcion();
         this.propietarios = local.getPropietarios();
     }
     
-    public Direccion getDireccion(){
+    public Nombre getDireccion(){
         return this.direccion;
     }
 
@@ -69,7 +69,7 @@ public class Local implements XMLRepresentable, Serializable{
         this.nombre = nombre;
     }
 
-    public void setDireccion(Direccion direccion) {
+    public void setDireccion(Nombre direccion) {
         this.direccion = direccion;
     }
 
@@ -77,7 +77,7 @@ public class Local implements XMLRepresentable, Serializable{
         this.descripcion = descripcion;
     }
 
-    public boolean anadirPropietario(Usuario u){
+    public boolean anadirPropietario(Persona u){
         //si ya existen los 3 propietarios indico que no se pueden añadir más y salgo
         if(propietarios[0] != null && propietarios[1] != null && propietarios[2] != null){
             System.out.println("Máximo de propietarios (3) ya alcanzado");
@@ -95,11 +95,11 @@ public class Local implements XMLRepresentable, Serializable{
         }
     }     
 
-    public Usuario[] getPropietarios() {
+    public Persona[] getPropietarios() {
         return propietarios;
     }
 
-    public void setPropietarios(Usuario[] propietarios) {
+    public void setPropietarios(Persona[] propietarios) {
         this.propietarios = propietarios;
     }
 

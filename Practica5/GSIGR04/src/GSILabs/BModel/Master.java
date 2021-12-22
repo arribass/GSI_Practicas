@@ -6,9 +6,8 @@
 package GSILabs.BModel;
 
 import GSILabs.BSystem.XMLRepresentable;
-import GSILabs.persistence.XMLParsingException;
 import java.io.File;
-import javax.xml.bind.JAXBException;
+import GSILabs.persistence.XMLParsingException;
 import java.io.StringReader;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -18,18 +17,37 @@ import javax.xml.bind.Unmarshaller;
  *
  * @author Arribas
  */
-public class Pub extends Local implements Reservable, XMLRepresentable{
+public class Master extends Curso implements XMLRepresentable{
     
-    public Pub(String nombre, Direccion direccion, String descripcion) {
+    private String Duenos[] = new String[3];
+    
+   
+    
+    public Master(String nombre, Nombre direccion, String descripcion) {
         super(nombre, direccion, descripcion);
     }
     
     
-    public Pub(String stringXML) throws JAXBException{
+    
+    public Master(String stringXML) throws JAXBException{
         super(stringXML);
+        
     }
     
     
+    
+    private void anadirDueno(String dueno){
+        if(this.Duenos[0] == null){
+            this.Duenos[0] = dueno;
+        } else if(this.Duenos[1] == null){
+            this.Duenos[1] = dueno;
+        } else if(this.Duenos[2] == null){
+            this.Duenos[2] = dueno;
+        } else if(this.Duenos[2] != null){
+            System.out.println("Este bar ya tiene 3 dueños.");
+        }
+    }
+
     @Override
     public String toXML() {
         try{
@@ -65,4 +83,5 @@ public class Pub extends Local implements Reservable, XMLRepresentable{
         }
         return false;
     }
+    
 }

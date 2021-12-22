@@ -4,55 +4,27 @@
  * and open the template in the editor.
  */
 package GSILabs.BModel;
+
 import GSILabs.BSystem.XMLRepresentable;
 import GSILabs.persistence.XMLParsingException;
 import java.io.File;
-import java.util.Date;
-
 import javax.xml.bind.JAXBException;
-import java.io.StringReader;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Unmarshaller;
+
 /**
  *
  * @author Arribas
  */
-public class Contestacion implements XMLRepresentable {
-    private Review review;
-    private String comentario;
-    private Date fecha;
-
-    public Contestacion(Review review, String comentario, Date fecha){
-        this.review = review;
-        this.comentario = comentario;
-        this.fecha = fecha;
-    }
-
-    public Contestacion(String stringXML) throws JAXBException{
-        JAXBContext jaxbContext = JAXBContext.newInstance(Contestacion.class);
-        Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-
-        StringReader reader = new StringReader(stringXML);
-        Contestacion contestacion = (Contestacion) unmarshaller.unmarshal(reader);
-        
-        this.review = contestacion.getReview();
-        this.comentario = contestacion.getComentario();
-        this.fecha = contestacion.getFecha();
-    }
+public class Grado extends Curso implements Matriculable,XMLRepresentable{
     
-    public Review getReview() {
-        return review;
+    public Grado(String nombre, Nombre direccion, String descripcion) {
+        super(nombre, direccion, descripcion);
     }
 
-    public String getComentario() {
-        return comentario;
-    }
-
-    public Date getFecha() {
-        return fecha;
-    }
-
-   @Override
+    public Grado(String stringXML) throws JAXBException{
+        super(stringXML);
+    }    
+    
+    @Override
     public String toXML() {
         try{
             
@@ -87,6 +59,4 @@ public class Contestacion implements XMLRepresentable {
         }
         return false;
     }
-    
-    
 }
