@@ -141,14 +141,14 @@ public class P01Tester {
                     System.out.println("Introduce el numero: "); 
                     String numero = sc.nextLine();
                     //Genero la dirección.
-                    EscuelaPertenece d = new EscuelaPertenece(localidad,provincia,calle,numero);
+                    EscuelaPertenece d = new EscuelaPertenece(localidad,provincia,calle);
 
                     //Pido la descripcion del local al usuario.
                     System.out.println("Introduce la descripción del local: "); 
                     String descripcionLocal = sc.nextLine();
                     Curso l = new Curso(nombreLocal,d,descripcionLocal);
                     //añado el nuevo local
-                    bs.nuevoLocal(l);
+                    bs.nuevoCurso(l);
                     break;
                 case 4://Añadir review
                     System.out.println("¿cual es tu puntuacion de 1 a 5?");
@@ -162,18 +162,16 @@ public class P01Tester {
                     String comentario = sc.nextLine();
 
                     Date fecha = new Date(); //coge la fecha actual
-                    System.out.println("Vas a introducir la dirección del local al que quieres añadir comentario\n");         
-                    System.out.println("Introduce la localidad: "); 
+                    System.out.println("Vas a introducir la escuela del curso al que quieres añadir examen\n");         
+                    System.out.println("Introduce el nombre: "); 
                     String loc = sc.nextLine();         
-                    System.out.println("Introduce la provincia: "); 
+                    System.out.println("Introduce el director: "); 
                     String prov = sc.nextLine();       
-                    System.out.println("Introduce la calle: "); 
+                    System.out.println("Introduce el edificio central: "); 
                     String cal = sc.nextLine();       
-                    System.out.println("Introduce el numero: "); 
-                    String num = sc.nextLine();
-                    //Genero la dirección.
-                    EscuelaPertenece dir = new EscuelaPertenece(loc,prov,cal,num);
-                    Curso local = bs.obtenerLocal(dir);
+                    //Genero la escuela.
+                    EscuelaPertenece dir = new EscuelaPertenece(loc,prov,cal);
+                    Curso local = bs.obtenerCurso(dir);
                     Examen r = new Examen(valint,comentario,fecha,local, c);
                     bs.nuevaReview(r);
                     break;
@@ -189,11 +187,11 @@ public class P01Tester {
                     System.out.println("Introduce el numero: "); 
                     String numeroB = sc.nextLine();
                     //Genero la dirección.
-                    EscuelaPertenece dB = new EscuelaPertenece(localidadB,provinciaB,calleB,numeroB);
+                    EscuelaPertenece dB = new EscuelaPertenece(localidadB,provinciaB,calleB);
                     //Cojo el local de esa dirección
-                    Curso localEliminar = bs.obtenerLocal(dB);
+                    Curso localEliminar = bs.obtenerCurso(dB);
                     //elimino el local
-                    bs.eliminarLocal(localEliminar);                    
+                    bs.eliminarCurso(localEliminar);                    
                     break;
                 case 6: //Listar locales
                     System.out.println("Introduce la provincia deseada "); 
@@ -201,7 +199,7 @@ public class P01Tester {
                     System.out.println("Introduce la ciudad deseada "); 
                     String ciudadD = sc.nextLine();
                     System.out.println("Listado de locales en: "+ ciudadD + ", "+ provinciaD +"\n");   
-                    Curso localeslist[] = bs.listarLocales(ciudadD, provinciaD);                                        
+                    Curso localeslist[] = bs.listarCursos(ciudadD, provinciaD);                                        
                     break;
                 case 7: //Obtener Local
                     System.out.println("Introduce la localidad: "); 
@@ -213,8 +211,8 @@ public class P01Tester {
                     System.out.println("Introduce el numero: "); 
                     String numeroc = sc.nextLine();
                     //Genero la dirección.
-                    EscuelaPertenece dc = new EscuelaPertenece(localidadc,provinciac,callec,numeroc);
-                    Curso local1 = bs.obtenerLocal(dc);
+                    EscuelaPertenece dc = new EscuelaPertenece(localidadc,provinciac,callec);
+                    Curso local1 = bs.obtenerCurso(dc);
                     
                     if(local1 != null){
                         System.out.println("Local encontrado");
@@ -233,8 +231,8 @@ public class P01Tester {
                     System.out.println("Introduce el numero: "); 
                     numeroc = sc.nextLine();
                     //Genero la dirección.
-                    EscuelaPertenece dd = new EscuelaPertenece(localidadc,provinciac,callec,numeroc);
-                    Curso localviejo = bs.obtenerLocal(dd);
+                    EscuelaPertenece dd = new EscuelaPertenece(localidadc,provinciac,callec);
+                    Curso localviejo = bs.obtenerCurso(dd);
                     
                     //Variables auxiliares.
                     String nuevaDescripcion = null;
@@ -282,7 +280,7 @@ public class P01Tester {
                             callec = sc2.nextLine();       
                             System.out.println("Introduce el numero: "); 
                             numeroc = sc2.nextLine();
-                            nuevaDireccion = new EscuelaPertenece(localidadc,provinciac,callec,numeroc);
+                            nuevaDireccion = new EscuelaPertenece(localidadc,provinciac,callec);
                             try{
                                nuevaDescripcion = localviejo.getContenidos();
                                 nuevoNombre = localviejo.getNombre(); 
@@ -298,7 +296,7 @@ public class P01Tester {
                             break;
                     }   
                     try{
-                        bs.actualizarLocal(localviejo, new Curso(nuevoNombre,nuevaDireccion,nuevaDescripcion));
+                        bs.actualizarCurso(localviejo, new Curso(nuevoNombre,nuevaDireccion,nuevaDescripcion));
                     }catch(Exception e){
                         System.out.println("no se ha podido actualizar porque no existe un local en esa direccion");
                     }
@@ -309,7 +307,7 @@ public class P01Tester {
                     System.out.println("Introduce la ciudad deseada "); 
                     ciudadD = sc.nextLine();
                     System.out.println("Listado de bares en: "+ ciudadD + ", "+ provinciaD +"\n");   
-                    Curso localeslist2[] = bs.listarBares(ciudadD, provinciaD);                                        
+                    Curso localeslist2[] = bs.listarMasteres(ciudadD, provinciaD);                                        
                     break;
                 case 10: //Listar solo restaurantes
                     System.out.println("Introduce la provincia deseada "); 
@@ -317,7 +315,7 @@ public class P01Tester {
                     System.out.println("Introduce la ciudad deseada "); 
                     ciudadD = sc.nextLine();
                     System.out.println("Listado de restaurantes en: "+ ciudadD + ", "+ provinciaD +"\n");   
-                    Curso localeslist3[] = bs.listarRestaurantes(ciudadD, provinciaD);                                        
+                    Curso localeslist3[] = bs.listarGrados(ciudadD, provinciaD);                                        
                     break;
                 case 11: //Listar solo pubs
                     System.out.println("Introduce la provincia deseada "); 
@@ -325,7 +323,7 @@ public class P01Tester {
                     System.out.println("Introduce la ciudad deseada "); 
                     ciudadD = sc.nextLine();
                     System.out.println("Listado de pubs en: "+ ciudadD + ", "+ provinciaD +"\n");   
-                    Curso localeslist4[] = bs.listarPubs(ciudadD, provinciaD);                                        
+                    Curso localeslist4[] = bs.listarDoctorados(ciudadD, provinciaD);                                        
                     break;
                 
                 //Ejercicio 4 S10, no se pueden añadir dos reviews del mismo usuario, el mismo dia para el mismo local
@@ -348,14 +346,14 @@ public class P01Tester {
                     System.out.println("Introduce el numero: \n"); 
                     String numero1 = sc.nextLine();
                     //Genero la dirección.
-                    EscuelaPertenece d1 = new EscuelaPertenece(localidad1,provincia1,calle1,numero1);
+                    EscuelaPertenece d1 = new EscuelaPertenece(localidad1,provincia1,calle1);
 
                     //Pido la descripcion del local al usuario.
                     System.out.println("Introduce la descripción del local: \n"); 
                     String descripcionLocal2 = sc.nextLine();
                     Curso l2 = new Curso(nombreLocal1,d1,descripcionLocal2);
                     //añado el nuevo local
-                    bs.nuevoLocal(l2);
+                    bs.nuevoCurso(l2);
                     //Creo cliente
         
                     //Creamos la primera review con la fecha y el local introducidos
@@ -396,14 +394,14 @@ public class P01Tester {
                     System.out.println("Introduce el numero: \n"); 
                     String numero13 = sc.nextLine();
                     //Genero la dirección.
-                    EscuelaPertenece d13 = new EscuelaPertenece(localidad13,provincia13,calle13,numero13);
+                    EscuelaPertenece d13 = new EscuelaPertenece(localidad13,provincia13,calle13);
 
                     //Pido la descripcion del local al usuario.
                     System.out.println("Introduce la descripción del local: \n"); 
                     String descripcionLocal23 = sc.nextLine();
                     Curso l23 = new Curso(nombreLocal13,d13,descripcionLocal23);
                     //añado el nuevo local
-                    bs.nuevoLocal(l23);
+                    bs.nuevoCurso(l23);
                     
                     //Una vez agregado el local vamos a agregar los tres propietarios
                     
@@ -450,7 +448,7 @@ public class P01Tester {
                         //Simplemente vamos a crear una contestacion en cuyo constructor no va a haber una review válida ya que simplemente no la hemos creado
                         //Para ello vamos a capturar el error que nos va a lanzar el compilador e indicar el porque
                         try{
-                            Nota contestacion = new Nota(rev2345, "comentario", fechaContestacion);
+                            Nota contestacion = new Nota(rev2345, 3, fechaContestacion);
                         }catch(RuntimeException e){
                             System.out.println("Se ha intentado crear una contestacion a una review que no existe");
                         }
@@ -461,15 +459,15 @@ public class P01Tester {
 
                 case 15:
                     //Creamos un local en la direccion dr
-                    EscuelaPertenece dr = new EscuelaPertenece("Pamplona", "Navarra", "Tajonar", "4");
+                    EscuelaPertenece dr = new EscuelaPertenece("upna","paco paco","aulario");
                     Curso locaux = new Curso("BarNistelroy", dr, "bonito");
                     
-                    bs.nuevoLocal(locaux);
+                    bs.nuevoCurso(locaux);
                     //borramos el local
-                    bs.eliminarLocal(locaux);
+                    bs.eliminarCurso(locaux);
                     //insertamos un nuevo bar en esa misma direccion y nos permite hacerlo
                     Master bar = new Master("BarNistelroy2", dr, "bonito");
-                    bs.nuevoLocal(bar);
+                    bs.nuevoCurso(bar);
                 break;
                 case 16:
                     
@@ -548,12 +546,12 @@ public class P01Tester {
                     
                 case 17:
                     //inserto un local en la direccion dr
-                    dr = new EscuelaPertenece("Pamplona", "Navarra", "Tajonar", "4");
+                    dr = new EscuelaPertenece("upna","paco paco","aulario");
                     locaux = new Curso("BarNistelroy", dr, "bonito");                    
-                    bs.nuevoLocal(locaux);
+                    bs.nuevoCurso(locaux);
                     //intento insertar un nuevo bar en esa misma direccion y me dice que no se puede.
                     Curso locaux2 = new Curso("BarNistelroy2", dr, "bonito");
-                    bs.nuevoLocal(locaux2);
+                    bs.nuevoCurso(locaux2);
                     break;
                 case 18:
                     //Creo un usuario y lo inserto
@@ -573,18 +571,18 @@ public class P01Tester {
                 case 21:
                     //Importa datos de locales tipo bares de una hoja de calculo
                     final File fileBares = new File("test06.ods");
-                    int exitosBares = bs.importarBares(fileBares);
+                    int exitosBares = bs.importarMasteres(fileBares);
                     System.out.println("Numero de bares añadidos con éxito: " + exitosBares);
-                    //Local listaLocales[] = bs.listarLocales("Barcelona", "Barcelona");
+                    //Local listaLocales[] = bs.listarCursos("Barcelona", "Barcelona");
                     break;
                 case 22:
                      //Importa datos de locales tipo bares de una hoja de calculo
                     /*Aunque test06.ods es una hoja con bares se puede utilizar tambien para
-                    comprobar el funcionamiento de la función importarPubs*/
+                    comprobar el funcionamiento de la función importarDoctorados*/
                     final File filePubs = new File("test06.ods");
-                    int exitosPubs = bs.importarPubs(filePubs);
+                    int exitosPubs = bs.importarDoctorados(filePubs);
                     System.out.println("Numero de Pubs añadidos con éxito: " + exitosPubs);
-                    //Local listaLocales[] = bs.listarLocales("Barcelona", "Barcelona");
+                    //Local listaLocales[] = bs.listarCursos("Barcelona", "Barcelona");
                     break;
                  
             }

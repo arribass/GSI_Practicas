@@ -52,9 +52,9 @@ public class AdminHub {
             //Instanciar un objeto de la clase del servidor
             AdminGateway ag=(AdminGateway) registro.lookup(tag);	
             //Uso del servicio
-            EscuelaPertenece d = new EscuelaPertenece("Haro", "La Rioja", "Avenida mayor", "3");
+            EscuelaPertenece d = new EscuelaPertenece("upna","paco paco","aulario");
             Curso l = new Curso("Casa Paco", d, "Bar elegante en el centro.");
-            ag.eliminaLocal(l);
+            ag.eliminaCurso(l);
             System.out.println("Fin");
             
         }catch (Exception e){

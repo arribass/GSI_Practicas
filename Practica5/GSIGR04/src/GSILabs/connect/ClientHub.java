@@ -52,24 +52,24 @@ public class ClientHub {
             //Instanciar un objeto de la clase del servidor
             ClientGateway cg = (ClientGateway) registro.lookup(tag);
             //Uso del servicio
-            EscuelaPertenece d = new EscuelaPertenece("Haro", "La Rioja", "Avenida mayor", "3");
+            EscuelaPertenece d = new EscuelaPertenece("upna","paco paco","aulario");
             Curso l = new Curso("Casa Paco", d, "Bar elegante en el centro.");
             Date fecha = new Date();
             Alumno c = new Alumno("davidgnomo", "12345", new GregorianCalendar(1996, Calendar.MARCH, 14).getTime(), 1);
             Examen r = new Examen(6, "Muy limpio y bonito.", fecha, l, c);
             //Comprobación insertarReview
-            cg.insertaReview(r);
+            cg.insertaExamen(r);
             
             //Comprobación quitarReview
-            cg.quitaReview(r);
+            cg.quitaExamen(r);
             
-            //Comprobación mejorBar
-            //cg.mejorBar("ciudad");
+            //Comprobación mejorMaster
+            //cg.mejorMaster("ciudad");
             /*Como en ClienteGateway.java no está declarada la función añadir local
               no se puede comprobar la función mejorar bar ya que no podemos insertar 
               locales tipo bares.*/
             
-            //Comprobación mejoresRestaurantes
+            //Comprobación mejoresGrados
             /*Misma situación*/
             
             

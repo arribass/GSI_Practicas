@@ -32,7 +32,7 @@ public interface ClientGateway extends Remote, LocalFinder{
      * @return True si y solo si la operacion fue completada.
      * @throws RemoteException If some error happens in the remove invocation.
      */
-    public boolean insertaReview(Examen r) throws RemoteException;
+    public boolean insertaExamen(Examen r) throws RemoteException;
     
     /**
      * Elimina una review del sistema, siempre y cuando exista y no tenga una 
@@ -41,7 +41,7 @@ public interface ClientGateway extends Remote, LocalFinder{
      * @return True si y solo si la operacion fue completada.
      * @throws RemoteException If some error happens in the remove invocation.
      */
-    public boolean quitaReview(Examen r) throws RemoteException;
+    public boolean quitaExamen(Examen r) throws RemoteException;
 	
 	/**
      * Devuelve el mejor bar de la cuidad que coincida con el nombre.
@@ -49,7 +49,7 @@ public interface ClientGateway extends Remote, LocalFinder{
      * @return El bar con mejor puntuación media de la cuidad
      * @throws RemoteException If some error happens in the remove invocation.
      */
-    public Master mejorBar(String ciudad) throws RemoteException;
+    public Master mejorMaster(String ciudad) throws RemoteException;
 	
 	
 	/**
@@ -58,7 +58,7 @@ public interface ClientGateway extends Remote, LocalFinder{
      * @return Una tabla con Num restaurantes, conteniendo nulls en caso de que no existan tantos.
      * @throws RemoteException If some error happens in the remove invocation.
      */
-    public Grado[] mejoresRestaurantes(String ciudad,Integer num)  throws RemoteException;
+    public Grado[] mejoresGrados(String ciudad,Integer num)  throws RemoteException;
 
     
 }

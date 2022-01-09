@@ -116,7 +116,7 @@ public class SSTest04 {
                    System.out.println("Introduce el numero: "); 
                    String numero = sc.nextLine();
                    //Genero la dirección.
-                   EscuelaPertenece d = new EscuelaPertenece(localidad,provincia,calle,numero);
+                   EscuelaPertenece d = new EscuelaPertenece(localidad,provincia,calle);
 
                    //Pido la descripcion del local al usuario.
                    System.out.println("Introduce la descripción del local: "); 
@@ -132,7 +132,7 @@ public class SSTest04 {
                    Persona u = bs.obtenerUsuario(nombrePro);
                   
                    l.anadirPropietario(u);
-                   bs.nuevoLocal(l);
+                   bs.nuevoCurso(l);
                    break;
 
                 case 3://guardar los datos de bar, restaurante y pub en un fichero .ods 
@@ -143,7 +143,7 @@ public class SSTest04 {
                     hojaBares.setName("Bares");
                     //Listar todos los bares 
                     List<Curso> listaBares = new ArrayList<>();
-                    listaBares = bs.listarTodosBares();
+                    listaBares = bs.listarTodosMasteres();
                     
                    
                     for (int i=0;i<listaBares.size();i++) {
@@ -162,7 +162,7 @@ public class SSTest04 {
                     hojaRestaurantes.setName("Restaurantes");
                     //Listar todos los Restaurantes
                     List<Curso> listaRestaurantes = new ArrayList<>();
-                    listaRestaurantes = bs.listarTodosRestaurantes();
+                    listaRestaurantes = bs.listarTodosGrados();
                     
                     
                     for (int i=0;i<listaRestaurantes.size();i++) {
@@ -178,7 +178,7 @@ public class SSTest04 {
                     hojaPubs.setName("Pubs");
                     //Listar todos los Restaurantes
                     List<Curso> listaPubs = new ArrayList<>();
-                    listaPubs = bs.listarTodosPubs();
+                    listaPubs = bs.listarTodosDoctorados();
                     
                     
                     for (int i=0;i<listaPubs.size();i++) {
