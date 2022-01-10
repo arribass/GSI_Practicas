@@ -49,7 +49,7 @@ public class P01Tester {
         String passwordUsuario;
         String nombreUsuario;
         String psw;
-        Alumno c;
+        Alumno c = null;
         Scanner sc = new Scanner(System.in);
         System.out.println("Introduzca su nombre de usuario: ");
         nombreUsuario = sc.nextLine();
@@ -81,7 +81,7 @@ public class P01Tester {
                 break;
             }
         }
-        
+
         br.close();
         //Menú principal, el usuario elige que quiere hacer.
         int choice=999;
