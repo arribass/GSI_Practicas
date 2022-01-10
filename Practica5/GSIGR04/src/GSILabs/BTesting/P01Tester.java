@@ -73,7 +73,7 @@ public class P01Tester {
         String line;
         while ( (line = br.readLine()) != null ) {
             String[] values = line.split(",");
-            String[] nia = nombreUsuario.split(".");
+            String[] nia = nombreUsuario.split("\\.");
             if(values[0].equals(nia[1])) {
                 Date date = format.parse(values[2]);
                 //Si encuentra un match de usuario, recoge la contraseña de éste

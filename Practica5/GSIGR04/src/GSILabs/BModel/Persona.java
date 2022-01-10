@@ -34,7 +34,7 @@ public class Persona  implements XMLRepresentable, Serializable{
     private String centroUltimosEstudiosAnteriores;
    
     private final int EDAD_MINIMA  = 18;
-    private final int LONGITUD_MINIMA_NICK = 6;
+    private final int LONGITUD_MINIMA_NICK = 3;
 
     
 
