@@ -31,6 +31,11 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import GSILabs.BModel.Matriculable;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.text.DateFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 /**
  *
@@ -38,14 +43,47 @@ import GSILabs.BModel.Matriculable;
  */
 public class P01Tester {
                
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, ParseException {
         // Instanciamos una clase BusinessSystem
         UniSystem bs = new UniSystem();
         String passwordUsuario;
         String nombreUsuario;
-        Alumno c = new Alumno("james876", "12345", new GregorianCalendar(1997, Calendar.APRIL, 23).getTime(), 999);
-        //Menú principal, el usuario elige que quiere hacer.
+        String psw;
+        Alumno c;
         Scanner sc = new Scanner(System.in);
+        System.out.println("Introduzca su nombre de usuario: ");
+        nombreUsuario = sc.nextLine();
+        passwordUsuario = searchCsvUser(nombreUsuario);
+        
+        if (passwordUsuario == null){
+            System.out.println("El usuario no existe. El programa finalizará ahora mismo...");
+            System.exit(1);
+        }
+        System.out.printf("Introduzca la contraseña para el usuario %s: ", nombreUsuario);
+        psw  = sc.nextLine();
+        
+        if (!psw.equals(passwordUsuario)){
+            System.out.println("La contraseña del usuario es incorrecta. El programa finalizará ahora mismo...");
+            System.exit(1);
+        }
+        System.out.println("Ha iniciado sesión con éxito");
+        
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+        BufferedReader br = new BufferedReader(new FileReader("alumnos.csv"));
+        String line;
+        while ( (line = br.readLine()) != null ) {
+            String[] values = line.split(",");
+            String[] nia = nombreUsuario.split(".");
+            if(values[0].equals(nia[1])) {
+                Date date = format.parse(values[2]);
+                //Si encuentra un match de usuario, recoge la contraseña de éste
+                c = new Alumno(nia[1], values[1], date, Integer.parseInt(values[3]));
+                break;
+            }
+        }
+        
+        br.close();
+        //Menú principal, el usuario elige que quiere hacer.
         int choice=999;
         do {
             System.out.println("0. Salir\n"
@@ -592,5 +630,25 @@ public class P01Tester {
     private static void nuevaReview(Examen r){
         //TODO: comprobar que no haya otra review para esa fecha y ese local
 //        Reviews.add(r);//Hay que añadir en businessSystem no en el tester CAMBIAR
+    }
+    
+    //Función para buscar en un csv
+    public static String searchCsvUser(String searchString) throws IOException {
+        BufferedReader br = new BufferedReader(new FileReader("usuarios.csv"));
+        String line;
+        //Inicializo la contraseña a null
+        String psw = null;
+        while ( (line = br.readLine()) != null ) {
+            String[] values = line.split(",");
+            if(values[1].equals(searchString)) {
+                //Si encuentra un match de usuario, recoge la contraseña de éste
+                psw = values[2];
+                break;
+            }
+        }
+        br.close();
+        //Devuelvo la variable contraseña, en caso de haberla encontrado será el 
+        //valor de ésta, si no, será null
+        return psw;
     }
 }
