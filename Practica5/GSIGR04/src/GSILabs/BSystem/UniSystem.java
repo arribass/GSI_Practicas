@@ -262,7 +262,7 @@ public class UniSystem implements LeisureOffice, ODSPersistente, XMLRepresentabl
     public boolean nuevoCurso(Curso l) { //OK
         Scanner sc = new Scanner(System.in);
         //Primero consulto al usuario si lo que desea eliminar es un bar, restaurante o pub.
-             System.out.println("De que tipo quieres que sea el local: 1-Bar 2-Restaurante 3-Pub"); 
+             System.out.println("De que tipo quieres que sea el curos: 1-Doctorado  2-Master 3-Grado "); 
              int tipo = 4; //variable auxiliar
              //realizo un try-catch del tipo por si el usuario introduce valores incorrectos, como pueden ser en lugar de
              //un entero un caracter o una expresión del estilo "4.-", o cualquier otra que no sea un entero.
@@ -296,23 +296,23 @@ public class UniSystem implements LeisureOffice, ODSPersistente, XMLRepresentabl
                 case 1:
                     Master b = new Master(l.getNombre(),l.getEscuelaPertenece(),l.getContenidos());
                     Cursos.add(b);
-                    System.out.println("******Bar añadido*******");
+                    System.out.println("******Grado añadido*******");
                     break;
                 case 2:
                     Grado r = new Grado(l.getNombre(),l.getEscuelaPertenece(),l.getContenidos());
                     Cursos.add(r);
-                    System.out.println("******Restaurante añadido*******");
+                    System.out.println("******Master añadido*******");
                     break;
                 case 3:
                     Doctorado p = new Doctorado(l.getNombre(),l.getEscuelaPertenece(),l.getContenidos());
                     Cursos.add(p);
-                    System.out.println("******Pub añadido*******");
+                    System.out.println("******Doctorado añadido*******");
                     break;
             } 
             return true;
         } else{
             //Si ya habia un local en esa dirección lo notifico al usuario.
-            System.out.println("Ya existe un local en esa direccion.");
+            System.out.println("Ya existe un curos en esa direccion.");
             return false;
         }  
              }
@@ -328,11 +328,11 @@ public class UniSystem implements LeisureOffice, ODSPersistente, XMLRepresentabl
         //arraylist locales, si no esta saltará una excepcion que recojo con el catch e indico que no existe.
         try{
             Cursos.remove(l);
-            System.out.print("Ya no existen locales en la dirección introducida");
+            System.out.print("Ya no existen cursos en la dirección introducida");
             return true;
         }
         catch(NullPointerException e){
-            System.out.print("El local no existe");
+            System.out.print("El curso no existe");
             return false;
         }
     }
@@ -351,7 +351,7 @@ public class UniSystem implements LeisureOffice, ODSPersistente, XMLRepresentabl
                                 .collect(Collectors.toList()).get(0);
             return localFound;
         }catch(IndexOutOfBoundsException e){
-            System.out.println("No existe ningún local en la dirección que buscas");
+            System.out.println("No existe ningún curso en la dirección que buscas");
             return null;
         }
         
@@ -392,10 +392,10 @@ public class UniSystem implements LeisureOffice, ODSPersistente, XMLRepresentabl
                     return true;
                 }
             }
-            System.out.println("El propietario indicado no formaba parte de los propietarios asociados al local.\n");
+            System.out.println("El propietario indicado no formaba parte de los propietarios asociados al curso.\n");
             return false;
         }else{
-            System.out.println("El local no existe.\n");
+            System.out.println("El curso no existe.\n");
             return false;
         }
 
@@ -416,10 +416,10 @@ public class UniSystem implements LeisureOffice, ODSPersistente, XMLRepresentabl
         Cursos.stream().filter(item -> item.getEscuelaPertenece().equals(viejoL.getEscuelaPertenece()))
                         .collect(Collectors.toList()).get(0).setNombre(nuevoL.getNombre());
         
-        System.out.print("Local actualizado\n");
+        System.out.print("Curso actualizado\n");
         return true;
         }catch(Exception ex){
-            System.out.print("No ha sido posible actualizar el local\n");
+            System.out.print("No ha sido posible actualizar el curso\n");
             return false;
         }
     }
@@ -548,11 +548,11 @@ public class UniSystem implements LeisureOffice, ODSPersistente, XMLRepresentabl
         //Busca la reserva de entrada en la lista y lo elimina, si la reserva introducida es valida/existe
         try{
             Matriculas.remove(r);
-            System.out.print("Reserva eliminada");
+            System.out.print("Matricula eliminada");
             return true;
         }
         catch(NullPointerException e){
-            System.out.print("La reserva no existe");
+            System.out.print("La matricula no existe");
             return false;
         }
     }
@@ -668,10 +668,10 @@ public class UniSystem implements LeisureOffice, ODSPersistente, XMLRepresentabl
                     cont ++;
                 }
             }
-            System.out.println("Se han eliminado " + cont + " contestaciones de la review indicada.\n");
+            System.out.println("Se han eliminado " + cont + " contestaciones de la nota indicada.\n");
             return true;
         }else{
-            System.out.println("La review introducida no existe.\n");
+            System.out.println("La nota introducida no existe.\n");
             return false;
         }
     }
@@ -829,10 +829,10 @@ public class UniSystem implements LeisureOffice, ODSPersistente, XMLRepresentabl
             if(Examenes.get(i).getCurso() == l){
                 try {
                     Examenes.remove(i);
-                    System.out.println("Review eliminada\n");
+                    System.out.println("examen eliminada\n");
                     flag = true;
                 }catch (Exception e) {
-                    System.out.println("Error eliminando review\n");
+                    System.out.println("Error eliminando el examen\n");
                     return false;
                  }
             }
@@ -853,10 +853,10 @@ public class UniSystem implements LeisureOffice, ODSPersistente, XMLRepresentabl
             if(Examenes.get(i).getAlumno() == c){
                 try {
                     Examenes.remove(i);
-                    System.out.println("Review eliminada\n");
+                    System.out.println("Examen eliminado\n");
                     count++;
                 }catch (Exception e) {
-                    System.out.println("Error eliminando review\n");
+                    System.out.println("Error eliminando examen\n");
                     return -1;
                  }
             }
@@ -879,7 +879,7 @@ public class UniSystem implements LeisureOffice, ODSPersistente, XMLRepresentabl
                 return false;
             }
         }catch(Exception e){
-            System.out.println("No existe ningún local en la dirección que buscas");
+            System.out.println("No existe ningún curso en la dirección que buscas");
             return false;
         }
     }
@@ -892,7 +892,7 @@ public class UniSystem implements LeisureOffice, ODSPersistente, XMLRepresentabl
                                 .collect(Collectors.toList()).get(0);
             return cursoFound;
         }catch(IndexOutOfBoundsException e){
-            System.out.println("No existe ningún local en la dirección que buscas");
+            System.out.println("No existe ningún curso en la dirección que buscas");
             return null;
         }
     }
@@ -913,14 +913,14 @@ public class UniSystem implements LeisureOffice, ODSPersistente, XMLRepresentabl
         if (flag){
             try {
                 Examenes.add(r);
-                System.out.print("Review introducida\n");
+                System.out.print("Examen introducido\n");
                 return true;
             }catch (Exception e) {
-                System.out.print("Error introduciendo review\n");
+                System.out.print("Error introduciendo examen\n");
                 return false;
             }
         }else{
-            System.out.print("Una review ha sido introducida en esa fecha y en ese local anteriormente\n");
+            System.out.print("Una examen ha sido introducida en esa fecha y en ese curso anteriormente\n");
             return false;
         }
 
@@ -933,11 +933,11 @@ public class UniSystem implements LeisureOffice, ODSPersistente, XMLRepresentabl
             if(Examenes.get(i).getCurso() == r.getCurso() && Examenes.get(i).getFecha() == r.getFecha()){
                 try {
                     Examenes.remove(r);
-                    System.out.print("Review eliminada\n");
+                    System.out.print("Examen eliminado\n");
                     flag = true;
                     return true;
                 }catch (Exception e) {
-                    System.out.print("Error eliminando review\n");
+                    System.out.print("Error eliminando examen\n");
                     return false;
                  }
             }

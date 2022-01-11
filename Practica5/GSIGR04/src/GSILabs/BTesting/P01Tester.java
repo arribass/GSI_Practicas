@@ -111,12 +111,15 @@ public class P01Tester {
             System.out.println("0. Salir\n"
                                 + "1. Registrar Usuario\n"
                                 + "2. Buscar usuario por nick\n"
-                                + "3. Registrar local\n"
+                                + "3. Registrar curso\n"
+                    
                                 + "4. Añadir Review\n"
-                                + "5. Eliminar local\n"
-                                + "6. Listar locales por provincia y ciudad\n"
-                                + "7. Obtener local\n"
-                                + "8. Modificar local\n"
+                                + "5. Eliminar curso\n"
+                                + "6. Listar cursos por provincia y ciudad\n"
+                    
+                                + "7. Obtener Curso\n"
+                    
+                                + "8. Modificar Curso\n"
                                 + "9. Listar bares por provincia y ciudad\n"
                                 + "10. Listar restaruantes por provincia y ciudad\n"
                                 + "11. Listar pubs por provincia y ciudad\n"                    
@@ -187,8 +190,8 @@ public class P01Tester {
                 case 3: //Registrar local
                     //Pido al usuario el nombre del nuevo local.                    
 
-                    System.out.println("Introduce el nombre del local: ");  
-                    String nombreLocal = sc.nextLine(); 
+                    System.out.println("Introduce el nombre del curso: ");  
+                    String nombreCurso = sc.nextLine(); 
 
                     //Pido al usuario los componentes de la direccion del local.        
                     System.out.println("Vas a introducir la dirección \n");         
@@ -204,14 +207,14 @@ public class P01Tester {
                     EscuelaPertenece d = new EscuelaPertenece(localidad,provincia,calle);
 
                     //Pido la descripcion del local al usuario.
-                    System.out.println("Introduce la descripción del local: "); 
+                    System.out.println("Introduce la descripción del curso: "); 
                     String descripcionLocal = sc.nextLine();
-                    Curso l = new Curso(nombreLocal,d,descripcionLocal);
+                    Curso l = new Curso(nombreCurso,d,descripcionLocal);
                     //añado el nuevo local
                     bs.nuevoCurso(l);
                     break;
                 case 4://Añadir review
-                    System.out.println("¿cual es tu puntuacion de 1 a 5?");
+                    System.out.println("¿cual es la puntuación del examen?");
                     int valint;
                     do{
                         String valoracion = sc.nextLine();
@@ -237,7 +240,7 @@ public class P01Tester {
                     break;
                 case 5: //Eliminar local
                     //Recogo la direccion del local que quiero eliminar para identificarlo
-                    System.out.println("Introduce a continuación los datos del local a eliminar"); 
+                    System.out.println("Introduce a continuación los datos del curos a eliminar"); 
                     System.out.println("Introduce la localidad: "); 
                     String localidadB = sc.nextLine();         
                     System.out.println("Introduce la provincia: "); 
@@ -253,15 +256,15 @@ public class P01Tester {
                     //elimino el local
                     bs.eliminarCurso(localEliminar);                    
                     break;
-                case 6: //Listar locales
+                case 6: //Listar cursos
                     System.out.println("Introduce la provincia deseada "); 
                     String provinciaD = sc.nextLine();
                     System.out.println("Introduce la ciudad deseada "); 
                     String ciudadD = sc.nextLine();
-                    System.out.println("Listado de locales en: "+ ciudadD + ", "+ provinciaD +"\n");   
+                    System.out.println("Listado de curos en: "+ ciudadD + ", "+ provinciaD +"\n");   
                     Curso localeslist[] = bs.listarCursos(ciudadD, provinciaD);                                        
                     break;
-                case 7: //Obtener Local
+                case 7: //Obtener cursos
                     System.out.println("Introduce la localidad: "); 
                     String localidadc = sc.nextLine();         
                     System.out.println("Introduce la provincia: "); 
@@ -275,13 +278,13 @@ public class P01Tester {
                     Curso local1 = bs.obtenerCurso(dc);
                     
                     if(local1 != null){
-                        System.out.println("Local encontrado");
+                        System.out.println("Curso encontrado");
                         System.out.println(local1.toString());
                     }
                     break;
                 case 8: //Modificar Local
                     //identifico el local que quiero modificar con su dirección que es única.
-                    System.out.println("Datos del local a modificar: \n"); 
+                    System.out.println("Datos del curso a modificar: \n"); 
                     System.out.println("Introduce la localidad: "); 
                     localidadc = sc.nextLine();         
                     System.out.println("Introduce la provincia: "); 
@@ -312,7 +315,7 @@ public class P01Tester {
                     Scanner sc2 = new Scanner(System.in);
                     switch(eleccion){
                         case 1:
-                            System.out.println("Introduce la descripción del local: "); 
+                            System.out.println("Introduce la descripción del Curso: "); 
                             nuevaDescripcion = sc2.nextLine();
                             try{
                                 nuevoNombre = localviejo.getNombre();
@@ -322,7 +325,7 @@ public class P01Tester {
                             }                            
                             break;
                         case 2:
-                            System.out.println("Introduce el nombre del local: "); 
+                            System.out.println("Introduce el nombre del Curso: "); 
                             nuevoNombre = sc2.nextLine();
                             try{
                                 nuevaDescripcion = localviejo.getContenidos();
@@ -358,7 +361,7 @@ public class P01Tester {
                     try{
                         bs.actualizarCurso(localviejo, new Curso(nuevoNombre,nuevaDireccion,nuevaDescripcion));
                     }catch(Exception e){
-                        System.out.println("no se ha podido actualizar porque no existe un local en esa direccion");
+                        System.out.println("no se ha podido actualizar porque no existe un curso en esa direccion");
                     }
                     break;
                 case 9: //Listar solo bares
@@ -644,7 +647,13 @@ public class P01Tester {
                     System.out.println("Numero de Pubs añadidos con éxito: " + exitosPubs);
                     //Local listaLocales[] = bs.listarCursos("Barcelona", "Barcelona");
                     break;
-                 
+                 case 23:
+                     //Importa datos de locales tipo bares de una hoja de calculo
+                    /*Aunque test06.ods es una hoja con bares se puede utilizar tambien para
+                    comprobar el funcionamiento de la función importarDoctorados*/
+                    EscuelaPertenece escuela = new EscuelaPertenece("upna","pepe","aulario");
+                    
+                    break;
             }
         } while ( choice != 0 );
     }

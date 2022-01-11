@@ -25,7 +25,7 @@ import org.mozilla.javascript.JavaScriptException;
  *
  * @author LENOVO-arribass
  */
-public class Persona  implements XMLRepresentable, Serializable{
+public class Persona {
     private static final AtomicInteger id = new AtomicInteger();
 
     private String NIA;
@@ -178,39 +178,6 @@ public class Persona  implements XMLRepresentable, Serializable{
         return "ID:" + getId() + "\nNIA: " + getNIA() + "\nFecha nacimiento: " + getFechaNacimiento().toString() +"\n";
     }
 
-    @Override
-    public String toXML() {
-        try{
-            
-            throw new XMLParsingException("Error XML");
-            
-        }catch(XMLParsingException e){
-            System.out.println("Error al convertir a XML");
-        }
-        return null;
-    }
-
-    @Override
-    public boolean saveToXML(File f) {
-        try{
-            
-            throw new XMLParsingException("Error XML");
-            
-        }catch(XMLParsingException e){
-            System.out.println("Error al guardar en XML");
-        }
-        return false;
-    }
-
-    @Override
-    public boolean saveToXML(String filePath) {
-        try{
-            
-            throw new XMLParsingException("Error XML");
-            
-        }catch(XMLParsingException e){
-            System.out.println("Error al guardar en XML");
-        }
-        return false;
-    }
+  
+  
 }
