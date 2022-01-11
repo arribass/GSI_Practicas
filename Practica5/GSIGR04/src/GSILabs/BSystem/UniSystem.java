@@ -262,7 +262,7 @@ public class UniSystem implements LeisureOffice, ODSPersistente, XMLRepresentabl
     public boolean nuevoCurso(Curso l) { //OK
         Scanner sc = new Scanner(System.in);
         //Primero consulto al usuario si lo que desea eliminar es un bar, restaurante o pub.
-             System.out.println("De que tipo quieres que sea el curos: 1-Doctorado  2-Master 3-Grado "); 
+             System.out.println("De que tipo quieres que sea el curos: 1-Grado  2-Master 3-Doctorado "); 
              int tipo = 4; //variable auxiliar
              //realizo un try-catch del tipo por si el usuario introduce valores incorrectos, como pueden ser en lugar de
              //un entero un caracter o una expresión del estilo "4.-", o cualquier otra que no sea un entero.

@@ -120,9 +120,9 @@ public class P01Tester {
                                 + "7. Obtener Curso\n"
                     
                                 + "8. Modificar Curso\n"
-                                + "9. Listar bares por provincia y ciudad\n"
-                                + "10. Listar restaruantes por provincia y ciudad\n"
-                                + "11. Listar pubs por provincia y ciudad\n"                    
+                                + "9. Listar Grados por provincia y ciudad\n"
+                                + "10. Listar Master por provincia y ciudad\n"
+                                + "11. Listar Doctorados por provincia y ciudad\n"                    
                                 + "12. Comprobación de ejercicio 4 apartado S10)\n"
                                 + "13. Comprobación de ejercicio 4 apartado S9) \n"
                                 + "14. Comprobación de ejercicio 4 apartado S8) \n"
@@ -134,7 +134,8 @@ public class P01Tester {
                                 + "20. Comprobacion de ejercicio 4 apartado S2) \n"
                                 + "21. Comprobacion de ejercicio 6 practica 2   \n"
                                 + "22. Comprobacion de ejercicio extra e2.1     \n"
-                                + "23. Registrar Usuario\n");
+                                + "23. Registrar Usuario\n"
+                                + "24. Insertar examen falso de prueba\n");
 
  
             System.out.print("¿Qué deseas hacer? : \n");
@@ -152,11 +153,10 @@ public class P01Tester {
                     break;
                 case 1:  //Añadir usuario                
                     boolean registerOk = false;
+                    System.out.println("Introduce el NIA de usuario: ");  
+                    String NIA = sc.nextLine();  
                     System.out.println("Introduce el nombre de usuario: ");  
                     nombreUsuario = sc.nextLine();      
-
-                    System.out.println("Introduce la contraseña: "); 
-                    passwordUsuario = sc.nextLine();
 
 //                    System.out.println("Introduce la fecha de nacimiento (dd/MM/yyyy): "); 
 //                    String edadUsuario = sc.nextLine();
@@ -164,7 +164,7 @@ public class P01Tester {
                     
                     try {
                         fechaNacimientoUsuario = new SimpleDateFormat("dd/MM/yyyy").parse("13/11/1999");
-                        Persona u = new Persona(nombreUsuario, passwordUsuario, fechaNacimientoUsuario,1);
+                        Persona u = new Persona(NIA, nombreUsuario, fechaNacimientoUsuario,1);
                         if (bs.nuevoUsuario(u)){
                             System.out.println("Usuario registrado correctamente!");
                             System.out.println(u.toString());
@@ -178,7 +178,7 @@ public class P01Tester {
                     break;
                 case 2: //Buscar usuario por nick
                     //Obtener usuario
-                    System.out.println("¿Que usuario quieres buscar?: ");  
+                    System.out.println("¿Que usuario quieres buscar? meter el NIA: ");  
                     nombreUsuario = sc.nextLine(); 
                     Persona u = bs.obtenerUsuario(nombreUsuario);
                     if(u != null){
@@ -653,7 +653,7 @@ public class P01Tester {
                     
                     Scanner scc = new Scanner(System.in);
                     System.out.println("Introduzca NIA: ");
-                    String NIA = scc.nextLine();
+                    String NIAA = scc.nextLine();
 
                     System.out.println("Introduzca su nombre: ");
                     String nombre = scc.nextLine();
@@ -677,7 +677,7 @@ public class P01Tester {
 
                     /*2. append to stringBuffer*/   
 
-                    oneLineStringBuffer.append(NIA + "," + nombre + "," + fecha_na + "," + "1");
+                    oneLineStringBuffer.append(NIAA + "," + nombre + "," + fecha_na + "," + "1");
 
                     /*3. print to csvWriter*/
                     csvWriter.print(oneLineStringBuffer);
@@ -689,6 +689,12 @@ public class P01Tester {
                 } 
 
                         break;
+                        
+                 case 24:
+                     //insertar examen falso de prueba
+                     
+                     
+                     break;
                 }
         } while ( choice != 0 );
     }
