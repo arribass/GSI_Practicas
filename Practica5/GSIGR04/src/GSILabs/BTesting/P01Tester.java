@@ -33,9 +33,12 @@ import java.util.logging.Logger;
 import GSILabs.BModel.Matriculable;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
+import java.util.Random;
 
 /**
  *
@@ -44,17 +47,31 @@ import java.util.Locale;
 public class P01Tester {
                
     public static void main(String[] args) throws IOException, ParseException {
+        
+        
         // Instanciamos una clase BusinessSystem
         UniSystem bs = new UniSystem();
+        
         String passwordUsuario;
         String nombreUsuario;
         String psw;
+        
         Alumno c = null;
         Scanner sc = new Scanner(System.in);
+        
+        System.out.println("¿Deseas registrarte (no para continuar)?");
+        String respuesta = sc.nextLine();
+        //registrar nuevo alumno o profesor en la base de datos
+        if(respuesta.equals("si")){
+            registrarUser();
+        }
+        
         System.out.println("Introduzca su nombre de usuario: ");
         nombreUsuario = sc.nextLine();
+        //obtenemos la contraseña de ese usuario
         passwordUsuario = searchCsvUser(nombreUsuario);
         
+
         if (passwordUsuario == null){
             System.out.println("El usuario no existe. El programa finalizará ahora mismo...");
             System.exit(1);
@@ -71,10 +88,15 @@ public class P01Tester {
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
         BufferedReader br = new BufferedReader(new FileReader("alumnos.csv"));
         String line;
+        
+        //poblamos la clase alumnos
         while ( (line = br.readLine()) != null ) {
+            //lectura de la linea
             String[] values = line.split(",");
             String[] nia = nombreUsuario.split("\\.");
+            //introducimos el alumno
             if(values[0].equals(nia[1])) {
+                //System.out.println("entro"+ values[0] + values[1] + values[2] + values[3]);
                 Date date = format.parse(values[2]);
                 //Si encuentra un match de usuario, recoge la contraseña de éste
                 c = new Alumno(nia[1], values[1], date, Integer.parseInt(values[3]));
@@ -650,5 +672,50 @@ public class P01Tester {
         //Devuelvo la variable contraseña, en caso de haberla encontrado será el 
         //valor de ésta, si no, será null
         return psw;
+    }
+    
+    public static void registrarUser() throws IOException {
+        
+        Random r = new Random();
+        int id = r.nextInt(1000)+1; 
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Introduzca su nuevo nombre de usuario: ");
+        String nombre = sc.nextLine();
+        
+        System.out.println("Introduzca su nueva contraseña: ");
+        String pass = sc.nextLine();
+        
+         System.out.println("Introduzca su rol (alumno o profesor): ");
+        String rol = sc.nextLine();
+       
+        
+        PrintWriter csvWriter;
+    try {
+        /*1. declare stringBuffer*/
+        StringBuffer oneLineStringBuffer = new StringBuffer();
+
+        File file = new File("usuarios.csv");
+        if (!file.exists()) {
+            file = new File("usuarios.csv");
+
+        }
+        csvWriter = new PrintWriter(new FileWriter(file, true));
+
+        /*2. append to stringBuffer*/   
+        
+        oneLineStringBuffer.append(id + "," + nombre + "," + pass + "," + rol);
+
+        /*3. print to csvWriter*/
+        csvWriter.print(oneLineStringBuffer);
+
+        csvWriter.close();
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+       
+        
+        
+        
     }
 }
