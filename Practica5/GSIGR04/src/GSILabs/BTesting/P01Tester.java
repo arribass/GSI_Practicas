@@ -112,7 +112,7 @@ public class P01Tester {
                                 + "1. Registrar Usuario\n"
                                 + "2. Buscar usuario por nick\n"
                                 + "3. Registrar curso\n"
-                    
+                                
                                 + "4. Añadir Review\n"
                                 + "5. Eliminar curso\n"
                                 + "6. Listar cursos por provincia y ciudad\n"
@@ -133,7 +133,8 @@ public class P01Tester {
                                 + "19. Comprobación de ejercicio 4 apartado S6) \n"
                                 + "20. Comprobacion de ejercicio 4 apartado S2) \n"
                                 + "21. Comprobacion de ejercicio 6 practica 2   \n"
-                                + "22. Comprobacion de ejercicio extra e2.1     \n");
+                                + "22. Comprobacion de ejercicio extra e2.1     \n"
+                                + "23. Registrar Usuario\n");
 
  
             System.out.print("¿Qué deseas hacer? : \n");
@@ -648,13 +649,47 @@ public class P01Tester {
                     //Local listaLocales[] = bs.listarCursos("Barcelona", "Barcelona");
                     break;
                  case 23:
-                     //Importa datos de locales tipo bares de una hoja de calculo
-                    /*Aunque test06.ods es una hoja con bares se puede utilizar tambien para
-                    comprobar el funcionamiento de la función importarDoctorados*/
-                    EscuelaPertenece escuela = new EscuelaPertenece("upna","pepe","aulario");
                     
-                    break;
-            }
+                    
+                    Scanner scc = new Scanner(System.in);
+                    System.out.println("Introduzca NIA: ");
+                    String NIA = scc.nextLine();
+
+                    System.out.println("Introduzca su nombre: ");
+                    String nombre = scc.nextLine();
+
+                    System.out.println("Introduzca su fecha de nacimento ejemplo (1999-05-22): ");
+                    String fecha_na = scc.nextLine();
+                    
+                    
+
+                    PrintWriter csvWriter;
+                try {
+                    /*1. declare stringBuffer*/
+                    StringBuffer oneLineStringBuffer = new StringBuffer();
+
+                    File file = new File("alumnos.csv");
+                    if (!file.exists()) {
+                        file = new File("alumnos.csv");
+
+                    }
+                    csvWriter = new PrintWriter(new FileWriter(file, true));
+
+                    /*2. append to stringBuffer*/   
+
+                    oneLineStringBuffer.append(NIA + "," + nombre + "," + fecha_na + "," + "1");
+
+                    /*3. print to csvWriter*/
+                    csvWriter.print(oneLineStringBuffer);
+
+                    csvWriter.close();
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } 
+
+                        break;
+                }
         } while ( choice != 0 );
     }
 
